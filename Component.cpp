@@ -26,6 +26,14 @@ void Component::Render()
 {
 }
 
+void Component::OnEnable()
+{
+}
+
+void Component::OnDisable()
+{
+}
+
 void Component::OnCollision(GameObject* gameObject)
 {
 }

@@ -15,8 +15,10 @@ void UIRenderer::Init()
 	width = 100;
 	height = 100;
 	memDC = CreateCompatibleDC(hdc);
+	alphaMemDC = CreateCompatibleDC(hdc);
 	hBit = (HBITMAP)CreateCompatibleBitmap(hdc, width, height);
 	oBit = (HBITMAP)SelectObject(memDC, hBit);
+
 	hBit = (HBITMAP)CreateCompatibleBitmap(hdc, width, height);
 	SelectObject(alphaMemDC, hBit);
 
@@ -36,6 +38,7 @@ void UIRenderer::Init(const char* filename, int width, int height)
 	this->width = width;
 	this->height = height;
 	memDC = CreateCompatibleDC(hdc);
+	alphaMemDC = CreateCompatibleDC(hdc);
 	hBit = (HBITMAP)LoadImage(_hInstance, filename, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
 	oBit = (HBITMAP)SelectObject(memDC, hBit);
 
@@ -58,8 +61,8 @@ void UIRenderer::Update()
 
 void UIRenderer::Render()
 {
-	int startX = CAMERAMANAGER->mainCam->transform->GetX() + transform->GetX() - width/2;
-	int startY = CAMERAMANAGER->mainCam->transform->GetY() + transform->GetY() - height / 2;
+	int startX = SCENEMANAGER->GetCurScene()->mainCam->transform->GetX() + transform->GetX() - width/2;
+	int startY = SCENEMANAGER->GetCurScene()->mainCam->transform->GetY() + transform->GetY() - height / 2;
 	BitBlt(alphaMemDC, 0, 0, width, height, _backBuffer->getMemDC(), startX, startY, SRCCOPY);
 	GdiTransparentBlt(
 		alphaMemDC,					//복사될 영역의 DC
@@ -78,7 +81,7 @@ void UIRenderer::Render()
 		startY,					//출력할 DC에서 그림의 찍을 좌표 y
 		width,		//출력한 DC에서 그림의 가로 길이
 		height,		//출력한 DC에서 그림의 세로 길이
-		memDC,			//그림의 DC
+		alphaMemDC,			//그림의 DC
 		0,					//그림에서 그리기 시작할 좌표 x
 		0,					//그림에서 그리기 시작할 좌표 y
 		width,		//그림에서 출력DC에 그릴 그림의 가로 길이
@@ -105,4 +108,14 @@ void UIRenderer::SetAlpha(int alpha)
 {
 	this->alpha = alpha;
 	blendFunction.SourceConstantAlpha = this->alpha;
+}
+
+void UIRenderer::FillColor(COLORREF color)
+{
+	HBRUSH hBrush, oBrush;
+	hBrush = CreateSolidBrush(color);
+	oBrush = (HBRUSH)SelectObject(memDC, hBrush);
+	PatBlt(memDC, 0, 0, width, height, PATCOPY);
+	SelectObject(memDC, oBrush);
+	DeleteObject(hBrush);
 }

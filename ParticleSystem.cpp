@@ -3,7 +3,7 @@
 #include "image.h"
 
 
-ParticleSystem::ParticleSystem(image* particleImage, int num, int frameTerm)
+ParticleSystem::ParticleSystem(image* particleImage, int num, float frameTerm)
 {
 	_particleImage = particleImage;
 	_num = num;
@@ -44,7 +44,7 @@ void ParticleSystem::Emission(int idx)
 		if (this->_minDuration == this->_maxDuration)
 			_particle[idx].duration = this->_minDuration;
 		else
-			_particle[idx].duration = RND->getFromIntTo(_minDuration, _maxDuration);
+			_particle[idx].duration = RND->getFromFloatTo(_minDuration, _maxDuration);
 		_particle[idx].activeTime = 0;
 		_emissionNum = idx + 1;
 		if (_emissionNum == _num && _isLoop == true) {
@@ -65,7 +65,7 @@ void ParticleSystem::Update()
 	_x = gameObject->transform->position.x;
 	_y = gameObject->transform->position.y;
 	if (_isStop == false) {
-		_deltaTime += 10;
+		_deltaTime += TIMEMANAGER->getElapsedTime();
 		if (_deltaTime >= _interval && _interval != 0) {
 			_deltaTime = 0;
 			if (_emissionNum != _num)
@@ -78,9 +78,9 @@ void ParticleSystem::Update()
 	}
 	for (int i = 0; i < _num; i++) {
 		if (_particle[i].isEmission == false) continue;
-		_particle[i].activeTime += 10;
-		_particle[i].frameTick++;
-		if (_particle[i].frameTick == _frameTerm) {
+		_particle[i].activeTime += TIMEMANAGER->getElapsedTime();
+		_particle[i].frameTick += TIMEMANAGER->getElapsedTime();
+		if (_particle[i].frameTick >= _frameTerm) {
 			_particle[i].frameTick = 0;
 			_particle[i].curFrame++;
 			if (_particle[i].curFrame == _particleImage->getMaxFrameX())
@@ -99,7 +99,10 @@ void ParticleSystem::Render()
 {
 	for (int i = 0; i < _num; i++) {
 		if (_particle[i].isEmission == false) continue;
-		_particleImage->frameRender(_backBuffer->getMemDC(), _particle[i].x, _particle[i].y, _particle[i].curFrame, 0);
+		_particleImage->frameRender(_backBuffer->getMemDC(), 
+			_particle[i].x - _particleImage->getFrameWidth()/2,
+			_particle[i].y - _particleImage->getFrameHeight()/2
+			, _particle[i].curFrame, 0);
 	}
 }
 

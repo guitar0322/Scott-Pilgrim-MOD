@@ -17,6 +17,7 @@ BoxCollider::~BoxCollider()
 void BoxCollider::Update()
 {
 	rc = RectMakeCenter(transform->GetX(), transform->GetY(), width, height);
+	if (isTrigger == false) return;
 	int colNum = COLLIDERMANAGER->colliderList.size();
 	for (int i = 0; i < colNum; i++) {
 		if (CheckCollision(GetCenterX(rc), GetCenterY(rc), i)) {
@@ -64,18 +65,57 @@ bool BoxCollider::CheckCollision(float tempX, float tempY) {
 	int marginX = 0, marginY = 0;
 	for (int i = 0; i < colNum; i++) {
 		if (CheckCollision(tempX, tempY, i)) {
-			if (COLLIDERMANAGER->colliderList[i]->isTrigger == false) {
+			if (COLLIDERMANAGER->colliderList[i]->isTrigger == false && this->isTrigger == false) {
 				int w = intersectRc.right - intersectRc.left;
 				int h = intersectRc.bottom - intersectRc.top;
 				if (w <= h) {
-					deltaX > 0 ? marginX = deltaX - w : marginX = deltaX + w;
+					deltaX >= 0 ? marginX = deltaX - w : marginX = deltaX + w;
 				}
 				else {
-					deltaY > 0 ? marginY = deltaY - h : marginY = deltaY + h;
+					deltaY >= 0 ? marginY = deltaY - h : marginY = deltaY + h;
 				}
+				string targetName = COLLIDERMANAGER->colliderList[i]->gameObject->name;
 				gameObject->OnCollision(COLLIDERMANAGER->colliderList[i]->gameObject);
-				transform->Move(marginX, marginY);
-				return true;
+				if (weight > COLLIDERMANAGER->colliderList[i]->weight) {
+					bool isLack = false;
+					for (int j = 0; j < colNum; j++) {
+						if (COLLIDERMANAGER->colliderList[j]->isTrigger == false  &&
+							COLLIDERMANAGER->colliderList[j] != COLLIDERMANAGER->colliderList[i] &&
+							CheckCollision(COLLIDERMANAGER->colliderList[i]->rc, j)) {
+							string name = COLLIDERMANAGER->colliderList[j]->gameObject->name;
+							int bottom = COLLIDERMANAGER->colliderList[i]->rc.bottom;
+							int top = COLLIDERMANAGER->colliderList[j]->rc.top;
+   							isLack = true;
+							break;
+						}
+					}
+					if (isLack == true) {
+						COLLIDERMANAGER->colliderList[i]->isTrigger = true;
+					}
+					else {
+						COLLIDERMANAGER->colliderList[i]->transform->Move(deltaX - marginX, deltaY - marginY);
+					}
+					return false;
+				}
+				else {
+					bool isLack = false;
+					for (int j = 0; j < colNum; j++) {
+						if (COLLIDERMANAGER->colliderList[j]->isTrigger == false &&
+							COLLIDERMANAGER->colliderList[j] != COLLIDERMANAGER->colliderList[i] && 
+							CheckCollision(transform->GetX() + marginX, transform->GetY() + marginY, j)) {
+							isLack = true;
+							string name = COLLIDERMANAGER->colliderList[j]->gameObject->name;
+  							break;
+						}
+					}
+					if (isLack == true) {
+						this->isTrigger = true;
+					}
+					else {
+						transform->Move(marginX, marginY);
+					}
+					return true;
+				}
 			}
 		}
 	}
@@ -85,7 +125,9 @@ bool BoxCollider::CheckCollision(float tempX, float tempY, int colIdx)
 {
 	RECT tempRc = RectMakeCenter(tempX, tempY, width, height);
 	RECT* targetRc;
-	if (&this->rc == &COLLIDERMANAGER->colliderList[colIdx]->rc) return false;
+	if (&(this->rc) == &(COLLIDERMANAGER->colliderList[colIdx]->rc)) return false;
+	if (COLLIDERMANAGER->colliderList[colIdx]->gameObject->isActive == false) return false;
+	if (COLLIDERMANAGER->colliderList[colIdx]->enable == false) return false;
 	targetRc = &COLLIDERMANAGER->colliderList[colIdx]->rc;
 	if (IntersectRect(&intersectRc, &tempRc, targetRc)) {
 		int w = intersectRc.right - intersectRc.left;
@@ -101,6 +143,44 @@ bool BoxCollider::CheckCollision(float tempX, float tempY, int colIdx)
 		return true;
 	}
 	return false;
+}
+bool BoxCollider::CheckCollision(RECT rc, int colIdx)
+{
+	RECT* targetRc;
+	if (&(this->rc) == &(COLLIDERMANAGER->colliderList[colIdx]->rc)) return false;
+	if (COLLIDERMANAGER->colliderList[colIdx]->gameObject->isActive == false) return false;
+	if (COLLIDERMANAGER->colliderList[colIdx]->enable == false) return false;
+	targetRc = &COLLIDERMANAGER->colliderList[colIdx]->rc;
+	if (IntersectRect(&intersectRc, &rc, targetRc)) {
+		int w = intersectRc.right - intersectRc.left;
+		int h = intersectRc.bottom - intersectRc.top;
+		if (h >= w) {
+			if (intersectRc.right <= GetCenterX(*targetRc)) {
+			}
+			else {
+			}
+		}
+		else {
+		}
+		return true;
+	}
+	return false;
+}
+void BoxCollider::SetWidth(int width)
+{
+	this->width = width;
+	rc = RectMakeCenter(transform->GetX(), transform->GetY(), width, height);
+}
+void BoxCollider::SetHeight(int height)
+{
+	this->height = height;
+	rc = RectMakeCenter(transform->GetX(), transform->GetY(), width, height);
+}
+void BoxCollider::SetSize(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+	rc = RectMakeCenter(transform->GetX(), transform->GetY(), width, height);
 }
 void BoxCollider::Render()
 {

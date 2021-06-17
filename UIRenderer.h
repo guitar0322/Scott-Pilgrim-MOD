@@ -19,5 +19,6 @@ public:
     virtual void Render();
     void Resize(int width, int height);
     void SetAlpha(int alpha);
+    void FillColor(COLORREF color);
 };
 

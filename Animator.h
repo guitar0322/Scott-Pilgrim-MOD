@@ -21,6 +21,7 @@ private:
 public:
     Animator();
     ~Animator();
+    int currentFrame;
     Renderer* renderer;
     AnimationClip* curClip;
     AnimationClip* preClip;
@@ -35,6 +36,5 @@ public:
     void AddClip(string clipName, AnimationClip* newClip);
     AnimationClip* GetClip(string clipName);
     void AddTransaction(string name, AnimationClip* startClip, AnimationClip* nextClip);
-    
 };
 

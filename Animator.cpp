@@ -17,22 +17,23 @@ void Animator::Init()
 	if (renderer == nullptr) {
 		throw "Animator에서 발생 : 게임 오브젝트에 Renderer컴포넌트가 없습니다";
 	}
+	currentFrame = 0;
 }
 
 void Animator::Update()
 {
 	if (curClip == nullptr)
 		return;
-	frameTime = frameTime + TIMEMANAGER->getElapsedTime();
+	frameTime += TIMEMANAGER->getElapsedTime();
 	if (frameTime >= curClip->frameTerm) {
 		BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
-			curClip->wholeDC, curClip->frameWidth * curClip->currentFrame, 0, SRCCOPY);
-		curClip->currentFrame++;
-		if (curClip->currentFrame == curClip->frameNum) {
+			curClip->wholeDC, curClip->frameWidth * currentFrame, 0, SRCCOPY);
+		currentFrame++;
+		if (currentFrame == curClip->frameNum) {
 			if (curClip->isLoop == true)
-				curClip->currentFrame = 0;
+				currentFrame = 0;
 			else {
-				curClip->currentFrame = curClip->frameNum - 1;
+				currentFrame = curClip->frameNum - 1;
 				for (transactionIter = transactionMap.begin(); transactionIter != transactionMap.end(); transactionIter++) {
 					if (transactionIter->second.startClip == curClip) {
 						SetClip(transactionIter->second.nextClip);
@@ -54,6 +55,7 @@ void Animator::SetClip(AnimationClip* newClip)
 	preClip = curClip;
 	curClip = newClip;
 	curClip->currentFrame = 0;
+	currentFrame = 0;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
 	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
@@ -65,6 +67,7 @@ void Animator::SetClip(AnimationClip* newClip, int startFrame)
 	preClip = curClip;
 	curClip = newClip;
 	curClip->currentFrame = startFrame;
+	currentFrame = startFrame;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
 	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,

@@ -17,6 +17,7 @@ Transform::~Transform()
 bool Transform::Move(float x, float y)
 {
 	int childCount = GetChildCount();
+	bool result = true;
 	if (CheckCollision(position.x + x, position.y + y) == true) {
 		return false;
 	}
@@ -26,12 +27,13 @@ bool Transform::Move(float x, float y)
 		child[i]->MoveX(x);
 		child[i]->MoveY(y);
 	}
-	return true;
+	return result;
 }
 
 bool Transform::MoveX(float x)
 {
 	int childCount = GetChildCount();
+	bool result = true;
 	if (CheckCollision(position.x + x, position.y) == true) {
 		return false;
 	}
@@ -39,12 +41,13 @@ bool Transform::MoveX(float x)
 	for (int i = 0; i < childCount; i++) {
 		child[i]->MoveX(x);
 	}
-	return true;
+	return result;
 }
 
 bool Transform::MoveY(float y)
 {
 	int childCount = GetChildCount();
+	bool result = true;
 	if (CheckCollision(position.x, position.y + y) == true) {
 		return false;
 	}
@@ -52,7 +55,7 @@ bool Transform::MoveY(float y)
 	for (int i = 0; i < childCount; i++) {
 		child[i]->MoveY(y);
 	}
-	return true;
+	return result;
 }
 
 bool Transform::CheckCollision(float tempX, float tempY)

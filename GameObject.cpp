@@ -3,6 +3,7 @@
 
 GameObject::GameObject()
 {
+	name = "gameobject";
 	transform = new Transform();
 	transform->gameObject = this;
 	isActive = true;
@@ -45,6 +46,23 @@ Component* GameObject::AddComponent(Component* component)
 	return component;
 }
 
+void GameObject::OnEnable()
+{
+	if (isActive == false) return;
+	for (int i = 0; i < components.size(); i++) {
+		if (components[i]->enable == true)
+			components[i]->OnEnable();
+	}
+}
+
+void GameObject::OnDisable()
+{
+	for (int i = 0; i < components.size(); i++) {
+		if (components[i]->enable == true)
+			components[i]->OnDisable();
+	}
+}
+
 void GameObject::OnCollision(GameObject* gameObject)
 {
 	if (isActive == false) return;
@@ -78,5 +96,17 @@ void GameObject::OnTriggerExit(GameObject* gameObject)
 	for (int i = 0; i < components.size(); i++) {
 		if (components[i]->enable == true)
 			components[i]->OnTriggerExit(gameObject);
+	}
+}
+
+void GameObject::SetActive(bool active)
+{
+	if (isActive == false && active == true) {
+		isActive = active;
+		OnEnable();
+	}
+	else if(isActive == true && active == false){
+		isActive = active;
+		OnDisable();
 	}
 }

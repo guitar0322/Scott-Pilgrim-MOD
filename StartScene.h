@@ -9,6 +9,7 @@ public:
     StartScene();
     ~StartScene();
     GameObject rockman;
+    ImageObject* _background;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();

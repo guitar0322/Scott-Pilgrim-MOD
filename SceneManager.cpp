@@ -1,8 +1,4 @@
 #include "stdafx.h"
-#include "SceneManager.h"
-#include "Scene.h"
-#include "StartScene.h"
-#include "SecondScene.h"
 SceneManager::SceneManager()
 {
 }
@@ -13,11 +9,9 @@ SceneManager::~SceneManager()
 
 HRESULT SceneManager::Init()
 {
-    startScene = new StartScene();
-    secondScene = new SecondScene();
-    AddScene("start", startScene);
-    _curScene = startScene;
-    _curScene->Init();
+    //_curScene = startScene;
+    //_curScene = secondScene;
+    //_curScene->Init();
     return S_OK;
 }
 
@@ -42,7 +36,8 @@ void SceneManager::AddScene(string sceneName, Scene* scene)
 
 void SceneManager::LoadScene(string sceneName)
 {
-    _curScene->Release();
+    if(_curScene != nullptr)
+        _curScene->Release();
     sceneIter = sceneMap.find(sceneName);
     if (sceneIter != sceneMap.end()) {
         _curScene = sceneIter->second;
@@ -56,4 +51,9 @@ Scene* SceneManager::GetScene(string sceneName)
         return sceneIter->second;
     }
     return nullptr;
+}
+
+Scene* SceneManager::GetCurScene()
+{
+    return _curScene;
 }

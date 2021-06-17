@@ -7,14 +7,14 @@ enum SHAPE {
 };
 struct Particle {
 	float x, y;
-	int activeTime;
-	int duration;
+	float activeTime;
+	float duration;
 	float speedX, speedY;
 	float gravity;
 	float angle;
 	bool isEmission;
 	int curFrame;
-	int frameTick;
+	float frameTick;
 };
 
 class ParticleSystem :
@@ -27,19 +27,19 @@ private:
 	vector<Particle> _particle;
 	int _num;
 	int _emissionNum;
-	int _deltaTime;
-	int _interval;
-	int _minDuration, _maxDuration;
-	int _frameTerm;
+	float _deltaTime;
+	float _interval;
+	float _minDuration, _maxDuration;
+	float _frameTerm;
 	bool _isLoop;
 	float _minSpeed, _maxSpeed;
 	float _minAngle, _maxAngle;
 	float _gravity;
+public:
+	ParticleSystem(image* particleImage, int num, float frameTerm);
+	~ParticleSystem();
 	void Emission(int idx);
 	void EmissionAll();
-public:
-	ParticleSystem(image* particleImage, int num, int frameTerm);
-	~ParticleSystem();
 	virtual void Update();
 	virtual void Render();
 	void Play();
@@ -56,10 +56,10 @@ public:
 
 	void SetPosition(int x, int y) { _x = x; _y = y; }
 
-	void SetDuration(int duration) { _minDuration = duration; _maxDuration = duration; }
-	void SetDuration(int minDuration, int maxDuration) { _minDuration = minDuration; _maxDuration = maxDuration; }
+	void SetDuration(float duration) { _minDuration = duration; _maxDuration = duration; }
+	void SetDuration(float minDuration, float maxDuration) { _minDuration = minDuration; _maxDuration = maxDuration; }
 
-	void SetInterval(int interval) { _interval = interval; }
+	void SetInterval(float interval) { _interval = interval; }
 
 	void SetSpeed(float speed) { _minSpeed = speed, _maxSpeed = speed; }
 	void SetSpeed(float minSpeed, float maxSpeed) { _minSpeed = minSpeed; _maxSpeed = maxSpeed; }

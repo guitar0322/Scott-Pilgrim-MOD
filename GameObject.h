@@ -62,6 +62,8 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
+	virtual void OnEnable();
+	virtual void OnDisable();
 	virtual void OnCollision(GameObject* gameObject);
 	virtual void OnTriggerEnter(GameObject* gameObject);
 	virtual void OnTriggerStay(GameObject* gameObject);
@@ -77,6 +79,7 @@ public:
 	~GameObject();
 	Transform* transform;
 	vector<Component*> components;
+	string name;
 	bool isActive;
 	int tag;
 	void Init();
@@ -88,12 +91,14 @@ public:
 	void MoveX(float x) { transform->MoveX(x); }
 	void MoveY(float y) { transform->MoveY(y); }
 	void Move(float x, float y) { transform->Move(x, y); }
+	void OnEnable();
+	void OnDisable();
 	void OnCollision(GameObject* gameObject);
 	void OnTriggerEnter(GameObject* gameObject);
 	void OnTriggerStay(GameObject* gameObject);
 	void OnTriggerExit(GameObject* gameObject);
 	
-	void SetActive(bool active) { isActive = active; }
+	void SetActive(bool active);
 };
 
 template<typename T>

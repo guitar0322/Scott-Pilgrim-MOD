@@ -32,6 +32,7 @@ void Renderer::Init(const char* filename, int width, int height)
 		this->gameObject->transform->position.y,
 		width,
 		height);
+	transColor = RGB(255, 0, 255);
 }
 
 void Renderer::Init()
@@ -53,12 +54,12 @@ void Renderer::Init()
 	rc = RectMakeCenter(this->transform->GetX(), transform->GetY(),
 		width, height);
 	ReleaseDC(_hWnd, hdc);
+	transColor = RGB(255, 0, 255);
 }
 
 void Renderer::Render()
 {
-	if(!KEYMANAGER->isToggleKey(VK_TAB))
-		Rectangle(_backBuffer->getMemDC(), rc);
+	string name = gameObject->name;
 	BitBlt(alphaMemDC, 0, 0, width, height, _backBuffer->getMemDC(), rc.left, rc.top, SRCCOPY);
 	GdiTransparentBlt(
 		alphaMemDC,					//복사될 영역의 DC
@@ -70,7 +71,7 @@ void Renderer::Render()
 		0, 0,					//복사해올 시작좌표(left, top)
 		width,					//복사해올 가로크기
 		height,					//복사해올 세로크기
-		RGB(255, 0, 255)		//복사할때 제외할 픽셀값
+		transColor		//복사할때 제외할 픽셀값
 	);
 	AlphaBlend(
 		_backBuffer->getMemDC(),					//복사될 영역의 DC
@@ -86,7 +87,16 @@ void Renderer::Render()
 	);
 }
 
+
 void Renderer::Update()
+{
+	rc = RectMakeCenter(this->gameObject->transform->position.x,
+		this->gameObject->transform->position.y,
+		width,
+		height);
+}
+
+void Renderer::OnEnable()
 {
 	rc = RectMakeCenter(this->gameObject->transform->position.x,
 		this->gameObject->transform->position.y,
@@ -96,6 +106,8 @@ void Renderer::Update()
 
 void Renderer::Resize(int newWidth, int newHeight)
 {
+	if (width == newWidth && height == newHeight)
+		return;
 	HDC hdc = GetDC(_hWnd);
 	HDC temp;
 
@@ -112,6 +124,7 @@ void Renderer::Resize(int newWidth, int newHeight)
 		newWidth,
 		newHeight);
 
+	DeleteObject(scaleBitmap);
 	width = newWidth;
 	height = newHeight;
 }

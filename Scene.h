@@ -1,11 +1,11 @@
 #pragma once
+class Cam;
 class Scene
 {
 private:
 protected:
 	int _mapWidth;
 	int _mapHeight;
-	ImageObject* _background;
 public:
 	Scene();
 	~Scene();
@@ -15,5 +15,8 @@ public:
 	virtual void Release();
 	virtual void Update();
 	virtual void Render();
+
+	int GetWidth() { return _mapWidth; }
+	int GetHeight() { return _mapHeight; }
 };
 
