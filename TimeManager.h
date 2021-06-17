@@ -18,5 +18,6 @@ public:
 
 	inline float getElapsedTime() const { return _timer->getElapsedTime(); }
 	inline float getWorldTime() const { return _timer->getWorldTime(); }
+	inline int getFPS() const { return _timer->getFrameRate(); }
 };
 

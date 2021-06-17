@@ -33,6 +33,8 @@ public:
     void Render();
     void SetClip(AnimationClip* newClip);
     void SetClip(AnimationClip* newClip, int startFrame);
+    void SetClip(string clipName);
+    void SetClip(string clipName, int startFrame);
     void AddClip(string clipName, AnimationClip* newClip);
     AnimationClip* GetClip(string clipName);
     void AddTransaction(string name, AnimationClip* startClip, AnimationClip* nextClip);

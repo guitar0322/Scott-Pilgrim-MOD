@@ -14,6 +14,8 @@ public:
     int weight;
     virtual void Update();
     virtual void Render();
+    virtual void OnDisable();
+    virtual void OnEnable();
     bool CheckCollision(float tempX, float tempY);
     bool CheckCollision(float tempX, float tempY, int colIdx);
     bool CheckCollision(RECT rc, int colIdx);

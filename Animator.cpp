@@ -54,7 +54,6 @@ void Animator::SetClip(AnimationClip* newClip)
 {
 	preClip = curClip;
 	curClip = newClip;
-	curClip->currentFrame = 0;
 	currentFrame = 0;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
@@ -66,12 +65,33 @@ void Animator::SetClip(AnimationClip* newClip, int startFrame)
 {
 	preClip = curClip;
 	curClip = newClip;
-	curClip->currentFrame = startFrame;
 	currentFrame = startFrame;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
 	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
 		curClip->wholeDC, curClip->currentFrame * curClip->frameWidth, 0, SRCCOPY);
+}
+
+void Animator::SetClip(string clipName)
+{
+	preClip = curClip;
+	curClip = this->GetClip(clipName);
+	currentFrame = 0;
+	frameTime = 0;
+	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
+	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
+		curClip->wholeDC, 0, 0, SRCCOPY);
+}
+
+void Animator::SetClip(string clipName, int startFrame)
+{
+	preClip = curClip;
+	curClip = this->GetClip(clipName);
+	currentFrame = startFrame;
+	frameTime = 0;
+	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
+	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
+		curClip->wholeDC, 0, 0, SRCCOPY);
 }
 
 void Animator::AddClip(string clipName, AnimationClip* newClip)

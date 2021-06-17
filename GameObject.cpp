@@ -36,6 +36,15 @@ void GameObject::Render()
 	}
 }
 
+void GameObject::Release()
+{
+	for (int i = 0; i < components.size(); i++) {
+		if (components[i] != nullptr)
+			components[i]->Release();
+	}
+	SAFE_DELETE(transform);
+}
+
 Component* GameObject::AddComponent(Component* component)
 {
 	component->gameObject = this;

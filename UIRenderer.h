@@ -7,8 +7,9 @@ private:
     HBITMAP hBit, oBit;
     HDC memDC, alphaMemDC;
     BLENDFUNCTION blendFunction;
-    int width;
-    int height;
+    int _width;
+    int _height;
+    bool _isAlpha;
 public:
     UIRenderer();
     ~UIRenderer();
@@ -18,6 +19,8 @@ public:
     virtual void Update();
     virtual void Render();
     void Resize(int width, int height);
+    void SetAlphaMode(bool isAlpha) { _isAlpha = isAlpha; }
+    void SetAlphaMode(bool isAlpha, int alpha);
     void SetAlpha(int alpha);
     void FillColor(COLORREF color);
 };

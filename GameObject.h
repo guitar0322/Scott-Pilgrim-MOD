@@ -62,6 +62,7 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
+	virtual void Release();
 	virtual void OnEnable();
 	virtual void OnDisable();
 	virtual void OnCollision(GameObject* gameObject);
@@ -85,6 +86,7 @@ public:
 	void Init();
 	void Update();
 	void Render();
+	void Release();
 	Component* AddComponent(Component* component);
 	template <typename T>
 	T* GetComponent();

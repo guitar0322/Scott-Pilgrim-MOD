@@ -26,6 +26,10 @@ void Component::Render()
 {
 }
 
+void Component::Release()
+{
+}
+
 void Component::OnEnable()
 {
 }

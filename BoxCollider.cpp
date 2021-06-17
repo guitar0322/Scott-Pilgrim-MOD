@@ -199,3 +199,13 @@ void BoxCollider::Render()
 	DeleteObject(hPen);
 	DeleteObject(hBrush);
 }
+
+void BoxCollider::OnDisable()
+{
+	COLLIDERMANAGER->EraseCollider(this);
+}
+
+void BoxCollider::OnEnable()
+{
+	COLLIDERMANAGER->AddCollider(this);
+}

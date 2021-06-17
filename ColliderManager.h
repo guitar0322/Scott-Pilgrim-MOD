@@ -8,5 +8,7 @@ public:
 	~ColliderManager();
 	HRESULT init();
 	void release();
+	void EraseCollider(BoxCollider* targetCollider);
+	void AddCollider(BoxCollider* newCollider);
 };
 

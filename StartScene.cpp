@@ -57,5 +57,7 @@ void StartScene::Render()
 {
     _background->Render();
     rockman.Render();
+    sprintf_s(debug[0], "%d", TIMEMANAGER->getFPS());
+    TextOut(_backBuffer->getMemDC(), 20, 20, debug[0], strlen(debug[0]));
     mainCam->camera->Render(_hdc);
 }
