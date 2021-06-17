@@ -18,6 +18,8 @@
 #include "Box.h"
 #include "Zone.h"
 #include "ImageObject.h"
+#include "Controler.h"
+
 #include <typeinfo>
 
 typedef RECT ELLIPSE;

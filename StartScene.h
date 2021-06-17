@@ -8,13 +8,7 @@ class StartScene :
 public:
     StartScene();
     ~StartScene();
-    RockMan rockman;
-    Box smallObj;
-    Box _bigObj;
-    Box _airObj;
-    Zone clearZone;
-    ClearTrigger* clearTrigger;
-    GameObject* _ground;
+    GameObject rockman;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();
