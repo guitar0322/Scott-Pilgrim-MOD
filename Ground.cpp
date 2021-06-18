@@ -1,0 +1,82 @@
+#include "stdafx.h"
+#include "Ground.h"
+
+void Ground::Init()
+{
+	_width = transform->GetWidth();
+	_height = transform->GetHeight();
+	_deltaX = 0;
+	_deltaY = 0;
+	_x = gameObject->transform->GetX();
+	_y = gameObject->transform->GetY();
+	GROUNDMANAGER->AddGround(this);
+}
+
+void Ground::Init(int width, int height, int deltaX, int deltaY)
+{
+	_width = width;
+	_height = height;
+	_deltaX = deltaX;
+	_deltaY = deltaY;
+	_x = gameObject->transform->GetX() + _deltaX;
+	_y = gameObject->transform->GetY() + _deltaY;
+	GROUNDMANAGER->AddGround(this);
+}
+
+void Ground::Update()
+{
+	_rc = RectMakeCenter(_x, _y, _width, _height);
+}
+
+void Ground::Render()
+{
+	HPEN hPen, oPen;
+	HBRUSH hBrush, oBrush;
+	if (KEYMANAGER->isToggleKey(VK_TAB)) 
+	{
+		return;
+	}
+	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	oBrush = (HBRUSH)SelectObject(_backBuffer->getMemDC(), hBrush);
+	hPen = CreatePen(PS_DOT, 1, RGB(125, 125, 0));
+	oPen = (HPEN)SelectObject(_backBuffer->getMemDC(), hPen);
+	Rectangle(_backBuffer->getMemDC(), _rc);
+	SelectObject(_backBuffer->getMemDC(), oPen);
+	SelectObject(_backBuffer->getMemDC(), oBrush);
+	DeleteObject(hPen);
+	DeleteObject(hBrush);
+}
+
+void Ground::OnEnable()
+{
+	GROUNDMANAGER->AddGround(this);
+}
+
+void Ground::OnDisable()
+{
+	GROUNDMANAGER->EraseGround(this);
+}
+
+void Ground::Move(float x, float y)
+{
+	_x += x;
+	_y += y;
+}
+
+void Ground::MoveX(float x)
+{
+	_x += x;
+}
+
+void Ground::MoveY(float y)
+{
+	_y += y;
+}
+
+void Ground::ReSize(int width, int height)
+{
+	if (_width == width && _height == height)
+		return;
+	_width = width;
+	_height = height;
+}

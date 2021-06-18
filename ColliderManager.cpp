@@ -9,13 +9,14 @@ ColliderManager::~ColliderManager()
 {
 }
 
-HRESULT ColliderManager::init()
+HRESULT ColliderManager::Init()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }
 
-void ColliderManager::release()
+void ColliderManager::Release()
 {
+	colliderList.clear();
 }
 
 void ColliderManager::EraseCollider(BoxCollider* targetCollider)

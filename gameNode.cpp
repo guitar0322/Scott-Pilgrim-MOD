@@ -20,6 +20,11 @@ HRESULT gameNode::init()
 	TAGMANAGER->init();
 	TIMEMANAGER->init();
 	SCENEMANAGER->Init();
+	COLLIDERMANAGER->Init();
+	GROUNDMANAGER->Init();
+	SOUNDMANAGER->init();
+	TXTDATAMANAGER->Init();
+	CLIPMANAGER->Init();
 	return S_OK;
 }
 
@@ -36,6 +41,11 @@ HRESULT gameNode::init(bool managerInit)
 		TAGMANAGER->init();
 		TIMEMANAGER->init();
 		SCENEMANAGER->Init();
+		COLLIDERMANAGER->Init();
+		GROUNDMANAGER->Init();
+		SOUNDMANAGER->init();
+		TXTDATAMANAGER->Init();
+		CLIPMANAGER->Init();
 	}
 
 	return S_OK;
@@ -47,7 +57,7 @@ void gameNode::release()
 	KEYMANAGER->release();
 	KEYMANAGER->releaseSingleton();
 
-	COLLIDERMANAGER->release();
+	COLLIDERMANAGER->Release();
 	COLLIDERMANAGER->releaseSingleton();
 
 	TAGMANAGER->release();
@@ -58,6 +68,18 @@ void gameNode::release()
 
 	SCENEMANAGER->Release();
 	SCENEMANAGER->releaseSingleton();
+
+	GROUNDMANAGER->Release();
+	GROUNDMANAGER->releaseSingleton();
+
+	SOUNDMANAGER->release();
+	SOUNDMANAGER->releaseSingleton();
+
+	TXTDATAMANAGER->release();
+	TXTDATAMANAGER->releaseSingleton();
+
+	CLIPMANAGER->Release();
+	CLIPMANAGER->releaseSingleton();
 }
 
 void gameNode::update()

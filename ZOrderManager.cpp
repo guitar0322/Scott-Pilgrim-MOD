@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ZOrderManager.h"
 #include <algorithm>
-#include "Renderer.h"
+#include "ZOrder.h"
 ZOrderManager::ZOrderManager()
 {
 }
@@ -19,35 +19,32 @@ void ZOrderManager::release()
 {
 }
 
-bool CompareBottom(Renderer* rendererA, Renderer* rendererB) {
-	int bottomA = rendererA->GetRc().bottom;
-	int bottomB = rendererB->GetRc().bottom;
-	return bottomA < bottomB;
+bool CompareBottom(ZOrder* rendererA, ZOrder* rendererB) {
+	return rendererA->GetY() < rendererB->GetY();
 }
 void ZOrderManager::update()
 {
-	sort(_rendererV.begin(), _rendererV.end(), CompareBottom);
+	sort(_zOrderV.begin(), _zOrderV.end(), CompareBottom);
 }
 
 void ZOrderManager::render()
 {
-	for (int i = 0; i < _rendererV.size(); i++) {
-		string name = _rendererV[i]->gameObject->name;
-		_rendererV[i]->Render();
+	for (int i = 0; i < _zOrderV.size(); i++) {
+		string name = _zOrderV[i]->gameObject->name;
+		_zOrderV[i]->gameObject->Render();
 	}
 }
 
-void ZOrderManager::AddRenderer(Renderer* newRenderer)
+void ZOrderManager::AddZOrder(ZOrder* newZOrder)
 {
-	string name = newRenderer->gameObject->name;
-	_rendererV.push_back(newRenderer);
+	_zOrderV.push_back(newZOrder);
 }
 
-void ZOrderManager::EraseRenderer(Renderer* targetRenderer)
+void ZOrderManager::EraseZOrder(ZOrder* targetZOrder)
 {
-	for (int i = 0; i < _rendererV.size(); i++) {
-		if (_rendererV[i] == targetRenderer) {
-			_rendererV.erase(_rendererV.begin() + i);
+	for (int i = 0; i < _zOrderV.size(); i++) {
+		if (_zOrderV[i] == targetZOrder) {
+			_zOrderV.erase(_zOrderV.begin() + i);
 			break;
 		}
 	}

@@ -10,7 +10,6 @@ private:
     int _width;
     int _height;
     bool _isAlpha;
-    bool _isZOrder;
     RECT rc;
     COLORREF _transColor;
 public:
@@ -30,7 +29,6 @@ public:
     void SetAlpha(int alpha) { this->_alpha = alpha; blendFunc.SourceConstantAlpha = alpha;}//알파값 설정
     void Resize(int objWidth, int objHeight);//렌더러 DC영역 크기를 재조정
     void SetTransColor(COLORREF transColor) { _transColor = transColor; }
-    void SetZOrder(bool isZOrder);
     RECT GetRc() { return rc; }
 };
 

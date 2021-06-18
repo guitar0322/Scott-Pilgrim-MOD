@@ -9,5 +9,7 @@ public:
     Renderer* renderer;
     BoxCollider* collider;
     Animator* animator;
+    ZOrder* zOrder;
 };
+
 

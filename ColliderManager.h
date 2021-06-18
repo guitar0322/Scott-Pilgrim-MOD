@@ -6,8 +6,8 @@ public:
 	vector<BoxCollider*> colliderList;
 	ColliderManager();
 	~ColliderManager();
-	HRESULT init();
-	void release();
+	HRESULT Init();
+	void Release();
 	void EraseCollider(BoxCollider* targetCollider);
 	void AddCollider(BoxCollider* newCollider);
 };

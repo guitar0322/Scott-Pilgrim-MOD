@@ -24,6 +24,9 @@
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "ZOrderManager.h"
+#include "soundManager.h"
+#include "GroundManager.h"
+#include "ClipManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -52,8 +55,13 @@ using namespace HDY_UTIL;
 #define TIMEMANAGER TimeManager::getSingleton()
 #define SCENEMANAGER SceneManager::getSingleton()
 #define ZORDER ZOrderManager::getSingleton()
+#define SOUNDMANAGER soundManager::getSingleton()
+#define GROUNDMANAGER GroundManager::getSingleton()
+#define TXTDATAMANAGER TextDataManager::getSingleton()
+#define CLIPMANAGER ClipManager::getSingleton()
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p) = nullptr;}}
+#define SAFE_RELEASE(p) {if(p) {(p)->release(); (p) = NULL;}}
 
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", MAPSIZEX, MAPSIZEY);
 

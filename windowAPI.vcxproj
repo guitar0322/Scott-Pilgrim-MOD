@@ -155,7 +155,9 @@
     <ClInclude Include="Cam.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="ClearTrigger.h" />
+    <ClInclude Include="ClipManager.h" />
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
@@ -163,6 +165,8 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="GroundManager.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="ImageObject.h" />
@@ -196,6 +200,7 @@
     <ClInclude Include="UIRenderer.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Zone.h" />
+    <ClInclude Include="ZOrder.h" />
     <ClInclude Include="ZOrderManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -207,13 +212,17 @@
     <ClCompile Include="Cam.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="ClearTrigger.cpp" />
+    <ClCompile Include="ClipManager.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controler.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="GroundManager.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="ImageObject.cpp" />
@@ -249,6 +258,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="Zone.cpp" />
+    <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="ZOrderManager.cpp" />
   </ItemGroup>
   <ItemGroup>

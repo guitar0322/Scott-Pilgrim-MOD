@@ -1,11 +1,11 @@
 #pragma once
 #include "singletonBase.h"
 
-class Renderer;
+class ZOrder;
 class ZOrderManager : public singletonBase<ZOrderManager>
 {
 private:
-	vector<Renderer*> _rendererV;
+	vector<ZOrder*> _zOrderV;
 public:
 	ZOrderManager();
 	~ZOrderManager();
@@ -15,7 +15,7 @@ public:
 	void update();
 	void render();
 
-	void AddRenderer(Renderer* newRenderer);
-	void EraseRenderer(Renderer* targetRenderer);
+	void AddZOrder(ZOrder* newZOrder);
+	void EraseZOrder(ZOrder* targetZOrder);
 };
 

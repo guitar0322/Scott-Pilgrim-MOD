@@ -15,6 +15,7 @@ void Controler::Update()
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
 		transform->MoveX(_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<Ground>()->MoveX(_speed * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT)) {
 		animator->SetClip(animator->GetClip("idle_right"));
@@ -25,6 +26,7 @@ void Controler::Update()
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT)) {
 		transform->MoveX(-_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<Ground>()->MoveX(-_speed * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_LEFT)) {
 		animator->SetClip(animator->GetClip("idle_left"));
@@ -33,9 +35,13 @@ void Controler::Update()
 
 	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
 		transform->MoveY(-_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<Ground>()->MoveY(-_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<ZOrder>()->MoveY(-_speed * TIMEMANAGER->getElapsedTime()); //위아래로 움직일때만 zorder기준좌표 이동
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
 		transform->MoveY(_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<Ground>()->MoveY(_speed * TIMEMANAGER->getElapsedTime());
+		gameObject->GetComponent<ZOrder>()->MoveY(_speed * TIMEMANAGER->getElapsedTime());//위아래로 움직일때만 zorder기준좌표 이동
 	}
 }
 

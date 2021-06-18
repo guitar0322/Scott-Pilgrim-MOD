@@ -29,19 +29,20 @@ HRESULT StartScene::Init()
     runRight->Init("run_right.bmp", 1358, 94, 14, 0.08f);
     runLeft->Init("run_left.bmp", 1358, 94, 14, 0.08f);
 
-    testObj.renderer->SetZOrder(true);
     testObj.collider->isTrigger = true;
+    testObj.AddComponent(new ZOrder());
+    testObj.GetComponent<ZOrder>()->Init();
 
-    item.renderer->SetZOrder(true);
     item.transform->SetPosition(WINSIZEX / 2 + 200, WINSIZEY / 2);
     item.GetComponent<BoxCollider>()->isTrigger = true;
     item.AddComponent(new Item());
+    item.AddComponent(new ZOrder());
+    item.GetComponent<ZOrder>()->Init();
 
     rockman.name = "rockman";
     rockman.tag = TAGMANAGER->GetTag("player");
     rockman.AddComponent(new Renderer());
     rockman.GetComponent<Renderer>()->Init();
-    rockman.GetComponent<Renderer>()->SetZOrder(true);
     rockman.AddComponent(new BoxCollider());
     rockman.GetComponent<BoxCollider>()->Init();
     rockman.GetComponent<BoxCollider>()->SetSize(74, 90);
@@ -51,9 +52,14 @@ HRESULT StartScene::Init()
     rockman.GetComponent<Animator>()->AddClip("idle_left", idleLeft);
     rockman.GetComponent<Animator>()->AddClip("run_right", runRight);
     rockman.GetComponent<Animator>()->AddClip("run_left", runLeft);
-    rockman.GetComponent<Animator>()->SetClip(rockman.GetComponent<Animator>()->GetClip("idle_right"));
+    rockman.GetComponent<Animator>()->SetClip("idle_right");
     rockman.AddComponent(new Controler());
     rockman.GetComponent<Controler>()->Init();
+    rockman.AddComponent(new Ground());
+    rockman.GetComponent<Ground>()->Init(74, 6, 0, 48);
+    rockman.AddComponent(new ZOrder());
+    rockman.GetComponent<ZOrder>()->Init();
+    _gravity = 100.0f;
     return S_OK;
 }
 
@@ -64,6 +70,18 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
+    if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
+        _jumpPower = 150;
+        _isJump = true;
+    }
+    if (_isJump == true) {
+        rockman.transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
+        _jumpPower -= _gravity * TIMEMANAGER->getElapsedTime();
+    }
+    if (GROUNDMANAGER->CheckGround(rockman.GetComponent<BoxCollider>()->rc)) {
+        _isJump = false;
+        rockman.transform->MoveY(_jumpPower * TIMEMANAGER->getElapsedTime());
+    }
     _background->Update();
     item.Update();
     rockman.Update();
@@ -75,8 +93,6 @@ void StartScene::Update()
 void StartScene::Render()
 {
     _background->Render();
-    //item.Render();
-    //rockman.Render();
     ZORDER->render();
     TextOut(_backBuffer->getMemDC(), 20, 20, debug[0], strlen(debug[0]));
     TextOut(_backBuffer->getMemDC(), 20, 40, debug[1], strlen(debug[1]));

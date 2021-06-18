@@ -6,13 +6,15 @@ Character::Character()
 	renderer = new Renderer();
 	collider = new BoxCollider();
 	animator = new Animator();
-	
+	zOrder = new ZOrder();
 	AddComponent(renderer);
 	renderer->Init();
 	AddComponent(collider);
 	collider->Init();
 	AddComponent(animator);
 	animator->Init();
+	AddComponent(zOrder);
+	zOrder->Init();
 }
 
 Character::~Character()
