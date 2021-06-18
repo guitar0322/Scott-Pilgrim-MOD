@@ -28,13 +28,15 @@ void BoxCollider::Update()
 		bool isExist = false;
 		for (int j = 0; j < prevCol.size(); j++) {
 			 if(vCol[i] == prevCol[j]) {
-				gameObject->OnTriggerStay(COLLIDERMANAGER->colliderList[prevCol[j]]->gameObject);
+				if (gameObject->isActive == true)
+					gameObject->OnTriggerStay(COLLIDERMANAGER->colliderList[prevCol[j]]->gameObject);
 				isExist = true;
 				break;
 			}
 		}
 		if (isExist == false) {
-			gameObject->OnTriggerEnter(COLLIDERMANAGER->colliderList[vCol[i]]->gameObject);
+			if(gameObject->isActive == true)
+				gameObject->OnTriggerEnter(COLLIDERMANAGER->colliderList[vCol[i]]->gameObject);
 		}
 	}
 
@@ -47,7 +49,8 @@ void BoxCollider::Update()
 			}
 		}
 		if (isExist == false) {
-			gameObject->OnTriggerExit(COLLIDERMANAGER->colliderList[prevCol[i]]->gameObject);
+			if (gameObject->isActive == true)
+				gameObject->OnTriggerExit(COLLIDERMANAGER->colliderList[prevCol[i]]->gameObject);
 		}
 	}
 

@@ -29,6 +29,14 @@ void Controler::Update()
 	if (KEYMANAGER->isOnceKeyUp(VK_LEFT)) {
 		animator->SetClip(animator->GetClip("idle_left"));
 	}
+
+
+	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
+		transform->MoveY(-_speed * TIMEMANAGER->getElapsedTime());
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
+		transform->MoveY(_speed * TIMEMANAGER->getElapsedTime());
+	}
 }
 
 void Controler::Render()

@@ -33,6 +33,7 @@ void Renderer::Init(const char* filename, int width, int height)
 		width,
 		height);
 	_transColor = RGB(255, 0, 255);
+	_isZOrder = false;
 }
 
 void Renderer::Init()
@@ -57,11 +58,11 @@ void Renderer::Init()
 		_width, _height);
 	ReleaseDC(_hWnd, hdc);
 	_transColor = RGB(255, 0, 255);
+	_isZOrder = false;
 }
 
 void Renderer::Render()
 {
-	string name = gameObject->name;
 	int startX = transform->GetX() - _width / 2;
 	int startY = transform->GetY() - _height / 2;
 	if (_isAlpha == true) {
@@ -131,6 +132,12 @@ void Renderer::OnEnable()
 		this->gameObject->transform->position.y,
 		_width,
 		_height);
+	ZORDER->AddRenderer(this);
+}
+
+void Renderer::OnDisable()
+{
+	ZORDER->EraseRenderer(this);
 }
 
 void Renderer::SetAlphaMode(bool isAlpha, int alpha)
@@ -162,6 +169,18 @@ void Renderer::Resize(int newWidth, int newHeight)
 	DeleteObject(scaleBitmap);
 	_width = newWidth;
 	_height = newHeight;
+}
+
+void Renderer::SetZOrder(bool isZOrder)
+{
+	if (_isZOrder == false && isZOrder == true) {
+		ZORDER->AddRenderer(this);
+		_isZOrder = isZOrder;
+	}
+	if (_isZOrder == true && isZOrder == false) {
+		ZORDER->EraseRenderer(this);
+		_isZOrder = isZOrder;
+	}
 }
 
 

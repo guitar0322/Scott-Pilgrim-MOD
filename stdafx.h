@@ -23,6 +23,7 @@
 #include "TextDataManager.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
+#include "ZOrderManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -50,6 +51,7 @@ using namespace HDY_UTIL;
 #define DATAMANAGER TextDataManager::getSingleton()
 #define TIMEMANAGER TimeManager::getSingleton()
 #define SCENEMANAGER SceneManager::getSingleton()
+#define ZORDER ZOrderManager::getSingleton()
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p) = nullptr;}}
 

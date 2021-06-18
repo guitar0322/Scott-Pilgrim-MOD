@@ -7,7 +7,6 @@ class SecondScene :
 public:
     SecondScene();
     ~SecondScene();
-    RockMan rockman;
     virtual HRESULT Init();
     virtual HRESULT Init(int mapWidth, int mapHeight, ImageObject background);
     virtual void Release();
