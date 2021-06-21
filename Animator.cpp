@@ -69,7 +69,7 @@ void Animator::SetClip(AnimationClip* newClip, int startFrame)
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
 	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
-		curClip->wholeDC, curClip->currentFrame * curClip->frameWidth, 0, SRCCOPY);
+		curClip->wholeDC, currentFrame * curClip->frameWidth, 0, SRCCOPY);
 }
 
 void Animator::SetClip(string clipName)
@@ -91,7 +91,7 @@ void Animator::SetClip(string clipName, int startFrame)
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
 	BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
-		curClip->wholeDC, 0, 0, SRCCOPY);
+		curClip->wholeDC, currentFrame * curClip->frameWidth, 0, SRCCOPY);
 }
 
 void Animator::AddClip(string clipName, AnimationClip* newClip)

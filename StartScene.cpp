@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StartScene.h"
 #include "Item.h"
+#include "Player.h"
 StartScene::StartScene()
 {
 }
@@ -39,6 +40,9 @@ HRESULT StartScene::Init()
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
     character = new Character();
     character->name = "character";
+	character->AddComponent(new Player);
+	character->GetComponent<Player>()->Init();
+	character->ground->Init(100, 5, 0, 50);
 
     BackgroundInit();
     return S_OK;
