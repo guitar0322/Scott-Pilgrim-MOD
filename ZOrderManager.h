@@ -12,8 +12,8 @@ public:
 
 	HRESULT init();
 	void release();
-	void update();
-	void render();
+	void Update();
+	void Render();
 
 	void AddZOrder(ZOrder* newZOrder);
 	void EraseZOrder(ZOrder* targetZOrder);

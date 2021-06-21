@@ -22,12 +22,12 @@ void ZOrderManager::release()
 bool CompareBottom(ZOrder* rendererA, ZOrder* rendererB) {
 	return rendererA->GetY() < rendererB->GetY();
 }
-void ZOrderManager::update()
+void ZOrderManager::Update()
 {
 	sort(_zOrderV.begin(), _zOrderV.end(), CompareBottom);
 }
 
-void ZOrderManager::render()
+void ZOrderManager::Render()
 {
 	for (int i = 0; i < _zOrderV.size(); i++) {
 		string name = _zOrderV[i]->gameObject->name;

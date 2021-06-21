@@ -15,16 +15,7 @@ HRESULT gameNode::init()
 	//_hdc = GetDC(_hWnd);
 
 	SetTimer(_hWnd, 1, 10, NULL);
-	KEYMANAGER->init();
-	IMAGEMANAGER->init();
-	TAGMANAGER->init();
-	TIMEMANAGER->init();
-	SCENEMANAGER->Init();
-	COLLIDERMANAGER->Init();
-	GROUNDMANAGER->Init();
-	SOUNDMANAGER->init();
-	TXTDATAMANAGER->Init();
-	CLIPMANAGER->Init();
+
 	return S_OK;
 }
 
@@ -46,6 +37,7 @@ HRESULT gameNode::init(bool managerInit)
 		SOUNDMANAGER->init();
 		TXTDATAMANAGER->Init();
 		CLIPMANAGER->Init();
+		BGMANAGER->Init();
 	}
 
 	return S_OK;
@@ -80,6 +72,9 @@ void gameNode::release()
 
 	CLIPMANAGER->Release();
 	CLIPMANAGER->releaseSingleton();
+
+	BGMANAGER->Release();
+	BGMANAGER->releaseSingleton();
 }
 
 void gameNode::update()

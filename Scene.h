@@ -1,5 +1,6 @@
 #pragma once
-class Cam;
+#include "Cam.h"
+//class Cam;
 class Scene
 {
 private:

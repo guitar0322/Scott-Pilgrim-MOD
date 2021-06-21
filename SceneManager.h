@@ -2,8 +2,6 @@
 #include "singletonBase.h"
 #include "Scene.h"
 
-class Scene;
-
 class SceneManager : public singletonBase<SceneManager>
 {
 private:

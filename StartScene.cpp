@@ -11,55 +11,36 @@ StartScene::~StartScene()
 
 HRESULT StartScene::Init()
 {
-    _background = new ImageObject();
-    _background->renderer->Init("map.bmp", 10224, 1494);
-    _background->transform->SetPosition(10224 / 2, 1494 / 2);
-    _background->name = "background";
-    _mapWidth = 10224;
-    _mapHeight = 1494;
+    _mapWidth = 10615;
+    _mapHeight = 377;
     mainCam = new Cam();
     mainCam->camera->SetMapSize(_mapWidth, _mapHeight);
-    mainCam->transform->SetPosition(WINSIZEX / 2, WINSIZEY / 2);
-    AnimationClip* idleRight = new AnimationClip();
-    AnimationClip* runRight = new AnimationClip();
-    AnimationClip* idleLeft = new AnimationClip();
-    AnimationClip* runLeft = new AnimationClip();
-    idleRight->Init("idle_right.bmp", 740, 90, 10, 0.15f);
-    idleLeft->Init("idle_left.bmp", 740, 90, 10, 0.15f);
-    runRight->Init("run_right.bmp", 1358, 94, 14, 0.08f);
-    runLeft->Init("run_left.bmp", 1358, 94, 14, 0.08f);
+    mainCam->transform->SetPosition(WINSIZEX / 2, _mapHeight / 2);
+    mainCam->camera->SetRenderHeight(377);
+    mainCam->camera->SetScreenHeight(377);
+    //위에는 건들지 마시오
+    
 
-    testObj.collider->isTrigger = true;
-    testObj.AddComponent(new ZOrder());
-    testObj.GetComponent<ZOrder>()->Init();
+    //=============미리 만들어져 있는 예시 오브젝트============
+    //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
+    //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
 
-    item.transform->SetPosition(WINSIZEX / 2 + 200, WINSIZEY / 2);
-    item.GetComponent<BoxCollider>()->isTrigger = true;
-    item.AddComponent(new Item());
-    item.AddComponent(new ZOrder());
-    item.GetComponent<ZOrder>()->Init();
+    //1.ImageObject
+    //Renderer컴포넌트가 미리 추가되어있는 오브젝트
+    //imageObj->renderer 로 접근이 가능
+    imageObj = new ImageObject();
+    //2.Box
+    //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
+    //->renderer,  ->collider 로 접근이 가능
+    box = new Box();
 
-    rockman.name = "rockman";
-    rockman.tag = TAGMANAGER->GetTag("player");
-    rockman.AddComponent(new Renderer());
-    rockman.GetComponent<Renderer>()->Init();
-    rockman.AddComponent(new BoxCollider());
-    rockman.GetComponent<BoxCollider>()->Init();
-    rockman.GetComponent<BoxCollider>()->SetSize(74, 90);
-    rockman.AddComponent(new Animator());
-    rockman.GetComponent<Animator>()->Init();
-    rockman.GetComponent<Animator>()->AddClip("idle_right", idleRight);
-    rockman.GetComponent<Animator>()->AddClip("idle_left", idleLeft);
-    rockman.GetComponent<Animator>()->AddClip("run_right", runRight);
-    rockman.GetComponent<Animator>()->AddClip("run_left", runLeft);
-    rockman.GetComponent<Animator>()->SetClip("idle_right");
-    rockman.AddComponent(new Controler());
-    rockman.GetComponent<Controler>()->Init();
-    rockman.AddComponent(new Ground());
-    rockman.GetComponent<Ground>()->Init(74, 6, 0, 48);
-    rockman.AddComponent(new ZOrder());
-    rockman.GetComponent<ZOrder>()->Init();
-    _gravity = 100.0f;
+    //3.Character
+    //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
+    //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
+    character = new Character();
+    character->name = "character";
+
+    BackgroundInit();
     return S_OK;
 }
 
@@ -70,32 +51,40 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
-    if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
-        _jumpPower = 150;
-        _isJump = true;
+    if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+        character->transform->MoveX(15);
     }
-    if (_isJump == true) {
-        rockman.transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
-        _jumpPower -= _gravity * TIMEMANAGER->getElapsedTime();
-    }
-    if (GROUNDMANAGER->CheckGround(rockman.GetComponent<BoxCollider>()->rc)) {
-        _isJump = false;
-        rockman.transform->MoveY(_jumpPower * TIMEMANAGER->getElapsedTime());
-    }
-    _background->Update();
-    item.Update();
-    rockman.Update();
-    testObj.Update();
+    mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
+    character->Update();
+    BGMANAGER->Update();
+    ZORDER->Update();
     mainCam->Update();
-    ZORDER->update();
 }
 
 void StartScene::Render()
 {
-    _background->Render();
-    ZORDER->render();
-    TextOut(_backBuffer->getMemDC(), 20, 20, debug[0], strlen(debug[0]));
-    TextOut(_backBuffer->getMemDC(), 20, 40, debug[1], strlen(debug[1]));
+    BGMANAGER->Render();
+    ZORDER->Render();
+    sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
+    sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
+    TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
+    TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 40, debug[1], strlen(debug[1]));
     TextOut(_backBuffer->getMemDC(), 20, 60, debug[2], strlen(debug[2]));
     mainCam->camera->Render(_hdc);
+}
+
+void StartScene::BackgroundInit()
+{
+    for (int i = 0; i < BG_NUM; i++) {
+        char fileName[64];
+        sprintf_s(fileName, "map/background%d.bmp", i + 1);
+		background[i] = new ImageObject();
+		background[i]->renderer->Init(fileName, 965, 377);
+		background[i]->transform->SetPosition(965 * i + 965/2, 377/2);
+		background[i]->name = "background";
+        BGMANAGER->AddBackground(background[i]);
+    }
+	BGMANAGER->SetMargin(30);
+	BGMANAGER->SetBackgroundWidth(965);
+    BGMANAGER->SetPlayer(character);
 }

@@ -27,6 +27,7 @@
 #include "soundManager.h"
 #include "GroundManager.h"
 #include "ClipManager.h"
+#include "BackgroundManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -42,8 +43,8 @@ using namespace HDY_UTIL;
 #define WINSIZEX 640	//윈도우 가로크기
 #define WINSIZEY 480	//윈도우 세로크기
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
-#define MAPSIZEX 4023
-#define MAPSIZEY 3024
+#define MAPSIZEX 10615
+#define MAPSIZEY 400
 
 #define RND randomFunction::getSingleton()
 #define KEYMANAGER keyManager::getSingleton()
@@ -59,6 +60,7 @@ using namespace HDY_UTIL;
 #define GROUNDMANAGER GroundManager::getSingleton()
 #define TXTDATAMANAGER TextDataManager::getSingleton()
 #define CLIPMANAGER ClipManager::getSingleton()
+#define BGMANAGER BackgroundManager::getSingleton()
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p) = nullptr;}}
 #define SAFE_RELEASE(p) {if(p) {(p)->release(); (p) = NULL;}}

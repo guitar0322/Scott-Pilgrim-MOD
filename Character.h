@@ -10,6 +10,7 @@ public:
     BoxCollider* collider;
     Animator* animator;
     ZOrder* zOrder;
+    Ground* ground;
 };
 
 

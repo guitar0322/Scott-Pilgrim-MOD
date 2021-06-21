@@ -15,7 +15,7 @@ playGround::~playGround()
 //초기화는 여기다 하세요 제발
 HRESULT playGround::init()
 {
-	gameNode::init();
+	gameNode::init(true);
 	_camShakeFrame = 0;
 	StartScene* startScene = new StartScene();
 	SCENEMANAGER->AddScene("start", startScene);

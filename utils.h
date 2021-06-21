@@ -18,6 +18,7 @@
 #include "Box.h"
 #include "Zone.h"
 #include "ImageObject.h"
+#include "Character.h"
 #include "Ground.h"
 #include "Controler.h"
 #include "ZOrder.h"

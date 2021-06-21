@@ -1,21 +1,21 @@
 #pragma once
 #include "Scene.h"
+#define BG_NUM 11
 class StartScene :
     public Scene
 {
 public:
     StartScene();
     ~StartScene();
-    GameObject rockman;
-    ImageObject* _background;
-    Box testObj;
-    Box item;
-    float _jumpPower;
-    float _gravity;
-    bool _isJump;
+    ImageObject* background[BG_NUM];
+    Box* box;
+    ImageObject* imageObj;
+    Character* character;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();
     virtual void Render();
+
+    void BackgroundInit();
 };
 
