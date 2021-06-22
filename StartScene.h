@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#define BG_NUM 11
+#define BG_NUM 23
 class StartScene :
     public Scene
 {

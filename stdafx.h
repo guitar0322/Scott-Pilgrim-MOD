@@ -40,11 +40,11 @@ using namespace HDY_UTIL;
 #define WINNAME (LPTSTR)(TEXT("28기 API"))
 #define WINSTARTX 200	//윈도우 창 시작좌표 (left)
 #define WINSTARTY 50	//윈도우 창 시작좌표 (top)
-#define WINSIZEX 640	//윈도우 가로크기
-#define WINSIZEY 480	//윈도우 세로크기
+#define WINSIZEX 900	//윈도우 가로크기
+#define WINSIZEY 568	//윈도우 세로크기
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
-#define MAPSIZEX 10615
-#define MAPSIZEY 400
+#define MAPSIZEX 21206
+#define MAPSIZEY 568
 
 #define RND randomFunction::getSingleton()
 #define KEYMANAGER keyManager::getSingleton()
