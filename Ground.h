@@ -22,6 +22,13 @@ public:
     void MoveX(float x);
     void MoveY(float y);
     void ReSize(int width, int height);
+    
+    void SetX(float x) { _x = x; }
+    float GetX() { return _x; }
+
+    void SetY(float y) { _y = y; }
+    float GetY() { return _y; }
+
     RECT GetRc() { return _rc; }
 };
 

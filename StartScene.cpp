@@ -12,15 +12,13 @@ StartScene::~StartScene()
 
 HRESULT StartScene::Init()
 {
-    _mapWidth = 10615;
-    _mapHeight = 377;
+    _mapWidth = 21206;
+    _mapHeight = 680;
     mainCam = new Cam();
     mainCam->camera->SetMapSize(_mapWidth, _mapHeight);
-    mainCam->transform->SetPosition(WINSIZEX / 2, _mapHeight / 2);
-    mainCam->camera->SetRenderHeight(377);
-    mainCam->camera->SetScreenHeight(377);
+    mainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    mainCam->camera->SetRenderHeight(568);
     //위에는 건들지 마시오
-    
 
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
@@ -43,7 +41,6 @@ HRESULT StartScene::Init()
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 50);
-
     BackgroundInit();
     return S_OK;
 }
@@ -83,12 +80,12 @@ void StartScene::BackgroundInit()
         char fileName[64];
         sprintf_s(fileName, "map/background%d.bmp", i + 1);
 		background[i] = new ImageObject();
-		background[i]->renderer->Init(fileName, 965, 377);
-		background[i]->transform->SetPosition(965 * i + 965/2, 377/2);
+		background[i]->renderer->Init(fileName, 922, 680);
+		background[i]->transform->SetPosition(922 * i + 922 /2, 680 /2);
 		background[i]->name = "background";
         BGMANAGER->AddBackground(background[i]);
     }
 	BGMANAGER->SetMargin(30);
-	BGMANAGER->SetBackgroundWidth(965);
+	BGMANAGER->SetBackgroundWidth(922);
     BGMANAGER->SetPlayer(character);
 }

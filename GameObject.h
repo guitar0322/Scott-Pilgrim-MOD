@@ -35,7 +35,6 @@ public:
 	void DetachChild(int idx);
 	void DetachParent();
 
-
 	void SetX(float x) { position.x = x; }
 	void SetY(float y) { position.y = y; }
 	void SetPosition(float x, float y) { position.x = x; position.y = y; }
@@ -47,7 +46,6 @@ public:
 	void SetSize(int width, int height) { size.width = width, size.height = height; }
 	int GetWidth() { return size.width; }
 	int GetHeight() { return size.height; }
-
 };
 
 class Component
