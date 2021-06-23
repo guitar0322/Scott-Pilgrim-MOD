@@ -18,6 +18,7 @@ private:
     }TRANSACTION;
 private:
     float frameTime;
+	bool _isPause;
 public:
     Animator();
     ~Animator();
@@ -38,5 +39,7 @@ public:
     void AddClip(string clipName, AnimationClip* newClip);
     AnimationClip* GetClip(string clipName);
     void AddTransaction(string name, AnimationClip* startClip, AnimationClip* nextClip);
+	void Pause();
+	void Resume();
 };
 

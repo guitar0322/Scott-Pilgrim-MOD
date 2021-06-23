@@ -228,6 +228,18 @@
     <ClInclude Include="PlayerJumpState.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerShieldState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKickAttackState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerZorderJumpState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGroundState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -405,6 +417,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShieldState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKickAttackState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerZorderJumpState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGroundState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

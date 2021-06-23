@@ -5,11 +5,7 @@
 
 PlayerState * PlayerJumpState::InputHandle(Player * player)
 {
-	//if (player->transform->GetY() > WINSIZEY / 2)
-	//{
-	//	return new PlayerIdleState();
-
-	//}
+	
 	if (GROUNDMANAGER->CheckGround(player->collider->rc) == true) 
 	{
 		return new PlayerIdleState();
@@ -23,35 +19,32 @@ void PlayerJumpState::Update(Player * player)
 
 	player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 
-	//_count++;
-
-	//if (_count % 20 == 0)
-	//{
-	//	_jumpPower += player->GetGravity()*TIMEMANAGER->getElapsedTime();
-
-	//	player->transform->MoveY(_jumpPower * TIMEMANAGER->getElapsedTime());
-
-	//}
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->transform->MoveX(player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->dashStop = false;
+		player->transform->MoveX(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->dashStop = false;
+		player->transform->MoveX(-player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(-player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->transform->MoveY(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->dashStop = false;
+
+		player->transform->MoveY(-player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(-player->GetSpeed()* 0.3 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->transform->MoveY(player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->dashStop = false;
+
+		player->transform->MoveY(player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(player->GetSpeed()*0.3 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
@@ -66,11 +59,13 @@ void PlayerJumpState::Update(Player * player)
 	}
 
 
+
+
 }
 
 void PlayerJumpState::Enter(Player * player)
 {
-	_jumpPower = 150;
+	_jumpPower = 100;
 
 	if (player->dir == false)
 	{

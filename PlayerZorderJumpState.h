@@ -1,16 +1,21 @@
 #pragma once
 #include "PlayerState.h"
-class PlayerIdleState :
+#include "PlayerIdleState.h"
+#include "Player.h"
+
+class PlayerZorderJumpState :
 	public PlayerState
 {
 private:
-	float _dashSpeed;
+	float _jumpPowerZorder;
+	float _speedZ;
 
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player* player);
 	virtual void Enter(Player* player);
 	virtual void Exit(Player* player);
+
 
 
 };

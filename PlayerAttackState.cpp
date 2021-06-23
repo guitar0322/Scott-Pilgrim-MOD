@@ -43,11 +43,6 @@ void PlayerAttackState::Update(Player * player)
 	}
 
 
-
-
-
-
-
 }
 
 void PlayerAttackState::Enter(Player * player)
