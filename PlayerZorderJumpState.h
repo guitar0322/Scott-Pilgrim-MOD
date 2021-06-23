@@ -1,7 +1,5 @@
 #pragma once
 #include "PlayerState.h"
-#include "PlayerIdleState.h"
-#include "Player.h"
 
 class PlayerZorderJumpState :
 	public PlayerState

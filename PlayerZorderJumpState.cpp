@@ -1,15 +1,18 @@
 #include "stdafx.h"
 #include "PlayerZorderJumpState.h"
+#include "PlayerIdleState.h"
+#include "PlayerGroundState.h"
+#include "Player.h"
 
 PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 {
 	
 	if (GROUNDMANAGER->CheckGround(player->collider->rc) == true)
 	{
-	
-		return new PlayerIdleState();
+		player->jumpZ = true;
+
+			return new PlayerGroundState();
 	}
-	
 	
 
 	return nullptr;
@@ -26,7 +29,6 @@ void PlayerZorderJumpState::Update(Player * player)
 		player->transform->MoveY(-_jumpPowerZorder *0.5 *TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
-		player->groundCheck = false;
 		_jumpPowerZorder = 0;
 
 
@@ -37,7 +39,6 @@ void PlayerZorderJumpState::Update(Player * player)
 		player->transform->MoveY(-_jumpPowerZorder * 0.5* TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
-		player->groundCheck = false;
 		_jumpPowerZorder = 0;
 	
 	}
@@ -47,9 +48,8 @@ void PlayerZorderJumpState::Update(Player * player)
 
 void PlayerZorderJumpState::Enter(Player * player)
 {
-	_jumpPowerZorder = 100;
+	_jumpPowerZorder = 110;
 	_speedZ = 100;
-	player->groundCheck = true;
 
 	if (player->dir == false)
 	{

@@ -178,6 +178,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackState.h" />
     <ClInclude Include="PlayerControler.h" />
+    <ClInclude Include="PlayerFallState.h" />
     <ClInclude Include="PlayerGroundState.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerJumpState.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
+    <ClCompile Include="PlayerFallState.cpp" />
     <ClCompile Include="PlayerGroundState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpState.cpp" />

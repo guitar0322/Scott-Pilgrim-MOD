@@ -55,9 +55,13 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	{
 		if (player->dir == true && player->jumpDelay <= 0.5f && player->jumpZ == true)
 		{
+			
 			player->dir = true;
 			player->jumpZ = false;
 			player->dirZ = true;
+			player->groundZCheck = true;
+			player->groundCheck = false;
+
 
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
@@ -67,6 +71,9 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			player->dir = false;
 			player->jumpZ = false;
 			player->dirZ = true;
+			player->groundZCheck = true;
+			player->groundCheck = false;
+
 
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
@@ -82,27 +89,30 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		if (player->dir == true && player->jumpDelay <= 0.5f && player->jumpZ == true)
+		if (player->dir == true && player->jumpDelay <= 0.7f && player->jumpZ == true)
 		{
 			player->dir = true;
 			player->jumpZ = false;
 			player->dirZ = false;
+			player->groundZCheck = true;
+			player->groundCheck = false;
 
 
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
 		}
-		if (player->dir == false && player->jumpDelay <= 0.5f && player->jumpZ == true) {
+		if (player->dir == false && player->jumpDelay <= 0.7f && player->jumpZ == true) {
 			player->dir = false;
 			player->jumpZ = false;
 			player->dirZ = false;
+			player->groundZCheck = true;
+			player->groundCheck = false;
 
 
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
 		}
 		
-		player->dirZ = false;
 		player->jumpZ = true;
 		player->dashStop = false;
 		player->dash = true;

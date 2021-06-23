@@ -20,8 +20,12 @@ private:
 	AnimationClip runLeft;
 	AnimationClip jumpRight;
 	AnimationClip jumpLeft;
+	AnimationClip fallRight;
+	AnimationClip fallLeft;
 	AnimationClip jumpZorderRight;
 	AnimationClip jumpZorderLeft;
+	AnimationClip groundRight;
+	AnimationClip groundLeft;
 	AnimationClip attack1Right;
 	AnimationClip attack2Right;
 	AnimationClip attack3Right;
@@ -44,6 +48,7 @@ public:
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분
+	bool groundZCheck;	//Z축 그라운드 체크 구분
 	bool dash;			//뛰는 거 구분
 	bool dashStop;		//마찰 구분
 	bool shield;		//막기 구분

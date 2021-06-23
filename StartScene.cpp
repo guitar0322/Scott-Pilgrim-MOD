@@ -40,7 +40,7 @@ HRESULT StartScene::Init()
     character->name = "character";
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 50);
+	character->ground->Init(100, 5, 0, 52);
     BackgroundInit();
     return S_OK;
 }
