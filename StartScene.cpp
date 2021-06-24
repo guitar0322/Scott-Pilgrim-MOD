@@ -39,6 +39,10 @@ HRESULT StartScene::Init()
     //3.Character
     //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
+
+	CLIPMANAGER->AddClip("trashBox", "item/trashBox.bmp", 100, 76, 1, 1);
+	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
+
     character = new Character();
     character->name = "character";
 	character->AddComponent(new Player);
@@ -61,15 +65,14 @@ HRESULT StartScene::Init()
     testGround->GetComponent<Ground>()->SetX(500);
     testGround->GetComponent<Ground>()->SetY(600);
 
-	itemObj = new ItemObj();
-	itemObj->Init();
+	trashBox = new ItemObject();
+	trashBox->Init();
+	trashBox->item->SetItemImage("trashBox");
+	trashBox->transform->SetPosition(640, 300);
 
-	itemObj->AddComponent(new TrashBox());
-	itemObj->GetComponent<TrashBox>()->Init();
-	itemObj->transform->SetPosition(635, 310);
-	itemObj->AddComponent(new ZOrder());
-	itemObj->GetComponent<ZOrder>()->Init();
-	itemObj->GetComponent<ZOrder>()->SetY(itemObj->transform->GetY());
+	
+
+
 
     BackgroundInit();
     return S_OK;
@@ -86,8 +89,8 @@ void StartScene::Update()
     //    character->transform->MoveX(15);
     //}
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
-	itemObj->Update();
     testGround->Update();
+	trashBox->Update();
     character->Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
@@ -98,12 +101,12 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
-	//itemObj->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
     testGround->Render();
+	trashBox->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());

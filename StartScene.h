@@ -15,7 +15,7 @@ public:
     Character* character;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
-	ItemObj* itemObj;
+	ItemObject* trashBox;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();

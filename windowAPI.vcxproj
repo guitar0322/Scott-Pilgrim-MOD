@@ -172,7 +172,7 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemObj.h" />
+    <ClInclude Include="ItemObject.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="ObjectInfo.h" />
     <ClInclude Include="ParticleSystem.h" />
@@ -208,7 +208,6 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="TrashBox.h" />
     <ClInclude Include="TriggerTest.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="UIRenderer.h" />
@@ -245,7 +244,7 @@
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemObj.cpp" />
+    <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -282,7 +281,6 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="TrashBox.cpp" />
     <ClCompile Include="TriggerTest.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="UIRenderer.cpp" />

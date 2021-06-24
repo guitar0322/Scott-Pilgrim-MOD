@@ -23,8 +23,7 @@
 #include "Ground.h"
 #include "Controler.h"
 #include "ZOrder.h"
-#include "ItemObj.h"
-#include "TrashBox.h"
+#include "ItemObject.h"
 #include <typeinfo>
 
 typedef RECT ELLIPSE;
