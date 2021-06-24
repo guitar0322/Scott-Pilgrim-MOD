@@ -228,6 +228,12 @@
     <ClInclude Include="PlayerJumpState.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="ItemObj.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashBox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -405,6 +411,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashBox.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

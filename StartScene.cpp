@@ -41,6 +41,17 @@ HRESULT StartScene::Init()
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 50);
+
+	itemObj = new ItemObj();
+	itemObj->Init();
+
+	itemObj->AddComponent(new TrashBox());
+	itemObj->GetComponent<TrashBox>()->Init();
+	itemObj->transform->SetPosition(635, 310);
+	itemObj->AddComponent(new ZOrder());
+	itemObj->GetComponent<ZOrder>()->Init();
+	itemObj->GetComponent<ZOrder>()->SetY(itemObj->transform->GetY());
+
     BackgroundInit();
     return S_OK;
 }
@@ -56,6 +67,7 @@ void StartScene::Update()
         character->transform->MoveX(15);
     }
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
+	itemObj->Update();
     character->Update();
     BGMANAGER->Update();
     ZORDER->Update();
@@ -65,6 +77,7 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
+	//itemObj->Render();
     ZORDER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());

@@ -11,6 +11,7 @@ public:
     Box* box;
     ImageObject* imageObj;
     Character* character;
+	ItemObj* itemObj;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();
