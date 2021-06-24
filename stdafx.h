@@ -28,6 +28,8 @@
 #include "GroundManager.h"
 #include "ClipManager.h"
 #include "BackgroundManager.h"
+#include "WallManager.h"
+#include "EffectManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -61,6 +63,8 @@ using namespace HDY_UTIL;
 #define TXTDATAMANAGER TextDataManager::getSingleton()
 #define CLIPMANAGER ClipManager::getSingleton()
 #define BGMANAGER BackgroundManager::getSingleton()
+#define WALLMANAGER WallManager::getSingleton()
+#define EFFECTMANAGER EffectManager::getSingleton()
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p) = nullptr;}}
 #define SAFE_RELEASE(p) {if(p) {(p)->release(); (p) = NULL;}}
