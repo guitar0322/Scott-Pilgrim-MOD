@@ -7,9 +7,16 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 {
 	_count++;
 
-	if (_count > 70 && player->attackChange == true)
+	if (_count > 100 && player->dir == false)
 	{
 
+		return new PlayerIdleState();
+
+
+		_count = 0;
+	}
+	if (_count > 150 && player->dir == true)
+	{
 		return new PlayerIdleState();
 
 
@@ -22,29 +29,20 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 
 void PlayerAttackState::Update(Player * player)
 {
-	_attackCount++;
-
-	if (_attackCount > 2)
+	
+	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
-		if (KEYMANAGER->isOnceKeyDown('L'))
+		if (player->dir == false)
 		{
-			if (player->dir == false)
-			{
-				player->ChangeClip("attack2_right", false);
-			}
-			else
-			{
-				player->ChangeClip("attack2_left", false);
-
-			}
+			player->ChangeClip("attack2_right", false);
+		}
+		else
+		{
+			player->ChangeClip("attack2_left", false);
 
 		}
 
 	}
-
-
-
-
 
 
 

@@ -13,20 +13,25 @@ Transform::~Transform()
 {
 
 }
-
+//wallManager 설계
+//wall은 시작점과 끝점을 잇는 선이다.
+//transform move시 시작점과 도착지점이 선의 각 반대방향에 있으면 움직이지 않는다
+//
 bool Transform::Move(float x, float y)
 {
 	int childCount = GetChildCount();
 	bool result = true;
-	if (CheckCollision(position.x + x, position.y + y) == true) {
-		return false;
-	}
-	position.x += x;
-	position.y += y;
-	for (int i = 0; i < childCount; i++) {
-		child[i]->MoveX(x);
-		child[i]->MoveY(y);
-	}
+	result = MoveX(x);
+	result = MoveY(y);
+	//if (CheckCollision(position.x + x, position.y + y) == true) {
+	//	return false;
+	//}
+	//position.x += x;
+	//position.y += y;
+	//for (int i = 0; i < childCount; i++) {
+	//	child[i]->MoveX(x);
+	//	child[i]->MoveY(y);
+	//}
 	return result;
 }
 
@@ -35,6 +40,9 @@ bool Transform::MoveX(float x)
 	int childCount = GetChildCount();
 	bool result = true;
 	if (CheckCollision(position.x + x, position.y) == true) {
+		return false;
+	}
+	if (CheckWallCross(x, 0) == true) {
 		return false;
 	}
 	position.x += x;
@@ -49,6 +57,9 @@ bool Transform::MoveY(float y)
 	int childCount = GetChildCount();
 	bool result = true;
 	if (CheckCollision(position.x, position.y + y) == true) {
+		return false;
+	}
+	if (CheckWallCross(0, y) == true) {
 		return false;
 	}
 	position.y += y;
@@ -68,6 +79,17 @@ bool Transform::CheckCollision(float tempX, float tempY)
 	else {
 		return collider->CheckCollision(tempX, tempY);
 	}
+	return false;
+}
+
+bool Transform::CheckWallCross(float deltaX, float deltaY)
+{
+	Ground* ground = gameObject->GetComponent<Ground>();
+	if (ground == nullptr)
+		return false;
+
+	if (WALLMANAGER->CheckCross(ground->GetX(), ground->GetY(), ground->GetX() + deltaX, ground->GetY() + deltaY) == true)
+		return true;
 	return false;
 }
 

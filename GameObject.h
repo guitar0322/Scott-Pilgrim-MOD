@@ -28,6 +28,7 @@ public:
 	bool MoveX(float x);
 	bool MoveY(float y);
 	bool CheckCollision(float tempX, float tempY);
+	bool CheckWallCross(float deltaX, float deltaY);
 	int GetChildCount() { return child.size(); }
 	Transform* GetChild(int i);
 	void AddChild(GameObject* gameObject);

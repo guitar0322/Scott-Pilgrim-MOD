@@ -18,12 +18,14 @@ void Animator::Init()
 		throw "Animator에서 발생 : 게임 오브젝트에 Renderer컴포넌트가 없습니다";
 	}
 	currentFrame = 0;
+	_isPause = false;
 }
 
 void Animator::Update()
 {
 	if (curClip == nullptr)
 		return;
+	if (_isPause == true) return;
 	frameTime += TIMEMANAGER->getElapsedTime();
 	if (frameTime >= curClip->frameTerm) {
 		BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
@@ -113,4 +115,14 @@ void Animator::AddTransaction(string name, AnimationClip* startClip, AnimationCl
 {
 	TRANSACTION newTransaction = { startClip, nextClip };
 	transactionMap.insert(make_pair( name, newTransaction));
+}
+
+void Animator::Pause()
+{
+	_isPause = true;
+}
+
+void Animator::Resume()
+{
+	_isPause = false;
 }
