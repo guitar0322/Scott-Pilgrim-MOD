@@ -8,6 +8,7 @@ GameObject::GameObject()
 	transform->gameObject = this;
 	isActive = true;
 	tag = TAGMANAGER->GetTag("default");
+	autoDisable = true;
 }
 
 GameObject::~GameObject()
@@ -25,6 +26,7 @@ void GameObject::Update()
 		if (components[i]->enable == true)
 			components[i]->Update();
 	}
+
 }
 
 void GameObject::Render()

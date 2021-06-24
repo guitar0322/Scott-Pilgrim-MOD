@@ -14,6 +14,6 @@ void DebugText::Init()
 void DebugText::Render()
 {
 	for (int i = 0; i < 3; i++) {
-		TextOut(_backBuffer->getMemDC(), transform->GetX() + _deltaX, transform->GetY() + _deltaY - _term * i, debugStr[i], strlen(debugStr[i]));
+		TextOut(BackBuffer, transform->GetX() + _deltaX, transform->GetY() + _deltaY - _term * i, debugStr[i], strlen(debugStr[i]));
 	}
 }

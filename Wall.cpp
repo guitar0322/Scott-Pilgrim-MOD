@@ -25,7 +25,7 @@ void Wall::Render()
 {
 	if (!KEYMANAGER->isToggleKey(VK_TAB)) 
 	{
-		LineMake(_backBuffer->getMemDC(), _startX, _startY, _endX, _endY);
+		LineMake(BackBuffer, _startX, _startY, _endX, _endY);
 	}
 }
 

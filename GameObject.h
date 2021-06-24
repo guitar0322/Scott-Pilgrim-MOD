@@ -9,11 +9,12 @@ class GameObject
 {
 private:
 	int component_num;
+	bool autoDisable;
+	vector<Component*> components;
 public:
 	GameObject();
 	~GameObject();
 	Transform* transform;
-	vector<Component*> components;
 	string name;
 	bool isActive;
 	int tag;

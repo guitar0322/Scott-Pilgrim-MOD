@@ -14,13 +14,14 @@ StartScene::~StartScene()
 
 HRESULT StartScene::Init()
 {
+    Scene::Init();
     _mapWidth = 21206;
     _mapHeight = 680;
-    mainCam = new Cam();
-    mainCam->camera->SetMapSize(_mapWidth, _mapHeight);
-    mainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    mainCam->camera->SetRenderHeight(568);
-    CLIPMANAGER->AddClip("test_effect", "trap_blast_projectile.bmp", 168, 50, 4, 1.f);
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
     //위에는 건들지 마시오
 
     //=============미리 만들어져 있는 예시 오브젝트============
@@ -73,10 +74,6 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
-	
-
-
-
     BackgroundInit();
     return S_OK;
 }
@@ -88,9 +85,9 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
-    //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
-    //    character->transform->MoveX(15);
-    //}
+    if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+        character->transform->MoveX(15);
+    }
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -133,4 +130,8 @@ void StartScene::BackgroundInit()
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
     BGMANAGER->SetPlayer(character);
+}
+
+void StartScene::CameraInit()
+{
 }

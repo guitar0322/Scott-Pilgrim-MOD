@@ -27,6 +27,7 @@ public:
 
 	int GetMapWidth() { return _maxX; }
 	int GetMapHeight() { return _maxY; }
+	void SetMapSize(int width, int height) { _maxX = width; _maxY = height; }
 
 	void SetScreenStart(int x, int y) { _screenStartX = x; _screenStartY = y; }
 	pair<int, int> GetScreenStart() { return { _screenStartX, _screenStartY }; }
@@ -46,6 +47,5 @@ public:
 	int GetRenderWidth() { return _renderWidth; }
 	int GetRenderHeight() { return _renderHeight; }
 	pair<int, int> GetRenderSize() { return { _renderWidth, _renderHeight }; }
-	void SetMapSize(int width, int height) { _maxX = width; _maxY = height; }
 };
 

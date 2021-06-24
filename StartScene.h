@@ -22,5 +22,6 @@ public:
     virtual void Render();
 
     void BackgroundInit();
+    void CameraInit();
 };
 

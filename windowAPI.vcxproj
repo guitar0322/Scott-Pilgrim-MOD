@@ -193,7 +193,6 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="RockMan.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondScene.h" />
@@ -263,7 +262,6 @@
     <ClCompile Include="PlayerZorderJumpState.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RockMan.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondScene.cpp" />

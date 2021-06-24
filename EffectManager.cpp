@@ -53,7 +53,7 @@ void EffectManager::Render()
 	for (int i = 0; i < _effectV.size(); i++) {
 		if (_effectV[i].active == false) continue;
 		AnimationClip* curClip = CLIPMANAGER->FindClip(_effectV[i].clipName);
-		GdiTransparentBlt(_backBuffer->getMemDC(),
+		GdiTransparentBlt(BackBuffer,
 			_effectV[i].x, _effectV[i].y,
 			curClip->frameWidth, curClip->frameHeight,
 			curClip->wholeDC,
