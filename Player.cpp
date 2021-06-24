@@ -109,8 +109,8 @@ void Player::ClipInit()
 	kickAttackLeft.isLoop = false;
 
 
-	attack1Right.Init("attack1_right.bmp", 480, 122, 4, 0.15f);
-	attack2Right.Init("attack2_right.bmp", 366, 126, 3, 0.15f);
+	attack1Right.Init("attack1_right.bmp", 360, 120, 3, 0.20f);
+	attack2Right.Init("attack2_right.bmp", 488, 124, 4, 0.20f);
 	attack3Right.Init("attack3_right.bmp", 366, 130, 3, 0.15f);
 	attack4Right.Init("attack4_right.bmp", 864, 166, 8, 0.15f);
 	attack1Right.isLoop = false;
@@ -118,8 +118,8 @@ void Player::ClipInit()
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("attack1_left.bmp", 480, 122, 4, 0.25f);
-	attack2Left.Init("attack2_left.bmp", 366, 126, 3, 0.20f);
+	attack1Left.Init("attack1_left.bmp", 360, 120, 3, 0.20f);
+	attack2Left.Init("attack2_left.bmp", 488, 124, 4, 0.20f);
 	attack3Left.Init("attack3_left.bmp", 366, 130, 3, 0.15f);
 	attack4Left.Init("attack4_left.bmp", 864, 166, 8, 0.15f);
 	attack1Left.isLoop = false;

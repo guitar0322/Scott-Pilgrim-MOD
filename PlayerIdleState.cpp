@@ -124,6 +124,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//점프
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
+		player->dashStop = false;
 
 		return new PlayerJumpState();
 	}
@@ -132,12 +133,12 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//주먹공격
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
+		player->dashStop = false;
 
-		player->attackChange = true; //2번공격
 		return new PlayerAttackState();
 
-
 	}
+
 	//발차기
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
