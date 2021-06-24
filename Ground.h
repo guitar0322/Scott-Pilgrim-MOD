@@ -18,6 +18,8 @@ public:
     virtual void Render();
     virtual void OnEnable();
     virtual void OnDisable();
+
+    bool CheckWallCross(float nextX, float nextY);
     void Move(float x, float y);
     void MoveX(float x);
     void MoveY(float y);

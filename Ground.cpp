@@ -57,19 +57,31 @@ void Ground::OnDisable()
 	GROUNDMANAGER->EraseGround(this);
 }
 
+bool Ground::CheckWallCross(float nextX, float nextY)
+{
+	if (WALLMANAGER->CheckCross(_x, _y, nextX, nextY)) {
+		return true;
+	}
+	return false;
+}
+
 void Ground::Move(float x, float y)
 {
-	_x += x;
-	_y += y;
+	MoveX(x);
+	MoveY(y);
 }
 
 void Ground::MoveX(float x)
 {
+	if (CheckWallCross(_x + x, _y) == true)
+		return;
 	_x += x;
 }
 
 void Ground::MoveY(float y)
 {
+	if (CheckWallCross(_x, _y + y) == true)
+		return;
 	_y += y;
 }
 

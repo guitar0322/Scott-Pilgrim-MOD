@@ -38,6 +38,8 @@ HRESULT gameNode::init(bool managerInit)
 		TXTDATAMANAGER->Init();
 		CLIPMANAGER->Init();
 		BGMANAGER->Init();
+		WALLMANAGER->Init();
+		EFFECTMANAGER->Init();
 	}
 
 	return S_OK;
@@ -75,6 +77,12 @@ void gameNode::release()
 
 	BGMANAGER->Release();
 	BGMANAGER->releaseSingleton();
+
+	WALLMANAGER->Release();
+	WALLMANAGER->releaseSingleton();
+
+	EFFECTMANAGER->Release();
+	EFFECTMANAGER->releaseSingleton();
 }
 
 void gameNode::update()
