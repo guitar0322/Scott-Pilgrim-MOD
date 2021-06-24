@@ -97,15 +97,14 @@ void PlayerWalkState::Update(Player * player)
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
 		player->dash = false;
-		player->transform->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
-
+		player->zOrder->MoveZ(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		player->dash = false;
-		player->transform->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 	}
 
 }

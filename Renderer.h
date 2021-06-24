@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Component.h"
 #include "image.h"
 class Renderer :
     public Component

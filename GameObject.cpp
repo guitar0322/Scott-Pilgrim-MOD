@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "Transform.h"
 
 GameObject::GameObject()
 {
@@ -118,4 +118,17 @@ void GameObject::SetActive(bool active)
 		isActive = active;
 		OnDisable();
 	}
+}
+
+void GameObject::MoveX(float x) 
+{ 
+	transform->MoveX(x); 
+}
+void GameObject::MoveY(float y) 
+{ 
+	transform->MoveY(y);
+}
+void GameObject::Move(float x, float y)
+{ 
+	transform->Move(x, y); 
 }

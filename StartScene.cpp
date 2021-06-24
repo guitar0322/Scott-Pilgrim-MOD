@@ -45,9 +45,12 @@ HRESULT StartScene::Init()
 
     character = new Character();
     character->name = "character";
+    character->zOrder->SetY(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 50);
+	character->ground->Init(100, 5, 0, 52);
+    character->AddComponent(new DebugText());
+    character->GetComponent<DebugText>()->Init();
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
@@ -63,7 +66,7 @@ HRESULT StartScene::Init()
     testGround->GetComponent<Ground>()->Init();
     testGround->transform->SetPosition(500, 600);
     testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(600);
+    testGround->GetComponent<Ground>()->SetY(500);
 
 	trashBox = new ItemObject();
 	trashBox->Init();

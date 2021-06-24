@@ -20,6 +20,7 @@ void Player::Init()
 	animator = gameObject->GetComponent<Animator>();
 	collider = gameObject->GetComponent<BoxCollider>();
 	ground = gameObject->GetComponent<Ground>();
+	zOrder = gameObject->GetComponent<ZOrder>();
 	ClipInit();
 	_speed = 80;
 	_gravity = 90;

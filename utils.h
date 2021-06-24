@@ -24,6 +24,7 @@
 #include "Controler.h"
 #include "ZOrder.h"
 #include "ItemObject.h"
+#include "DebugText.h"
 #include <typeinfo>
 
 typedef RECT ELLIPSE;

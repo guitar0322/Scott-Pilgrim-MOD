@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Component.h"
 #include "AnimationClip.h"
 #include <map>
 //트랜잭션을 추가할 수 있고
