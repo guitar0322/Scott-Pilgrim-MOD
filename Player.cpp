@@ -31,6 +31,7 @@ void Player::Init()
 	jumpZ = false;
 	shield = false;
 	groundCheck = false;
+	groundZCheck = false;
 	_state = new PlayerIdleState();
 	_state->Enter(this);
 	runDelay = 0;
@@ -74,44 +75,53 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 
 void Player::ClipInit()
 {
-	idleRight.Init("idle_right.bmp", 312, 74, 8, 0.20f);
-	idleLeft.Init("idle_Left.bmp", 312, 74, 8, 0.20f);
-	walkRight.Init("walk_right.bmp", 228, 64, 6, 0.25f);
-	walkLeft.Init("walk_left.bmp", 228, 64, 6, 0.25f);
-	runRight.Init("run_right.bmp", 432, 63, 8, 0.17f);
-	runLeft.Init("run_left.bmp", 432, 63, 8, 0.17f);
-	jumpRight.Init("jump_right.bmp", 588, 72, 12, 0.15f);
+	idleRight.Init("idle_right.bmp", 640, 122, 8, 0.20f);
+	idleLeft.Init("idle_left.bmp", 640, 122, 8, 0.20f);
+	walkRight.Init("walk_right.bmp", 456, 128, 6, 0.25f);
+	walkLeft.Init("walk_left.bmp", 456, 128, 6, 0.25f);
+	runRight.Init("run_right.bmp", 864, 126, 8, 0.17f);
+	runLeft.Init("run_left.bmp", 864, 126, 8, 0.17f);
+	jumpRight.Init("jump_right.bmp", 684, 144, 7, 0.15f);
 	jumpRight.isLoop = false;
-	jumpLeft.Init("jump_left.bmp", 588, 72, 12, 0.15f);
+	jumpLeft.Init("jump_left.bmp", 684, 144, 7, 0.15f);
 	jumpLeft.isLoop = false;
-	jumpZorderRight.Init("jumpZorder_right.bmp", 441, 72, 9, 0.10f);
+	fallRight.Init("fall_right.bmp", 490, 144, 5, 0.15f);
+	fallRight.isLoop = false;
+	fallLeft.Init("fall_left.bmp", 490, 144, 5, 0.15f);
+	fallLeft.isLoop = false;
+	jumpZorderRight.Init("jumpZorder_right.bmp", 882, 144, 9, 0.10f);
 	jumpZorderRight.isLoop = false;
-	jumpZorderLeft.Init("jumpZorder_left.bmp", 441, 72, 9, 0.10f);
+	jumpZorderLeft.Init("jumpZorder_left.bmp", 882, 144, 9, 0.10f);
 	jumpZorderLeft.isLoop = false;
-	shieldRight.Init("shield_right.bmp", 266, 63, 7, 0.22f);
+	groundRight.Init("ground_right.bmp", 98, 144, 1, 0.10f);
+	groundRight.isLoop = false;
+	groundLeft.Init("ground_left.bmp", 98, 144, 1, 0.10f);
+	groundLeft.isLoop = false;
+
+	shieldRight.Init("shield_right.bmp", 532, 126, 7, 0.22f);
 	shieldRight.isLoop = false;
-	shieldLeft.Init("shield_left.bmp", 266, 63, 7, 0.22f);
+	shieldLeft.Init("shield_left.bmp", 532, 126, 7, 0.22f);
 	shieldLeft.isLoop = false;
 
-	kickAttackRight.Init("kickAttack_right.bmp", 448, 63, 7, 0.15f);
+	kickAttackRight.Init("kickAttack_right.bmp", 896, 126, 7, 0.15f);
 	kickAttackRight.isLoop = false;
-	kickAttackLeft.Init("kickAttack_left.bmp", 448, 63, 7, 0.15f);
+	kickAttackLeft.Init("kickAttack_left.bmp", 896, 126, 7, 0.15f);
 	kickAttackLeft.isLoop = false;
 
 
-	attack1Right.Init("attack1_right.bmp", 240, 61, 4, 0.15f);
-	attack2Right.Init("attack2_right.bmp", 183, 63, 3, 0.15f);
-	attack3Right.Init("attack3_right.bmp", 183, 65, 3, 0.15f);
-	attack4Right.Init("attack4_right.bmp", 432, 86, 8, 0.15f);
+	attack1Right.Init("attack1_right.bmp", 480, 122, 4, 0.15f);
+	attack2Right.Init("attack2_right.bmp", 366, 126, 3, 0.15f);
+	attack3Right.Init("attack3_right.bmp", 366, 130, 3, 0.15f);
+	attack4Right.Init("attack4_right.bmp", 864, 166, 8, 0.15f);
 	attack1Right.isLoop = false;
 	attack2Right.isLoop = false;
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("attack1_left.bmp", 240, 61, 4, 0.25f);
-	attack2Left.Init("attack2_left.bmp", 183, 63, 3, 0.20f);
-	attack3Left.Init("attack3_left.bmp", 183, 65, 3, 0.15f);
-	attack4Left.Init("attack4_left.bmp", 432, 86, 8, 0.15f);
+	attack1Left.Init("attack1_left.bmp", 480, 122, 4, 0.25f);
+	attack2Left.Init("attack2_left.bmp", 366, 126, 3, 0.20f);
+	attack3Left.Init("attack3_left.bmp", 366, 130, 3, 0.15f);
+	attack4Left.Init("attack4_left.bmp", 864, 166, 8, 0.15f);
 	attack1Left.isLoop = false;
 	attack2Left.isLoop = false;
 	attack3Left.isLoop = false;
@@ -126,8 +136,13 @@ void Player::ClipInit()
 	animator->AddClip("run_left", &runLeft);
 	animator->AddClip("jump_right", &jumpRight);
 	animator->AddClip("jump_left", &jumpLeft);
+	animator->AddClip("fall_right", &fallRight);
+	animator->AddClip("fall_left", &fallLeft);
 	animator->AddClip("jumpZorder_right", &jumpZorderRight);
 	animator->AddClip("jumpZorder_left", &jumpZorderLeft);
+	animator->AddClip("ground_right", &groundRight);
+	animator->AddClip("ground_left", &groundLeft);
+
 	animator->AddClip("shield_right", &shieldRight);
 	animator->AddClip("shield_left", &shieldLeft);
 

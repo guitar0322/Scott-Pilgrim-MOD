@@ -53,7 +53,6 @@ HRESULT StartScene::Init()
 
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
-    wall[2]->GetComponent<Wall>()->SetDir(true);
 
     testGround = new GameObject();
     testGround->AddComponent(new Ground());

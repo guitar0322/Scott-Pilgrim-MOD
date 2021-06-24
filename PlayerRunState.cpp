@@ -70,13 +70,13 @@ void PlayerRunState::Update(Player * player)
 {
 	if (player->dir == false)
 	{
-		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() *2* TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
-		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 
 	if (KEYMANAGER->isStayKeyDown('W'))
