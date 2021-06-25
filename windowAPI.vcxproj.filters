@@ -253,7 +253,10 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerFallState.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBreakState.h">
+      <Filter>소스 파일\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -453,7 +456,10 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="PlayerFallState.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBreakState.cpp">
+      <Filter>소스 파일\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

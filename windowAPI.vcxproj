@@ -177,6 +177,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerBreakState.h" />
     <ClInclude Include="PlayerControler.h" />
     <ClInclude Include="PlayerFallState.h" />
     <ClInclude Include="PlayerGroundState.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerBreakState.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
     <ClCompile Include="PlayerFallState.cpp" />
     <ClCompile Include="PlayerGroundState.cpp" />

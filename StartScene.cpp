@@ -43,7 +43,9 @@ HRESULT StartScene::Init()
     character->name = "character";
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 50);
+	character->ground->Init(100, 5, 0, 52);
+	character->zOrder->Init();
+	character->zOrder->SetY(568 / 2 + 52);
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);

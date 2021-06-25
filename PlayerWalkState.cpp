@@ -99,6 +99,8 @@ void PlayerWalkState::Update(Player * player)
 		player->dash = false;
 		player->transform->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+
 
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
@@ -106,6 +108,8 @@ void PlayerWalkState::Update(Player * player)
 		player->dash = false;
 		player->transform->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+
 	}
 
 }

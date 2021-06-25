@@ -17,36 +17,37 @@ PlayerState * PlayerJumpState::InputHandle(Player * player)
 
 void PlayerJumpState::Update(Player * player)
 {
-	_jumpPower -= player->GetGravity()*TIMEMANAGER->getElapsedTime();
+	_jumpPower -= player->GetGravity()*TIMEMANAGER->getElapsedTime() *1.5f;
 
 	player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->dashStop = false;
+
 		player->transform->MoveX(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->dashStop = false;
 		player->transform->MoveX(-player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(-player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->dashStop = false;
 
-		player->transform->MoveY(-player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(-player->GetSpeed()* 0.3 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveY(-player->GetSpeed()* 0.6 *TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->dashStop = false;
 
-		player->transform->MoveY(player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(player->GetSpeed()*0.3 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveY(player->GetSpeed()* 0.6*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
@@ -65,7 +66,7 @@ void PlayerJumpState::Update(Player * player)
 
 void PlayerJumpState::Enter(Player * player)
 {
-	_jumpPower = 170;
+	_jumpPower = 180;
 
 	if (player->dir == false)
 	{

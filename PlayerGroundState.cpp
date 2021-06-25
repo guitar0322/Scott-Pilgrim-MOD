@@ -5,13 +5,13 @@
 
 PlayerState * PlayerGroundState::InputHandle(Player * player)
 {
-	if (player->groundCheck == true && player->groundCheckDelay >= 0.6f)
+	if (player->groundCheck == true && player->groundCheckDelay >= 0.5f)
 	{
 		player->groundCheck = false;
 		player->groundCheckDelay = 0;
 		return new PlayerIdleState();
 	}
-	if (_jumpTime > 0.5f)
+	if (_jumpTime >= 0.4f)
 	{
 		player->jumpZ = false;
 		player->groundZCheck = false;

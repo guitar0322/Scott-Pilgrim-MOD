@@ -17,36 +17,41 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 
 void PlayerFallState::Update(Player * player)
 {
-	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime() * 2.5f;
+	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime() * 4.5;
 
 	player->transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());
 
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->dashStop = false;
+		player->dash = false;
 		player->transform->MoveX(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->dashStop = false;
+		player->dash = false;
+
 		player->transform->MoveX(-player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(-player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->dashStop = false;
+		player->dash = false;
 
-		player->transform->MoveY(-player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(-player->GetSpeed()* 0.3 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveY(-player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->dashStop = false;
+		player->dash = false;
 
-		player->transform->MoveY(player->GetSpeed()*0.3*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(player->GetSpeed()*0.3 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveY(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{

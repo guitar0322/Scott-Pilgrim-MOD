@@ -29,6 +29,8 @@ void PlayerZorderJumpState::Update(Player * player)
 		player->transform->MoveY(-_jumpPowerZorder *0.5 *TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
+
 		_jumpPowerZorder = 0;
 
 
@@ -39,6 +41,8 @@ void PlayerZorderJumpState::Update(Player * player)
 		player->transform->MoveY(-_jumpPowerZorder * 0.5* TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
+
 		_jumpPowerZorder = 0;
 	
 	}
@@ -48,7 +52,7 @@ void PlayerZorderJumpState::Update(Player * player)
 
 void PlayerZorderJumpState::Enter(Player * player)
 {
-	_jumpPowerZorder = 110;
+	_jumpPowerZorder = 115;
 	_speedZ = 100;
 
 	if (player->dir == false)

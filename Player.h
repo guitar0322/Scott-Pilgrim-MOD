@@ -45,12 +45,13 @@ public:
 	BoxCollider* collider;
 	Ground* ground;
 	Animator* animator;
+	ZOrder* zOrder;
+
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분
 	bool groundZCheck;	//Z축 그라운드 체크 구분
 	bool dash;			//뛰는 거 구분
-	bool dashStop;		//마찰 구분
 	bool shield;		//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	
