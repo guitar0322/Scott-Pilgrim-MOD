@@ -10,9 +10,7 @@ void Player::InputHandle()
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
-
 	}
-
 }
 
 void Player::Init()

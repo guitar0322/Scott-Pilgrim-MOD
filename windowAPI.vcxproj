@@ -163,7 +163,10 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controler.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyState.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
@@ -174,6 +177,10 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="Luke.h" />
+    <ClInclude Include="LukeAttackState.h" />
+    <ClInclude Include="LukeIdleState.h" />
+    <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="ObjectInfo.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
@@ -235,7 +242,10 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controler.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -246,6 +256,10 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="Luke.cpp" />
+    <ClCompile Include="LukeAttackState.cpp" />
+    <ClCompile Include="LukeIdleState.cpp" />
+    <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
