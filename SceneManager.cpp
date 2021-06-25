@@ -9,9 +9,6 @@ SceneManager::~SceneManager()
 
 HRESULT SceneManager::Init()
 {
-    //_curScene = startScene;
-    //_curScene = secondScene;
-    //_curScene->Init();
     return S_OK;
 }
 

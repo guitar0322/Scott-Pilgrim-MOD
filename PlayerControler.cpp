@@ -231,7 +231,7 @@ void PlayerControler::Update()
 void PlayerControler::Render()
 {
 	if(!KEYMANAGER->isToggleKey(VK_TAB))
-		Rectangle(_backBuffer->getMemDC(), groundRc);
+		Rectangle(BackBuffer, groundRc);
 }
 
 bool PlayerControler::CheckGround()

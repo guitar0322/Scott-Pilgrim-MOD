@@ -10,9 +10,7 @@ void Player::InputHandle()
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
-
 	}
-
 }
 
 void Player::Init()
@@ -20,6 +18,7 @@ void Player::Init()
 	animator = gameObject->GetComponent<Animator>();
 	collider = gameObject->GetComponent<BoxCollider>();
 	ground = gameObject->GetComponent<Ground>();
+	zOrder = gameObject->GetComponent<ZOrder>();
 	ClipInit();
 	_speed = 80;
 	_gravity = 90;
@@ -36,6 +35,9 @@ void Player::Init()
 	_state->Enter(this);
 	runDelay = 0;
 	jumpDelay = 0;
+	_enterNum = 0;
+	_exitNum = 0;
+	_isCatch = false;
 
 }
 
@@ -49,6 +51,21 @@ void Player::Update()
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 	if (groundCheck == true)
 		groundCheckDelay += TIMEMANAGER->getElapsedTime();
+
+	if (_isCatch == false)
+	{
+		if (KEYMANAGER->isOnceKeyDown('I'))
+		{
+			PickItem();
+		}
+	}
+	if (_isCatch == true)
+	{
+		if (KEYMANAGER->isOnceKeyDown('I'))
+		{
+			PutItem();
+		}
+	}
 
 }
 
@@ -165,4 +182,35 @@ void Player::ClipInit()
 
 
 
+}
+
+void Player::OnTriggerEnter(GameObject * gameObject)
+{
+	_enterNum++;
+	item = gameObject->GetComponent<Item>();
+}
+
+void Player::OnTriggerExit(GameObject * gameObject)
+{
+	_exitNum++;
+	item = nullptr;
+}
+
+void Player::PickItem()
+{
+	if (item != nullptr)
+	{
+		_isCatch = true;
+		transform->AddChild(item->transform);
+		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+	}
+}
+
+void Player::PutItem()
+{
+	if (item != nullptr)
+	{
+		_isCatch = false;
+		item->transform->DetachParent();
+	}	
 }

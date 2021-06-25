@@ -37,12 +37,12 @@ void Ground::Render()
 		return;
 	}
 	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	oBrush = (HBRUSH)SelectObject(_backBuffer->getMemDC(), hBrush);
+	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
 	hPen = CreatePen(PS_DOT, 1, RGB(125, 125, 0));
-	oPen = (HPEN)SelectObject(_backBuffer->getMemDC(), hPen);
-	Rectangle(_backBuffer->getMemDC(), _rc);
-	SelectObject(_backBuffer->getMemDC(), oPen);
-	SelectObject(_backBuffer->getMemDC(), oBrush);
+	oPen = (HPEN)SelectObject(BackBuffer, hPen);
+	Rectangle(BackBuffer, _rc);
+	SelectObject(BackBuffer, oPen);
+	SelectObject(BackBuffer, oBrush);
 	DeleteObject(hPen);
 	DeleteObject(hBrush);
 }

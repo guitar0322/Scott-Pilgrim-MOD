@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "Transform.h"
 
 GameObject::GameObject()
 {
@@ -8,6 +8,7 @@ GameObject::GameObject()
 	transform->gameObject = this;
 	isActive = true;
 	tag = TAGMANAGER->GetTag("default");
+	autoDisable = true;
 }
 
 GameObject::~GameObject()
@@ -16,6 +17,7 @@ GameObject::~GameObject()
 
 void GameObject::Init()
 {
+
 }
 
 void GameObject::Update()
@@ -25,6 +27,7 @@ void GameObject::Update()
 		if (components[i]->enable == true)
 			components[i]->Update();
 	}
+
 }
 
 void GameObject::Render()
@@ -118,4 +121,17 @@ void GameObject::SetActive(bool active)
 		isActive = active;
 		OnDisable();
 	}
+}
+
+void GameObject::MoveX(float x) 
+{ 
+	transform->MoveX(x); 
+}
+void GameObject::MoveY(float y) 
+{ 
+	transform->MoveY(y);
+}
+void GameObject::Move(float x, float y)
+{ 
+	transform->Move(x, y); 
 }

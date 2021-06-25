@@ -13,8 +13,6 @@ PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 
 			return new PlayerGroundState();
 	}
-	
-
 	return nullptr;
 }
 
@@ -24,18 +22,15 @@ void PlayerZorderJumpState::Update(Player * player)
 
 	if (player->dirZ == true)
 	{
-
-		player->transform->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(-_speedZ * TIMEMANAGER->getElapsedTime());
 		player->transform->MoveY(-_jumpPowerZorder *0.5 *TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
 		_jumpPowerZorder = 0;
-
-
 	}
 	else
 	{
-		player->transform->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(_speedZ * TIMEMANAGER->getElapsedTime());
 		player->transform->MoveY(-_jumpPowerZorder * 0.5* TIMEMANAGER->getElapsedTime());
 
 		player->ground->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());

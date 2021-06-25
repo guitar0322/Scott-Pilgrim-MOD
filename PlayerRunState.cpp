@@ -81,15 +81,13 @@ void PlayerRunState::Update(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-
-
+		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->transform->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 
 	

@@ -193,12 +193,12 @@ void BoxCollider::Render()
 		return;
 	}
 	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	oBrush = (HBRUSH)SelectObject(_backBuffer->getMemDC(), hBrush);
+	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
 	hPen = CreatePen(PS_DOT, 1, RGB(0, 255, 0));
-	oPen = (HPEN)SelectObject(_backBuffer->getMemDC(), hPen);
-	Rectangle(_backBuffer->getMemDC(), rc);
-	SelectObject(_backBuffer->getMemDC(), oPen);
-	SelectObject(_backBuffer->getMemDC(), oBrush);
+	oPen = (HPEN)SelectObject(BackBuffer, hPen);
+	Rectangle(BackBuffer, rc);
+	SelectObject(BackBuffer, oPen);
+	SelectObject(BackBuffer, oBrush);
 	DeleteObject(hPen);
 	DeleteObject(hBrush);
 }
