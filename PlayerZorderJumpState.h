@@ -5,7 +5,7 @@ class PlayerZorderJumpState :
 	public PlayerState
 {
 private:
-	float _jumpPowerZorder;
+	float _jumpPower;
 	float _speedZ;
 
 public:
@@ -13,8 +13,5 @@ public:
 	virtual void Update(Player* player);
 	virtual void Enter(Player* player);
 	virtual void Exit(Player* player);
-
-
-
 };
 

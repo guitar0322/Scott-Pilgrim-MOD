@@ -85,13 +85,8 @@ HRESULT StartScene::Init()
 	doberman->AddComponent(new Doberman());
 	doberman->GetComponent<Doberman>()->Init();
 	doberman->GetComponent<Doberman>()->SetPlayer(character);
+    doberman->ground->enable = false;
     
-    luke = new Enemy();
-    luke->Init();
-    luke->collider->isTrigger = true;
-    luke->name = "luke";
-    //luke->SetPlayer(character);
-
     BackgroundInit();
     return S_OK;
 }
@@ -106,7 +101,6 @@ void StartScene::Update()
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
-    luke->Update();
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -125,7 +119,6 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    luke->Render();
     testGround->Render();
 	trashBox->Render();
 	doberman->Render();

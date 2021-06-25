@@ -24,9 +24,6 @@
 #include "Controler.h"
 #include "ZOrder.h"
 #include "ItemObject.h"
-#include "Enemy.h"
-#include "Luke.h"
-#include "EnemyAI.h"
 #include "DebugText.h"
 #include <typeinfo>
 

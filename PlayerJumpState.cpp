@@ -11,7 +11,6 @@ PlayerState * PlayerJumpState::InputHandle(Player * player)
 	{
 		return new PlayerFallState;
 	}
-	
 	return nullptr;
 }
 
@@ -24,7 +23,6 @@ void PlayerJumpState::Update(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-
 		player->transform->MoveX(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
 	}
@@ -35,18 +33,13 @@ void PlayerJumpState::Update(Player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-
-		player->transform->MoveY(-player->GetSpeed()* 0.6 *TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
-
+		player->zOrder->MoveZ(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-
-		player->transform->MoveY(player->GetSpeed()* 0.6*TIMEMANAGER->getElapsedTime());
 		player->ground->MoveY(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveY(player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
@@ -58,16 +51,12 @@ void PlayerJumpState::Update(Player * player)
 	{
 		player->ChangeClip("jump_left", true);
 		player->dir = true;
-
 	}
-
-
 }
 
 void PlayerJumpState::Enter(Player * player)
 {
 	_jumpPower = 180;
-
 	if (player->dir == false)
 	{
 		player->ChangeClip("jump_right", false);
@@ -76,7 +65,6 @@ void PlayerJumpState::Enter(Player * player)
 	{
 		player->ChangeClip("jump_left", false);
 	}
-
 }
 
 void PlayerJumpState::Exit(Player * player)

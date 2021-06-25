@@ -5,17 +5,15 @@
 
 PlayerState * PlayerGroundState::InputHandle(Player * player)
 {
-	if (player->groundCheck == true && player->groundCheckDelay >= 0.5f)
-	{
-		player->groundCheck = false;
-		player->groundCheckDelay = 0;
-		return new PlayerIdleState();
-	}
-	if (_jumpTime >= 0.4f)
+	if (player->groundZCheck == true && _jumpTime >= 0.4f)
 	{
 		player->jumpZ = false;
 		player->groundZCheck = false;
-		_jumpTime = 0;
+		return new PlayerIdleState();
+	}
+
+	if (player->groundCheck == true && _jumpTime >= 0.7f) {
+		player->groundCheck = false;
 		return new PlayerIdleState();
 	}
 
@@ -24,16 +22,13 @@ PlayerState * PlayerGroundState::InputHandle(Player * player)
 
 void PlayerGroundState::Update(Player * player)
 {
-	if (player->groundZCheck == true && player->groundCheck == false)
-	{
-		_jumpTime += TIMEMANAGER->getElapsedTime();
-	}
+	_jumpTime += TIMEMANAGER->getElapsedTime();
 }
 
 void PlayerGroundState::Enter(Player * player)
 {
 	_jumpTime = 0;
-
+	player->dash = false;
 	if (player->dir == false)
 	{
 		player->ChangeClip("ground_right", false);

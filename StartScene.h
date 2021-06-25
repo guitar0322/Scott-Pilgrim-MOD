@@ -21,7 +21,6 @@ public:
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
 	ItemObject* trashBox;
-    Enemy* luke;
 
     virtual HRESULT Init();
     virtual void Release();

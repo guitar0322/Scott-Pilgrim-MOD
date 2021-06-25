@@ -27,7 +27,7 @@ void Player::Init()
 	dirZ = false;							//Z축 확인용
 	dash = false;							//뛰는 지 확인용
 	jumpZ = false;							//Z축 점프 확인용
-	shield = false;							//막기 확인용
+	block = false;							//막기 확인용
 	groundCheck = false;					//플레이어 그라운드 착지 확인용
 	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
 
@@ -48,8 +48,6 @@ void Player::Update()
 		runDelay += TIMEMANAGER->getElapsedTime();
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
-	if (groundCheck == true)
-		groundCheckDelay += TIMEMANAGER->getElapsedTime();
 
 	if (_isCatch == false)
 	{
@@ -65,7 +63,6 @@ void Player::Update()
 			PutItem();
 		}
 	}
-
 }
 
 void Player::Render()
@@ -77,16 +74,11 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 	if (isInitFrame == false)
 	{
 		animator->SetClip(animator->GetClip(clipName));
-		
 	}
 	else
 	{
 		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
-
-
-
-
 }
 
 void Player::ClipInit()

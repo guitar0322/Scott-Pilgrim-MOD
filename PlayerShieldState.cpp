@@ -10,18 +10,11 @@ PlayerState * PlayerShieldState::InputHandle(Player * player)
 	{
 		return new PlayerIdleState();
 	}
-		
-	
-
-	
-		
-
 	return nullptr;
 }
 
 void PlayerShieldState::Update(Player * player)
 {
-
 	if (player->animator->currentFrame >= 4)
 	{
 		player->animator->Pause();
@@ -29,14 +22,13 @@ void PlayerShieldState::Update(Player * player)
 
 	if (KEYMANAGER->isOnceKeyUp('K'))
 	{
-		player->shield = false;	
+		player->block = false;	
 	}
 
-	if (player->shield == false)
+	if (player->block == false)
 	{
 		player->animator->Resume();
 	}
-
 }
 
 void PlayerShieldState::Enter(Player * player)
@@ -49,8 +41,6 @@ void PlayerShieldState::Enter(Player * player)
 	{
 		player->ChangeClip("shield_left", false);
 	}
-
-
 }
 
 void PlayerShieldState::Exit(Player * player)

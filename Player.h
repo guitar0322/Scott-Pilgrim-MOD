@@ -56,13 +56,12 @@ public:
 	bool groundCheck;	//그라운드 체크 구분
 	bool groundZCheck;	//Z축 그라운드 체크 구분
 	bool dash;			//뛰는 거 구분
-	bool shield;		//막기 구분
+	bool block;		//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	
 	bool attackChange;
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
-	float groundCheckDelay;	//그라운드체크 딜레이 시간
 	float _friction;		//마찰
 
 

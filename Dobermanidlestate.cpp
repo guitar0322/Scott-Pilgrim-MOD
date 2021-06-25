@@ -5,7 +5,7 @@
 Dobermanstate * Dobermanidlestate::Update(Doberman * doberman)
 {
 	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
-		doberman->getPlayer()->GetX(),doberman->getPlayer()->GetY())<300)
+		doberman->getPlayer()->GetX(),doberman->getPlayer()->GetY()) < 300)
 	{
 		if (doberman->transform->GetX() < doberman->getPlayer()->GetX())
 		{
@@ -14,7 +14,6 @@ Dobermanstate * Dobermanidlestate::Update(Doberman * doberman)
 				doberman->changeClip("idleLeft", true);
 				doberman->setDir(false);
 			}
-		
 		}
 		else
 		{
@@ -25,7 +24,6 @@ Dobermanstate * Dobermanidlestate::Update(Doberman * doberman)
 			}
 		}
 	}
-
 	return nullptr;
 }
 

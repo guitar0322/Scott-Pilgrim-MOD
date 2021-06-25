@@ -54,7 +54,6 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	{
 		if (player->dir == true && player->jumpDelay <= 0.7f && player->jumpZ == true)
 		{
-			
 			player->dir = true;
 			player->jumpZ = false;
 			player->dirZ = true;
@@ -146,7 +145,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//¸·±â
 	if (KEYMANAGER->isStayKeyDown('K'))
 	{
-		player->shield = true;
+		player->block = true;
 		return new PlayerShieldState();
 	
 	}
