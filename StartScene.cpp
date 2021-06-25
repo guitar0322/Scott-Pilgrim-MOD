@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "WallObj.h"
 #include "Wall.h"
+#include "Doberman.h"
 StartScene::StartScene()
 {
 }
@@ -14,13 +15,14 @@ StartScene::~StartScene()
 
 HRESULT StartScene::Init()
 {
+    Scene::Init();
     _mapWidth = 21206;
     _mapHeight = 680;
-    mainCam = new Cam();
-    mainCam->camera->SetMapSize(_mapWidth, _mapHeight);
-    mainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    mainCam->camera->SetRenderHeight(568);
-    CLIPMANAGER->AddClip("test_effect", "trap_blast_projectile.bmp", 168, 50, 4, 1.f);
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
     //위에는 건들지 마시오
 
     //=============미리 만들어져 있는 예시 오브젝트============
@@ -39,13 +41,21 @@ HRESULT StartScene::Init()
     //3.Character
     //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
+
+	CLIPMANAGER->AddClip("trashBox", "item/trashBox.bmp", 100, 76, 1, 1);
+	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
+
     character = new Character();
     character->name = "character";
+    character->zOrder->SetY(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 52);
 	character->zOrder->Init();
 	character->zOrder->SetY(568 / 2 + 52);
+	character->collider->isTrigger = true;
+    character->AddComponent(new DebugText());
+    character->GetComponent<DebugText>()->Init();
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
@@ -61,7 +71,27 @@ HRESULT StartScene::Init()
     testGround->GetComponent<Ground>()->Init();
     testGround->transform->SetPosition(500, 600);
     testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(600);
+    testGround->GetComponent<Ground>()->SetY(500);
+
+	trashBox = new ItemObject();
+	trashBox->Init();
+	trashBox->item->SetItemImage("trashBox");
+	trashBox->transform->SetPosition(640, 300);
+
+	doberman = new Character();
+	doberman->Init();
+	doberman->transform->SetPosition(1200, 400);
+	doberman->collider->isTrigger = true;
+	doberman->AddComponent(new Doberman());
+	doberman->GetComponent<Doberman>()->Init();
+	doberman->GetComponent<Doberman>()->SetPlayer(character);
+    
+    luke = new Enemy();
+    luke->Init();
+    luke->collider->isTrigger = true;
+    luke->name = "luke";
+    //luke->SetPlayer(character);
+
     BackgroundInit();
     return S_OK;
 }
@@ -76,13 +106,16 @@ void StartScene::Update()
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
+    luke->Update();
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
+	trashBox->Update();
     character->Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+	doberman->Update();
 }
 
 void StartScene::Render()
@@ -92,7 +125,10 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
+    luke->Render();
     testGround->Render();
+	trashBox->Render();
+	doberman->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
@@ -116,4 +152,8 @@ void StartScene::BackgroundInit()
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
     BGMANAGER->SetPlayer(character);
+}
+
+void StartScene::CameraInit()
+{
 }

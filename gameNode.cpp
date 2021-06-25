@@ -33,6 +33,7 @@ HRESULT gameNode::init(bool managerInit)
 		TIMEMANAGER->init();
 		SCENEMANAGER->Init();
 		COLLIDERMANAGER->Init();
+		CAMERAMANAGER->Init();
 		GROUNDMANAGER->Init();
 		SOUNDMANAGER->init();
 		TXTDATAMANAGER->Init();
@@ -53,6 +54,9 @@ void gameNode::release()
 
 	COLLIDERMANAGER->Release();
 	COLLIDERMANAGER->releaseSingleton();
+
+	CAMERAMANAGER->Release();
+	CAMERAMANAGER->releaseSingleton();
 
 	TAGMANAGER->release();
 	TAGMANAGER->releaseSingleton();

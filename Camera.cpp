@@ -28,8 +28,8 @@ void Camera::Init()
 	HDC hdc = GetDC(_hWnd);
 	screenDC = CreateCompatibleDC(hdc);
 	ResizeScreen(WINSIZEX, WINSIZEY);
-	_maxX = MAPSIZEX;
-	_maxY = MAPSIZEY;
+	_maxX = WINSIZEX;
+	_maxY = WINSIZEY;
 	_renderWidth = _screenWidth;
 	_renderHeight = _screenHeight;
 	_screenStartX = 0;
@@ -60,7 +60,7 @@ void Camera::Render(HDC frontDC)
 		startY = _maxY - _renderHeight;
 	}
 	StretchBlt(screenDC, 0, 0, _screenWidth, _screenHeight,
-		_backBuffer->getMemDC(), startX, startY, _renderWidth, _renderHeight, SRCCOPY);
+		BackBuffer, startX, startY, _renderWidth, _renderHeight, SRCCOPY);
 
 	BitBlt(
 		frontDC,		//บนป็วา DC	

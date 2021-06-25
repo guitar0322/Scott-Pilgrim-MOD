@@ -17,11 +17,17 @@
 #include "Text.h"
 #include "Box.h"
 #include "Zone.h"
+#include "Item.h"
 #include "ImageObject.h"
 #include "Character.h"
 #include "Ground.h"
 #include "Controler.h"
 #include "ZOrder.h"
+#include "ItemObject.h"
+#include "Enemy.h"
+#include "Luke.h"
+#include "EnemyAI.h"
+#include "DebugText.h"
 #include <typeinfo>
 
 typedef RECT ELLIPSE;

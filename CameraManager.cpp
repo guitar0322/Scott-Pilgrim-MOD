@@ -9,10 +9,24 @@ CameraManager::~CameraManager()
 {
 }
 
+void CameraManager::Init()
+{
+}
+
+void CameraManager::Release()
+{
+}
+
 void CameraManager::AddCamera(Camera* newCamera)
 {
-	if (cameraList.size() == 0) {
-		mainCam = newCamera;
+	if (_cameraList.size() == 0) {
+		_mainCam = newCamera;
 	}
-	cameraList.push_back(newCamera);
+	_cameraList.push_back(newCamera);
+}
+
+void CameraManager::SetMainCam(Camera* mainCam)
+{
+	SAFE_DELETE(_mainCam);
+	_mainCam = mainCam;
 }

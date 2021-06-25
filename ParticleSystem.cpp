@@ -99,7 +99,7 @@ void ParticleSystem::Render()
 {
 	for (int i = 0; i < _num; i++) {
 		if (_particle[i].isEmission == false) continue;
-		_particleImage->frameRender(_backBuffer->getMemDC(), 
+		_particleImage->frameRender(BackBuffer,
 			_particle[i].x - _particleImage->getFrameWidth()/2,
 			_particle[i].y - _particleImage->getFrameHeight()/2
 			, _particle[i].curFrame, 0);

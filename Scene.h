@@ -7,6 +7,7 @@ private:
 protected:
 	int _mapWidth;
 	int _mapHeight;
+	HDC _backDC;
 public:
 	Scene();
 	~Scene();
@@ -19,5 +20,9 @@ public:
 
 	int GetWidth() { return _mapWidth; }
 	int GetHeight() { return _mapHeight; }
+
+	void SetBackBufferSize(int width, int height);
+	void ChangeMainCam(Cam* newCam);
+	HDC GetBackDC() const { return _backDC;}
 };
 

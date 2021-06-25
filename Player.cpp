@@ -10,9 +10,7 @@ void Player::InputHandle()
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
-
 	}
-
 }
 
 void Player::Init()
@@ -21,7 +19,6 @@ void Player::Init()
 	collider = gameObject->GetComponent<BoxCollider>();
 	ground = gameObject->GetComponent<Ground>();
 	zOrder = gameObject->GetComponent<ZOrder>();
-
 	ClipInit();
 	_speed = 80;							//플레이어 속도
 	_gravity = 90;							//플레이어 중력 (점프 후 중력값)
@@ -33,11 +30,14 @@ void Player::Init()
 	shield = false;							//막기 확인용
 	groundCheck = false;					//플레이어 그라운드 착지 확인용
 	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
+
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
-	runDelay = 0;							//달릴 때 딜레이 시간
-	jumpDelay = 0;							//뛸 때 딜레이 시간
-
+	runDelay = 0;
+	jumpDelay = 0;
+	_enterNum = 0;
+	_exitNum = 0;
+	_isCatch = false;
 }
 
 void Player::Update()
@@ -50,6 +50,21 @@ void Player::Update()
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 	if (groundCheck == true)
 		groundCheckDelay += TIMEMANAGER->getElapsedTime();
+
+	if (_isCatch == false)
+	{
+		if (KEYMANAGER->isOnceKeyDown('I'))
+		{
+			PickItem();
+		}
+	}
+	if (_isCatch == true)
+	{
+		if (KEYMANAGER->isOnceKeyDown('I'))
+		{
+			PutItem();
+		}
+	}
 
 }
 
@@ -166,4 +181,35 @@ void Player::ClipInit()
 
 
 
+}
+
+void Player::OnTriggerEnter(GameObject * gameObject)
+{
+	_enterNum++;
+	item = gameObject->GetComponent<Item>();
+}
+
+void Player::OnTriggerExit(GameObject * gameObject)
+{
+	_exitNum++;
+	item = nullptr;
+}
+
+void Player::PickItem()
+{
+	if (item != nullptr)
+	{
+		_isCatch = true;
+		transform->AddChild(item->transform);
+		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+	}
+}
+
+void Player::PutItem()
+{
+	if (item != nullptr)
+	{
+		_isCatch = false;
+		item->transform->DetachParent();
+	}	
 }

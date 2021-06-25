@@ -66,7 +66,7 @@ void UIRenderer::Render()
 	int startX = SCENEMANAGER->GetCurScene()->mainCam->transform->GetX() + transform->GetX() - _width/2;
 	int startY = SCENEMANAGER->GetCurScene()->mainCam->transform->GetY() + transform->GetY() - _height / 2;
 	if (_isAlpha == false) {
-		BitBlt(alphaMemDC, 0, 0, _width, _height, _backBuffer->getMemDC(), startX, startY, SRCCOPY);
+		BitBlt(alphaMemDC, 0, 0, _width, _height, BackBuffer, startX, startY, SRCCOPY);
 		GdiTransparentBlt(
 			alphaMemDC,			//복사될 영역의 DC
 			0,					//복사될 좌표(left)
@@ -80,7 +80,7 @@ void UIRenderer::Render()
 			RGB(255, 0, 255)	//복사할때 제외할 픽셀값
 		);
 		AlphaBlend(
-			_backBuffer->getMemDC(),	//출력할 곳의 DC
+			BackBuffer,	//출력할 곳의 DC
 			startX,						//출력할 DC에서 그림의 찍을 좌표 x
 			startY,						//출력할 DC에서 그림의 찍을 좌표 y
 			_width,						//출력한 DC에서 그림의 가로 길이
@@ -94,7 +94,7 @@ void UIRenderer::Render()
 	}
 	else {
 		GdiTransparentBlt(
-			alphaMemDC,			//복사될 영역의 DC
+			BackBuffer,			//복사될 영역의 DC
 			startX,				//복사될 좌표(left)
 			startY,				//복사될 좌표(top)
 			_width,				//복사될 크기 (가로크기)
