@@ -15,15 +15,8 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {
     Scene::Init();
-    _mapWidth = 21206;
-    _mapHeight = 680;
-    MainCam->SetMapSize(_mapWidth, _mapHeight);
-    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    MainCam->SetRenderHeight(568);
-    MainCam->SetMapSize(21206, 680);
-    SetBackBufferSize(_mapWidth, _mapHeight);
-    //위에는 건들지 마시오
 
+    //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
     //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
@@ -85,9 +78,6 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
-    if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
-        character->transform->MoveX(15);
-    }
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -129,9 +119,16 @@ void StartScene::BackgroundInit()
     }
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
-    BGMANAGER->SetPlayer(character);
+    BGMANAGER->SetPlayer(character->transform);
 }
 
 void StartScene::CameraInit()
 {
+    _mapWidth = 21206;
+    _mapHeight = 680;
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
 }

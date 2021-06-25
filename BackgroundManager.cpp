@@ -9,7 +9,7 @@ HRESULT BackgroundManager::Init()
 void BackgroundManager::Update()
 {
     if (_player == nullptr || _backgroundV.size() == 0) return;
-    int playerX = _player->transform->GetX();
+    int playerX = _player->GetX();
     for (int i = 0; i < _backgroundV.size(); i++) 
     {
         int minX = _unitWidth * i - _margin - (SCENEMANAGER->GetCurScene()->mainCam->GetComponent<Camera>()->GetScreenWidth() / 2);

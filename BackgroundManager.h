@@ -7,7 +7,7 @@ private:
 	int _unitWidth;
 	int _margin;
 	int _screenSize;
-	GameObject* _player;
+	Transform* _player;
 public:
 	BackgroundManager() {};
 	~BackgroundManager() {};
@@ -17,7 +17,7 @@ public:
 	void Render();
 	void Release();
 
-	void SetPlayer(GameObject* player) { _player = player; }
+	void SetPlayer(Transform* player) { _player = player; }
 	void AddBackground(GameObject* gameObject) { _backgroundV.push_back(gameObject); }
 	GameObject* GetBackground(int idx) { return _backgroundV[idx]; }
 
