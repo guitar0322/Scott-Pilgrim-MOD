@@ -18,10 +18,10 @@ public:
 	string name;
 	bool isActive;
 	int tag;
-	void Init();
-	void Update();
-	void Render();
-	void Release();
+	virtual void Init();
+	virtual void Update();
+	virtual void Render();
+	virtual void Release();
 	Component* AddComponent(Component* component);
 	template <typename T>
 	T* GetComponent();

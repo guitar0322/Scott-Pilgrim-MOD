@@ -4,7 +4,6 @@ class PlayerIdleState :
 	public PlayerState
 {
 private:
-	float _dashSpeed;
 
 public:
 	virtual PlayerState* InputHandle(Player* player);

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerRunState.h"
-#include "PlayerIdleState.h"
+#include "PlayerBreakState.h"
 #include "PlayerJumpState.h"
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
@@ -10,15 +10,14 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 {
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
-		player->dashStop = true;
 
-		return new PlayerIdleState();
+		return new PlayerBreakState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
-		player->dashStop = true;
 
-		return new PlayerIdleState();
+		return new PlayerBreakState();
+
 	}
 
 	if (KEYMANAGER->isStayKeyDown('J'))

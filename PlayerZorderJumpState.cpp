@@ -6,44 +6,39 @@
 
 PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 {
-	
-	if (GROUNDMANAGER->CheckGround(player->collider->rc) == true)
+	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
+	if (intersectHeight != 0)
 	{
 		player->jumpZ = true;
-
-			return new PlayerGroundState();
+		player->transform->MoveY(-intersectHeight);
+		return new PlayerGroundState();
 	}
 	return nullptr;
 }
 
 void PlayerZorderJumpState::Update(Player * player)
 {
-	_jumpPowerZorder -= player->GetGravity()*TIMEMANAGER->getElapsedTime() *2;
+	_jumpPower -= player->GetGravity()*TIMEMANAGER->getElapsedTime() * 2;
 
 	if (player->dirZ == true)
 	{
 		player->zOrder->MoveZ(-_speedZ * TIMEMANAGER->getElapsedTime());
-		player->transform->MoveY(-_jumpPowerZorder *0.5 *TIMEMANAGER->getElapsedTime());
-
 		player->ground->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
-		_jumpPowerZorder = 0;
+
+		player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
 		player->zOrder->MoveZ(_speedZ * TIMEMANAGER->getElapsedTime());
-		player->transform->MoveY(-_jumpPowerZorder * 0.5* TIMEMANAGER->getElapsedTime());
-
 		player->ground->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
-		_jumpPowerZorder = 0;
-	
+
+		player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 	}
-	
-	
 }
 
 void PlayerZorderJumpState::Enter(Player * player)
 {
-	_jumpPowerZorder = 110;
+	_jumpPower = 80;
 	_speedZ = 100;
 
 	if (player->dir == false)

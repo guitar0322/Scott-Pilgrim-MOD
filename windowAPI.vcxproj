@@ -161,9 +161,14 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controler.h" />
-    <ClInclude Include="DebugText.h" />
+    <ClInclude Include="Doberman.h" />
+    <ClInclude Include="Dobermanidlestate.h" />
+    <ClInclude Include="Dobermanstate.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="DebugText.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyState.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
@@ -178,6 +183,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerBreakState.h" />
     <ClInclude Include="PlayerControler.h" />
     <ClInclude Include="PlayerFallState.h" />
     <ClInclude Include="PlayerGroundState.h" />
@@ -232,9 +238,14 @@
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controler.cpp" />
-    <ClCompile Include="DebugText.cpp" />
+    <ClCompile Include="Doberman.cpp" />
+    <ClCompile Include="Dobermanidlestate.cpp" />
+    <ClCompile Include="Dobermanstate.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -249,6 +260,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerBreakState.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
     <ClCompile Include="PlayerFallState.cpp" />
     <ClCompile Include="PlayerGroundState.cpp" />

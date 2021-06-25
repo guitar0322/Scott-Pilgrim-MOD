@@ -14,7 +14,7 @@ void ItemObject::Init()
 	collider = new BoxCollider();
 	AddComponent(collider);
 	collider->Init();
-	collider->isTrigger = true;
+
 
 	item = new Item;
 	AddComponent(item);

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "WallObj.h"
 #include "Wall.h"
+#include "Doberman.h"
 StartScene::StartScene()
 {
 }
@@ -43,6 +44,9 @@ HRESULT StartScene::Init()
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 52);
+	character->zOrder->Init();
+	character->zOrder->SetY(568 / 2 + 52);
+	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
@@ -67,6 +71,15 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
+	doberman = new Character();
+	doberman->Init();
+	doberman->transform->SetPosition(1200, 400);
+	doberman->collider->isTrigger = true;
+	doberman->AddComponent(new Doberman());
+	doberman->GetComponent<Doberman>()->Init();
+	doberman->GetComponent<Doberman>()->SetPlayer(character);
+    doberman->ground->enable = false;
+    
     BackgroundInit();
     return S_OK;
 }
@@ -78,6 +91,9 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
+    //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+    //    character->transform->MoveX(15);
+    //}
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -86,6 +102,7 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+	doberman->Update();
 }
 
 void StartScene::Render()
@@ -97,6 +114,7 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
+	doberman->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
