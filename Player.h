@@ -8,6 +8,10 @@ class Player :
 private:
 	float _speed;		//플레이어 속도
 	float _gravity;		//중력
+	
+	int _enterNum;		//플레이어와 gameObject가 겹칠때++
+	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
+	bool _isCatch;		//아이템을 획득 유무 
 	//float _friction;	//마찰
 
 	PlayerState* _state;
@@ -45,6 +49,7 @@ public:
 	BoxCollider* collider;
 	Ground* ground;
 	Animator* animator;
+	Item* item;
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분
@@ -72,6 +77,12 @@ public:
 	int GetSpeed() { return _speed; }
 	int GetGravity() { return _gravity; }
 	int GetFriction() { return _friction; }
+
+	virtual void OnTriggerEnter(GameObject* gameObject);
+	virtual void OnTriggerExit(GameObject* gameObject);
+
+	virtual void PickItem();		//아이템 획득 함수
+	virtual void PutItem();			//아이템 놓는 함수
 
 
 };

@@ -48,6 +48,7 @@ HRESULT StartScene::Init()
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 50);
+	character->collider->isTrigger = true;
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
