@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "WallObj.h"
 #include "Wall.h"
+#include "Doberman.h"
 StartScene::StartScene()
 {
 }
@@ -70,9 +71,13 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
-	
-
-
+	doberman = new Character();
+	doberman->Init();
+	doberman->transform->SetPosition(1200, 400);
+	doberman->collider->isTrigger = true;
+	doberman->AddComponent(new Doberman());
+	doberman->GetComponent<Doberman>()->Init();
+	doberman->GetComponent<Doberman>()->SetPlayer(character);
 
     BackgroundInit();
     return S_OK;
@@ -96,6 +101,7 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+	doberman->Update();
 }
 
 void StartScene::Render()
@@ -107,6 +113,7 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
+	doberman->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());

@@ -43,6 +43,12 @@
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{62258bee-db31-4e2a-8a8d-9788c53f861d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Enemy2">
+      <UniqueIdentifier>{85acc812-83b2-4200-9a2f-c557a71ecfd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Enemy2\DobermanState">
+      <UniqueIdentifier>{0c6ec647-ab44-4260-8aef-d255794bdda1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -258,6 +264,18 @@
     <ClInclude Include="ItemObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy2.h">
+      <Filter>소스 파일\Enemy2</Filter>
+    </ClInclude>
+    <ClInclude Include="Doberman.h">
+      <Filter>소스 파일\Enemy2</Filter>
+    </ClInclude>
+    <ClInclude Include="Dobermanstate.h">
+      <Filter>소스 파일\Enemy2\DobermanState</Filter>
+    </ClInclude>
+    <ClInclude Include="Dobermanidlestate.h">
+      <Filter>소스 파일\Enemy2\DobermanState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -460,6 +478,18 @@
     </ClCompile>
     <ClCompile Include="ItemObject.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy2.cpp">
+      <Filter>소스 파일\Enemy2</Filter>
+    </ClCompile>
+    <ClCompile Include="Doberman.cpp">
+      <Filter>소스 파일\Enemy2</Filter>
+    </ClCompile>
+    <ClCompile Include="Dobermanstate.cpp">
+      <Filter>소스 파일\Enemy2\DobermanState</Filter>
+    </ClCompile>
+    <ClCompile Include="Dobermanidlestate.cpp">
+      <Filter>소스 파일\Enemy2\DobermanState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

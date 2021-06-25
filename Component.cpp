@@ -2,6 +2,7 @@
 
 Component::Component()
 {
+
 }
 
 Component::Component(GameObject* gameObject)
@@ -16,6 +17,8 @@ Component::~Component()
 
 void Component::Init()
 {
+	sprintf_s(debug[0], "%d", 1);
+
 }
 
 void Component::Update()
