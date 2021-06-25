@@ -64,7 +64,7 @@ void Renderer::Render()
 	int startX = transform->GetX() - _width / 2;
 	int startY = transform->GetY() - _height / 2;
 	if (_isAlpha == true) {
-		BitBlt(alphaMemDC, 0, 0, _width, _height, _backBuffer->getMemDC(), startX, startY, SRCCOPY);
+		BitBlt(alphaMemDC, 0, 0, _width, _height, BackBuffer, startX, startY, SRCCOPY);
 		GdiTransparentBlt(
 			alphaMemDC,		//복사될 영역의 DC
 			0,				//복사될 좌표(left)
@@ -78,30 +78,30 @@ void Renderer::Render()
 			_transColor		//복사할때 제외할 픽셀값
 		);
 		AlphaBlend(
-			_backBuffer->getMemDC(),	//복사될 영역의 DC
-			startX,						//복사될 좌표(left)
-			startY,						//복사될 좌표(top)
-			_width,						//복사될 크기 (가로크기)
-			_height,					//복사될 크기 (세로크기)
-			alphaMemDC,					//복사해올 DC 
-			0, 0,						//복사해올 시작좌표(left, top)
-			_width,						//복사해올 가로크기
-			_height,					//복사해올 세로크기
-			blendFunc					//복사할때 제외할 픽셀값
+			BackBuffer,		//복사될 영역의 DC
+			startX,			//복사될 좌표(left)
+			startY,			//복사될 좌표(top)
+			_width,			//복사될 크기 (가로크기)
+			_height,		//복사될 크기 (세로크기)
+			alphaMemDC,		//복사해올 DC 
+			0, 0,			//복사해올 시작좌표(left, top)
+			_width,			//복사해올 가로크기
+			_height,		//복사해올 세로크기
+			blendFunc		//복사할때 제외할 픽셀값
 		);
 	}
 	else {
 		GdiTransparentBlt(
-			_backBuffer->getMemDC(),	//복사될 영역의 DC
-			startX,						//복사될 좌표(left)
-			startY,						//복사될 좌표(top)
-			_width,						//복사될 크기 (가로크기)
-			_height,					//복사될 크기 (세로크기)
-			memDC,						//복사해올 DC 
-			0, 0,						//복사해올 시작좌표(left, top)
-			_width,						//복사해올 가로크기
-			_height,					//복사해올 세로크기
-			_transColor					//복사할때 제외할 픽셀값
+			BackBuffer,		//복사될 영역의 DC
+			startX,			//복사될 좌표(left)
+			startY,			//복사될 좌표(top)
+			_width,			//복사될 크기 (가로크기)
+			_height,		//복사될 크기 (세로크기)
+			memDC,			//복사해올 DC 
+			0, 0,			//복사해올 시작좌표(left, top)
+			_width,			//복사해올 가로크기
+			_height,		//복사해올 세로크기
+			_transColor		//복사할때 제외할 픽셀값
 		);
 	}
 }

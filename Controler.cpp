@@ -36,12 +36,12 @@ void Controler::Update()
 	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
 		transform->MoveY(-_speed * TIMEMANAGER->getElapsedTime());
 		gameObject->GetComponent<Ground>()->MoveY(-_speed * TIMEMANAGER->getElapsedTime());
-		gameObject->GetComponent<ZOrder>()->MoveY(-_speed * TIMEMANAGER->getElapsedTime()); //위아래로 움직일때만 zorder기준좌표 이동
+		gameObject->GetComponent<ZOrder>()->MoveZ(-_speed * TIMEMANAGER->getElapsedTime()); //위아래로 움직일때만 zorder기준좌표 이동
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
 		transform->MoveY(_speed * TIMEMANAGER->getElapsedTime());
 		gameObject->GetComponent<Ground>()->MoveY(_speed * TIMEMANAGER->getElapsedTime());
-		gameObject->GetComponent<ZOrder>()->MoveY(_speed * TIMEMANAGER->getElapsedTime());//위아래로 움직일때만 zorder기준좌표 이동
+		gameObject->GetComponent<ZOrder>()->MoveZ(_speed * TIMEMANAGER->getElapsedTime());//위아래로 움직일때만 zorder기준좌표 이동
 	}
 }
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Component.h"
 class Wall :
     public Component
 {
@@ -11,13 +11,13 @@ private:
     float _gradient;    //벽의 기울기
     float _interceptY;  //벽의 y절편
 public:
-    virtual void Init(int startX, int startY, int endX, int endY);
+    virtual void Init(float startX, float startY, float endX, float endY);
     virtual void Update();
     virtual void Render();
 
-    void SetStartPoint(int startX, int startY);
-    void SetEndPoint(int endX, int endY);
-    bool IsCross(int startX, int startY, int endX, int endY);
+    void SetStartPoint(float startX, float startY);
+    void SetEndPoint(float endX, float endY);
+    bool IsCross(float startX, float startY, float endX, float endY);
     int CalcUpDown(float x, float y);
     bool IsInLine(float x, float y);
 };

@@ -11,9 +11,7 @@ void Item::Init()
 
 void Item::Update()
 {
-	sprintf_s(debug[0], "%d", enterNum);
-	sprintf_s(debug[1], "%d", stayNum);
-	sprintf_s(debug[2], "%d", exitNum);
+
 }
 
 void Item::Render()

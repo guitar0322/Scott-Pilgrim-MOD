@@ -123,9 +123,6 @@
     <ClInclude Include="TriggerTest.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="RockMan.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectInfo.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -167,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearTrigger.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Controler.h">
       <Filter>헤더 파일</Filter>
@@ -258,10 +252,13 @@
     <ClInclude Include="EffectManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerFallState.h">
+    <ClInclude Include="ItemObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ItemObject.h">
+    <ClInclude Include="PlayerFallState.h">
+      <Filter>소스 파일\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
@@ -347,9 +344,6 @@
     <ClCompile Include="TriggerTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="RockMan.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -391,9 +385,6 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearTrigger.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Controler.cpp">
       <Filter>소스 파일</Filter>
@@ -482,10 +473,13 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerFallState.cpp">
+    <ClCompile Include="ItemObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ItemObject.cpp">
+    <ClCompile Include="PlayerFallState.cpp">
+      <Filter>소스 파일\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugText.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">

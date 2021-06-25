@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Component.h"
 class PlayerState;
 
 class Player :
@@ -45,6 +45,7 @@ public:
 	BoxCollider* collider;
 	Ground* ground;
 	Animator* animator;
+	ZOrder* zOrder;
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분

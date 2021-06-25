@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include "Transform.h"
+#include "GameObject.h"
 
 Transform::Transform()
 {
@@ -13,25 +15,12 @@ Transform::~Transform()
 {
 
 }
-//wallManager 설계
-//wall은 시작점과 끝점을 잇는 선이다.
-//transform move시 시작점과 도착지점이 선의 각 반대방향에 있으면 움직이지 않는다
-//
 bool Transform::Move(float x, float y)
 {
 	int childCount = GetChildCount();
 	bool result = true;
 	result = MoveX(x);
 	result = MoveY(y);
-	//if (CheckCollision(position.x + x, position.y + y) == true) {
-	//	return false;
-	//}
-	//position.x += x;
-	//position.y += y;
-	//for (int i = 0; i < childCount; i++) {
-	//	child[i]->MoveX(x);
-	//	child[i]->MoveY(y);
-	//}
 	return result;
 }
 
@@ -59,9 +48,6 @@ bool Transform::MoveY(float y)
 	if (CheckCollision(position.x, position.y + y) == true) {
 		return false;
 	}
-	if (CheckWallCross(0, y) == true) {
-		return false;
-	}
 	position.y += y;
 	for (int i = 0; i < childCount; i++) {
 		child[i]->MoveY(y);
@@ -84,13 +70,13 @@ bool Transform::CheckCollision(float tempX, float tempY)
 
 bool Transform::CheckWallCross(float deltaX, float deltaY)
 {
-	Ground* ground = gameObject->GetComponent<Ground>();
-	if (ground == nullptr)
+	ZOrder* zOrder = gameObject->GetComponent<ZOrder>();
+	if (zOrder == nullptr)
 		return false;
-
-	if (WALLMANAGER->CheckCross(ground->GetX(), ground->GetY(), ground->GetX() + deltaX, ground->GetY() + deltaY) == true)
-		return true;
-	return false;
+	sprintf_s(gameObject->GetComponent<DebugText>()->debugStr[0], "%f", zOrder->GetY());
+	sprintf_s(gameObject->GetComponent<DebugText>()->debugStr[1], 
+		"%d", WALLMANAGER->CheckCross(position.x, zOrder->GetY(), position.x + deltaX, zOrder->GetY() + deltaY));
+	return WALLMANAGER->CheckCross(position.x, zOrder->GetY(), position.x + deltaX, zOrder->GetY() + deltaY);
 }
 
 Transform* Transform::GetChild(int i)

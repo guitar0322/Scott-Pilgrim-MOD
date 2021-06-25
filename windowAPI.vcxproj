@@ -156,12 +156,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="ClearTrigger.h" />
     <ClInclude Include="ClipManager.h" />
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controler.h" />
+    <ClInclude Include="DebugText.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
@@ -200,7 +200,6 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="RockMan.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondScene.h" />
@@ -236,11 +235,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="ClearTrigger.cpp" />
     <ClCompile Include="ClipManager.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controler.cpp" />
+    <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
@@ -277,7 +276,6 @@
     <ClCompile Include="PlayerZorderJumpState.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RockMan.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondScene.cpp" />

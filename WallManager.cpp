@@ -21,7 +21,7 @@ void WallManager::EraseWall(Wall* targetWall)
 	}
 }
 
-bool WallManager::CheckCross(int startX, int startY, int endX, int endY)
+bool WallManager::CheckCross(float startX, float startY, float endX, float endY)
 {
 	for (int i = 0; i < _wallV.size(); i++) 
 	{
@@ -33,7 +33,7 @@ bool WallManager::CheckCross(int startX, int startY, int endX, int endY)
 	return false;
 }
 
-bool WallManager::CheckCross(int startX, int startY, int endX, int endY, int idx)
+bool WallManager::CheckCross(float startX, float startY, float endX, float endY, int idx)
 {
 	if (_wallV[idx]->IsCross(startX, startY, endX, endY) == true)
 		return true;
