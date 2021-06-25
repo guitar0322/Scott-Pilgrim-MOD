@@ -66,8 +66,11 @@ using namespace HDY_UTIL;
 #define WALLMANAGER WallManager::getSingleton()
 #define EFFECTMANAGER EffectManager::getSingleton()
 
+#define MainCam CAMERAMANAGER->GetMainCam()
+#define BackBuffer SCENEMANAGER->GetCurScene()->GetBackDC()
+
 #define SAFE_DELETE(p) {if(p) {delete(p); (p) = nullptr;}}
-#define SAFE_RELEASE(p) {if(p) {(p)->release(); (p) = NULL;}}
+#define SAFE_RELEASE(p) {if(p) {(p)->Release(); (p) = NULL;}}
 
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", MAPSIZEX, MAPSIZEY);
 

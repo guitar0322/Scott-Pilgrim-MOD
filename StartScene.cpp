@@ -14,13 +14,14 @@ StartScene::~StartScene()
 
 HRESULT StartScene::Init()
 {
+    Scene::Init();
     _mapWidth = 21206;
     _mapHeight = 680;
-    mainCam = new Cam();
-    mainCam->camera->SetMapSize(_mapWidth, _mapHeight);
-    mainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    mainCam->camera->SetRenderHeight(568);
-    CLIPMANAGER->AddClip("test_effect", "trap_blast_projectile.bmp", 168, 50, 4, 1.f);
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
     //위에는 건들지 마시오
 
     //=============미리 만들어져 있는 예시 오브젝트============
@@ -45,10 +46,14 @@ HRESULT StartScene::Init()
 
     character = new Character();
     character->name = "character";
+    character->zOrder->SetY(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 50);
 	character->collider->isTrigger = true;
+	character->ground->Init(100, 5, 0, 52);
+    character->AddComponent(new DebugText());
+    character->GetComponent<DebugText>()->Init();
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
@@ -64,16 +69,18 @@ HRESULT StartScene::Init()
     testGround->GetComponent<Ground>()->Init();
     testGround->transform->SetPosition(500, 600);
     testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(600);
+    testGround->GetComponent<Ground>()->SetY(500);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
-
-	
-
-
+    
+    luke = new Enemy();
+    luke->Init();
+    luke->collider->isTrigger = true;
+    luke->name = "luke";
+    //luke->SetPlayer(character);
 
     BackgroundInit();
     return S_OK;
@@ -89,6 +96,7 @@ void StartScene::Update()
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
+    luke->Update();
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -106,6 +114,7 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
+    luke->Render();
     testGround->Render();
 	trashBox->Render();
     EFFECTMANAGER->Render();
@@ -131,4 +140,8 @@ void StartScene::BackgroundInit()
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
     BGMANAGER->SetPlayer(character);
+}
+
+void StartScene::CameraInit()
+{
 }

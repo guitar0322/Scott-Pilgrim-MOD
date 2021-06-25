@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Wall.h"
 
-void Wall::Init(int startX, int startY, int endX, int endY)
+void Wall::Init(float startX, float startY, float endX, float endY)
 {
 	_startX = startX;
 	_startY = startY;
@@ -25,11 +25,11 @@ void Wall::Render()
 {
 	if (!KEYMANAGER->isToggleKey(VK_TAB)) 
 	{
-		LineMake(_backBuffer->getMemDC(), _startX, _startY, _endX, _endY);
+		LineMake(BackBuffer, _startX, _startY, _endX, _endY);
 	}
 }
 
-void Wall::SetStartPoint(int startX, int startY)
+void Wall::SetStartPoint(float startX, float startY)
 {
 	_startX = startX;
 	_startY = startY;
@@ -38,7 +38,7 @@ void Wall::SetStartPoint(int startX, int startY)
 	_interceptY = _startY - (_gradient * _startX);
 }
 
-void Wall::SetEndPoint(int endX, int endY)
+void Wall::SetEndPoint(float endX, float endY)
 {
 	_endX = endX;
 	_endY = endY;
@@ -47,7 +47,7 @@ void Wall::SetEndPoint(int endX, int endY)
 	_interceptY = _startY - (_gradient * _startX);
 }
 
-bool Wall::IsCross(int startX, int startY, int endX, int endY)
+bool Wall::IsCross(float startX, float startY, float endX, float endY)
 {
 	//오브젝트가 이동할때 시작점과 끝점이 1차 부등식의 부호가 다를경우
 	//선을 넘는것으로 판단

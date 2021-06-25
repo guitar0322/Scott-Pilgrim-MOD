@@ -51,8 +51,8 @@ void Text::Update()
 
 void Text::Render()
 {
-	oFont = (HFONT)SelectObject(_backBuffer->getMemDC(), hFont);
-	TextOut(_backBuffer->getMemDC(), transform->GetX(),
+	oFont = (HFONT)SelectObject(BackBuffer, hFont);
+	TextOut(BackBuffer, transform->GetX(),
 		transform->GetY(), text, strlen(text));
-	SelectObject(_backBuffer->getMemDC(), oFont);
+	SelectObject(BackBuffer, oFont);
 }

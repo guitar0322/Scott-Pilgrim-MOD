@@ -10,9 +10,7 @@ void Player::InputHandle()
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
-
 	}
-
 }
 
 void Player::Init()
@@ -20,6 +18,7 @@ void Player::Init()
 	animator = gameObject->GetComponent<Animator>();
 	collider = gameObject->GetComponent<BoxCollider>();
 	ground = gameObject->GetComponent<Ground>();
+	zOrder = gameObject->GetComponent<ZOrder>();
 	ClipInit();
 	_speed = 80;
 	_gravity = 90;

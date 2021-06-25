@@ -11,12 +11,7 @@ SecondScene::~SecondScene()
 
 HRESULT SecondScene::Init()
 {
-    return E_NOTIMPL;
-}
-
-HRESULT SecondScene::Init(int mapWidth, int mapHeight, ImageObject background)
-{
-    return E_NOTIMPL;
+    return S_OK;
 }
 
 void SecondScene::Release()

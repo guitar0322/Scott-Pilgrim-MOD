@@ -5,10 +5,11 @@
 
 PlayerState * PlayerFallState::InputHandle(Player * player)
 {
-
-	if (GROUNDMANAGER->CheckGround(player->collider->rc) == true)
+	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
+	if (intersectHeight != 0)
 	{
 		player->groundCheck = true;
+		player->transform->MoveY(-intersectHeight);
 		return new PlayerGroundState();
 	}
 
