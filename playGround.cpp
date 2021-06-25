@@ -19,13 +19,14 @@ HRESULT playGround::init()
 	_camShakeFrame = 0;
 	StartScene* startScene = new StartScene();
 	SCENEMANAGER->AddScene("start", startScene);
-	//SCENEMANAGER->LoadScene("start");
-	//SCENEMANAGER->GetCurScene()->Init();
+	SCENEMANAGER->LoadScene("start");
+	SCENEMANAGER->GetCurScene()->Init();
 
-	SecondScene* secondScene = new SecondScene();
-	SCENEMANAGER->AddScene("second", secondScene);
-	SCENEMANAGER->LoadScene("second");
-	secondScene->Init();
+	//SecondScene* secondScene = new SecondScene();
+	//SCENEMANAGER->AddScene("second", secondScene);
+	//SCENEMANAGER->LoadScene("second");
+	//secondScene->Init();
+
 	//_mainCam.transform->SetX(_mainCam.transform->GetX() + 100);
 	//testParticle = new image();
 	//testParticle->init("full_charge_hit_effect_left.bmp", 240, 88, 4, 1, true, RGB(255, 0, 255));
