@@ -22,10 +22,10 @@ HRESULT playGround::init()
 	SCENEMANAGER->LoadScene("start");
 	SCENEMANAGER->GetCurScene()->Init();
 
-	//SecondScene* secondScene = new SecondScene();
-	//SCENEMANAGER->AddScene("second", secondScene);
+	//SecondScene* secondscene = new SecondScene();
+	//SCENEMANAGER->AddScene("second", secondscene);
 	//SCENEMANAGER->LoadScene("second");
-	//secondScene->Init();
+	//secondscene->Init();
 
 	//_mainCam.transform->SetX(_mainCam.transform->GetX() + 100);
 	//testParticle = new image();

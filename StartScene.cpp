@@ -16,7 +16,8 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {
     Scene::Init();
-
+    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    sceneInfoLoader.LoadObjectInfo();
     //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
@@ -86,6 +87,9 @@ void StartScene::Update()
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
+    for (int i = 0; i < _objectV.size(); i++) {
+        _objectV[i]->Update();
+    }
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -100,6 +104,9 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
+    for (int i = 0; i < _objectV.size(); i++) {
+        _objectV[i]->Render();
+    }
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();

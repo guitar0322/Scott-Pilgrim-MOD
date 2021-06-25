@@ -205,6 +205,7 @@
     <ClCompile Include="UIRenderer.cpp">
       <Filter>Component\Common</Filter>
     </ClCompile>
+    <ClCompile Include="SceneInfoLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="randomFunction.h" />
@@ -419,6 +420,7 @@
     <ClInclude Include="UIRenderer.h">
       <Filter>Component\Common</Filter>
     </ClInclude>
+    <ClInclude Include="SceneInfoLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

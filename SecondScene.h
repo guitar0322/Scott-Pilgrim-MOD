@@ -33,6 +33,15 @@ private:
         ImageObject* image;
     }SELECTOBJECT;
 
+private:
+    float _worldEditorRatio;
+    float _editorWidth;
+    float _editorHeight;
+    int _objectUIPositionY;
+    int _objectUIPositionStartX;
+    int _objectUITermX;
+    vector<OBJECTINFO> _placedObjectV;
+    vector<OBJECTINFO>::iterator _placedObjectIter;
 public:
     ImageObject* background[BG_NUM];
     OBJECTINFO object[OBJECT_NUM];
