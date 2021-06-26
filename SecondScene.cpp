@@ -28,7 +28,8 @@ HRESULT SecondScene::Init()
     mouseInfo.preX = 0;
     mouseInfo.preY = 0;
     
-    selectIdx = -1;
+    selectIdxUI = -1; 
+    selectIdxObject = -1;
 
     _objectUITermX = 100;
     _objectUIPositionStartX = 100;
@@ -56,73 +57,117 @@ void SecondScene::Release()
 void SecondScene::Update()
 {
     BGMANAGER->Update();
-    sprintf_s(debug[0], "%d", selectIdx);
+    sprintf_s(debug[0], "%d", selectIdxUI);
+    for (int i = 0; i < _placedObjectV.size(); i++)
+    {
+        _placedObjectV[i].image.Update();
+    }
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
+        mouseInfo.clickedLeft = true;
+        mouseInfo.preX = _ptMouse.x;
+        mouseInfo.preY = _ptMouse.y;
 		if (_ptMouse.x <= 650 && _ptMouse.y <= 400)
 		{
-			mouseInfo.clickedLeft = true;
-			mouseInfo.preX = _ptMouse.x;
-			mouseInfo.preY = _ptMouse.y;
+            selectIdxObject = -1;
+            POINT worldPtMouse = ScreenToWorld(_ptMouse.x, _ptMouse.y);
+            for (int i = 0; i < _placedObjectV.size(); i++) {
+                if (PtInRect(&_placedObjectV[i].image.renderer->GetRc(), worldPtMouse)) {
+                    selectIdxObject = i;
+                    break;
+                }
+            }
 		}
         else 
         {
+            selectIdxObject = -1;
             for (int i = 0; i < OBJECT_NUM; i++) 
             {
                 if (PtInRect(&object[i].rc, _ptMouse))
                 {
-                    selectIdx = i;
+                    selectIdxUI = i;
                     selectObject.deltaX = _ptMouse.x - object[i].x;
                     selectObject.deltaY = _ptMouse.y - object[i].y;
-                    selectObject.width = object[i].width;
-                    selectObject.height = object[i].height;
+                    selectObject.width = object[i].width * _worldEditorRatio;
+                    selectObject.height = object[i].height * _worldEditorRatio;
                     selectObject.image = &(object[i].image);
                 }
             }
+
         }
 	}
-    if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) && selectIdx != -1) 
-    {
-
-    }
     if (mouseInfo.clickedLeft == true) 
     {
         mouseInfo.deltaX = _ptMouse.x - mouseInfo.preX;
-        if (KEYMANAGER->isStayKeyDown(VK_CONTROL)) 
+        mouseInfo.deltaY = _ptMouse.y - mouseInfo.preY;
+        if (selectIdxUI == -1 && selectIdxObject == -1)
         {
-            MainCam->transform->MoveX(-(mouseInfo.deltaX * 3));
+			if (KEYMANAGER->isStayKeyDown(VK_CONTROL))
+			{
+				MainCam->transform->MoveX(-(mouseInfo.deltaX * 3));
+			}
+			else
+			{
+				MainCam->transform->MoveX(-mouseInfo.deltaX);
+			}
+            if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
+                MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
         }
-        else
+        else if (selectIdxObject != -1)
         {
-			MainCam->transform->MoveX(-mouseInfo.deltaX);
+            _placedObjectV[selectIdxObject].image.transform->Move(mouseInfo.deltaX / _worldEditorRatio, mouseInfo.deltaY / _worldEditorRatio);
+            _placedObjectV[selectIdxObject].rc = WorldToScreen(_placedObjectV[selectIdxObject].image.renderer->GetRc());
+        }
+        else 
+        {
+            selectObject.x = _ptMouse.x - selectObject.deltaX;
+            selectObject.y = _ptMouse.y - selectObject.deltaY;
+            selectObject.rc = RectMakeCenter(selectObject.x, selectObject.y, selectObject.width, selectObject.height);
         }
         mouseInfo.preX = _ptMouse.x;
+        mouseInfo.preY = _ptMouse.y;
     }
     if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
     {
         mouseInfo.clickedLeft = false;
-        if (selectIdx != -1 && _ptMouse.x <= 650 && _ptMouse.y <= 400) 
+        if (selectIdxUI != -1 && _ptMouse.x <= 650 && _ptMouse.y <= 400) 
         {
 			OBJECTINFO newObject;
-			ZeroMemory(&newObject, sizeof(OBJECTINFO));
-			newObject.x = _ptMouse.x - selectObject.deltaX;
-			newObject.y = _ptMouse.y - selectObject.deltaY;
-			newObject.image = *selectObject.image;
-			newObject.width = selectObject.width * _worldEditorRatio;
-			newObject.height = selectObject.height * _worldEditorRatio;
-			newObject.type = selectIdx;
-			newObject.rc = RectMakeCenter(newObject.x, newObject.y, newObject.width, newObject.height);
+            newObject.image.renderer->Resize
+            (
+                object[selectIdxUI].image.renderer->GetWidth(),
+                object[selectIdxUI].image.renderer->GetHeight()
+            );
+            BitBlt
+            (
+                newObject.image.renderer->memDC, 0, 0,
+                object[selectIdxUI].image.renderer->GetWidth(),
+                object[selectIdxUI].image.renderer->GetHeight(),
+                object[selectIdxUI].image.renderer->memDC, 0, 0,
+                SRCCOPY
+            );
+            newObject.image.transform->SetPosition
+            (
+                MainCam->transform->GetX() - (WINSIZEX / 2 - selectObject.x / _worldEditorRatio),
+                MainCam->transform->GetY() - (WINSIZEY / 2 - selectObject.y / _worldEditorRatio)
+            );
+			newObject.type = selectIdxUI;
+            newObject.x = selectObject.x;
+            newObject.y = selectObject.y;
+            newObject.width = selectObject.width;
+            newObject.height = selectObject.height;
+            newObject.rc = RectMakeCenter(newObject.x, newObject.y, newObject.width, newObject.height);
 			_placedObjectV.push_back(newObject);
         }
-		selectIdx = -1;
+		selectIdxUI = -1;
     }
     if (KEYMANAGER->isOnceKeyDown('S'))
     {
 		vector<string> objectStringInfo;
         for (int i = 0; i < _placedObjectV.size(); i++)
         {
-            objectStringInfo.push_back(to_string(_placedObjectV[i].x / _worldEditorRatio));
-            objectStringInfo.push_back(to_string(_placedObjectV[i].y / _worldEditorRatio));
+            objectStringInfo.push_back(to_string(_placedObjectV[i].image.transform->GetX()));
+            objectStringInfo.push_back(to_string(_placedObjectV[i].image.transform->GetY()));
             objectStringInfo.push_back(to_string(_placedObjectV[i].type));
         }
 		TXTDATAMANAGER->txtSave("scene_info.txt", objectStringInfo);
@@ -133,7 +178,18 @@ void SecondScene::Render()
 {
     PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
     BGMANAGER->Render();
+    for (int i = 0; i < _placedObjectV.size(); i++)
+    {
+        _placedObjectV[i].image.Render();
+    }
     MainCam->Render(backDC);
+    //if (KEYMANAGER->isToggleKey(VK_TAB))
+    //{
+    //    for (int i = 0; i < _placedObjectV.size(); i++)
+    //    {
+    //        Rectangle(backDC, _placedObjectV[i].rc);
+    //    }
+    //}
     for (int i = 0; i < OBJECT_NUM; i++)
     {
 		GdiTransparentBlt(backDC, 
@@ -144,33 +200,27 @@ void SecondScene::Render()
             object[i].width, object[i].height,
             RGB(255, 0, 255));
     }
-    if (selectIdx != -1)
+    
+    if (selectIdxUI != -1)
     {
         GdiTransparentBlt(backDC,
-            _ptMouse.x - selectObject.deltaX - (selectObject.image->renderer->GetWidth() * _worldEditorRatio) / 2,
-            _ptMouse.y - selectObject.deltaY - (selectObject.image->renderer->GetHeight() * _worldEditorRatio) / 2,
-            selectObject.image->renderer->GetWidth() * _worldEditorRatio,
-            selectObject.image->renderer->GetHeight() * _worldEditorRatio,
+            selectObject.rc.left,
+            selectObject.rc.top,
+            selectObject.width,
+            selectObject.height,
             selectObject.image->renderer->memDC,
             0, 0,
             selectObject.image->renderer->GetWidth(),
             selectObject.image->renderer->GetHeight(),
             RGB(255, 0, 255));
     }
-    for (int i = 0; i < _placedObjectV.size(); i++)
-    {
-        GdiTransparentBlt(backDC,
-            _placedObjectV[i].x - (selectObject.image->renderer->GetWidth() * _worldEditorRatio) / 2,
-            _placedObjectV[i].y - (selectObject.image->renderer->GetHeight() * _worldEditorRatio) / 2,
-            _placedObjectV[i].width, _placedObjectV[i].height,
-            _placedObjectV[i].image.renderer->memDC,
-            0, 0,
-            _placedObjectV[i].width / _worldEditorRatio, _placedObjectV[i].height / _worldEditorRatio,
-            RGB(255, 0, 255));
-    }
+
     sprintf_s(debug[1], "%.1f, %.1f", _ptMouse.x / _worldEditorRatio, _ptMouse.y / _worldEditorRatio);
-    TextOut(backDC, 20, 20, debug[0], strlen(debug[0]));
-    TextOut(backDC, 20, 40, debug[1], strlen(debug[1]));
+    if (!KEYMANAGER->isToggleKey(VK_TAB))
+    {
+		TextOut(backDC, 20, 20, debug[0], strlen(debug[0]));
+		TextOut(backDC, _ptMouse.x, _ptMouse.y - 20, debug[1], strlen(debug[1]));
+    }
     BitBlt(_hdc, 0, 0, WINSIZEX, WINSIZEY, backDC, 0, 0, SRCCOPY);
 }
 
@@ -204,5 +254,39 @@ void SecondScene::CameraInit()
     MainCam->SetMapSize(21206, 680);
     MainCam->SetScreenSize(_editorWidth, _editorHeight);
     SetBackBufferSize(_mapWidth, _mapHeight);
+}
+
+RECT SecondScene::WorldToScreen(RECT rc)
+{
+    //실제 월드의 렉트를 에디터 스크린상의 렉트로 전환.
+    //left,top을 구해서 width , height로 RectMake하기
+    POINT leftTop = WorldToScreen(rc.left, rc.top);
+    RECT result = RectMake(leftTop.x, leftTop.y, (rc.right - rc.left) * _worldEditorRatio, (rc.bottom - rc.top) * _worldEditorRatio);
+    return result;
+}
+
+RECT SecondScene::ScreenToWorld(RECT rc)
+{
+    POINT leftTop = ScreenToWorld(rc.left, rc.top);
+    RECT result = RectMake(leftTop.x, leftTop.y, rc.right - rc.left, rc.bottom - rc.top);
+    return result;
+}
+
+POINT SecondScene::WorldToScreen(long x, long y)
+{
+    //월드좌표를 에디터상 화면 좌표로 변환
+    long resultX = (x - (MainCam->transform->GetX() - MainCam->GetRenderWidth() / 2)) * _worldEditorRatio;
+    long resultY = y * _worldEditorRatio;
+
+    return { resultX, resultY };
+}
+
+POINT SecondScene::ScreenToWorld(long x, long y)
+{
+    //에디터상의 좌표를 월드좌표로 변환
+    //드래그되는 오브젝트의 실제 월드좌표 공식 = camera.x - (WINSIZEX/2 - ptMouse.x / ratio)
+    long resultX = MainCam->transform->GetX() - (WINSIZEX / 2 - x / _worldEditorRatio);
+    long resultY = y / _worldEditorRatio;
+    return{ resultX ,resultY };
 }
 

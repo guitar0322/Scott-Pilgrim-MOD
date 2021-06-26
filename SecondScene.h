@@ -26,10 +26,13 @@ private:
         ImageObject image;
     }OBJECTINFO;
     typedef struct tagSelectObject {
+        RECT rc;
         int deltaX;
         int deltaY;
         int width;
         int height;
+        int x;
+        int y;
         ImageObject* image;
     }SELECTOBJECT;
 
@@ -45,10 +48,11 @@ private:
 public:
     ImageObject* background[BG_NUM];
     OBJECTINFO object[OBJECT_NUM];
-    MOUSEINFO mouseInfo;
     SELECTOBJECT selectObject;
+    MOUSEINFO mouseInfo;
     float mouseDeltaX;
-    int selectIdx;
+    int selectIdxUI;
+    int selectIdxObject;
 public:
     SecondScene();
     ~SecondScene();
@@ -59,5 +63,9 @@ public:
 
     void BackgroundInit();
     void CameraInit();
+    RECT WorldToScreen(RECT rc);
+    RECT ScreenToWorld(RECT rc);
+    POINT WorldToScreen(long x, long y);
+    POINT ScreenToWorld(long x, long y);
 };
 

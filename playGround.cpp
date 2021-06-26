@@ -19,13 +19,13 @@ HRESULT playGround::init()
 	_camShakeFrame = 0;
 	StartScene* startScene = new StartScene();
 	SCENEMANAGER->AddScene("start", startScene);
-	SCENEMANAGER->LoadScene("start");
-	SCENEMANAGER->GetCurScene()->Init();
+	//SCENEMANAGER->LoadScene("start");
+	//SCENEMANAGER->GetCurScene()->Init();
 
-	//SecondScene* secondscene = new SecondScene();
-	//SCENEMANAGER->AddScene("second", secondscene);
-	//SCENEMANAGER->LoadScene("second");
-	//secondscene->Init();
+	SecondScene* secondscene = new SecondScene();
+	SCENEMANAGER->AddScene("second", secondscene);
+	SCENEMANAGER->LoadScene("second");
+	secondscene->Init();
 
 	//_mainCam.transform->SetX(_mainCam.transform->GetX() + 100);
 	//testParticle = new image();

@@ -12,6 +12,8 @@ private:
     bool _isAlpha;
     RECT rc;
     COLORREF _transColor;
+    float _scaleX;
+    float _scaleY;
 public:
     Renderer();
     ~Renderer();
@@ -28,9 +30,19 @@ public:
     void SetAlphaMode(bool isAlpha, int alpha);//알파모드와 알파값을 동시에 설정
     void SetAlpha(int alpha) { this->_alpha = alpha; blendFunc.SourceConstantAlpha = alpha;}//알파값 설정
     void Resize(int objWidth, int objHeight);//렌더러 DC영역 크기를 재조정
+    void ResizeAlphaMemDC(float newWidth, float newHeight);
     void SetTransColor(COLORREF transColor) { _transColor = transColor; }
     int GetWidth() const { return _width; }
     int GetHeight() const { return _height; }
     RECT GetRc() { return rc; }
+
+
+    void SetScale(float scaleX, float scaleY);
+
+    float GetScaleX() const { return _scaleX; }
+    void SetScaleX(float scaleX);
+
+    float GetScaleY() const { return _scaleY; }
+    void SetScaleY(float scaleY);
 };
 

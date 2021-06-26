@@ -28,8 +28,6 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		player->runDelay = 0;
 
 		return new PlayerWalkState();
-
-
 	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
