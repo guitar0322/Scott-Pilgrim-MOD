@@ -77,7 +77,7 @@ void Animator::SetClip(AnimationClip* newClip, int startFrame)
 void Animator::SetClip(string clipName)
 {
 	preClip = curClip;
-	curClip = this->GetClip(clipName);
+	curClip = GetClip(clipName);
 	currentFrame = 0;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
@@ -88,7 +88,7 @@ void Animator::SetClip(string clipName)
 void Animator::SetClip(string clipName, int startFrame)
 {
 	preClip = curClip;
-	curClip = this->GetClip(clipName);
+	curClip = GetClip(clipName);
 	currentFrame = startFrame;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);

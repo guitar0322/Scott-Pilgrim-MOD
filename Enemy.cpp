@@ -43,3 +43,4 @@ Enemy::~Enemy()
 	SAFE_DELETE(enemyinfo);
 	SAFE_DELETE(enemyAI);
 }
+

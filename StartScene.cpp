@@ -74,10 +74,25 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
+	/* LUKE CLIP MANAGER  */
+	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 320, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 320, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 1188, 134, 11, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 1188, 134, 11, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack_right", "luke/luke_attack_right.bmp", 585, 64, 9, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack_left", "luke/luke_attack_left.bmp", 585, 64, 9, 0.20f);
+
+	// 210627 시영 추가 (Enemy Update)
     enemy = new Luke();
-    
+	enemy->transform->SetPosition(400, 300);
+	enemy->ground->enable = false;
+	enemy->enemyAI->SetPlayer(character);
+	enemy->zOrder->SetY(enemy->transform->GetY() + 132 / 2);
+	enemy->enemyinfo->SetSpeed(30.f);
+
     BackgroundInit();
     WallInit();
+
     return S_OK;
 }
 
@@ -103,8 +118,9 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+
     // 210627 시영 추가 (Enemy Update)
-    //enemy->Update();
+    enemy->Update();
 }
 
 void StartScene::Render()
@@ -122,7 +138,7 @@ void StartScene::Render()
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)
-    enemy->Render();
+    //enemy->Render();
 
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());

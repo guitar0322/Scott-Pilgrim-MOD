@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EnemyAI.h"
 #include "EnemyState.h"
-
+#include "LukeIdleState.h"
 
 EnemyAI::EnemyAI()
 {
@@ -18,16 +18,8 @@ void EnemyAI::Init()
 	클립 인잇을 만들어서 에너미 이름을 스트링으로 받게한다. 
 	그 다음에 LEFT, RIGHT 붙여서 에너미에 추가하도록 
 	*/
-
-	/* Info에 넣기 */
-	//_dir = RND->getInt(1);
-	//if (commonStats->dir == false)
-	//	enemyState = ENEMY_IDLE_RIGHT;
-	//else
-	//	enemyState = ENEMY_IDLE_LEFT;
-	//
-	//animator = gameObject->GetComponent<Animator>();
-	//collider = gameObject->GetComponent<BoxCollider>();
+	animator = gameObject->GetComponent<Animator>();
+	enemyinfo = gameObject->GetComponent<EnemyInfo>();
 }
 
 void EnemyAI::Update()
@@ -49,4 +41,17 @@ void EnemyAI::Render()
 
 void EnemyAI::ChangeClip(string clipName, bool isInitFrame)
 {
+	AnimationClip* newClip = animator->GetClip(clipName);
+	if (isInitFrame == true)
+		animator->SetClip(animator->GetClip(clipName));
+	else
+		animator->SetClip(animator->GetClip(clipName), animator->curClip->currentFrame);
+
+}
+
+void EnemyAI::SetState(EnemyState * newState)
+{
+	state = newState;
+	state->Enter(this);
+	return;
 }

@@ -160,11 +160,6 @@
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Controler.h" />
-
-    <ClInclude Include="Doberman.h" />
-    <ClInclude Include="Dobermanidlestate.h" />
-    <ClInclude Include="Dobermanstate.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="DebugText.h" />
     <ClInclude Include="Enemy.h" />
@@ -246,10 +241,6 @@
     <ClCompile Include="ClipManager.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Controler.cpp" />
-    <ClCompile Include="Doberman.cpp" />
-    <ClCompile Include="Dobermanidlestate.cpp" />
-    <ClCompile Include="Dobermanstate.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="Enemy.cpp" />

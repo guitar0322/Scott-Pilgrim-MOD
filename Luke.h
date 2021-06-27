@@ -10,6 +10,4 @@ public:
 	~Luke();
 
 	virtual void Init();
-	virtual void Update();
-	virtual void Render();
 };

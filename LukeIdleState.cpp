@@ -20,9 +20,9 @@ void LukeIdleState::Enter(EnemyAI* enemy)
 {
 	_idelTime = 0;
 	if (enemy->enemyinfo->GetDir() == false)
-		enemy->ChangeClip("luke_idleRight", true);
+		enemy->ChangeClip("luke_idle_right", true);
 	else
-		enemy->ChangeClip("luke_idleLeft", true);
+		enemy->ChangeClip("luke_idle_left", true);
 }
 
 void LukeIdleState::Exit(EnemyAI* enemy)

@@ -12,8 +12,9 @@ private:
 
 public:
 
-	/*
+	
 	virtual void Init();
+	/*
 	virtual void Update();
 	virtual void Render();
 	얘 없이 에너미 메니저에서 적들의 상태를 불러 올때 GETTET SETTER를 이용해 불러온다.
