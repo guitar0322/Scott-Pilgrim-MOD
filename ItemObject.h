@@ -9,7 +9,7 @@ public:
 	Animator* animator;
 	Item* item;
 	BoxCollider* collider;
-
+	ZOrder* zorder;
 	virtual void Init();
 };
 
