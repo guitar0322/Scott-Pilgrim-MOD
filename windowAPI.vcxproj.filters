@@ -14,14 +14,9 @@
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controler.cpp" />
-    <ClCompile Include="Doberman.cpp" />
-    <ClCompile Include="Dobermanidlestate.cpp" />
-    <ClCompile Include="Dobermanstate.cpp" />
     <ClCompile Include="EffectManager.cpp" />
-    <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
-    <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -73,6 +68,30 @@
     <ClCompile Include="Zone.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="ZOrderManager.cpp" />
+    <ClCompile Include="EnemyAI.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Luke.cpp">
+      <Filter>Enemy\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeIdleState.cpp">
+      <Filter>Enemy\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeRunState.cpp">
+      <Filter>Enemy\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeAttackState.cpp">
+      <Filter>Enemy\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInfo.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -89,14 +108,9 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controler.h" />
-    <ClInclude Include="Doberman.h" />
-    <ClInclude Include="Dobermanidlestate.h" />
-    <ClInclude Include="Dobermanstate.h" />
     <ClInclude Include="EffectManager.h" />
-    <ClInclude Include="Enemy2.h" />
     <ClInclude Include="DebugText.h" />
     <ClInclude Include="EnemyManager.h" />
-    <ClInclude Include="EnemyState.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
@@ -151,6 +165,30 @@
     <ClInclude Include="Zone.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="ZOrderManager.h" />
+    <ClInclude Include="EnemyAI.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Luke.h">
+      <Filter>Enemy\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeIdleState.h">
+      <Filter>Enemy\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeRunState.h">
+      <Filter>Enemy\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeAttackState.h">
+      <Filter>Enemy\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInfo.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
@@ -158,5 +196,19 @@
   <ItemGroup>
     <Image Include="small.ico" />
     <Image Include="windowAPI.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{3f7f0ca0-45a3-45a9-9323-135794649587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{0bddd623-e47b-49c9-8530-924cc8966256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Luke">
+      <UniqueIdentifier>{0f64d714-3ef7-4854-9cf2-2d47f8d7170a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{e7dc148e-ab24-4752-bc94-f4563c7e1f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

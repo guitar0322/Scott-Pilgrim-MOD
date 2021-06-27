@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "WallObj.h"
 #include "Wall.h"
-#include "Doberman.h"
+
 StartScene::StartScene()
 {
 }
@@ -57,12 +57,10 @@ HRESULT StartScene::Init()
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
-    wall[0] = new WallObj();
+   wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
-
     wall[1] = new WallObj();
     wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
-
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
 
@@ -78,14 +76,7 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
-	doberman = new Character();
-	doberman->Init();
-	doberman->transform->SetPosition(1200, 400);
-	doberman->collider->isTrigger = true;
-	doberman->AddComponent(new Doberman());
-	doberman->GetComponent<Doberman>()->Init();
-	doberman->GetComponent<Doberman>()->SetPlayer(character);
-    doberman->ground->enable = false;
+    enemy = new Luke();
     
     BackgroundInit();
     return S_OK;
@@ -98,9 +89,6 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
-    //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
-    //    character->transform->MoveX(15);
-    //}
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -109,7 +97,8 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
-	doberman->Update();
+    // 210627 시영 추가 (Enemy Update)
+    //enemy->Update();
 }
 
 void StartScene::Render()
@@ -121,8 +110,11 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
-	doberman->Render();
     EFFECTMANAGER->Render();
+
+    // 210627 시영 추가 (Enemy Update)
+    enemy->Render();
+
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
