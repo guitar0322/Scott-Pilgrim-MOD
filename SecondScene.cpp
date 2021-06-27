@@ -78,7 +78,7 @@ void SecondScene::Update()
                 }
             }
 		}
-        else 
+        else
         {
             selectIdxObject = -1;
             for (int i = 0; i < OBJECT_NUM; i++) 
@@ -93,7 +93,6 @@ void SecondScene::Update()
                     selectObject.image = &(object[i].image);
                 }
             }
-
         }
 	}
     if (mouseInfo.clickedLeft == true) 
