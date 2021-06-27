@@ -17,8 +17,8 @@ HRESULT StartScene::Init()
 {
     Scene::Init();
     CameraInit();
-    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
-    sceneInfoLoader.LoadObjectInfo();
+    //sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    //sceneInfoLoader.LoadObjectInfo();
     //_objectV[0]->GetComponent<Renderer>()->SetAlphaMode(true, 125);
     //_objectV[0]->GetComponent<Renderer>()->SetScale(3.f, 3.f);
 
@@ -45,22 +45,21 @@ HRESULT StartScene::Init()
 
     character = new Character();
     character->name = "character";
-    character->zOrder->SetY(character->transform->GetY() + 52);
+    character->zOrder->SetZ(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 52);
 	character->zOrder->Init();
-	character->zOrder->SetY(568 / 2 + 52);
+	character->zOrder->SetZ(568 / 2 + 52);
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
     testGround = new GameObject();
+    testGround->transform->SetPosition(500, 350);
+    testGround->AddComponent(new ZOrder());
+    testGround->GetComponent<ZOrder>()->Init();
     testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init();
-    testGround->transform->SetPosition(500, 600);
-    testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(500);
+    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
@@ -74,7 +73,6 @@ HRESULT StartScene::Init()
 	doberman->AddComponent(new Doberman());
 	doberman->GetComponent<Doberman>()->Init();
 	doberman->GetComponent<Doberman>()->SetPlayer(character);
-    doberman->ground->enable = false;
     
     BackgroundInit();
     WallInit();

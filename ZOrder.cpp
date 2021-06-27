@@ -3,7 +3,7 @@
 
 void ZOrder::Init()
 {
-	_y = transform->GetY();
+	_z = transform->GetY();
 	_x = transform->GetX();
 	ZORDER->AddZOrder(this);
 }
@@ -20,18 +20,18 @@ void ZOrder::OnDisable()
 
 void ZOrder::MoveZ(float z)
 {
-	if (WALLMANAGER->CheckCross(transform->GetX(), _y, transform->GetX(), _y + z) == true)
+	if (WALLMANAGER->CheckCross(transform->GetX(), _z, transform->GetX(), _z + z) == true)
 		return;
 
 	transform->MoveY(z);
-	_y += z;
+	_z += z;
 }
 
 void ZOrder::Render()
 {
 	if (!KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		_rc = RectMakeCenter(transform->GetX(), _y, 5, 5);
+		_rc = RectMakeCenter(transform->GetX(), _z, 5, 5);
 		Rectangle(BackBuffer, _rc);
 	}
 }

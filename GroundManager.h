@@ -11,10 +11,10 @@ public:
 	void Release();
 	void AddGround(Ground* newGround);
 	void EraseGround(Ground* targetGround);
-	int CheckGround(int x, int y, int width, int height);
-	int CheckGround(RECT rc);
-	int CheckGround(int x, int y, int width, int height, int idx);
-	int CheckGround(RECT rc, int idx);
+	int CheckGround(float x, float y, float z, int width, int height);
+	int CheckGround(RECT rc, float z);
+	int CheckGround(float x, float y, float z, int width, int height, int idx);
+	int CheckGround(RECT rc, float z, int idx);
 	RECT GetGroundRect(int idx);
 };
 
