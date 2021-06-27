@@ -40,7 +40,6 @@ void Player::Init()
 	_exitNum = 0;
 	_isCatch = false;
 
-
 }
 
 void Player::Update()
@@ -221,21 +220,26 @@ void Player::OnTriggerExit(GameObject * gameObject)
 	item = nullptr;
 }
 
-void Player::PickItem()
+void Player::PickItem()							// item 획득 했을때
 {
-	if (item != nullptr)
+	if (item != nullptr)						
 	{
-		_isCatch = true;
+		_isCatch = true;						
 		transform->AddChild(item->transform);
 		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
 	}
 }
 
-void Player::PutItem()
+void Player::PutItem()							//item을 놓았을때
 {
 	if (item != nullptr)
 	{
 		_isCatch = false;
 		item->transform->DetachParent();
+
+		item->_itemZ = this->zOrder->GetZ();
+		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
+
+		item->Throw(dir);
 	}	
 }

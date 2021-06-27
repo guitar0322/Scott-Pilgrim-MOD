@@ -24,6 +24,6 @@ void SceneInfoLoader::MakeSnow1(float x, float y)
 	snow->GetComponent<Renderer>()->Init("map/snow1.bmp", 108, 44);
 	snow->AddComponent(new ZOrder());
 	snow->GetComponent<ZOrder>()->Init();
-	snow->GetComponent<ZOrder>()->SetY(snow->transform->GetY() + 22);
+	snow->GetComponent<ZOrder>()->SetZ(snow->transform->GetY() + 22);
 	_sceneObjectV->push_back(snow);
 }

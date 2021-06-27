@@ -6,11 +6,16 @@
 
 PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 {
-	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
+	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
 		player->jumpZ = true;
 		player->transform->MoveY(-intersectHeight);
+		return new PlayerGroundState();
+	}
+
+	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
+		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
 	return nullptr;
@@ -23,14 +28,12 @@ void PlayerZorderJumpState::Update(Player * player)
 	if (player->dirZ == true)
 	{
 		player->zOrder->MoveZ(-_speedZ * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(-_speedZ * TIMEMANAGER->getElapsedTime());
 
 		player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
 		player->zOrder->MoveZ(_speedZ * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveY(_speedZ * TIMEMANAGER->getElapsedTime());
 
 		player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
 	}

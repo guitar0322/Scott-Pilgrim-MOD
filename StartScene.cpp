@@ -17,8 +17,8 @@ HRESULT StartScene::Init()
 {
     Scene::Init();
     CameraInit();
-    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
-    sceneInfoLoader.LoadObjectInfo();
+    //sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    //sceneInfoLoader.LoadObjectInfo();
     //_objectV[0]->GetComponent<Renderer>()->SetAlphaMode(true, 125);
     //_objectV[0]->GetComponent<Renderer>()->SetScale(3.f, 3.f);
 
@@ -31,6 +31,7 @@ HRESULT StartScene::Init()
     //Renderer컴포넌트가 미리 추가되어있는 오브젝트
     //imageObj->renderer 로 접근이 가능
     imageObj = new ImageObject();
+	
     //2.Box
     //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
     //->renderer,  ->collider 로 접근이 가능
@@ -40,20 +41,20 @@ HRESULT StartScene::Init()
     //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
 
-	CLIPMANAGER->AddClip("trashBox", "item/trashBox.bmp", 100, 76, 1, 1);
+	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 100, 76, 1, 1);
 	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
 
     character = new Character();
     character->name = "character";
-    character->zOrder->SetY(character->transform->GetY() + 52);
+    character->zOrder->SetZ(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 52);
 	character->zOrder->Init();
-	character->zOrder->SetY(568 / 2 + 52);
+	character->zOrder->SetZ(568 / 2 + 52);
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
+	character->renderer->SetScale(3.f, 3.f);
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
@@ -63,16 +64,18 @@ HRESULT StartScene::Init()
     wall[2]->Init(800, 200, 1000, 300);
 
     testGround = new GameObject();
+    testGround->transform->SetPosition(500, 350);
+    testGround->AddComponent(new ZOrder());
+    testGround->GetComponent<ZOrder>()->Init();
     testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init();
-    testGround->transform->SetPosition(500, 600);
-    testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(500);
+    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
-	trashBox->item->SetItemImage("trashBox");
+	trashBox->item->SetItemImage("trashbox");
 	trashBox->transform->SetPosition(640, 300);
+	trashBox->zorder->Init();
+	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
 	/* LUKE CLIP MANAGER  */
 	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 320, 132, 4, 0.20f);
@@ -90,6 +93,14 @@ HRESULT StartScene::Init()
 	enemy->zOrder->SetY(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
 
+	doberman = new Character();
+	doberman->Init();
+	doberman->transform->SetPosition(1200, 400);
+	doberman->collider->isTrigger = true;
+	doberman->AddComponent(new Doberman());
+	doberman->GetComponent<Doberman>()->Init();
+	doberman->GetComponent<Doberman>()->SetPlayer(character);
+    
     BackgroundInit();
     WallInit();
 
@@ -98,7 +109,6 @@ HRESULT StartScene::Init()
 
 void StartScene::Release()
 {
-
 }
 
 void StartScene::Update()
