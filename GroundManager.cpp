@@ -28,11 +28,11 @@ void GroundManager::EraseGround(Ground* targetGround)
     }
 }
 
-int GroundManager::CheckGround(int x, int y, int width, int height)
+int GroundManager::CheckGround(float x, float y, float z, int width, int height)
 {
     for (int i = 0; i < _groundV.size(); i++) 
     {
-        int intersectHeight = CheckGround(x, y, width, height, i);
+        int intersectHeight = CheckGround(x, y, z, width, height, i);
         if (intersectHeight != 0)
         {
             return intersectHeight;
@@ -41,11 +41,11 @@ int GroundManager::CheckGround(int x, int y, int width, int height)
     return 0;
 }
 
-int GroundManager::CheckGround(RECT rc)
+int GroundManager::CheckGround(RECT rc, float z)
 {
     for (int i = 0; i < _groundV.size(); i++)
     {
-        int intersectHeight = CheckGround(rc, i);
+        int intersectHeight = CheckGround(rc, z, i);
         if (intersectHeight != 0)
         {
             return intersectHeight;
@@ -54,19 +54,23 @@ int GroundManager::CheckGround(RECT rc)
     return 0;
 }
 
-int GroundManager::CheckGround(int x, int y, int width, int height, int idx)
+int GroundManager::CheckGround(float x, float y, float z, int width, int height, int idx)
 {
     RECT intersectRc;
     RECT destRc = RectMakeCenter(x, y, width, height);
+    if (z <= _groundV[idx]->GetZ() - 5 || z >= _groundV[idx]->GetZ() + 5)
+        return 0;
     if (IntersectRect(&intersectRc, &destRc, &_groundV[idx]->GetRc())) {
         return intersectRc.bottom - intersectRc.top;
     }
     return 0;
 }
 
-int GroundManager::CheckGround(RECT rc, int idx)
+int GroundManager::CheckGround(RECT rc, float z, int idx)
 {
     RECT intersectRc;
+    if (z <= _groundV[idx]->GetZ() - 5 || z >= _groundV[idx]->GetZ() + 5)
+        return 0;
     if (IntersectRect(&intersectRc, &rc, &_groundV[idx]->GetRc())) {
         return intersectRc.bottom - intersectRc.top;
     }

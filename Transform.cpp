@@ -73,6 +73,9 @@ bool Transform::CheckWallCross(float deltaX, float deltaY)
 	ZOrder* zOrder = gameObject->GetComponent<ZOrder>();
 	if (zOrder == nullptr)
 		return false;
+	sprintf_s(gameObject->GetComponent<DebugText>()->debugStr[0], "%f", zOrder->GetZ());
+	sprintf_s(gameObject->GetComponent<DebugText>()->debugStr[1], 
+		"%d", WALLMANAGER->CheckCross(position.x, zOrder->GetZ(), position.x + deltaX, zOrder->GetZ() + deltaY));
 	return WALLMANAGER->CheckCross(position.x, zOrder->GetZ(), position.x + deltaX, zOrder->GetZ() + deltaY);
 }
 

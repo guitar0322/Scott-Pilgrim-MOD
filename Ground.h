@@ -1,5 +1,8 @@
 #pragma once
 #include "Component.h"
+
+class ZOrder;
+
 class Ground :
     public Component
 {
@@ -7,6 +10,7 @@ private:
     RECT _rc;
     float _x;
     float _y;
+    float _z;
     int _deltaX;
     int _deltaY;
     int _width;
@@ -26,10 +30,12 @@ public:
     void ReSize(int width, int height);
     
     void SetX(float x) { _x = x; }
-    float GetX() { return _x; }
+    float GetX() const { return _x; }
 
     void SetY(float y) { _y = y; }
-    float GetY() { return _y; }
+    float GetY() const { return _y; }
+
+    float GetZ() const { return _z; }
 
     RECT GetRc() { return _rc; }
 };

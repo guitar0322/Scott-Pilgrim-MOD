@@ -17,4 +17,3 @@ public:
     void SetZ(float z) { _z = z; }//기준좌표를 설정
     float GetZ() { return _z; }//기준좌표를 반환
 };
-

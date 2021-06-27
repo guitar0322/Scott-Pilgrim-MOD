@@ -5,14 +5,14 @@
 
 PlayerState * PlayerFallState::InputHandle(Player * player)
 {
-	//int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
-	//if (intersectHeight != 0)
-	//{
-	//	player->groundCheck = true;
+	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
+	if (intersectHeight != 0)
+	{
+		player->groundCheck = true;
 
-	//	player->transform->MoveY(-intersectHeight);
-	//	return new PlayerGroundState();
-	//}
+		player->transform->MoveY(-intersectHeight);
+		return new PlayerGroundState();
+	}
 
 	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
 		player->groundCheck = true;
@@ -31,24 +31,20 @@ void PlayerFallState::Update(Player * player)
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
 		player->transform->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
 		player->transform->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
