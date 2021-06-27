@@ -38,6 +38,7 @@ void Player::Init()
 	_enterNum = 0;
 	_exitNum = 0;
 	_isCatch = false;
+
 }
 
 void Player::Update()
@@ -203,5 +204,18 @@ void Player::PutItem()
 	{
 		_isCatch = false;
 		item->transform->DetachParent();
+		//item->_itemZ = this->zOrder->GetY();
+		if (dir)		//플레이어가 left일때 아이템 left로 이동
+		{
+			item->_leftThrowItem = true;
+			/*if (_itemZ >= this->zOrder->GetY())
+			{
+				_itemZ -= 5;
+			}*/
+		}
+		if (!dir)		//플레이어가 right일떄 아이템 right로 이동
+		{
+			item->_rightThrowItem = true;
+		}
 	}	
 }

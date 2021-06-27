@@ -33,6 +33,7 @@ HRESULT StartScene::Init()
     //Renderer컴포넌트가 미리 추가되어있는 오브젝트
     //imageObj->renderer 로 접근이 가능
     imageObj = new ImageObject();
+
     //2.Box
     //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
     //->renderer,  ->collider 로 접근이 가능
@@ -78,6 +79,7 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashBox");
 	trashBox->transform->SetPosition(640, 300);
 
+
 	doberman = new Character();
 	doberman->Init();
 	doberman->transform->SetPosition(1200, 400);
@@ -93,7 +95,6 @@ HRESULT StartScene::Init()
 
 void StartScene::Release()
 {
-
 }
 
 void StartScene::Update()
