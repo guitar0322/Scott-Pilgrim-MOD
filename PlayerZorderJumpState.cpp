@@ -38,7 +38,7 @@ void PlayerZorderJumpState::Update(Player * player)
 
 void PlayerZorderJumpState::Enter(Player * player)
 {
-	_jumpPower = 80;
+	_jumpPower = 150;
 	_speedZ = 70;
 
 	if (player->dir == false)

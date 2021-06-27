@@ -22,8 +22,6 @@ PlayerState * PlayerJumpState::InputHandle(Player * player)
 		}
 
 	}
-
-
 	//점프 L 날라차기
 	
 	return nullptr;
@@ -95,7 +93,7 @@ void PlayerJumpState::Update(Player * player)
 
 void PlayerJumpState::Enter(Player * player)
 {
-	_jumpPower = 160;
+	_jumpPower = 200;
 	if (player->dir == false)
 	{
 		player->ChangeClip("jump_right", false);

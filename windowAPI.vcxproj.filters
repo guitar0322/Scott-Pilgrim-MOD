@@ -40,9 +40,6 @@
     <ClCompile Include="PlayerRunState.cpp">
       <Filter>PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerShieldState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>PlayerState</Filter>
     </ClCompile>
@@ -204,6 +201,17 @@
       <Filter>Component\Common</Filter>
     </ClCompile>
     <ClCompile Include="SceneInfoLoader.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="PlayerBlockState.cpp">
+      <Filter>PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpKickState.cpp">
+      <Filter>PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKickSkillState.cpp">
+      <Filter>PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectManager.h">
@@ -243,9 +251,6 @@
       <Filter>PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRunState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerShieldState.h">
       <Filter>PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
@@ -415,6 +420,19 @@
       <Filter>Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="SceneInfoLoader.h" />
+    <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="PlayerBlockState.h">
+      <Filter>PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpKickState.h">
+      <Filter>PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKickSkillState.h">
+      <Filter>PlayerState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

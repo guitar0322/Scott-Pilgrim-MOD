@@ -5,22 +5,26 @@
 
 PlayerState * PlayerFallState::InputHandle(Player * player)
 {
-	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
-	if (intersectHeight != 0)
-	{
-		player->groundCheck = true;
+	//int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
+	//if (intersectHeight != 0)
+	//{
+	//	player->groundCheck = true;
 
-		player->transform->MoveY(-intersectHeight);
+	//	player->transform->MoveY(-intersectHeight);
+	//	return new PlayerGroundState();
+	//}
+
+	if (player->transform->GetY() + 52 >= player->zOrder->GetY()) {
+		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
-
 	return nullptr;
 }
 
 void PlayerFallState::Update(Player * player)
 {
 	//중력값을 올려서 좀 더 빨리 떨어지는 효과를 보여줌
-	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime() * 4.5;
+	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime();
 
 	player->transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());
 
