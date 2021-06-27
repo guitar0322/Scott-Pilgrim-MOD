@@ -31,7 +31,7 @@ HRESULT StartScene::Init()
     //Renderer컴포넌트가 미리 추가되어있는 오브젝트
     //imageObj->renderer 로 접근이 가능
     imageObj = new ImageObject();
-
+	
     //2.Box
     //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
     //->renderer,  ->collider 로 접근이 가능
@@ -41,20 +41,21 @@ HRESULT StartScene::Init()
     //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
 
-	CLIPMANAGER->AddClip("trashBox", "item/trashBox.bmp", 100, 76, 1, 1);
+	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 100, 76, 1, 1);
 	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
 
     character = new Character();
     character->name = "character";
-    character->zOrder->SetY(character->transform->GetY() + 52);
+    character->zOrder->SetZ(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
 	character->ground->Init(100, 5, 0, 52);
 	character->zOrder->Init();
-	character->zOrder->SetY(568 / 2 + 52);
+	character->zOrder->SetZ(568 / 2 + 52);
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
+	character->renderer->SetScale(3.f, 3.f);
 
     testGround = new GameObject();
     testGround->AddComponent(new Ground());
@@ -65,9 +66,10 @@ HRESULT StartScene::Init()
 
 	trashBox = new ItemObject();
 	trashBox->Init();
-	trashBox->item->SetItemImage("trashBox");
+	trashBox->item->SetItemImage("trashbox");
 	trashBox->transform->SetPosition(640, 300);
-
+	trashBox->zorder->Init();
+	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
 	doberman = new Character();
 	doberman->Init();

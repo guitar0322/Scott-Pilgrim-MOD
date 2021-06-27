@@ -14,7 +14,7 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 	//	return new PlayerGroundState();
 	//}
 
-	if (player->transform->GetY() + 52 >= player->zOrder->GetY()) {
+	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
 		player->groundCheck = true;
 		return new PlayerGroundState();
 	}

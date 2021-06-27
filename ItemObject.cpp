@@ -15,11 +15,12 @@ void ItemObject::Init()
 	AddComponent(collider);
 	collider->Init();
 
+	zorder = new ZOrder();
+	AddComponent(zorder);
+	zorder->Init();
+
 	item = new Item();
 	AddComponent(item);
 	item->Init();
 
-	zorder = new ZOrder();
-	AddComponent(zorder);
-	zorder->Init();
 }

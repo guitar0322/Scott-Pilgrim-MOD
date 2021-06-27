@@ -73,7 +73,7 @@ bool Transform::CheckWallCross(float deltaX, float deltaY)
 	ZOrder* zOrder = gameObject->GetComponent<ZOrder>();
 	if (zOrder == nullptr)
 		return false;
-	return WALLMANAGER->CheckCross(position.x, zOrder->GetY(), position.x + deltaX, zOrder->GetY() + deltaY);
+	return WALLMANAGER->CheckCross(position.x, zOrder->GetZ(), position.x + deltaX, zOrder->GetZ() + deltaY);
 }
 
 Transform* Transform::GetChild(int i)

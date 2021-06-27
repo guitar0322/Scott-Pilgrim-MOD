@@ -1,17 +1,21 @@
 #include "stdafx.h"
 #include "Item.h"
+#include "Player.h"
 
 void Item::Init()
 {
 	_animator = gameObject->GetComponent<Animator>();
-	
-	_zorder = gameObject->GetComponent<ZOrder>();
+	//_zOrder = gameObject->GetComponent<ZOrder>();
+	player = gameObject->GetComponent<Player>();
+
+	//_itemZ = _zorder->GetZ(); //현재 itemZ값은 item의 zorder gety값이다
 
 	enterNum = 0;
 	exitNum = 0;
 
 	_itemSpeed = 210;
-	_gravity = 80;
+	////_gravity = 80;
+	//_gravity = 0;
 
 	_leftThrowItem = false;							//아이템 left로 안던짐
 	_rightThrowItem = false;						//아이템 right로 안던짐
@@ -22,22 +26,20 @@ void Item::Init()
 
 void Item::Update()
 {
-	//_zorder->SetY(transform->GetY() + 30);
-	if (_leftThrowItem)								//left로 item을 던졌을때
+	transform->MoveX(_itemSpeed * TIMEMANAGER->getElapsedTime());
+	transform->MoveY(_gravity * TIMEMANAGER->getElapsedTime());
+
+	if (MainCam->transform->GetX() - MainCam->GetRenderWidth() / 2 + 37 >= transform->GetX()
+		|| MainCam->transform->GetX() + MainCam->GetRenderWidth() / 2 - 37 <= transform->GetX())
 	{
-		ItemLeftMove();								//left로 이동하는 item move값
-		if (MainCam->transform->GetX() - MainCam->GetRenderWidth() / 2 + 37 >= transform->GetX())
-		{
-			ItemRangeOutRightMove();				//item이 범위 초과시 right로 이동
-		}
+		_itemSpeed *= -1;			//item이 범위 초과시 right로 이동
+		_gravity = 80;
 	}
-	if (_rightThrowItem)							//right로 item을 던졌을때
+
+	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= _itemZ)
 	{
-		ItemRightMove();							//right로 이동하는 item Move 값
-		if (MainCam->transform->GetX() + MainCam->GetRenderWidth() / 2	- 37 <= transform->GetX() )
-		{
-			ItemRangeOutLeftMove();					//item이 범위 초과시 left로 이동
-		}
+		_itemSpeed = 0;
+		_gravity = 0;
 	}
 }
 
@@ -66,23 +68,17 @@ void Item::OnTriggerExit(GameObject* gameObject)
 	exitNum++;
 }
 
-void Item::ItemLeftMove()
+void Item::Throw(bool dir)
 {
-	transform->Move(-_itemSpeed * TIMEMANAGER->getElapsedTime(), _gravity * TIMEMANAGER->getElapsedTime());
-}
-
-void Item::ItemRightMove()
-{
-	transform->Move(_itemSpeed * TIMEMANAGER->getElapsedTime(), _gravity * TIMEMANAGER->getElapsedTime());
-}
-
-void Item::ItemRangeOutLeftMove()
-{
-	transform->Move(-_itemSpeed * TIMEMANAGER->getElapsedTime(), _gravity * TIMEMANAGER->getElapsedTime());
-}
-
-void Item::ItemRangeOutRightMove()
-{
-	transform->Move(_itemSpeed * TIMEMANAGER->getElapsedTime(), _gravity * TIMEMANAGER->getElapsedTime());
+	_throwDir = dir;
+	_gravity = 0;
+	if (dir == false)
+	{
+		_itemSpeed = 210;
+	}
+	else
+	{
+		_itemSpeed = -210;
+	}
 }
 

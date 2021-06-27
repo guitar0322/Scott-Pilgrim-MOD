@@ -1,21 +1,26 @@
 #pragma once
 #include "Component.h"
 
+class Player;
 class Item :
     public Component
 {
 private:
 	Animator* _animator;
-	ZOrder* _zorder;
+	//ZOrder*  _zOrder;
 	float _itemSpeed;						//아이템의 속도
 	float _gravity;							//중력
-	float _itemZ;							//item의 z값
 
 
 public:
     int enterNum;
     int exitNum;
 	
+	Player* player;
+	
+	float _itemZ;							//item의 z값
+	
+	bool _throwDir;
 	bool _leftThrowItem;					//왼쪽으로 아이템을 던졌을때
 	bool _rightThrowItem;					//오른쪽으로 아이템을 던졌을떄
 
@@ -32,11 +37,6 @@ public:
     virtual void OnTriggerEnter(GameObject* gameObject);				//오브젝트의 박스콜라이더가 겹쳐짐이 시작될때 호출
     virtual void OnTriggerExit(GameObject* gameObject);					//오브젝트의 박스콜라이더가 겹쳐짐이 끝날때 호출
 
-	virtual void ItemLeftMove();										//왼쪽으로 이동하는 아이템 move값
-	virtual void ItemRightMove();										//오른쪽으로 이동하는 아이템 move값
-
-	virtual void ItemRangeOutLeftMove();								//아이템이 카메라 범위 초과시 "left로 이동
-	virtual void ItemRangeOutRightMove();								//아이템이 카메라 범위 초과시 "rgiht"로 이동
-
+	void Throw(bool dir);
 };
 

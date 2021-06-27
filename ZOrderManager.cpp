@@ -20,7 +20,7 @@ void ZOrderManager::release()
 }
 
 bool CompareBottom(ZOrder* rendererA, ZOrder* rendererB) {
-	return rendererA->GetY() < rendererB->GetY();
+	return rendererA->GetZ() < rendererB->GetZ();
 }
 void ZOrderManager::Update()
 {
