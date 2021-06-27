@@ -62,8 +62,8 @@ void PlayerJumpState::Update(Player * player)
 		}
 		else
 		{
-			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-			player->ground->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+			player->transform->MoveX(-player->GetSpeed()*1.5f*TIMEMANAGER->getElapsedTime());
+			player->ground->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
 
 		}
 	}

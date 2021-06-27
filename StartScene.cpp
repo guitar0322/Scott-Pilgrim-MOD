@@ -16,15 +16,8 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {
     Scene::Init();
-    _mapWidth = 21206;
-    _mapHeight = 680;
-    MainCam->SetMapSize(_mapWidth, _mapHeight);
-    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    MainCam->SetRenderHeight(568);
-    MainCam->SetMapSize(21206, 680);
-    SetBackBufferSize(_mapWidth, _mapHeight);
-    //위에는 건들지 마시오
 
+    //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
     //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
@@ -57,15 +50,6 @@ HRESULT StartScene::Init()
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
-    wall[0] = new WallObj();
-    wall[0]->Init(0, 300, 1000, 300);
-
-    wall[1] = new WallObj();
-    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
-
-    wall[2] = new WallObj();
-    wall[2]->Init(800, 200, 1000, 300);
-
     testGround = new GameObject();
     testGround->AddComponent(new Ground());
     testGround->GetComponent<Ground>()->Init();
@@ -88,6 +72,7 @@ HRESULT StartScene::Init()
     doberman->ground->enable = false;
     
     BackgroundInit();
+    WallInit();
     return S_OK;
 }
 
@@ -146,9 +131,28 @@ void StartScene::BackgroundInit()
     }
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
-    BGMANAGER->SetPlayer(character);
+    BGMANAGER->SetPlayer(character->transform);
 }
 
 void StartScene::CameraInit()
 {
+    _mapWidth = 21206;
+    _mapHeight = 680;
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
+}
+
+void StartScene::WallInit()
+{
+    wall[0] = new WallObj();
+    wall[0]->Init(0, 300, 1000, 300);
+
+    wall[1] = new WallObj();
+    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
+
+    wall[2] = new WallObj();
+    wall[2]->Init(800, 200, 1000, 300);
 }

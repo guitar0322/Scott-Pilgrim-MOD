@@ -160,7 +160,6 @@
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Controler.h" />
     <ClInclude Include="Doberman.h" />
     <ClInclude Include="Dobermanidlestate.h" />
     <ClInclude Include="Dobermanstate.h" />
@@ -215,7 +214,6 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="TriggerTest.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="UIRenderer.h" />
     <ClInclude Include="utils.h" />
@@ -239,7 +237,6 @@
     <ClCompile Include="ClipManager.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Controler.cpp" />
     <ClCompile Include="Doberman.cpp" />
     <ClCompile Include="Dobermanidlestate.cpp" />
     <ClCompile Include="Dobermanstate.cpp" />
@@ -295,7 +292,6 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="TriggerTest.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="UIRenderer.cpp" />
     <ClCompile Include="utils.cpp" />

@@ -29,6 +29,8 @@ public:
     void SetAlpha(int alpha) { this->_alpha = alpha; blendFunc.SourceConstantAlpha = alpha;}//알파값 설정
     void Resize(int objWidth, int objHeight);//렌더러 DC영역 크기를 재조정
     void SetTransColor(COLORREF transColor) { _transColor = transColor; }
+    int GetWidth() const { return _width; }
+    int GetHeight() const { return _height; }
     RECT GetRc() { return rc; }
 };
 
