@@ -40,6 +40,12 @@ private:
 	AnimationClip attack4Left;
 	AnimationClip kickAttackRight;
 	AnimationClip kickAttackLeft;
+	AnimationClip kickSkillRight;
+	AnimationClip kickSkillLeft;
+	AnimationClip walkJumpKickRight;
+	AnimationClip walkJumpKickLeft;
+	AnimationClip runJumpKickRight;
+	AnimationClip runJumpKickLeft;
 	AnimationClip shieldRight;
 	AnimationClip shieldLeft;
 
@@ -55,8 +61,9 @@ public:
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분
 	bool groundZCheck;	//Z축 그라운드 체크 구분
-	bool dash;			//뛰는 거 구분
-	bool block;		//막기 구분
+	bool isRun;			//뛰는 거 구분
+	bool runKeyPress;	//키 더블했는지
+	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	
 	bool attackChange;
@@ -64,6 +71,7 @@ public:
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float _friction;		//마찰
 
+	RECT playerBoxCheckRc;
 
 	void InputHandle();
 	virtual void Init();

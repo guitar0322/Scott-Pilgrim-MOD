@@ -69,7 +69,7 @@ void PlayerRunState::Update(Player * player)
 {
 	if (player->dir == false)
 	{
-		player->transform->MoveX(player->GetSpeed() *2* TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		player->ground->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 	else

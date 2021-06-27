@@ -9,6 +9,7 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 	if (intersectHeight != 0)
 	{
 		player->groundCheck = true;
+
 		player->transform->MoveY(-intersectHeight);
 		return new PlayerGroundState();
 	}
@@ -18,30 +19,33 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 
 void PlayerFallState::Update(Player * player)
 {
+	//중력값을 올려서 좀 더 빨리 떨어지는 효과를 보여줌
 	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime() * 4.5;
 
 	player->transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->transform->MoveX(player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->transform->MoveX(-player->GetSpeed()*0.6*TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->ground->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->ground->MoveY(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveZ(-player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->ground->MoveY(player->GetSpeed()*0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveZ(player->GetSpeed()* 0.6 * TIMEMANAGER->getElapsedTime());
+		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
@@ -59,6 +63,7 @@ void PlayerFallState::Update(Player * player)
 void PlayerFallState::Enter(Player * player)
 {
 	_speedY = 0;
+
 	if (player->dir == false)
 	{
 		player->ChangeClip("fall_right", false);

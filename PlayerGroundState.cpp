@@ -9,11 +9,17 @@ PlayerState * PlayerGroundState::InputHandle(Player * player)
 	{
 		player->jumpZ = false;
 		player->groundZCheck = false;
+
+
 		return new PlayerIdleState();
 	}
 
-	if (player->groundCheck == true && _jumpTime >= 0.7f) {
+	if (player->groundCheck == true && _jumpTime >= 0.7f) 
+	{
+		player->jumpZ = false;
 		player->groundCheck = false;
+
+
 		return new PlayerIdleState();
 	}
 
@@ -28,7 +34,10 @@ void PlayerGroundState::Update(Player * player)
 void PlayerGroundState::Enter(Player * player)
 {
 	_jumpTime = 0;
-	player->dash = false;
+	player->isRun = false;
+	player->runKeyPress = false;
+
+
 	if (player->dir == false)
 	{
 		player->ChangeClip("ground_right", false);

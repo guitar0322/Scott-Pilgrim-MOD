@@ -44,7 +44,6 @@
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerKickAttackState.cpp" />
     <ClCompile Include="PlayerRunState.cpp" />
-    <ClCompile Include="PlayerShieldState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="PlayerZorderJumpState.cpp" />
@@ -73,6 +72,9 @@
     <ClCompile Include="Zone.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="ZOrderManager.cpp" />
+    <ClCompile Include="PlayerBlockState.cpp" />
+    <ClCompile Include="PlayerKickSkillState.cpp" />
+    <ClCompile Include="PlayerJumpKickState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -119,7 +121,6 @@
     <ClInclude Include="PlayerJumpState.h" />
     <ClInclude Include="PlayerKickAttackState.h" />
     <ClInclude Include="PlayerRunState.h" />
-    <ClInclude Include="PlayerShieldState.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="PlayerZorderJumpState.h" />
@@ -151,6 +152,9 @@
     <ClInclude Include="Zone.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="ZOrderManager.h" />
+    <ClInclude Include="PlayerBlockState.h" />
+    <ClInclude Include="PlayerKickSkillState.h" />
+    <ClInclude Include="PlayerJumpKickState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
