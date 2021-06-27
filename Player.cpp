@@ -20,12 +20,13 @@ void Player::Init()
 	ground = gameObject->GetComponent<Ground>();
 	zOrder = gameObject->GetComponent<ZOrder>();
 	ClipInit();
-	_speed = 80;							//플레이어 속도
-	_gravity = 90;							//플레이어 중력 (점프 후 중력값)
+	_speed = 48;							//플레이어 속도
+	_gravity = 200;							//플레이어 중력 (점프 후 중력값)
 	_friction = 130;						//플레이어 마찰 (런뛰고 미끄러질 때)
 	dir = false;							//좌우 확인 용
 	dirZ = false;							//Z축 확인용
-	dash = false;							//뛰는 지 확인용
+	isRun = false;
+	runKeyPress = false;
 	jumpZ = false;							//Z축 점프 확인용
 	block = false;							//막기 확인용
 	groundCheck = false;					//플레이어 그라운드 착지 확인용
@@ -38,13 +39,15 @@ void Player::Init()
 	_enterNum = 0;
 	_exitNum = 0;
 	_isCatch = false;
+
+
 }
 
 void Player::Update()
 {
 	InputHandle();
 	_state->Update(this);
-	if (dash == true)
+	if (runKeyPress == true)
 		runDelay += TIMEMANAGER->getElapsedTime();
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
@@ -67,6 +70,18 @@ void Player::Update()
 
 void Player::Render()
 {
+	/*HPEN hPen, oPen;
+	HBRUSH hBrush, oBrush;
+
+	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
+	hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
+	oPen = (HPEN)SelectObject(BackBuffer, hPen);
+	Rectangle(BackBuffer, playerBoxCheckRc);
+	SelectObject(BackBuffer, oPen);
+	SelectObject(BackBuffer, oBrush);
+	DeleteObject(hPen);
+	DeleteObject(hBrush);*/
 }
 
 void Player::ChangeClip(string clipName, bool isInitFrame)
@@ -79,12 +94,14 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 	{
 		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
+
+	
 }
 
 void Player::ClipInit()
 {
-	idleRight.Init("player/idle_right.bmp", 944, 134, 8, 0.20f);
-	idleLeft.Init("player/idle_left.bmp", 944, 134, 8, 0.20f);
+	idleRight.Init("player/idle_right.bmp", 640, 122, 8, 0.20f);
+	idleLeft.Init("player/idle_left.bmp", 640, 122, 8, 0.20f);
 	walkRight.Init("player/walk_right.bmp", 456, 128, 6, 0.25f);
 	walkLeft.Init("player/walk_left.bmp", 456, 128, 6, 0.25f);
 	runRight.Init("player/run_right.bmp", 864, 126, 8, 0.17f);
@@ -97,24 +114,39 @@ void Player::ClipInit()
 	fallRight.isLoop = false;
 	fallLeft.Init("player/fall_left.bmp", 490, 144, 5, 0.15f);
 	fallLeft.isLoop = false;
-	jumpZorderRight.Init("player/jumpZorder_right.bmp", 882, 144, 9, 0.08f);
+	jumpZorderRight.Init("player/jump_Zorder_right.bmp", 882, 144, 9, 0.08f);
 	jumpZorderRight.isLoop = false;
-	jumpZorderLeft.Init("player/jumpZorder_left.bmp", 882, 144, 9, 0.08f);
+	jumpZorderLeft.Init("player/jump_Zorder_left.bmp", 882, 144, 9, 0.08f);
 	jumpZorderLeft.isLoop = false;
 	groundRight.Init("player/ground_right.bmp", 98, 144, 1, 0.10f);
 	groundRight.isLoop = false;
 	groundLeft.Init("player/ground_left.bmp", 98, 144, 1, 0.10f);
 	groundLeft.isLoop = false;
 
-	shieldRight.Init("player/shield_right.bmp", 532, 126, 7, 0.22f);
+	shieldRight.Init("player/block_right.bmp", 532, 126, 7, 0.22f);
 	shieldRight.isLoop = false;
-	shieldLeft.Init("player/shield_left.bmp", 532, 126, 7, 0.22f);
+	shieldLeft.Init("player/block_left.bmp", 532, 126, 7, 0.22f);
 	shieldLeft.isLoop = false;
 
-	kickAttackRight.Init("player/kickAttack_right.bmp", 896, 126, 7, 0.15f);
+	kickAttackRight.Init("player/kick_attack_right.bmp", 896, 126, 7, 0.15f);
 	kickAttackRight.isLoop = false;
-	kickAttackLeft.Init("player/kickAttack_left.bmp", 896, 126, 7, 0.15f);
+	kickAttackLeft.Init("player/kick_attack_left.bmp", 896, 126, 7, 0.15f);
 	kickAttackLeft.isLoop = false;
+	kickSkillRight.Init("player/kick_skill_right.bmp", 7958, 152, 23, 0.1f);
+	kickSkillRight.isLoop = false;
+	kickSkillLeft.Init("player/kick_skill_left.bmp", 7958, 152, 23, 0.1f);
+	kickSkillLeft.isLoop = false;
+
+	walkJumpKickRight.Init("player/walk_jump_kick_right.bmp", 980, 106, 7, 0.1f);
+	walkJumpKickRight.isLoop = false;
+	walkJumpKickLeft.Init("player/walk_jump_kick_left.bmp", 980, 106, 7, 0.1f);
+	walkJumpKickLeft.isLoop = false;
+	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickRight.isLoop = false;
+	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickLeft.isLoop = false;
+
+
 
 
 	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);
@@ -148,17 +180,22 @@ void Player::ClipInit()
 	animator->AddClip("jump_left", &jumpLeft);
 	animator->AddClip("fall_right", &fallRight);
 	animator->AddClip("fall_left", &fallLeft);
-	animator->AddClip("jumpZorder_right", &jumpZorderRight);
-	animator->AddClip("jumpZorder_left", &jumpZorderLeft);
+	animator->AddClip("jump_Zorder_right", &jumpZorderRight);
+	animator->AddClip("jump_Zorder_left", &jumpZorderLeft);
 	animator->AddClip("ground_right", &groundRight);
 	animator->AddClip("ground_left", &groundLeft);
 
-	animator->AddClip("shield_right", &shieldRight);
-	animator->AddClip("shield_left", &shieldLeft);
+	animator->AddClip("block_right", &shieldRight);
+	animator->AddClip("block_left", &shieldLeft);
 
-	animator->AddClip("kickAttack_right", &kickAttackRight);
-	animator->AddClip("kickAttack_left", &kickAttackLeft);
-
+	animator->AddClip("kick_attack_right", &kickAttackRight);
+	animator->AddClip("kick_attack_left", &kickAttackLeft);
+	animator->AddClip("kick_skill_right", &kickSkillRight);
+	animator->AddClip("kick_skill_left", &kickSkillLeft);
+	animator->AddClip("walk_jump_kick_right", &walkJumpKickRight);
+	animator->AddClip("walk_jump_kick_left", &walkJumpKickLeft);
+	animator->AddClip("run_jump_kick_right", &runJumpKickRight);
+	animator->AddClip("run_jump_kick_left", &runJumpKickLeft);
 
 	animator->AddClip("attack1_right", &attack1Right);
 	animator->AddClip("attack2_right", &attack2Right);
@@ -168,9 +205,6 @@ void Player::ClipInit()
 	animator->AddClip("attack2_left", &attack2Left);
 	animator->AddClip("attack3_left", &attack3Left);
 	animator->AddClip("attack4_left", &attack4Left);
-
-
-
 
 
 }

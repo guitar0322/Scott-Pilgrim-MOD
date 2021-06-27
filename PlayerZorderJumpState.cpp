@@ -38,16 +38,16 @@ void PlayerZorderJumpState::Update(Player * player)
 
 void PlayerZorderJumpState::Enter(Player * player)
 {
-	_jumpPower = 80;
-	_speedZ = 100;
+	_jumpPower = 150;
+	_speedZ = 70;
 
 	if (player->dir == false)
 	{
-		player->ChangeClip("jumpZorder_right", false);
+		player->ChangeClip("jump_Zorder_right", false);
 	}
 	else
 	{
-		player->ChangeClip("jumpZorder_left", false);
+		player->ChangeClip("jump_Zorder_left", false);
 	}
 }
 

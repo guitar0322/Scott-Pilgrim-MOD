@@ -8,7 +8,6 @@ private:
 public:
 	int frame;
 	int x, y;
-	Cam _mainCams;
 	UIBase _ui;
 	Text text;
 	GameObject particleObj;

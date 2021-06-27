@@ -16,15 +16,13 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {
     Scene::Init();
-    _mapWidth = 21206;
-    _mapHeight = 680;
-    MainCam->SetMapSize(_mapWidth, _mapHeight);
-    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
-    MainCam->SetRenderHeight(568);
-    MainCam->SetMapSize(21206, 680);
-    SetBackBufferSize(_mapWidth, _mapHeight);
-    //위에는 건들지 마시오
+    CameraInit();
+    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    sceneInfoLoader.LoadObjectInfo();
+    //_objectV[0]->GetComponent<Renderer>()->SetAlphaMode(true, 125);
+    //_objectV[0]->GetComponent<Renderer>()->SetScale(3.f, 3.f);
 
+    //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
     //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
@@ -57,7 +55,7 @@ HRESULT StartScene::Init()
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
-   wall[0] = new WallObj();
+    wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
     wall[1] = new WallObj();
     wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
@@ -79,6 +77,7 @@ HRESULT StartScene::Init()
     enemy = new Luke();
     
     BackgroundInit();
+    WallInit();
     return S_OK;
 }
 
@@ -89,6 +88,13 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
+
+    //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+    //    character->transform->MoveX(15);
+    //}
+    for (int i = 0; i < _objectV.size(); i++) {
+        _objectV[i]->Update();
+    }
     mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
     testGround->Update();
 	trashBox->Update();
@@ -104,6 +110,9 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
+    for (int i = 0; i < _objectV.size(); i++) {
+        _objectV[i]->Render();
+    }
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
@@ -117,10 +126,12 @@ void StartScene::Render()
 
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
-    TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
-    TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 40, debug[1], strlen(debug[1]));
-    TextOut(_backBuffer->getMemDC(), mainCam->transform->GetX() - 300, 60, debug[2], strlen(debug[2]));
+    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
+    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 40, debug[1], strlen(debug[1]));
+    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 60, debug[2], strlen(debug[2]));
     mainCam->camera->Render(_hdc);
+
+
 }
 
 void StartScene::BackgroundInit()
@@ -136,9 +147,28 @@ void StartScene::BackgroundInit()
     }
 	BGMANAGER->SetMargin(30);
 	BGMANAGER->SetBackgroundWidth(922);
-    BGMANAGER->SetPlayer(character);
+    BGMANAGER->SetPlayer(character->transform);
 }
 
 void StartScene::CameraInit()
 {
+    _mapWidth = 21206;
+    _mapHeight = 680;
+    MainCam->SetMapSize(_mapWidth, _mapHeight);
+    MainCam->transform->SetPosition(WINSIZEX / 2, 568 / 2);
+    MainCam->SetRenderHeight(568);
+    MainCam->SetMapSize(21206, 680);
+    SetBackBufferSize(_mapWidth, _mapHeight);
+}
+
+void StartScene::WallInit()
+{
+    wall[0] = new WallObj();
+    wall[0]->Init(0, 300, 1000, 300);
+
+    wall[1] = new WallObj();
+    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
+
+    wall[2] = new WallObj();
+    wall[2]->Init(800, 200, 1000, 300);
 }
