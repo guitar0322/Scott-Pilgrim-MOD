@@ -5,9 +5,6 @@ void Item::Init()
 {
 	_animator = gameObject->GetComponent<Animator>();
 	_zorder = gameObject->GetComponent<ZOrder>();
-
-	enterNum = 0;
-	exitNum = 0;
 	
 	//_itemSpeed = 210.0f;
 	//_gravity = 110.0f;
@@ -65,21 +62,6 @@ void Item::SetItemImage(string imageName)
 	_animator->SetClip(imageName);
 }
 
-void Item::OnCollision(GameObject* gameObject)
-{
-	enterNum++;
-}
-
-void Item::OnTriggerEnter(GameObject* gameObject)
-{
-	enterNum++;
-}
-
-void Item::OnTriggerExit(GameObject* gameObject)
-{
-	exitNum++;
-}
-
 void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 {
 	throwDir = dir;					
@@ -89,7 +71,7 @@ void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 	_angle = PI / 4.2;
 
 	_moveX += cosf(_angle) * _itemSpeed;
-	_moveY += -sinf(_angle) * _itemSpeed + _gravity;
+	_moveY -= -sinf(_angle) * _itemSpeed + _gravity;
 
 	if (dir == false)				//right일때
 	{
