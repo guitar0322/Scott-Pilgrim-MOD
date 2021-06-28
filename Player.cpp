@@ -85,8 +85,6 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 	{
 		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
-
-	
 }
 
 void Player::ClipInit()
