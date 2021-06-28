@@ -12,7 +12,7 @@ private:
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
-<
+
 	
 	//float _friction;	//마찰
 
@@ -90,8 +90,6 @@ public:
 	bool twoHandImageChange; // 이미지 바꿔줄 것 인지
 
 	bool attackChange;
-	
-	bool isCatch;		//아이템 획득 유무
 	
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때

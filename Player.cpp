@@ -19,6 +19,7 @@ void Player::Init()
 	collider = gameObject->GetComponent<BoxCollider>();
 	ground = gameObject->GetComponent<Ground>();
 	zOrder = gameObject->GetComponent<ZOrder>();
+
 	ClipInit();
 	_speed = 48;							//플레이어 속도
 	_gravity = 200;							//플레이어 중력 (점프 후 중력값)
@@ -63,17 +64,17 @@ void Player::Update()
 
 	if (isCatch == false)
 	{
-		if (KEYMANAGER->isOnceKeyDown('I'))
-		{
-			PickItem();
-		}
+			if (KEYMANAGER->isOnceKeyDown('I'))
+			{
+				PickItem();
+			}
 	}
 	if (isCatch == true)
 	{
-		if (KEYMANAGER->isOnceKeyDown('I'))
-		{
-			PutItem();
-		}
+			if (KEYMANAGER->isOnceKeyDown('I'))
+			{
+				PutItem();
+			}
 	}
 
 	if(isCatch == true)
@@ -262,32 +263,36 @@ void Player::OnTriggerExit(GameObject * gameObject)
 
 void Player::PickItem()							// item 획득 했을때
 {
-	if (item != nullptr)
+	if (item != nullptr)						//enter 했을때 item은 값을 가진다
 	{
+		//isCatch = true;
+		//transform->AddChild(item->transform);
+		//item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
 
-		isCatch = true;						
-		transform->AddChild(item->transform);
-		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
-
-		if (transform->GetChildCount() == 0)
+		if (transform->GetChildCount() == 0)		//player가 자식이 없을때
 		{
-			transform->AddChild(item->transform);
-			item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+			isCatch = true;							//isCatch = true가 된다
+			transform->AddChild(item->transform);	//player는 item을 자식으로 가진다
+			if (!dir)
+			{
+				item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
+			}
+			if (dir)
+			{
+				item->transform->SetPosition(transform->GetX() + 30, transform->GetY() - 80);
+			}
 		}
-
 	}
 }
 
-void Player::PutItem()							//item을 놓았을때
+void Player::PutItem()								//item을 놓았을때
 {
-	if (item != nullptr)
+	if (item != nullptr)							//item이 값을 가지고 있을때
 	{
-		isCatch = false;
-		item->transform->DetachParent();
-
-		item->itemZ = this->zOrder->GetZ();
+		isCatch = false;							//isCatch == false가 되고
+		item->transform->DetachParent();			//item은 부모를 잃는다
+		item->itemZ = this->zOrder->GetZ();			//item의 z값은 player의 z값을 갖는다
 		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
-
-		item->Throw(dir);
+		item->Throw(dir);							//dir에 따른 throw
 	}	
 }

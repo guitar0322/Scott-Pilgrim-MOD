@@ -87,7 +87,7 @@ HRESULT StartScene::Init()
 	CLIPMANAGER->AddClip("luke_attack_left", "luke/luke_attack_left.bmp", 585, 64, 9, 0.20f);
 
 	// 210627 시영 추가 (Enemy Update)
-    enemy = new Luke();
+   /* enemy = new Luke();
 	enemy->transform->SetPosition(1200, 300);
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
@@ -108,7 +108,7 @@ HRESULT StartScene::Init()
 	matthew->collider->isTrigger = true;
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	matthew->GetComponent<Matthew>()->SetPlayer(character);*/
 
     BackgroundInit();
     WallInit();
@@ -137,11 +137,11 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
-	doberman->Update();
-	matthew->Update();
+	//doberman->Update();
+	//matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
-    enemy->Update();
+    //enemy->Update();
 }
 
 void StartScene::Render()
@@ -156,8 +156,8 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
-	doberman->Render();
-	matthew->Render();
+	//doberman->Render();
+	//matthew->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)

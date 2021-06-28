@@ -1,7 +1,6 @@
 #pragma once
 #include "Component.h"
 
-
 class Item :
     public Component
 {
@@ -11,11 +10,7 @@ private:
 ;
 	float _itemSpeed;						//아이템의 속도
 	float _gravity;							//중력
-	float _angle;							//각도			
-
-	float _moveX;
-	float _moveY;
-
+	float _angle;							//각도
 
 public:
 	
