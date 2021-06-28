@@ -11,6 +11,7 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 		player->groundCheck = true;
 
 		player->transform->MoveY(-intersectHeight);
+		player->onGround = true;
 		return new PlayerGroundState();
 	}
 
@@ -30,12 +31,12 @@ void PlayerFallState::Update(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->transform->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->transform->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))

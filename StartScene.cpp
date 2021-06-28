@@ -4,7 +4,8 @@
 #include "Player.h"
 #include "WallObj.h"
 #include "Wall.h"
-
+#include "Doberman.h"
+#include "Matthew.h"
 StartScene::StartScene()
 {
 }
@@ -66,6 +67,7 @@ HRESULT StartScene::Init()
     testGround->transform->SetPosition(500, 350);
     testGround->AddComponent(new ZOrder());
     testGround->GetComponent<ZOrder>()->Init();
+    testGround->GetComponent<ZOrder>()->SetZ(400);
     testGround->AddComponent(new Ground());
     testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
 
@@ -86,12 +88,28 @@ HRESULT StartScene::Init()
 
 	// 210627 시영 추가 (Enemy Update)
     enemy = new Luke();
-	enemy->transform->SetPosition(400, 300);
+	enemy->transform->SetPosition(1200, 300);
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
     
+    doberman = new Character();
+    doberman->Init();
+    doberman->transform->SetPosition(1200, 400);
+    doberman->collider->isTrigger = true;
+    doberman->AddComponent(new Doberman());
+    doberman->GetComponent<Doberman>()->Init();
+    doberman->GetComponent<Doberman>()->SetPlayer(character);
+
+	matthew = new Character();
+	matthew->Init();
+	matthew->transform->SetPosition(2000, 400);
+	matthew->collider->isTrigger = true;
+	matthew->AddComponent(new Matthew());
+	matthew->GetComponent<Matthew>()->Init();
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
+
     BackgroundInit();
     WallInit();
 
@@ -119,6 +137,8 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+	doberman->Update();
+	matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
@@ -136,6 +156,8 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
+	doberman->Render();
+	matthew->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)

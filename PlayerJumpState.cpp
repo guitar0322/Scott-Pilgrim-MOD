@@ -40,7 +40,7 @@ void PlayerJumpState::Update(Player * player)
 		}
 		else // 안 뒬 때 -> 점프
 		{
-			player->transform->MoveX(player->GetSpeed()*1.5f*TIMEMANAGER->getElapsedTime());
+			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		}
 		
 	}
@@ -52,7 +52,7 @@ void PlayerJumpState::Update(Player * player)
 		}
 		else
 		{
-			player->transform->MoveX(-player->GetSpeed()*1.5f*TIMEMANAGER->getElapsedTime());
+			player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
