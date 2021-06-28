@@ -5,6 +5,7 @@
 #include "WallObj.h"
 #include "Wall.h"
 #include "Doberman.h"
+#include "Matthew.h"
 StartScene::StartScene()
 {
 }
@@ -87,6 +88,15 @@ HRESULT StartScene::Init()
 	doberman->GetComponent<Doberman>()->SetPlayer(character);
     doberman->ground->enable = false;
     
+	matthew = new Character();
+	matthew->Init();
+	matthew->transform->SetPosition(2000, 400);
+	matthew->collider->isTrigger = true;
+	matthew->AddComponent(new Matthew());
+	matthew->GetComponent<Matthew>()->Init();
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	matthew->ground->enable = false;
+
     BackgroundInit();
     return S_OK;
 }
@@ -110,6 +120,7 @@ void StartScene::Update()
     ZORDER->Update();
     mainCam->Update();
 	doberman->Update();
+	matthew->Update();
 }
 
 void StartScene::Render()
@@ -122,6 +133,7 @@ void StartScene::Render()
     testGround->Render();
 	trashBox->Render();
 	doberman->Render();
+	matthew->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
