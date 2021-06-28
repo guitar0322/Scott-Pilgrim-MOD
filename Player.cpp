@@ -31,7 +31,6 @@ void Player::Init()
 	block = false;							//막기 확인용
 	groundCheck = false;					//플레이어 그라운드 착지 확인용
 	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
-	twoHandImageChange = false;
 
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
@@ -136,22 +135,6 @@ void Player::ClipInit()
 	runJumpKickRight.isLoop = false;
 	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.2f);
 	runJumpKickLeft.isLoop = false;
-
-
-	//두손 이미지
-	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
-	twoHandPickRight.isLoop = false;
-	twoHandPickLeft.Init("player/two_hand_pick_left.bmp", 192, 130, 2, 0.20f);
-	twoHandPickLeft.isLoop = false;
-	twoHandIdleRight.Init("player/two_hand_idle_right.bmp", 312, 120, 4, 0.20f);
-	twoHandIdleLeft.Init("player/two_hand_idle_left.bmp", 312, 120, 4, 0.20f);
-	twoHandWalkRight.Init("player/two_hand_walk_right.bmp", 468, 130, 6, 0.25f);
-	twoHandWalkLeft.Init("player/two_hand_walk_left.bmp", 468, 130, 6, 0.25f);
-	twoHandRunRight.Init("player/two_hand_run_right.bmp", 910, 120, 8, 0.17f);
-	twoHandRunLeft.Init("player/two_hand_run_left.bmp", 910, 120, 8, 0.17f);
-
-
-
 	//공격 이미지
 	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);
 	attack2Right.Init("player/attack2_right.bmp", 472, 134, 4, 0.1f);
@@ -172,6 +155,45 @@ void Player::ClipInit()
 	attack2Left.isLoop = false;
 	attack3Left.isLoop = false;
 	attack4Left.isLoop = false;
+
+
+	//두손 이미지
+	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
+	twoHandPickRight.isLoop = false;
+	twoHandPickLeft.Init("player/two_hand_pick_left.bmp", 192, 130, 2, 0.20f);
+	twoHandPickLeft.isLoop = false;
+	twoHandIdleRight.Init("player/two_hand_idle_right.bmp", 312, 120, 4, 0.20f);
+	twoHandIdleLeft.Init("player/two_hand_idle_left.bmp", 312, 120, 4, 0.20f);
+	twoHandWalkRight.Init("player/two_hand_walk_right.bmp", 468, 130, 6, 0.25f);
+	twoHandWalkLeft.Init("player/two_hand_walk_left.bmp", 468, 130, 6, 0.25f);
+	twoHandRunRight.Init("player/two_hand_run_right.bmp", 944, 120, 8, 0.17f);
+	twoHandRunLeft.Init("player/two_hand_run_left.bmp", 944, 120, 8, 0.17f);
+	twoHandJumpRight.Init("player/two_hand_jump_right.bmp", 658, 146, 7, 0.15f);
+	twoHandJumpRight.isLoop = false;
+	twoHandJumpLeft.Init("player/two_hand_jump_left.bmp", 658, 146, 7, 0.15f);
+	twoHandJumpLeft.isLoop = false;
+	twoHandFallRight.Init("player/two_hand_fall_right.bmp", 470, 146, 5, 0.15f);
+	twoHandFallRight.isLoop = false;
+	twoHandFallLeft.Init("player/two_hand_fall_left.bmp", 470, 146, 5, 0.15f);
+	twoHandFallLeft.isLoop = false;
+	twoHandGroundRight.Init("player/two_hand_ground_right.bmp", 94, 146, 1, 0.10f);
+	twoHandGroundRight.isLoop = false;
+	twoHandGroundLeft.Init("player/two_hand_ground_left.bmp", 94, 146, 1, 0.10f);
+	twoHandGroundLeft.isLoop = false;
+	twoHandZorderRight.Init("player/two_hand_Zorder_right.bmp", 768, 146, 8, 0.08f);
+	twoHandZorderRight.isLoop = false;
+	twoHandZorderLeft.Init("player/two_hand_Zorder_left.bmp", 768, 146, 8, 0.08f);
+	twoHandZorderLeft.isLoop = false;
+
+	twoHandWalkAttackRight.Init("player/two_hand_walk_attack_right.bmp", 938, 126, 7, 0.2f);
+	twoHandWalkAttackRight.isLoop = false;
+	twoHandWalkAttackLeft.Init("player/two_hand_walk_attack_left.bmp", 938, 126, 7, 0.2f);
+	twoHandWalkAttackLeft.isLoop = false;
+	twoHandRunAttackRight.Init("player/two_hand_run_attack_right.bmp", 756, 138, 6, 0.15f);
+	twoHandRunAttackRight.isLoop = false;
+	twoHandRunAttackLeft.Init("player/two_hand_run_attack_left.bmp", 756, 138, 6, 0.15f);
+	twoHandRunAttackLeft.isLoop = false;
+
 
 
 	animator->AddClip("idle_right", &idleRight);
@@ -220,6 +242,18 @@ void Player::ClipInit()
 	animator->AddClip("two_hand_walk_left", &twoHandWalkLeft);
 	animator->AddClip("two_hand_run_right", &twoHandRunRight);
 	animator->AddClip("two_hand_run_left", &twoHandRunLeft);
+	animator->AddClip("two_hand_jump_right", &twoHandJumpRight);
+	animator->AddClip("two_hand_jump_left", &twoHandJumpLeft);
+	animator->AddClip("two_hand_fall_right", &twoHandFallRight);
+	animator->AddClip("two_hand_fall_left", &twoHandFallLeft);
+	animator->AddClip("two_hand_ground_right", &twoHandGroundRight);
+	animator->AddClip("two_hand_ground_left", &twoHandGroundLeft);
+	animator->AddClip("two_hand_Zorder_right", &twoHandZorderRight);
+	animator->AddClip("two_hand_Zorder_left", &twoHandZorderLeft);
+	animator->AddClip("two_hand_walk_attack_right", &twoHandWalkAttackRight);
+	animator->AddClip("two_hand_walk_attack_left", &twoHandWalkAttackLeft);
+	animator->AddClip("two_hand_run_attack_right", &twoHandRunAttackRight);
+	animator->AddClip("two_hand_run_attack_left", &twoHandRunAttackLeft);
 
 	animator->AddTransaction("pickup_to_pickup_idle_right", &twoHandPickRight, &twoHandIdleRight);
 	animator->AddTransaction("pickup_to_pickup_idle_left", &twoHandPickLeft, &twoHandIdleLeft);

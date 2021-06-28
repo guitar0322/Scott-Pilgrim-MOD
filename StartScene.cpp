@@ -54,7 +54,7 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-	character->renderer->SetScale(3.f, 3.f);
+	//character->renderer->SetScale(3.f, 3.f);
 
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
@@ -90,16 +90,10 @@ HRESULT StartScene::Init()
 	enemy->transform->SetPosition(400, 300);
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
-	enemy->zOrder->SetY(enemy->transform->GetY() + 132 / 2);
+	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
 
-	doberman = new Character();
-	doberman->Init();
-	doberman->transform->SetPosition(1200, 400);
-	doberman->collider->isTrigger = true;
-	doberman->AddComponent(new Doberman());
-	doberman->GetComponent<Doberman>()->Init();
-	doberman->GetComponent<Doberman>()->SetPlayer(character);
+	
     
     BackgroundInit();
     WallInit();

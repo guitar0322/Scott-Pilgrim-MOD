@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerState.h"
-class PlayerRunState :
+class PlayerTwoHandAttackState :
 	public PlayerState
 {
 

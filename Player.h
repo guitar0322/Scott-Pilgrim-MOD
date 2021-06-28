@@ -58,6 +58,18 @@ private:
 	AnimationClip twoHandWalkLeft;
 	AnimationClip twoHandRunRight;
 	AnimationClip twoHandRunLeft;
+	AnimationClip twoHandJumpRight;
+	AnimationClip twoHandJumpLeft;
+	AnimationClip twoHandFallRight;
+	AnimationClip twoHandFallLeft;
+	AnimationClip twoHandGroundRight;
+	AnimationClip twoHandGroundLeft;
+	AnimationClip twoHandZorderRight;
+	AnimationClip twoHandZorderLeft;
+	AnimationClip twoHandWalkAttackRight;
+	AnimationClip twoHandWalkAttackLeft;
+	AnimationClip twoHandRunAttackRight;
+	AnimationClip twoHandRunAttackLeft;
 
 
 
@@ -76,15 +88,11 @@ public:
 	bool isRun;			//뛰는 거 구분
 	bool runKeyPress;	//키 더블했는지
 
-	bool dash;			//뛰는 거 구분
-
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
-	bool twoHandImageChange; // 이미지 바꿔줄 것 인지
 
-	bool attackChange;
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float pickDelay;		//줍는 시간 딜레이
@@ -101,9 +109,9 @@ public:
 	void ChangeClip(string clipName, bool isInitFrame);
 	void ClipInit();
 
-	int GetSpeed() { return _speed; }
-	int GetGravity() { return _gravity; }
-	int GetFriction() { return friction; }
+	int GetSpeed() const { return _speed; }
+	int GetGravity() const { return _gravity; }
+	int GetFriction() const { return friction; }
 	virtual void OnTriggerEnter(GameObject* gameObject);
 	virtual void OnTriggerExit(GameObject* gameObject);
 

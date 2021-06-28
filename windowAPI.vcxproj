@@ -197,6 +197,7 @@
     <ClInclude Include="PlayerKickSkillState.h" />
     <ClInclude Include="PlayerRunState.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerTwoHandAttackState.h" />
     <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="PlayerZorderJumpState.h" />
     <ClInclude Include="playGround.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="PlayerKickSkillState.cpp" />
     <ClCompile Include="PlayerRunState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerTwoHandAttackState.cpp" />
     <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="PlayerZorderJumpState.cpp" />
     <ClCompile Include="playGround.cpp" />
