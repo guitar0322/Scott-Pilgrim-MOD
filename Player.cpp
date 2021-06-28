@@ -57,9 +57,6 @@ void Player::Update()
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 	if(isCatch == true)
 		pickDelay += TIMEMANAGER->getElapsedTime();
-
-
-	
 }
 
 void Player::Render()

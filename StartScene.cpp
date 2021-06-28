@@ -94,6 +94,14 @@ HRESULT StartScene::Init()
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
     
+    doberman = new Character();
+    doberman->Init();
+    doberman->transform->SetPosition(1200, 400);
+    doberman->collider->isTrigger = true;
+    doberman->AddComponent(new Doberman());
+    doberman->GetComponent<Doberman>()->Init();
+    doberman->GetComponent<Doberman>()->SetPlayer(character);
+
 	matthew = new Character();
 	matthew->Init();
 	matthew->transform->SetPosition(2000, 400);
