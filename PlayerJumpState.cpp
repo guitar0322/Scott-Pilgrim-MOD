@@ -52,7 +52,7 @@ void PlayerJumpState::Update(Player * player)
 		}
 		else
 		{
-			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
+			player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))

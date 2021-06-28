@@ -90,6 +90,7 @@ public:
 
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
+	bool onGround;
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
 
@@ -99,7 +100,7 @@ public:
 	float friction;			//마찰
 
 
-	RECT playerBoxCheckRc;
+	RECT groundCheckRc;
 
 	void InputHandle();
 	virtual void Init();

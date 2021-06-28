@@ -39,6 +39,7 @@ void Player::Init()
 	pickDelay = 0;
 	_enterNum = 0;
 	_exitNum = 0;
+	onGround = false;
 	isCatch = false;
 	isPick = false;
 }
@@ -46,6 +47,8 @@ void Player::Init()
 void Player::Update()
 {
 	InputHandle();
+	groundCheckRc = RectMakeCenter(transform->GetX(), transform->GetY() + collider->height / 2 + 5,
+		collider->width, 10);
 	_state->Update(this);
 	if (runKeyPress == true)
 		runDelay += TIMEMANAGER->getElapsedTime();
@@ -53,25 +56,25 @@ void Player::Update()
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 	if(isCatch == true)
 		pickDelay += TIMEMANAGER->getElapsedTime();
-
-
-	
 }
 
 void Player::Render()
 {
-	/*HPEN hPen, oPen;
-	HBRUSH hBrush, oBrush;
+	if (!KEYMANAGER->isToggleKey(VK_TAB)) 
+	{
+		HPEN hPen, oPen;
+		HBRUSH hBrush, oBrush;
 
-	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
-	hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
-	oPen = (HPEN)SelectObject(BackBuffer, hPen);
-	Rectangle(BackBuffer, playerBoxCheckRc);
-	SelectObject(BackBuffer, oPen);
-	SelectObject(BackBuffer, oBrush);
-	DeleteObject(hPen);
-	DeleteObject(hBrush);*/
+		hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
+		hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
+		oPen = (HPEN)SelectObject(BackBuffer, hPen);
+		Rectangle(BackBuffer, groundCheckRc);
+		SelectObject(BackBuffer, oPen);
+		SelectObject(BackBuffer, oBrush);
+		DeleteObject(hPen);
+		DeleteObject(hBrush);
+	}
 }
 
 void Player::ChangeClip(string clipName, bool isInitFrame)
@@ -84,8 +87,6 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 	{
 		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
-
-	
 }
 
 void Player::ClipInit()
@@ -273,10 +274,13 @@ void Player::OnTriggerExit(GameObject * gameObject)
 
 void Player::PickItem()							// item È¹µæ ÇßÀ»¶§
 {
-	if (item != nullptr)						
+	if (item != nullptr)
 	{
-		transform->AddChild(item->transform);
-		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+		if (transform->GetChildCount() == 0)
+		{
+			transform->AddChild(item->transform);
+			item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+		}
 	}
 }
 
