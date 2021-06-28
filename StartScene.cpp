@@ -55,7 +55,6 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-	character->renderer->SetScale(3.f, 3.f);
 
     testGround = new GameObject();
     testGround->AddComponent(new Ground());

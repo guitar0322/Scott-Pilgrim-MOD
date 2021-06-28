@@ -38,7 +38,7 @@ void Player::Init()
 	jumpDelay = 0;
 	_enterNum = 0;
 	_exitNum = 0;
-	_isCatch = false;
+	isCatch = false;
 
 }
 
@@ -51,14 +51,14 @@ void Player::Update()
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 
-	if (_isCatch == false)
+	if (isCatch == false)
 	{
 		if (KEYMANAGER->isOnceKeyDown('I'))
 		{
 			PickItem();
 		}
 	}
-	if (_isCatch == true)
+	if (isCatch == true)
 	{
 		if (KEYMANAGER->isOnceKeyDown('I'))
 		{
@@ -224,7 +224,7 @@ void Player::PickItem()							// item 획득 했을때
 {
 	if (item != nullptr)						
 	{
-		_isCatch = true;						
+		isCatch = true;						
 		transform->AddChild(item->transform);
 		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
 	}
@@ -234,10 +234,10 @@ void Player::PutItem()							//item을 놓았을때
 {
 	if (item != nullptr)
 	{
-		_isCatch = false;
+		isCatch = false;
 		item->transform->DetachParent();
 
-		item->_itemZ = this->zOrder->GetZ();
+		item->itemZ = this->zOrder->GetZ();
 		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
 
 		item->Throw(dir);
