@@ -8,7 +8,6 @@
 #include "PlayerFallState.h"
 #include "Player.h"
 
-
 PlayerState * PlayerWalkState::InputHandle(Player * player)
 {
 	if (KEYMANAGER->isOnceKeyDown('D')) {
@@ -56,8 +55,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		{
 			return new PlayerJumpState();
 		}
-
-
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
@@ -65,7 +62,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		{
 			player->attackChange = true; //2¹ø°ø°Ý
 			return new PlayerAttackState();
-
 		}
 		else
 		{
@@ -78,7 +74,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		if (player->dir == false)
 		{
 			return new PlayerKickAttackState();
-
 		}
 		else
 		{
@@ -86,10 +81,11 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		}
 	}
 
-	/*if (GROUNDMANAGER->CheckGround(player->playerBoxCheckRc) == 0)
+	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
 	{
+		player->onGround = false;
 		return new PlayerFallState();
-	}*/
+	}
 
 	return nullptr;
 }

@@ -200,13 +200,27 @@
     <ClCompile Include="PlayerKickSkillState.cpp">
       <Filter>PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyAI.cpp" />
-    <ClCompile Include="EnemyInfo.cpp" />
-    <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeAttackState.cpp" />
-    <ClCompile Include="LukeIdleState.cpp" />
-    <ClCompile Include="LukeRunState.cpp" />
+    <ClCompile Include="LukeAttackState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeIdleState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeRunState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Luke.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAI.cpp">
+      <Filter>Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInfo.cpp">
+      <Filter>Component\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectManager.h">
@@ -416,13 +430,27 @@
     <ClInclude Include="PlayerKickSkillState.h">
       <Filter>PlayerState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyAI.h" />
-    <ClInclude Include="EnemyInfo.h" />
-    <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeAttackState.h" />
-    <ClInclude Include="LukeIdleState.h" />
-    <ClInclude Include="LukeRunState.h" />
+    <ClInclude Include="LukeAttackState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeIdleState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeRunState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Luke.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAI.h">
+      <Filter>Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInfo.h">
+      <Filter>Component\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
@@ -467,6 +495,12 @@
     </Filter>
     <Filter Include="Component\Common">
       <UniqueIdentifier>{7dd67849-6cce-4557-8951-bba5e3601485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyState\Luke">
+      <UniqueIdentifier>{6df51c3f-b629-42b6-b817-b146501a13f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Enemy">
+      <UniqueIdentifier>{7d6c3acd-d20c-4035-8f5d-68e0e3b8cbfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

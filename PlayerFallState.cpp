@@ -11,6 +11,7 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 		player->groundCheck = true;
 
 		player->transform->MoveY(-intersectHeight);
+		player->onGround = true;
 		return new PlayerGroundState();
 	}
 

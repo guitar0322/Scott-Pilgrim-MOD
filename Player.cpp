@@ -39,12 +39,14 @@ void Player::Init()
 	_enterNum = 0;
 	_exitNum = 0;
 	_isCatch = false;
-
+	onGround = false;
 }
 
 void Player::Update()
 {
 	InputHandle();
+	groundCheckRc = RectMakeCenter(transform->GetX(), transform->GetY() + collider->height / 2 + 5,
+		collider->width, 10);
 	_state->Update(this);
 	if (runKeyPress == true)
 		runDelay += TIMEMANAGER->getElapsedTime();
@@ -69,18 +71,21 @@ void Player::Update()
 
 void Player::Render()
 {
-	/*HPEN hPen, oPen;
-	HBRUSH hBrush, oBrush;
+	if (!KEYMANAGER->isToggleKey(VK_TAB)) 
+	{
+		HPEN hPen, oPen;
+		HBRUSH hBrush, oBrush;
 
-	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
-	hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
-	oPen = (HPEN)SelectObject(BackBuffer, hPen);
-	Rectangle(BackBuffer, playerBoxCheckRc);
-	SelectObject(BackBuffer, oPen);
-	SelectObject(BackBuffer, oBrush);
-	DeleteObject(hPen);
-	DeleteObject(hBrush);*/
+		hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
+		hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
+		oPen = (HPEN)SelectObject(BackBuffer, hPen);
+		Rectangle(BackBuffer, groundCheckRc);
+		SelectObject(BackBuffer, oPen);
+		SelectObject(BackBuffer, oBrush);
+		DeleteObject(hPen);
+		DeleteObject(hBrush);
+	}
 }
 
 void Player::ChangeClip(string clipName, bool isInitFrame)

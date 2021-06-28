@@ -72,12 +72,14 @@ public:
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	
+	bool onGround;
+
 	bool attackChange;
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float _friction;		//마찰
 
-	RECT playerBoxCheckRc;
+	RECT groundCheckRc;
 
 	void InputHandle();
 	virtual void Init();
