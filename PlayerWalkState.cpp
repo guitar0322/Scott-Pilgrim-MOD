@@ -100,23 +100,19 @@ void PlayerWalkState::Update(Player * player)
 	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false) 
 	{
 		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
 		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
 		player->runKeyPress = false;
-		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		player->runKeyPress = false;
-		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 

@@ -25,6 +25,13 @@
 #include "DebugText.h"
 #include <typeinfo>
 
+// 210625 시영 Enemy 작업 관련 include
+#include "Enemy.h"
+#include "EnemyAI.h"
+#include "EnemyInfo.h"
+#include "EnemyState.h"
+#include "Luke.h"
+
 typedef RECT ELLIPSE;
 typedef struct tagPOINTF {
 	float x;

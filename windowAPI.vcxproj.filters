@@ -64,12 +64,6 @@
     <ClCompile Include="EnemyState.cpp">
       <Filter>EnemyState</Filter>
     </ClCompile>
-    <ClCompile Include="Dobermanidlestate.cpp">
-      <Filter>EnemyState</Filter>
-    </ClCompile>
-    <ClCompile Include="Dobermanstate.cpp">
-      <Filter>EnemyState</Filter>
-    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -161,12 +155,6 @@
     <ClCompile Include="Zone.cpp">
       <Filter>GameObject\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Doberman.cpp">
-      <Filter>GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy2.cpp">
-      <Filter>GameObject\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Component\Common</Filter>
     </ClCompile>
@@ -212,6 +200,13 @@
     <ClCompile Include="PlayerKickSkillState.cpp">
       <Filter>PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAI.cpp" />
+    <ClCompile Include="EnemyInfo.cpp" />
+    <ClCompile Include="Luke.cpp" />
+    <ClCompile Include="LukeAttackState.cpp" />
+    <ClCompile Include="LukeIdleState.cpp" />
+    <ClCompile Include="LukeRunState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectManager.h">
@@ -275,12 +270,6 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="EnemyState.h">
-      <Filter>EnemyState</Filter>
-    </ClInclude>
-    <ClInclude Include="Dobermanidlestate.h">
-      <Filter>EnemyState</Filter>
-    </ClInclude>
-    <ClInclude Include="Dobermanstate.h">
       <Filter>EnemyState</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
@@ -380,12 +369,6 @@
     <ClInclude Include="Zone.h">
       <Filter>GameObject\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Doberman.h">
-      <Filter>GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy2.h">
-      <Filter>GameObject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Component\Common</Filter>
     </ClInclude>
@@ -433,6 +416,13 @@
     <ClInclude Include="PlayerKickSkillState.h">
       <Filter>PlayerState</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAI.h" />
+    <ClInclude Include="EnemyInfo.h" />
+    <ClInclude Include="Luke.h" />
+    <ClInclude Include="LukeAttackState.h" />
+    <ClInclude Include="LukeIdleState.h" />
+    <ClInclude Include="LukeRunState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

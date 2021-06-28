@@ -18,11 +18,12 @@ public:
     Box* box;
     ImageObject* imageObj;
     Character* character;
-	Character* doberman;
 	GameObject* player;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
 	ItemObject* trashBox;
+    // 210627 시영 추가 (Enemy 동적할당)
+    Enemy* enemy;
 
     virtual HRESULT Init();
     virtual void Release();

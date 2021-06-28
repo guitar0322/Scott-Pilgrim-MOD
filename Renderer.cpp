@@ -55,7 +55,7 @@ void Renderer::Init()
 	blendFunc.BlendFlags = 0;
 	blendFunc.AlphaFormat = 0;
 	blendFunc.SourceConstantAlpha = _alpha;
-	rc = RectMakeCenter(this->transform->GetX(), transform->GetY(),
+	rc = RectMakeCenter(transform->GetX(), transform->GetY(),
 		_width, _height);
 	ReleaseDC(_hWnd, hdc);
 	_transColor = RGB(255, 0, 255);

@@ -9,6 +9,7 @@ void Ground::Init()
 	_deltaY = 0;
 	_x = gameObject->transform->GetX();
 	_y = gameObject->transform->GetY();
+	_z = gameObject->GetComponent<ZOrder>()->GetZ();
 	GROUNDMANAGER->AddGround(this);
 }
 
@@ -20,6 +21,7 @@ void Ground::Init(int width, int height, int deltaX, int deltaY)
 	_deltaY = deltaY;
 	_x = gameObject->transform->GetX() + _deltaX;
 	_y = gameObject->transform->GetY() + _deltaY;
+	_z = gameObject->GetComponent<ZOrder>()->GetZ();
 	GROUNDMANAGER->AddGround(this);
 }
 

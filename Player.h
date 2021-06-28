@@ -8,10 +8,10 @@ class Player :
 private:
 	float _speed;		//플레이어 속도
 	float _gravity;		//중력
+//	float _itemZ;		//item의z값을 넣어주기 위한 변수
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
-	//float _friction;	//마찰
 
 	PlayerState* _state;
 
@@ -67,12 +67,17 @@ public:
 	Animator* animator;
 	ZOrder* zOrder;
 	Item* item;
+
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool groundCheck;	//그라운드 체크 구분
 	bool groundZCheck;	//Z축 그라운드 체크 구분
+
 	bool isRun;			//뛰는 거 구분
 	bool runKeyPress;	//키 더블했는지
+
+	bool dash;			//뛰는 거 구분
+
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
 	bool isCatch;		//아이템을 획득 유무 
@@ -99,7 +104,6 @@ public:
 	int GetSpeed() { return _speed; }
 	int GetGravity() { return _gravity; }
 	int GetFriction() { return friction; }
-
 	virtual void OnTriggerEnter(GameObject* gameObject);
 	virtual void OnTriggerExit(GameObject* gameObject);
 
