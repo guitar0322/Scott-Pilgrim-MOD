@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "StartScene.h"
-
+#include "Item.h"
+#include "Player.h"
+#include "WallObj.h"
+#include "Wall.h"
+#include "Doberman.h"
+#include "Matthew.h"
 StartScene::StartScene()
 {
 }
@@ -89,6 +94,14 @@ HRESULT StartScene::Init()
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
     
+	matthew = new Character();
+	matthew->Init();
+	matthew->transform->SetPosition(2000, 400);
+	matthew->collider->isTrigger = true;
+	matthew->AddComponent(new Matthew());
+	matthew->GetComponent<Matthew>()->Init();
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
+
     BackgroundInit();
     WallInit();
 
@@ -116,6 +129,8 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
+	doberman->Update();
+	matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
@@ -133,6 +148,8 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
+	doberman->Render();
+	matthew->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)

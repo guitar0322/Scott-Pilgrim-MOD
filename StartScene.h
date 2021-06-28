@@ -18,7 +18,8 @@ public:
     Box* box;
     ImageObject* imageObj;
     Character* character;
-    Character* doberman;
+	Character* doberman;
+	Character* matthew;
 	GameObject* player;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
