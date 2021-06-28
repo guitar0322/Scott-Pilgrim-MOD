@@ -1,43 +1,29 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "Player.h"
 
 void Item::Init()
 {
 	_animator = gameObject->GetComponent<Animator>();
-	//_zOrder = gameObject->GetComponent<ZOrder>();
-	player = gameObject->GetComponent<Player>();
+	_zorder = gameObject->GetComponent<ZOrder>();
 
-	//_itemZ = _zorder->GetZ(); //현재 itemZ값은 item의 zorder gety값이다
-
-	enterNum = 0;
-	exitNum = 0;
-
-	_itemSpeed = 210;
-	////_gravity = 80;
-	//_gravity = 0;
-
-	_leftThrowItem = false;							//아이템 left로 안던짐
-	_rightThrowItem = false;						//아이템 right로 안던짐
-
-	_ItemRangeOutLeftCameraX = false;				//item이 cameraX의 left  좌표로 벗어나지 않았다
-	_ItemRangeOutRightCameraX = false;				//item이 cameraX의 right 좌표로 벗어나지 않았다
+	_itemSpeed = 140;
+	_gravity = 30;
 }
 
 void Item::Update()
 {
-	transform->MoveX(_itemSpeed * TIMEMANAGER->getElapsedTime());
-	transform->MoveY(_gravity * TIMEMANAGER->getElapsedTime());
+	transform->MoveX(_itemSpeed *TIMEMANAGER->getElapsedTime());			//speed만큼 이동한다
+	transform->MoveY(_gravity *  TIMEMANAGER->getElapsedTime());			//gravity만큼 이동한다
 
 	if (MainCam->transform->GetX() - MainCam->GetRenderWidth() / 2 + 37 >= transform->GetX()
 		|| MainCam->transform->GetX() + MainCam->GetRenderWidth() / 2 - 37 <= transform->GetX())
 	{
-		_itemSpeed *= -1;			//item이 범위 초과시 right로 이동
-		_gravity = 80;
+		_itemSpeed *= -1;				//범위 초과시 방향 바꿔줌
+		_gravity = 100;				//범위 초과시 중력값 0;
 	}
 
-	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= _itemZ)
-	{
+	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= itemZ )
+	{	
 		_itemSpeed = 0;
 		_gravity = 0;
 	}
@@ -53,32 +39,18 @@ void Item::SetItemImage(string imageName)
 	_animator->SetClip(imageName);
 }
 
-void Item::OnCollision(GameObject* gameObject)
+void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 {
-	enterNum++;
-}
+	throwDir = dir;					
 
-void Item::OnTriggerEnter(GameObject* gameObject)
-{
-	enterNum++;
-}
-
-void Item::OnTriggerExit(GameObject* gameObject)
-{
-	exitNum++;
-}
-
-void Item::Throw(bool dir)
-{
-	_throwDir = dir;
-	_gravity = 0;
-	if (dir == false)
+	if (dir == false)				//right일때
 	{
-		_itemSpeed = 210;
+		_itemSpeed = 140;
+		
 	}
-	else
+	else							//left일때
 	{
-		_itemSpeed = -210;
+		_itemSpeed = -140;
 	}
 }
 
