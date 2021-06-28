@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "SceneInfoLoader.h"
 #define BG_NUM 23
 #define WALL_NUM 3
 
@@ -11,7 +12,8 @@ class StartScene :
 public:
     StartScene();
     ~StartScene();
-
+    vector<GameObject*> _objectV;
+    SceneInfoLoader sceneInfoLoader;
     ImageObject* background[BG_NUM];
     Box* box;
     ImageObject* imageObj;
@@ -22,6 +24,8 @@ public:
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
 	ItemObject* trashBox;
+    // 210627 시영 추가 (Enemy 동적할당)
+    Enemy* enemy;
 
     virtual HRESULT Init();
     virtual void Release();
@@ -30,5 +34,6 @@ public:
 
     void BackgroundInit();
     void CameraInit();
+    void WallInit();
 };
 

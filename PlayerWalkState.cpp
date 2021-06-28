@@ -5,7 +5,9 @@
 #include "PlayerJumpState.h"
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
+#include "PlayerFallState.h"
 #include "Player.h"
+
 
 PlayerState * PlayerWalkState::InputHandle(Player * player)
 {
@@ -15,6 +17,8 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
+		if (player->dir == true)
+			player->runKeyPress = false;
 		return new PlayerIdleState();
 	}
 
@@ -24,14 +28,20 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
+		if (player->dir == false)
+			player->runKeyPress = false;
 		return new PlayerIdleState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('W'))
 	{
+		player->runKeyPress = false;
+
 		return new PlayerIdleState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('S'))
 	{
+		player->runKeyPress = false;
+
 		return new PlayerIdleState();
 	}
 
@@ -76,7 +86,10 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		}
 	}
 
-
+	/*if (GROUNDMANAGER->CheckGround(player->playerBoxCheckRc) == 0)
+	{
+		return new PlayerFallState();
+	}*/
 
 	return nullptr;
 }
@@ -86,26 +99,25 @@ void PlayerWalkState::Update(Player * player)
 	
 	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false) 
 	{
-		player->transform->MoveX(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
-		player->transform->MoveX(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->dash = false;
-		player->ground->MoveY(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveZ(-player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->runKeyPress = false;
+		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->dash = false;
-		player->ground->MoveY(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
-		player->zOrder->MoveZ(player->GetSpeed() * 0.6 * TIMEMANAGER->getElapsedTime());
+		player->runKeyPress = false;
+		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
+
+	//player->playerBoxCheckRc = RectMakeCenter(player->transform->GetX(), 
+	//												player->transform->GetY()+55, 100, 4);
 
 }
 

@@ -18,12 +18,10 @@ void PlayerBreakState::Update(Player * player)
 	if (player->dir == false)
 	{
 		player->transform->MoveX(_dashSpeed * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(_dashSpeed * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
 		player->transform->MoveX(-_dashSpeed * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-_dashSpeed * TIMEMANAGER->getElapsedTime());
 	}
 }
 

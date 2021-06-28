@@ -8,7 +8,6 @@
 #include "Animator.h"
 #include "BoxCollider.h"
 #include "PlayerControler.h"
-#include "TriggerTest.h"
 #include "ObjectInfo.h"
 #include "UIRenderer.h"
 #include "Cam.h"
@@ -21,11 +20,17 @@
 #include "ImageObject.h"
 #include "Character.h"
 #include "Ground.h"
-#include "Controler.h"
 #include "ZOrder.h"
 #include "ItemObject.h"
 #include "DebugText.h"
 #include <typeinfo>
+
+// 210625 시영 Enemy 작업 관련 include
+#include "Enemy.h"
+#include "EnemyAI.h"
+#include "EnemyInfo.h"
+#include "EnemyState.h"
+#include "Luke.h"
 
 typedef RECT ELLIPSE;
 typedef struct tagPOINTF {

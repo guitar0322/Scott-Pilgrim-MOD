@@ -27,6 +27,5 @@ void CameraManager::AddCamera(Camera* newCamera)
 
 void CameraManager::SetMainCam(Camera* mainCam)
 {
-	SAFE_DELETE(_mainCam);
 	_mainCam = mainCam;
 }

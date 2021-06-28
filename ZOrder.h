@@ -5,7 +5,7 @@ class ZOrder :
     public Component
 {
 private:
-    float _y;//zorder수행할 기준좌표
+    float _z;//zorder수행할 기준좌표
     float _x;
     RECT _rc;
 public:
@@ -14,7 +14,6 @@ public:
     virtual void OnEnable();
     virtual void OnDisable();
     void MoveZ(float z);//기준좌표를 이동
-    void SetY(float y) { _y = y; }//기준좌표를 설정
-    float GetY() { return _y; }//기준좌표를 반환
+    void SetZ(float z) { _z = z; }//기준좌표를 설정
+    float GetZ() { return _z; }//기준좌표를 반환
 };
-

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Dobermanmovestate.h"
 #include "Dobermanidlestate.h"
-#include "DobermanAttackstate.h"
 #include "Doberman.h"
 
 Dobermanstate * Dobermanmovestate::Update(Doberman * doberman)
@@ -27,13 +26,6 @@ Dobermanstate * Dobermanmovestate::Update(Doberman * doberman)
 	{
 		return new Dobermanidlestate();
 	}
-
-	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
-					doberman->GetPlayer()->GetX(),doberman->GetPlayer()->GetY())<50)
-	{
-		return new DobermanAttackstate();
-	}
-
 	float Angle = GetAngle(doberman->transform->GetX(), doberman->transform->GetY(), doberman->GetPlayer()->GetX(), doberman->GetPlayer()->GetY());
 	doberman->transform->Move(doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(Angle),
 		doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(Angle));

@@ -69,23 +69,19 @@ void PlayerRunState::Update(Player * player)
 {
 	if (player->dir == false)
 	{
-		player->transform->MoveX(player->GetSpeed() *2* TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
 		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-		player->ground->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->ground->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->ground->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 

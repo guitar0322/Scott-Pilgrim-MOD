@@ -5,7 +5,7 @@
 
 Dobermanstate* Dobermanidlestate::Update(Doberman * doberman)
 {
-	/*int SaveTimer;*/
+	int SaveTimer;
 
 
 	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
@@ -15,7 +15,7 @@ Dobermanstate* Dobermanidlestate::Update(Doberman * doberman)
 		{
 			if (doberman->GetDir() == true)
 			{
-				doberman->ChangeClip("idleRight",true);
+				doberman->ChangeClip("idleRight", true);
 				doberman->SetDir(false);
 			}
 			return new Dobermanmovestate();
