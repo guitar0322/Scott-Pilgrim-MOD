@@ -190,8 +190,8 @@ void PlayerIdleState::Update(Player * player)
 {
 	if (player->pickDelay > 0.3f && player->isPick == true)
 	{
-		player->isPick = false;
 		player->PickItem();
+		player->isPick = false;
 	}
 }
 

@@ -5,7 +5,6 @@ class DobermanAttackstate :
 {
 private:
 	float _attackTime;
-
 public:
 	virtual Dobermanstate* Update(Doberman* doberman);
 	virtual void Enter(Doberman* doberman);

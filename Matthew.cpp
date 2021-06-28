@@ -32,7 +32,6 @@ void Matthew::Init()
 	_dir = true;
 	_matthewstate = new Matthewidlestate();
 	_matthewstate->Enter(this);
-
 }
 
 void Matthew::Release()

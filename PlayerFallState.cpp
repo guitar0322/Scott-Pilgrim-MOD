@@ -31,12 +31,12 @@ void PlayerFallState::Update(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->transform->MoveX(player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->transform->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
+		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))

@@ -240,10 +240,13 @@ void Player::OnTriggerExit(GameObject * gameObject)
 
 void Player::PickItem()							// item È¹µæ ÇßÀ»¶§
 {
-	if (item != nullptr)						
+	if (item != nullptr)
 	{
-		transform->AddChild(item->transform);
-		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+		if (transform->GetChildCount() == 0)
+		{
+			transform->AddChild(item->transform);
+			item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+		}
 	}
 }
 
