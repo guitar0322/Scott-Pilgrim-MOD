@@ -7,7 +7,6 @@ Character::Character()
 	collider = new BoxCollider();
 	animator = new Animator();
 	zOrder = new ZOrder();
-	ground = new Ground();
 	AddComponent(renderer);
 	renderer->Init();
 	AddComponent(collider);
@@ -16,8 +15,6 @@ Character::Character()
 	animator->Init();
 	AddComponent(zOrder);
 	zOrder->Init();
-	AddComponent(ground);
-	ground->Init();
 }
 
 Character::~Character()

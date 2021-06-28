@@ -10,45 +10,47 @@ Doberman::~Doberman()
 {
 }
 
-void Doberman::init()
+void Doberman::Init()
 {
 	renderer = gameObject->GetComponent<Renderer>();
 	collision = gameObject->GetComponent<BoxCollider>();
 	animator = gameObject->GetComponent<Animator>();
-	animator->AddClip("idleLeft", CLIPMANAGER->AddClip("idleLeft", "Doberman/DogIdleLeft.bmp", 656, 96, 4, 0.3f));
-	animator->AddClip("idleRight", CLIPMANAGER->AddClip("idleRight", "Doberman/DogIdleRight.bmp", 656, 96, 4, 0.3f));
-	animator->AddClip("moveLeft", CLIPMANAGER->AddClip("moveLeft", "Dorberman/DogmoveLeft.bmp", 1146, 96, 6, 0.2f));
-	animator->AddClip("moveRight", CLIPMANAGER->AddClip("moveRight", "Dorberman/DogmoveRight.bmp", 1146, 96, 6, 0.2f));
-	animator->AddClip("runLeft", CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
-	animator->AddClip("runRight", CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
-	animator->AddClip("attackLeft", CLIPMANAGER->AddClip("attackLeft", "Doberman/DogAttackLeft.bmp", 1075, 96, 7, 0.2f));
-	animator->AddClip("attackRight", CLIPMANAGER->AddClip("attackRight", "Doberman/DogAttackRight.bmp", 1075, 96, 7, 0.2f));
+	animator->AddClip("idleLeft", CLIPMANAGER->AddClip("idleLeft", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f));
+	animator->AddClip("idleRight", CLIPMANAGER->AddClip("idleRight", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f));
+	animator->AddClip("moveLeft", CLIPMANAGER->AddClip("moveLeft", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f));
+	animator->AddClip("moveRight", CLIPMANAGER->AddClip("moveRight", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f));
+	//animator->AddClip("runLeft", CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
+	//animator->AddClip("runRight", CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
+	animator->AddClip("attackLeft", CLIPMANAGER->AddClip("attackLeft", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f));
+	animator->AddClip("attackRight", CLIPMANAGER->AddClip("attackRight", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f));
 	gameObject->tag = TAGMANAGER->GetTag("enemy");
-	_speed = 40;
-	_dir = false;
-	_DobermanState = new Dobermanidlestate();
-	_DobermanState->Enter(this);
+	_speed = 100;
+	_HP = 200;
+
+	_dir = true; // 처음 보는 방향이 true면 왼쪽이다.
+	_dobermanState = new Dobermanidlestate();
+	_dobermanState->Enter(this);
 }
-void Doberman::release()
+void Doberman::Release()
 {
 }
 
-void Doberman::update()
+void Doberman::Update()
 {
-	Dobermanstate* newDobermanstate = _DobermanState->Update(this);
+	Dobermanstate* newDobermanstate = _dobermanState->Update(this);
 	if (newDobermanstate != nullptr)
 	{
-		SAFE_DELETE(_DobermanState);
-		_DobermanState = newDobermanstate;
-		_DobermanState->Enter(this);
+		SAFE_DELETE(_dobermanState);
+		_dobermanState = newDobermanstate;
+		_dobermanState->Enter(this);
 	}
 }
 
-void Doberman::render()
+void Doberman::Render()
 {
 }
 
-void Doberman::changeClip(string name, bool isInitFrame)
+void Doberman::ChangeClip(string name, bool isInitFrame)
 {
 	if (isInitFrame == true)
 	{

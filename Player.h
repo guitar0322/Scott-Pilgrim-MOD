@@ -12,6 +12,7 @@ private:
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
+<
 	
 	//float _friction;	//마찰
 
@@ -51,6 +52,17 @@ private:
 	AnimationClip shieldLeft;
 
 
+	//두손이미지
+	AnimationClip twoHandPickRight;
+	AnimationClip twoHandPickLeft;
+	AnimationClip twoHandIdleRight;
+	AnimationClip twoHandIdleLeft;
+	AnimationClip twoHandWalkRight;
+	AnimationClip twoHandWalkLeft;
+	AnimationClip twoHandRunRight;
+	AnimationClip twoHandRunLeft;
+
+
 
 public:
 	BoxCollider* collider;
@@ -71,15 +83,23 @@ public:
 
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
+
+	bool onGround;
+	bool isCatch;		//아이템을 획득 유무 
+	bool isPick;		//아이템을 들어올렸는지 유무
+	bool twoHandImageChange; // 이미지 바꿔줄 것 인지
+
 	bool attackChange;
 	
 	bool isCatch;		//아이템 획득 유무
 	
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
-	float _friction;		//마찰
+	float pickDelay;		//줍는 시간 딜레이
+	float friction;			//마찰
 
-	RECT playerBoxCheckRc;
+
+	RECT groundCheckRc;
 
 	void InputHandle();
 	virtual void Init();
@@ -91,8 +111,7 @@ public:
 
 	int GetSpeed() { return _speed; }
 	int GetGravity() { return _gravity; }
-	int GetFriction() { return _friction; }
-	
+	int GetFriction() { return friction; }
 	virtual void OnTriggerEnter(GameObject* gameObject);
 	virtual void OnTriggerExit(GameObject* gameObject);
 

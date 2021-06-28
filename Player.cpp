@@ -22,7 +22,7 @@ void Player::Init()
 	ClipInit();
 	_speed = 48;							//플레이어 속도
 	_gravity = 200;							//플레이어 중력 (점프 후 중력값)
-	_friction = 130;						//플레이어 마찰 (런뛰고 미끄러질 때)
+	friction = 130;						//플레이어 마찰 (런뛰고 미끄러질 때)
 	dir = false;							//좌우 확인 용
 	dirZ = false;							//Z축 확인용
 	isRun = false;
@@ -31,25 +31,35 @@ void Player::Init()
 	block = false;							//막기 확인용
 	groundCheck = false;					//플레이어 그라운드 착지 확인용
 	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
+	twoHandImageChange = false;
 
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
 	runDelay = 0;
 	jumpDelay = 0;
+	pickDelay = 0;
 	_enterNum = 0;
 	_exitNum = 0;
+
 	isCatch = false;
+
+	onGround = false;
+	isCatch = false;
+	isPick = false;
 
 }
 
 void Player::Update()
 {
 	InputHandle();
+	groundCheckRc = RectMakeCenter(transform->GetX(), transform->GetY() + collider->height / 2 + 5,
+		collider->width, 10);
 	_state->Update(this);
 	if (runKeyPress == true)
 		runDelay += TIMEMANAGER->getElapsedTime();
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
+
 
 	if (isCatch == false)
 	{
@@ -65,22 +75,29 @@ void Player::Update()
 			PutItem();
 		}
 	}
+
+	if(isCatch == true)
+		pickDelay += TIMEMANAGER->getElapsedTime();
+
 }
 
 void Player::Render()
 {
-	/*HPEN hPen, oPen;
-	HBRUSH hBrush, oBrush;
+	if (!KEYMANAGER->isToggleKey(VK_TAB)) 
+	{
+		HPEN hPen, oPen;
+		HBRUSH hBrush, oBrush;
 
-	hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
-	hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
-	oPen = (HPEN)SelectObject(BackBuffer, hPen);
-	Rectangle(BackBuffer, playerBoxCheckRc);
-	SelectObject(BackBuffer, oPen);
-	SelectObject(BackBuffer, oBrush);
-	DeleteObject(hPen);
-	DeleteObject(hBrush);*/
+		hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		oBrush = (HBRUSH)SelectObject(BackBuffer, hBrush);
+		hPen = CreatePen(PS_DOT, 1, RGB(255, 255, 255));
+		oPen = (HPEN)SelectObject(BackBuffer, hPen);
+		Rectangle(BackBuffer, groundCheckRc);
+		SelectObject(BackBuffer, oPen);
+		SelectObject(BackBuffer, oBrush);
+		DeleteObject(hPen);
+		DeleteObject(hBrush);
+	}
 }
 
 void Player::ChangeClip(string clipName, bool isInitFrame)
@@ -93,8 +110,6 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 	{
 		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
-
-	
 }
 
 void Player::ClipInit()
@@ -146,8 +161,21 @@ void Player::ClipInit()
 	runJumpKickLeft.isLoop = false;
 
 
+	//두손 이미지
+	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
+	twoHandPickRight.isLoop = false;
+	twoHandPickLeft.Init("player/two_hand_pick_left.bmp", 192, 130, 2, 0.20f);
+	twoHandPickLeft.isLoop = false;
+	twoHandIdleRight.Init("player/two_hand_idle_right.bmp", 312, 120, 4, 0.20f);
+	twoHandIdleLeft.Init("player/two_hand_idle_left.bmp", 312, 120, 4, 0.20f);
+	twoHandWalkRight.Init("player/two_hand_walk_right.bmp", 468, 130, 6, 0.25f);
+	twoHandWalkLeft.Init("player/two_hand_walk_left.bmp", 468, 130, 6, 0.25f);
+	twoHandRunRight.Init("player/two_hand_run_right.bmp", 910, 120, 8, 0.17f);
+	twoHandRunLeft.Init("player/two_hand_run_left.bmp", 910, 120, 8, 0.17f);
 
 
+
+	//공격 이미지
 	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);
 	attack2Right.Init("player/attack2_right.bmp", 472, 134, 4, 0.1f);
 	attack3Right.Init("player/attack3_right.bmp", 366, 130, 3, 0.15f);
@@ -205,7 +233,19 @@ void Player::ClipInit()
 	animator->AddClip("attack3_left", &attack3Left);
 	animator->AddClip("attack4_left", &attack4Left);
 
+	//두손 이미지
 
+	animator->AddClip("two_hand_idle_right", &twoHandIdleRight);
+	animator->AddClip("two_hand_idle_left", &twoHandIdleLeft);
+	animator->AddClip("two_hand_pick_right", &twoHandPickRight);
+	animator->AddClip("two_hand_pick_left", &twoHandPickLeft);
+	animator->AddClip("two_hand_walk_right", &twoHandWalkRight);
+	animator->AddClip("two_hand_walk_left", &twoHandWalkLeft);
+	animator->AddClip("two_hand_run_right", &twoHandRunRight);
+	animator->AddClip("two_hand_run_left", &twoHandRunLeft);
+
+	animator->AddTransaction("pickup_to_pickup_idle_right", &twoHandPickRight, &twoHandIdleRight);
+	animator->AddTransaction("pickup_to_pickup_idle_left", &twoHandPickLeft, &twoHandIdleLeft);
 }
 
 void Player::OnTriggerEnter(GameObject * gameObject)
@@ -222,11 +262,19 @@ void Player::OnTriggerExit(GameObject * gameObject)
 
 void Player::PickItem()							// item 획득 했을때
 {
-	if (item != nullptr)						
+	if (item != nullptr)
 	{
+
 		isCatch = true;						
 		transform->AddChild(item->transform);
 		item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+
+		if (transform->GetChildCount() == 0)
+		{
+			transform->AddChild(item->transform);
+			item->transform->SetPosition(transform->GetX(), transform->GetY() - 80);
+		}
+
 	}
 }
 

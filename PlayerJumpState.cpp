@@ -31,21 +31,16 @@ void PlayerJumpState::Update(Player * player)
 {
 	_jumpPower -= player->GetGravity()*TIMEMANAGER->getElapsedTime();
 	player->transform->MoveY(-_jumpPower * TIMEMANAGER->getElapsedTime());
-	
-
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
 		if (player->isRun == true) //뛸 때 -> 점프
 		{
 			player->transform->MoveX(player->GetSpeed()*2 *TIMEMANAGER->getElapsedTime());
-			player->ground->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		}
 		else // 안 뒬 때 -> 점프
 		{
-			player->transform->MoveX(player->GetSpeed()*1.5f*TIMEMANAGER->getElapsedTime());
-			player->ground->MoveX(player->GetSpeed()*1.5f* TIMEMANAGER->getElapsedTime());
-
+			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		}
 		
 	}
@@ -54,27 +49,19 @@ void PlayerJumpState::Update(Player * player)
 		if (player->isRun == true)
 		{
 			player->transform->MoveX(-player->GetSpeed() * 2 *TIMEMANAGER->getElapsedTime());
-			player->ground->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-
-			
 		}
 		else
 		{
-			player->transform->MoveX(-player->GetSpeed()*1.5f*TIMEMANAGER->getElapsedTime());
-			player->ground->MoveX(-player->GetSpeed() *1.5f* TIMEMANAGER->getElapsedTime());
-
+			player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		player->ground->MoveY(-player->GetSpeed() *0.7f* TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(-player->GetSpeed() *0.7f* TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		player->ground->MoveY(player->GetSpeed() *0.7f* TIMEMANAGER->getElapsedTime());
 		player->zOrder->MoveZ(player->GetSpeed() *0.7f* TIMEMANAGER->getElapsedTime());
-
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{

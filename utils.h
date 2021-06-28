@@ -23,7 +23,17 @@
 #include "ZOrder.h"
 #include "ItemObject.h"
 #include "DebugText.h"
+#include "Wall.h"
+#include "WallObj.h"
+#include "Player.h"
 #include <typeinfo>
+
+// 210625 시영 Enemy 작업 관련 include
+#include "Enemy.h"
+#include "EnemyAI.h"
+#include "EnemyInfo.h"
+#include "EnemyState.h"
+#include "Luke.h"
 
 typedef RECT ELLIPSE;
 typedef struct tagPOINTF {

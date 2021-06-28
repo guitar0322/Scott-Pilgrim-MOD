@@ -1,12 +1,12 @@
 #pragma once
+#include "Enemy.h"
 
-class Enemy;
+class EnemyAI;
 
 class EnemyState
 {
 public:
-	virtual EnemyState* Update(Enemy* enemy) = 0;
-	virtual void Enter(Enemy* enemy) = 0;
-	virtual void Exit(Enemy* enemy) = 0;
+	virtual EnemyState* Update(EnemyAI* enemy) = 0;
+	virtual void Enter(EnemyAI* enemy) = 0;
+	virtual void Exit(EnemyAI* enemy) = 0;
 };
-

@@ -24,6 +24,15 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			player->runDelay = 0;
 			return new PlayerRunState();
 		}
+		/*
+		if (player->dir == false && player->isCatch == true)
+		{
+			player->dir = false;
+
+
+
+		}
+		*/
 		//플레이어 오른쪽 걷기
 		player->dir = false;
 		player->runKeyPress = true;
@@ -137,10 +146,27 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//발차기
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
-		return new PlayerKickAttackState();
-
+		if (player->item == nullptr)
+		{
+			return new PlayerKickAttackState();
+		}
+		else
+		{
+			player->isCatch = true;
+			player->isPick = true;
+			if (player->dir == false)
+			{
+				player->ChangeClip("two_hand_pick_right", false);
+			}
+			else
+			{
+				player->ChangeClip("two_hand_pick_left", false);
+			}
+		}
 
 	}
+	
+
 
 	//막기
 	if (KEYMANAGER->isStayKeyDown('K'))
@@ -162,24 +188,33 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 
 void PlayerIdleState::Update(Player * player)
 {
-
+	if (player->pickDelay > 0.3f && player->isPick == true)
+	{
+		player->PickItem();
+		player->isPick = false;
+	}
 }
 
 void PlayerIdleState::Enter(Player * player)
 {
-
-
-	if (player->dir == false)
+	if (player->isCatch == true)
 	{
-		player->ChangeClip("idle_right", false);
+		if(player->dir == false)
+			player->ChangeClip("two_hand_idle_right", false);
+		else
+			player->ChangeClip("two_hand_idle_left", false);
 	}
 	else
 	{
-		player->ChangeClip("idle_left", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("idle_right", false);
+		}
+		else
+		{
+			player->ChangeClip("idle_left", false);
+		}
 	}
-
-
-	
 }
 
 void PlayerIdleState::Exit(Player * player)

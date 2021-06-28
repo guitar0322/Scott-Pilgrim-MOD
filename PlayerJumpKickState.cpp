@@ -5,16 +5,12 @@
 
 PlayerState * PlayerJumpKickState::InputHandle(Player * player)
 {
-	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc);
+	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
-
 		player->transform->MoveY(-intersectHeight);
 		return new PlayerIdleState();
 	}
-
-	
-
 
 	return nullptr;
 }

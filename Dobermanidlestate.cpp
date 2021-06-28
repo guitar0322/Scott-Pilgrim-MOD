@@ -1,41 +1,66 @@
 #include "stdafx.h"
 #include "Dobermanidlestate.h"
+#include "Dobermanmovestate.h"
 #include "Doberman.h"
 
-Dobermanstate * Dobermanidlestate::Update(Doberman * doberman)
+Dobermanstate* Dobermanidlestate::Update(Doberman * doberman)
 {
+	int SaveTimer;
+
+
 	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
-		doberman->getPlayer()->GetX(),doberman->getPlayer()->GetY()) < 300)
+		doberman->GetPlayer()->GetX(),doberman->GetPlayer()->GetY()) < 300)
 	{
-		if (doberman->transform->GetX() < doberman->getPlayer()->GetX())
+		if (doberman->transform->GetX() < doberman->GetPlayer()->GetX())
 		{
-			if (doberman->getDir() == true)
+			if (doberman->GetDir() == true)
 			{
-				doberman->changeClip("idleLeft", true);
-				doberman->setDir(false);
+				doberman->ChangeClip("idleRight", true);
+				doberman->SetDir(false);
 			}
+			return new Dobermanmovestate();
 		}
 		else
 		{
-			if (doberman->getDir()==false)
+			if (doberman->GetDir()==false)
 			{
-				doberman->changeClip("idleLeft",true);
-				doberman->setDir(true);
+				doberman->ChangeClip("idleLeft",true);
+				doberman->SetDir(true);
 			}
+			return new Dobermanmovestate();
 		}
 	}
+	//if (TIMEMANAGER->getWorldTime() >= SaveTimer + 5)
+	//{
+	//	switch (RND->getInt(3))
+	//	{
+	//	case 0:
+	//		doberman->transform->Move(doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(Angle),
+	//			doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(Angle));
+
+	//	case 1:
+
+	//	case 2:
+
+	//	default:
+	//		break;
+	//	}
+	//}
+
+
+
 	return nullptr;
 }
 
 void Dobermanidlestate::Enter(Doberman * doberman)
 {
-	if (doberman->getDir() == false)
+	if (doberman->GetDir() == false)
 	{
-		doberman->changeClip("idleRight", true);
+		doberman->ChangeClip("idleRight", true);
 	}
 	else
 	{
-		doberman->changeClip("idleLeft", true);
+		doberman->ChangeClip("idleLeft", true);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "WallObj.h"
 #include "Wall.h"
 #include "Doberman.h"
+#include "Matthew.h"
 StartScene::StartScene()
 {
 }
@@ -17,8 +18,8 @@ HRESULT StartScene::Init()
 {
     Scene::Init();
     CameraInit();
-    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
-    sceneInfoLoader.LoadObjectInfo();
+    //sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    //sceneInfoLoader.LoadObjectInfo();
     //_objectV[0]->GetComponent<Renderer>()->SetAlphaMode(true, 125);
     //_objectV[0]->GetComponent<Renderer>()->SetScale(3.f, 3.f);
 
@@ -49,19 +50,26 @@ HRESULT StartScene::Init()
     character->zOrder->SetZ(character->transform->GetY() + 52);
 	character->AddComponent(new Player);
 	character->GetComponent<Player>()->Init();
-	character->ground->Init(100, 5, 0, 52);
 	character->zOrder->Init();
 	character->zOrder->SetZ(568 / 2 + 52);
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
+    wall[0] = new WallObj();
+    wall[0]->Init(0, 300, 1000, 300);
+    wall[1] = new WallObj();
+    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
+    wall[2] = new WallObj();
+    wall[2]->Init(800, 200, 1000, 300);
+
     testGround = new GameObject();
+    testGround->transform->SetPosition(500, 350);
+    testGround->AddComponent(new ZOrder());
+    testGround->GetComponent<ZOrder>()->Init();
+    testGround->GetComponent<ZOrder>()->SetZ(400);
     testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init();
-    testGround->transform->SetPosition(500, 600);
-    testGround->GetComponent<Ground>()->SetX(500);
-    testGround->GetComponent<Ground>()->SetY(500);
+    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
@@ -70,17 +78,41 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-	doberman = new Character();
-	doberman->Init();
-	doberman->transform->SetPosition(1200, 400);
-	doberman->collider->isTrigger = true;
-	doberman->AddComponent(new Doberman());
-	doberman->GetComponent<Doberman>()->Init();
-	doberman->GetComponent<Doberman>()->SetPlayer(character);
-    doberman->ground->enable = false;
+	/* LUKE CLIP MANAGER  */
+	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 320, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 320, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 1188, 134, 11, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 1188, 134, 11, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack_right", "luke/luke_attack_right.bmp", 585, 64, 9, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack_left", "luke/luke_attack_left.bmp", 585, 64, 9, 0.20f);
+
+	// 210627 시영 추가 (Enemy Update)
+    enemy = new Luke();
+	enemy->transform->SetPosition(1200, 300);
+	enemy->ground->enable = false;
+	enemy->enemyAI->SetPlayer(character);
+	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
+	enemy->enemyinfo->SetSpeed(30.f);
     
+    doberman = new Character();
+    doberman->Init();
+    doberman->transform->SetPosition(1200, 400);
+    doberman->collider->isTrigger = true;
+    doberman->AddComponent(new Doberman());
+    doberman->GetComponent<Doberman>()->Init();
+    doberman->GetComponent<Doberman>()->SetPlayer(character);
+
+	matthew = new Character();
+	matthew->Init();
+	matthew->transform->SetPosition(2000, 400);
+	matthew->collider->isTrigger = true;
+	matthew->AddComponent(new Matthew());
+	matthew->GetComponent<Matthew>()->Init();
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
+
     BackgroundInit();
     WallInit();
+
     return S_OK;
 }
 
@@ -90,6 +122,7 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
+
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
@@ -105,6 +138,10 @@ void StartScene::Update()
     ZORDER->Update();
     mainCam->Update();
 	doberman->Update();
+	matthew->Update();
+
+    // 210627 시영 추가 (Enemy Update)
+    enemy->Update();
 }
 
 void StartScene::Render()
@@ -120,7 +157,12 @@ void StartScene::Render()
     testGround->Render();
 	trashBox->Render();
 	doberman->Render();
+	matthew->Render();
     EFFECTMANAGER->Render();
+
+    // 210627 시영 추가 (Enemy Update)
+    //enemy->Render();
+
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(BackBuffer, mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
