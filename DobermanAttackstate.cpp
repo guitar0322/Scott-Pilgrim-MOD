@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "DobermanAttackstate.h"
-#include "Dobermanidlestate.h"
+#include "DobermanAttackState.h"
+#include "DobermanIdleState.h"
 #include "Enemy.h"
 
 EnemyState * DobermanAttackState::Update(EnemyAI * enemy)
 {
 	_attackTime += TIMEMANAGER->getElapsedTime();
-	if (_attackTime >= 2.5f)
+	if (_attackTime >= 2.0f)
 	{
 		return new DobermanIdleState();
 	}

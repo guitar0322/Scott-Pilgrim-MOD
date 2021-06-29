@@ -1,14 +1,11 @@
 #include "stdafx.h"
-#include "Dobermanmovestate.h"
-#include "Dobermanidlestate.h"
-#include "DobermanAttackstate.h"
+#include "DobermanMoveState.h"
+#include "DobermanIdleState.h"
+#include "DobermanAttackState.h"
 #include "Enemy.h"
 
 EnemyState * DobermanMoveState::Update(EnemyAI* enemy)
 {
-	_delaytime += TIMEMANAGER->getElapsedTime();
-
-
 	if (enemy->transform->GetX() < enemy->GetPlayerTransform()->GetX())
 	{
 		if (enemy->enemyinfo->GetDir()==true)

@@ -1,11 +1,9 @@
 #include "stdafx.h"
-#include "Dobermanidlestate.h"
-#include "Dobermanmovestate.h"
+#include "DobermanIdleState.h"
+#include "DobermanMoveState.h"
 
 EnemyState* DobermanIdleState::Update(EnemyAI* enemy)
 {
-	int SaveTimer;
-
 
 	if (GetDistance(enemy->transform->GetX(),enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY()) < 300)
@@ -21,22 +19,6 @@ EnemyState* DobermanIdleState::Update(EnemyAI* enemy)
 		}
 		return new DobermanMoveState();
 	}
-	//if (TIMEMANAGER->getWorldTime() >= SaveTimer + 5)
-	//{
-	//	switch (RND->getInt(3))
-	//	{
-	//	case 0:
-	//		doberman->transform->Move(doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(Angle),
-	//			doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(Angle));
-
-	//	case 1:
-
-	//	case 2:
-
-	//	default:
-	//		break;
-	//	}
-	//}
 	return nullptr;
 }
 

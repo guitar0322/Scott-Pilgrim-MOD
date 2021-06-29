@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "Matthewattack2state.h"
-#include "Matthewattack3state.h"
-#include "Matthewidlestate.h"
+#include "MatthewAttack2State.h"
+#include "MatthewAttack3State.h"
+#include "MatthewIdleState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewAttack2State::Update(Matthew * matthew)
 {
 	_attackTime2 += TIMEMANAGER->getElapsedTime();
-	if (_attackTime2 >= 2.0f)
+	if (_attackTime2 >= 1.0f)
 	{
 		return new MatthewAttack3State;
 	}

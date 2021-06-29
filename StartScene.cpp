@@ -92,18 +92,18 @@ HRESULT StartScene::Init()
 	//CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
 	//CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
 	CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->FindClip("doberman_attack_left")->isLoop = false;
 	CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
-
+	CLIPMANAGER->FindClip("doberman_attack_right")->isLoop = false;
 
 
 	// 210627 시영 추가 (Enemy Update)
 
-   /* enemy = new Luke();
+    enemy = new Luke();
 	enemy->transform->SetPosition(1200, 300);
 
     enemy = new Luke();
 	enemy->transform->SetPosition(800, 300);
-
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
@@ -112,27 +112,21 @@ HRESULT StartScene::Init()
 	// 210628 광철 도베르만 개선 //
 	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
-<<<<<<< HEAD
 	doberman->ground->enable = false;
 	doberman->enemyAI->SetPlayer(character);
 	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	doberman->enemyinfo->SetSpeed(100.f);
+	doberman->enemyinfo->SetSpeed(60.0f);
 
 	// 보스 매튜 구현//
-=======
-    doberman->collider->isTrigger = true;
-    doberman->AddComponent(new Doberman());
-    doberman->GetComponent<Doberman>()->Init();
-    doberman->GetComponent<Doberman>()->SetPlayer(character);
-    
->>>>>>> 474d9dd2c30a4acde5ceb348f66577c798d963ed
+
 	matthew = new Character();
 	matthew->Init();
 	matthew->transform->SetPosition(2000, 400);
 	matthew->collider->isTrigger = true;
+	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);*/
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
     BackgroundInit();
     WallInit();
