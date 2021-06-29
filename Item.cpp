@@ -65,16 +65,21 @@ void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 	
 	if (dir == false)				//right일때
 	{
-		_angle = -(PI/8);			//약 -22;
+		_angle = 0;
+		//if ()
+		//{
+			_angle = -(PI / 4);
+		//}
+		//_angle = -(PI/8);			//약 -22;
 		//_angle = -(PI / 4);       //약 -45;
 	}
 	else							//left일때
 	{
 		_angle = -(PI / 1.3);				
 	}
-	//_gravity = 160;
+	//_gravity = 30;
+	_gravity += 35;
 	//_gravity += 25;
-	//_gravity = 10;
 	_moveX += cosf(_angle) * _itemSpeed;
 	_moveY += -sinf(_angle) * _itemSpeed + _gravity;
 }
