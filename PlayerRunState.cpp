@@ -4,61 +4,40 @@
 #include "PlayerJumpState.h"
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
+#include "PlayerTwoHandAttackState.h"
 #include "Player.h"
 
 PlayerState * PlayerRunState::InputHandle(Player * player)
 {
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
-
 		return new PlayerBreakState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
-
 		return new PlayerBreakState();
-
 	}
 
-	if (KEYMANAGER->isStayKeyDown('J'))
+	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerJumpState();
-
-		}
-		else
-		{
-			return new PlayerJumpState();
-		}
-
+		return new PlayerJumpState();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
-		if (player->dir == false)
+		if (player->isCatch == false)
 		{
-			player->attackChange = true; //2번공격
 			return new PlayerAttackState();
-
 		}
 		else
 		{
-			player->attackChange = true; //2번공격
-			return new PlayerAttackState();
-		}
+			return new PlayerTwoHandAttackState();
+;		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerKickAttackState();
+		return new PlayerKickAttackState();
 
-		}
-		else
-		{
-			return new PlayerKickAttackState();
-		}
 	}
 
 
@@ -92,14 +71,29 @@ void PlayerRunState::Update(Player * player)
 
 void PlayerRunState::Enter(Player * player)
 {
-	if (player->dir == false)
+	if (player->isCatch == true)
 	{
-		player->ChangeClip("run_right", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("two_hand_run_right", false);
+		}
+		else
+		{
+			player->ChangeClip("two_hand_run_left", false);
+		}
 	}
 	else
 	{
-		player->ChangeClip("run_left", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("run_right", false);
+		}
+		else
+		{
+			player->ChangeClip("run_left", false);
+		}
 	}
+	
 }
 
 void PlayerRunState::Exit(Player * player)

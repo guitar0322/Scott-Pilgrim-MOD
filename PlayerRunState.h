@@ -10,7 +10,5 @@ public:
 	virtual void Enter(Player* player);
 	virtual void Exit(Player* player);
 
-
-
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerKickAttackState.h"
 #include "PlayerIdleState.h"
+#include "PlayerGroundState.h"
 #include "Player.h"
 
 PlayerState * PlayerKickAttackState::InputHandle(Player * player)
@@ -10,7 +11,7 @@ PlayerState * PlayerKickAttackState::InputHandle(Player * player)
 	{
 		return new PlayerIdleState();
 	}
-
+	
 	return nullptr;
 }
 

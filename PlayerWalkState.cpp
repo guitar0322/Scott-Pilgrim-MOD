@@ -6,13 +6,26 @@
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
 #include "PlayerFallState.h"
+#include "PlayerTwoHandAttackState.h"
 #include "Player.h"
 
 PlayerState * PlayerWalkState::InputHandle(Player * player)
 {
-	if (KEYMANAGER->isOnceKeyDown('D')) {
-		player->dir = false;
-		player->ChangeClip("walk_right", false);
+	if (KEYMANAGER->isOnceKeyDown('D')) 
+	{
+		if (player->isCatch == true)
+		{
+			player->dir = false;
+			player->ChangeClip("two_hand_walk_right", false);
+
+		}
+		else
+		{
+			player->dir = false;
+			player->ChangeClip("walk_right", false);
+
+		}
+	
 	}
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
@@ -21,9 +34,21 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		return new PlayerIdleState();
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('A')) {
-		player->dir = true;
-		player->ChangeClip("walk_left", false);
+	if (KEYMANAGER->isOnceKeyDown('A')) 
+	{
+
+		if (player->isCatch == true)
+		{
+			player->dir = true;
+			player->ChangeClip("two_hand_walk_left", false);
+
+		}
+		else
+		{
+			player->dir = true;
+			player->ChangeClip("walk_left", false);
+
+		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
@@ -58,15 +83,14 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
-		if (player->dir == false)
+		if (player->isCatch == false)
 		{
-			player->attackChange = true; //2번공격
 			return new PlayerAttackState();
 		}
 		else
 		{
-			player->attackChange = true; //2번공격
-			return new PlayerAttackState();
+			return new PlayerTwoHandAttackState();
+
 		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
@@ -119,14 +143,27 @@ void PlayerWalkState::Update(Player * player)
 
 void PlayerWalkState::Enter(Player * player)
 {
-	if (player->dir == false)
+	if (player->isCatch == true)
 	{
-		player->ChangeClip("walk_right", false);
+		if (player->dir == false)
+
+			player->ChangeClip("two_hand_walk_right", false);
+		else
+			player->ChangeClip("two_hand_walk_left", false);
 	}
 	else
 	{
-		player->ChangeClip("walk_left", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("walk_right", false);
+		}
+		else
+		{
+			player->ChangeClip("walk_left", false);
+		}
 	}
+	
+
 
 }
 

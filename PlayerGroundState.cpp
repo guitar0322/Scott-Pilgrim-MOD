@@ -37,15 +37,29 @@ void PlayerGroundState::Enter(Player * player)
 	player->isRun = false;
 	player->runKeyPress = false;
 
-
-	if (player->dir == false)
+	if (player->isCatch == true)
 	{
-		player->ChangeClip("ground_right", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("two_hand_ground_right", false);
+		}
+		else
+		{
+			player->ChangeClip("two_hand_ground_left", false);
+		}
 	}
 	else
 	{
-		player->ChangeClip("ground_left", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("ground_right", false);
+		}
+		else
+		{
+			player->ChangeClip("ground_left", false);
+		}
 	}
+	
 
 }
 

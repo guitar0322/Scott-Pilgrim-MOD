@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerFallState.h"
 #include "PlayerGroundState.h"
+#include "PlayerJumpKickState.h"
 #include "Player.h"
 
 PlayerState * PlayerFallState::InputHandle(Player * player)
@@ -19,6 +20,13 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
+
+	
+	if (KEYMANAGER->isOnceKeyDown('L'))
+	{
+		return new PlayerJumpKickState();
+
+	}
 	return nullptr;
 }
 
@@ -31,13 +39,26 @@ void PlayerFallState::Update(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		if (player->isRun == true) //뛸 때 -> 점프
+		{
+			player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 
+		}
+		else // 안 뒬 때 -> 점프
+		{
+			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-
+		if (player->isRun == true)
+		{
+			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		}
+		else
+		{
+			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
@@ -50,13 +71,35 @@ void PlayerFallState::Update(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		player->ChangeClip("fall_right", true);
-		player->dir = false;
+		if (player->isCatch == true)
+		{
+			player->dir = false;
+			player->ChangeClip("two_hand_fall_right", false);
+
+		}
+		else
+		{
+			player->dir = false;
+			player->ChangeClip("fall_right", true);
+
+		}
+	
 	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
-		player->ChangeClip("fall_left", true);
-		player->dir = true;
+		if (player->isCatch == true)
+		{
+			player->dir = true;
+			player->ChangeClip("two_hand_fall_left", false);
+
+		}
+		else
+		{
+			player->dir = true;
+			player->ChangeClip("fall_left", true);
+
+		}
+	
 	}
 
 }
@@ -64,15 +107,30 @@ void PlayerFallState::Update(Player * player)
 void PlayerFallState::Enter(Player * player)
 {
 	_speedY = 0;
-
-	if (player->dir == false)
+	if (player->isCatch == true)
 	{
-		player->ChangeClip("fall_right", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("two_hand_fall_right", false);
+		}
+		else
+		{
+			player->ChangeClip("two_hand_fall_left", false);
+		}
 	}
 	else
 	{
-		player->ChangeClip("fall_left", false);
+		if (player->dir == false)
+		{
+			player->ChangeClip("fall_right", false);
+		}
+		else
+		{
+			player->ChangeClip("fall_left", false);
+		}
 	}
+
+	
 }
 
 void PlayerFallState::Exit(Player * player)

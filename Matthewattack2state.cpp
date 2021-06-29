@@ -4,30 +4,30 @@
 #include "Matthewidlestate.h"
 #include "Matthew.h"
 
-Matthewstate * Matthewattack2state::Update(Matthew * matthew)
+Matthewstate * MatthewAttack2State::Update(Matthew * matthew)
 {
 	_attackTime2 += TIMEMANAGER->getElapsedTime();
 	if (_attackTime2 >= 2.0f)
 	{
-		return new Matthewattack3state;
+		return new MatthewAttack3State;
 	}
 
 	return nullptr;
 }
 
-void Matthewattack2state::Enter(Matthew * matthew)
+void MatthewAttack2State::Enter(Matthew * matthew)
 {
 	_attackTime2 = 0;
 	if (matthew->Getdir() == false)
 	{
-		matthew->ChangeCilp("Matthewattack2Right", true);
+		matthew->ChangeCilp("matthew_attack2_right", true);
 	}
 	else
 	{
-		matthew->ChangeCilp("Matthewattack2Left", true);
+		matthew->ChangeCilp("matthew_attack2_left", true);
 	}
 }
 
-void Matthewattack2state::Exit(Matthew * matthew)
+void MatthewAttack2State::Exit(Matthew * matthew)
 {
 }

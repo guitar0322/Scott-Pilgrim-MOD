@@ -5,17 +5,13 @@ class PlayerJumpState :
 {
 
 private:
-	int _jumpPower;
-	int _gravity;
-	int _count;
-
+	int _gravity;		//플레이어 중력값
 
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player * player);
 	virtual void Enter(Player * player);
 	virtual void Exit(Player * player);
-
 
 };
 

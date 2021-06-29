@@ -1,6 +1,6 @@
 #pragma once
 #include "Matthewstate.h"
-class Matthewattack3state :
+class MatthewAttack3State :
 	public Matthewstate
 {
 private:
