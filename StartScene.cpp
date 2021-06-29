@@ -78,17 +78,17 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-	/* LUKE CLIP MANAGER  */
-	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 320, 132, 4, 0.20f);
-	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 320, 132, 4, 0.20f);
-	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 1188, 134, 11, 0.20f);
-	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 1188, 134, 11, 0.20f);
-	CLIPMANAGER->AddClip("luke_attack_right", "luke/luke_attack_right.bmp", 585, 64, 9, 0.20f);
-	CLIPMANAGER->AddClip("luke_attack_left", "luke/luke_attack_left.bmp", 585, 64, 9, 0.20f);
+	/* LEE CLIP MANAGER  */
+	CLIPMANAGER->AddClip("lee_idle_right",     "lee/lee_idle_right.bmp",       400, 66, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_idle_left",      "lee/lee_idle_left.bmp",        400, 66, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_run_right",      "lee/lee_run_right.bmp",        432, 72, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_run_left",       "lee/lee_run_left.bmp",         432, 72, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack1_right",  "lee/lee_attack1_right.bmp",    280, 64, 4, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack1_left",   "lee/lee_attack1_left.bmp",     280, 64, 4, 0.20f);
 
 	// 210627 시영 추가 (Enemy Update)
     enemy = new Luke();
-	enemy->transform->SetPosition(1200, 300);
+	enemy->transform->SetPosition(800, 300);
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
@@ -101,7 +101,7 @@ HRESULT StartScene::Init()
     doberman->AddComponent(new Doberman());
     doberman->GetComponent<Doberman>()->Init();
     doberman->GetComponent<Doberman>()->SetPlayer(character);
-
+    
 	matthew = new Character();
 	matthew->Init();
 	matthew->transform->SetPosition(2000, 400);
@@ -156,8 +156,8 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
-	doberman->Render();
-	matthew->Render();
+	//doberman->Render();
+	//matthew->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)

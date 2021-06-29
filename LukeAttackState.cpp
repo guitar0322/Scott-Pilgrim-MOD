@@ -16,9 +16,9 @@ void LukeAttackState::Enter(EnemyAI* enemy)
 {
 	_attackTime = 0;
 	if (enemy->enemyinfo->GetDir() == false)
-		enemy->ChangeClip("luke_attack_right", true);
+		enemy->ChangeClip("lee_attack1_right", true);
 	else
-		enemy->ChangeClip("luke_attack_left", true);
+		enemy->ChangeClip("lee_attack1_left", true);
 }
 
 void LukeAttackState::Exit(EnemyAI* enemy)
