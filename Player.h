@@ -98,6 +98,7 @@ public:
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float pickDelay;		//줍는 시간 딜레이
 	float friction;			//마찰
+	float jumpPower;		//점프력
 
 
 	RECT groundCheckRc;

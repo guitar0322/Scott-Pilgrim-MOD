@@ -21,6 +21,7 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 		return new PlayerGroundState();
 	}
 
+	
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
 		return new PlayerJumpKickState();

@@ -11,20 +11,16 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 {
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
-
 		return new PlayerBreakState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
-
 		return new PlayerBreakState();
-
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
 		return new PlayerJumpState();
-
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('L'))
@@ -32,7 +28,6 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 		if (player->isCatch == false)
 		{
 			return new PlayerAttackState();
-
 		}
 		else
 		{
@@ -41,15 +36,8 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerKickAttackState();
+		return new PlayerKickAttackState();
 
-		}
-		else
-		{
-			return new PlayerKickAttackState();
-		}
 	}
 
 
@@ -86,9 +74,13 @@ void PlayerRunState::Enter(Player * player)
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
+		{
 			player->ChangeClip("two_hand_run_right", false);
+		}
 		else
+		{
 			player->ChangeClip("two_hand_run_left", false);
+		}
 	}
 	else
 	{

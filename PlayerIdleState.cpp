@@ -60,7 +60,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			return new PlayerWalkState();
 		}
 
-		
+			
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
@@ -117,7 +117,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		if (player->isCatch == true)  //두손으로 잡았을 때
 		{
 			if (player->dirZ == true && player->dir == true 
-					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+					&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = true;
 				player->jumpZ = false;
@@ -129,7 +129,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 				return new PlayerZorderJumpState();
 			}
 			else if (player->dirZ == true && player->dir == false 
-						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+						&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = false;
 				player->jumpZ = false;
@@ -150,7 +150,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		else //두손으로 안 잡았을 때
 		{
 			if (player->dirZ == true && player->dir == true 
-					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+					&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = true;
 				player->jumpZ = false;
@@ -162,7 +162,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 				return new PlayerZorderJumpState();
 			}
 			else if (player->dirZ == true && player->dir == false 
-				&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+				&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = false;
 				player->jumpZ = false;
@@ -187,7 +187,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		if (player->isCatch == true) //두손으로 잡았을 때
 		{
 			if (player->dirZ == false && player->dir == true 
-					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+					&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = true;
 				player->jumpZ = false;
@@ -199,7 +199,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 				return new PlayerZorderJumpState();
 			}
 			else if (player->dirZ == false && player->dir == false 
-						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+						&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = false;
 				player->jumpZ = false;
@@ -219,7 +219,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		else //두손으로 안 잡았을 때
 		{
 			if (player->dirZ == false && player->dir == true 
-					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+					&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = true;
 				player->jumpZ = false;
@@ -231,7 +231,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 				return new PlayerZorderJumpState();
 			}
 			else if (player->dirZ == false && player->dir == false 
-						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+						&& player->jumpDelay <= 0.8f && player->jumpZ == true)
 			{
 				player->dir = false;
 				player->jumpZ = false;
@@ -279,7 +279,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	}
 
 	//발차기
-	if (KEYMANAGER->isOnceKeyDown('I'))
+	if (KEYMANAGER->isStayKeyDown('I'))
 	{
 		player->jumpZ = false;
 
@@ -289,16 +289,34 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		}
 		else
 		{
-			player->isCatch = true;
-			player->isPick = true;
-			if (player->dir == false)
+			if (player->isCatch == false && player->isCatch == false)
 			{
-				player->ChangeClip("two_hand_pick_right", false);
+				player->isCatch = true;
+				player->isPick = true;
+				if (player->dir == false)
+				{
+					player->ChangeClip("two_hand_pick_right", false);
+				}
+				else
+				{
+					player->ChangeClip("two_hand_pick_left", false);
+				}
 			}
-			else
+			/*
+			if (player->isCatch == true && player->isPick == true)
 			{
-				player->ChangeClip("two_hand_pick_left", false);
-			}
+				player->PutItem();
+				player->isPick = false;
+				if (player->dir == false)
+				{
+					player->ChangeClip("player_idle_right", false);
+				}
+				else
+				{
+					player->ChangeClip("player_idle_left", false);
+
+				}
+			}*/
 		}
 
 	}

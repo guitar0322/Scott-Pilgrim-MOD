@@ -4,8 +4,6 @@ class PlayerKickAttackState :
 	public PlayerState
 {
 private:
-	float _AttackDelay;
-
 
 public:
 	virtual PlayerState* InputHandle(Player* player);
