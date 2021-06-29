@@ -1,13 +1,13 @@
 #pragma once
-#include "Dobermanstate.h"
-class DobermanAttackstate :
-	public Dobermanstate
+#include "EnemyState.h"
+class DobermanAttackState :
+	public EnemyState
 {
 private:
 	float _attackTime;
 public:
-	virtual Dobermanstate* Update(Doberman* doberman);
-	virtual void Enter(Doberman* doberman);
-	virtual void Exit(Doberman* doberman);
+	virtual EnemyState* Update(EnemyAI* enemy);
+	virtual void Enter(EnemyAI* enemy);
+	virtual void Exit(EnemyAI* enemy);
 };
 

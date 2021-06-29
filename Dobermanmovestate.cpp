@@ -1,51 +1,63 @@
 #include "stdafx.h"
 #include "Dobermanmovestate.h"
 #include "Dobermanidlestate.h"
-#include "Doberman.h"
+#include "DobermanAttackstate.h"
+#include "Enemy.h"
 
-Dobermanstate * Dobermanmovestate::Update(Doberman * doberman)
+EnemyState * DobermanMoveState::Update(EnemyAI* enemy)
 {
-	if (doberman->transform->GetX() < doberman->GetPlayer()->GetX())
+	_delaytime += TIMEMANAGER->getElapsedTime();
+
+
+	if (enemy->transform->GetX() < enemy->GetPlayerTransform()->GetX())
 	{
-		if (doberman->GetDir()==true)
+		if (enemy->enemyinfo->GetDir()==true)
 		{
-			doberman->ChangeClip("moveRight", false);
-			doberman->SetDir(false);
+			enemy->ChangeClip("doberman_move_right", false);
+			enemy->enemyinfo->SetDir(false);
 		}
 	}
 	else
 	{
-		if (doberman->GetDir() ==false)
+		if (enemy->enemyinfo->GetDir() == false)
 		{
-			doberman->ChangeClip("moveLeft", false);
-			doberman->SetDir(true);
+			enemy->ChangeClip("doberman_move_left", false);
+			enemy->enemyinfo->SetDir(true);
 		}
 	}
-	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
-		doberman->GetPlayer()->GetX(),doberman->GetPlayer()->GetY())>300) // idle의 반응 거리와 같아야함 다르게 설정하면 서로 표현을 반경때문에 버벅거림.
+	if (GetDistance(enemy->transform->GetX(),enemy->transform->GetY(),
+		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY())>300) // idle의 반응 거리와 같아야함 다르게 설정하면 서로 표현을 반경때문에 버벅거림.
 	{
-		return new Dobermanidlestate();
+		return new DobermanIdleState();
 	}
-	float Angle = GetAngle(doberman->transform->GetX(), doberman->transform->GetY(), doberman->GetPlayer()->GetX(), doberman->GetPlayer()->GetY());
-	doberman->transform->Move(doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(Angle),
-		doberman->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(Angle));
+	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 50)
+	{
+		return new DobermanAttackState();
+	}
 
+
+	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(), 
+				enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
+
+	enemy->transform->Move(enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
+		enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
 
 	return nullptr;
 }
 
-void Dobermanmovestate::Enter(Doberman * doberman)
+void DobermanMoveState::Enter(EnemyAI * doberman)
 {
-	if (doberman->GetDir() == false)
+	if (doberman->enemyinfo->GetDir() == false)
 	{
-		doberman->ChangeClip("moveRight", true);
+		doberman->ChangeClip("doberman_move_right", true);
 	}
 	else
 	{
-		doberman->ChangeClip("moveLeft", true);
+		doberman->ChangeClip("doberman_move_left", true);
 	}
 }
 
-void Dobermanmovestate::Exit(Doberman * doberman)
+void DobermanMoveState::Exit(EnemyAI * doberman)
 {
 }

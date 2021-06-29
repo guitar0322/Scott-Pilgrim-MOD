@@ -1,34 +1,25 @@
 #include "stdafx.h"
 #include "Dobermanidlestate.h"
 #include "Dobermanmovestate.h"
-#include "Doberman.h"
 
-Dobermanstate* Dobermanidlestate::Update(Doberman * doberman)
+EnemyState* DobermanIdleState::Update(EnemyAI* enemy)
 {
 	int SaveTimer;
 
 
-	if (GetDistance(doberman->transform->GetX(),doberman->transform->GetY(),
-		doberman->GetPlayer()->GetX(),doberman->GetPlayer()->GetY()) < 300)
+	if (GetDistance(enemy->transform->GetX(),enemy->transform->GetY(),
+		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY()) < 300)
 	{
-		if (doberman->transform->GetX() < doberman->GetPlayer()->GetX())
+		if (enemy->transform->GetX() < enemy->GetPlayerTransform()->GetX())
 		{
-			if (doberman->GetDir() == true)
-			{
-				doberman->ChangeClip("idleRight", true);
-				doberman->SetDir(false);
-			}
-			return new Dobermanmovestate();
+			enemy->enemyinfo->SetDir(false);
 		}
 		else
 		{
-			if (doberman->GetDir()==false)
-			{
-				doberman->ChangeClip("idleLeft",true);
-				doberman->SetDir(true);
-			}
-			return new Dobermanmovestate();
+			enemy->enemyinfo->SetDir(true);
+
 		}
+		return new DobermanMoveState();
 	}
 	//if (TIMEMANAGER->getWorldTime() >= SaveTimer + 5)
 	//{
@@ -46,24 +37,22 @@ Dobermanstate* Dobermanidlestate::Update(Doberman * doberman)
 	//		break;
 	//	}
 	//}
-
-
-
 	return nullptr;
 }
 
-void Dobermanidlestate::Enter(Doberman * doberman)
+void DobermanIdleState::Enter(EnemyAI * enemy)
 {
-	if (doberman->GetDir() == false)
+	_idleTime = 0;
+	if (enemy->enemyinfo->GetDir() == false)
 	{
-		doberman->ChangeClip("idleRight", true);
+		enemy->ChangeClip("doberman_idle_right", true);
 	}
 	else
 	{
-		doberman->ChangeClip("idleLeft", true);
+		enemy->ChangeClip("doberman_idle_left", true);
 	}
 }
 
-void Dobermanidlestate::Exit(Doberman * doberman)
+void DobermanIdleState::Exit(EnemyAI * enemy)
 {
 }

@@ -1,10 +1,11 @@
 #pragma once
 #include "Matthewstate.h"
-class MatthewAttack3State :
+class MatthewPalmwindState :
 	public Matthewstate
 {
 private:
-	float _attackTime3;
+	float _palmwindtime;
+
 public:
 	virtual Matthewstate* Update(Matthew* matthew);
 	virtual void Enter(Matthew* matthew);
