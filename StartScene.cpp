@@ -98,41 +98,32 @@ HRESULT StartScene::Init()
 
 	// 210627 시영 추가 (Enemy Update)
 
-   /* enemy = new Luke();
-	enemy->transform->SetPosition(1200, 300);
+ //   enemy = new Luke();
+	//enemy->transform->SetPosition(800, 300);
 
-    enemy = new Luke();
-	enemy->transform->SetPosition(800, 300);
+	//enemy->ground->enable = false;
+	//enemy->enemyAI->SetPlayer(character);
+	//enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
+	//enemy->enemyinfo->SetSpeed(30.f);
+ //   
+	//// 210628 광철 도베르만 개선 //
+	//doberman = new Doberman();
+ //   doberman->transform->SetPosition(1200, 400);
 
-	enemy->ground->enable = false;
-	enemy->enemyAI->SetPlayer(character);
-	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
-	enemy->enemyinfo->SetSpeed(30.f);
-    
-	// 210628 광철 도베르만 개선 //
-	doberman = new Doberman();
-    doberman->transform->SetPosition(1200, 400);
-<<<<<<< HEAD
-	doberman->ground->enable = false;
-	doberman->enemyAI->SetPlayer(character);
-	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	doberman->enemyinfo->SetSpeed(100.f);
+	//doberman->ground->enable = false;
+	//doberman->enemyAI->SetPlayer(character);
+	//doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
+	//doberman->enemyinfo->SetSpeed(100.f);
 
-	// 보스 매튜 구현//
-=======
-    doberman->collider->isTrigger = true;
-    doberman->AddComponent(new Doberman());
-    doberman->GetComponent<Doberman>()->Init();
-    doberman->GetComponent<Doberman>()->SetPlayer(character);
-    
->>>>>>> 474d9dd2c30a4acde5ceb348f66577c798d963ed
-	matthew = new Character();
-	matthew->Init();
-	matthew->transform->SetPosition(2000, 400);
-	matthew->collider->isTrigger = true;
-	matthew->AddComponent(new Matthew());
-	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);*/
+	//// 보스 매튜 구현//
+
+	//matthew = new Character();
+	//matthew->Init();
+	//matthew->transform->SetPosition(2000, 400);
+	//matthew->collider->isTrigger = true;
+	//matthew->AddComponent(new Matthew());
+	//matthew->GetComponent<Matthew>()->Init();
+	//matthew->GetComponent<Matthew>()->SetPlayer(character);
 
     BackgroundInit();
     WallInit();
@@ -161,16 +152,13 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
-	matthew->Update();
+	//matthew->Update();
 
-    // 210627 시영 추가 (Enemy Update)
-    enemy->Update();
-	doberman->Update();
 	//doberman->Update();
 	//matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
-    //enemy->Update();
+	//enemy->Update();
 }
 
 void StartScene::Render()
@@ -185,12 +173,11 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
-	matthew->Render();
-	//doberman->Render();
 	//matthew->Render();
+	//doberman->Render();
     EFFECTMANAGER->Render();
 
-    // 210627 시영 추가 (Enemy Update)
+    // 210627 시영 추가 (Enemy Render)
     //enemy->Render();
 
     sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());

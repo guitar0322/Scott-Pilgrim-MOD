@@ -8,7 +8,6 @@ class Player :
 private:
 	float _speed;		//플레이어 속도
 	float _gravity;		//중력
-
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
@@ -119,6 +118,7 @@ public:
 	int GetSpeed() const { return _speed; }
 	int GetGravity() const { return _gravity; }
 	int GetFriction() const { return friction; }
+	//int GetFriction1() const { return }
 	virtual void OnTriggerEnter(GameObject* gameObject);
 	virtual void OnTriggerExit(GameObject* gameObject);
 
