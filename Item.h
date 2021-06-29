@@ -7,10 +7,19 @@ class Item :
 private:
 	Animator* _animator;
 	ZOrder* _zorder;
-;
+
+	int _frictionCount;						//마찰력카운트
+	int _throwTime;							//throw후 시간
+
 	float _itemSpeed;						//아이템의 속도
 	float _gravity;							//중력
 	float _angle;							//각도
+	float _friction;						//마찰력
+
+	float _moveX;
+	float _moveY;
+
+	bool _dir;								//방향값 false가 right   /// true가 left
 
 public:
 	
