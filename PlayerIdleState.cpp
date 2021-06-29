@@ -8,6 +8,7 @@
 #include "PlayerBlockState.h"
 #include "PlayerKickAttackState.h"
 #include "PlayerKickSkillState.h"
+#include "PlayerTwoHandAttackState.h"
 #include "Player.h"
 
 PlayerState * PlayerIdleState::InputHandle(Player * player)
@@ -16,136 +17,272 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
 		//두번 눌렀을 때 run 상태로 변경
-		if (player->dir == false && player->runDelay <= 0.5f && player->runKeyPress == true) {
-			player->dir = false;
-			player->runKeyPress = false;
-			player->isRun = true;
-
-			player->runDelay = 0;
-			return new PlayerRunState();
-		}
-		/*
-		if (player->dir == false && player->isCatch == true)
+		
+		if (player->isCatch == true) //두손무기 들었으면
 		{
+			if (player->dir == false && player->runDelay <= 0.5f && player->runKeyPress == true)
+			{
+				player->dir = false;
+				player->runKeyPress = false;
+				player->isRun = true;
+
+				player->runDelay = 0;
+				return new PlayerRunState();
+			}
+
 			player->dir = false;
+			player->runKeyPress = true;
+			player->runDelay = 0;
+			player->isRun = false;
 
 
-
+			return new PlayerWalkState();
 		}
-		*/
-		//플레이어 오른쪽 걷기
-		player->dir = false;
-		player->runKeyPress = true;
-		player->runDelay = 0;
-		player->isRun = false;
+		else
+		{
+			if (player->dir == false && player->runDelay <= 0.5f && player->runKeyPress == true)
+			{
+				player->dir = false;
+				player->runKeyPress = false;
+				player->isRun = true;
+
+				player->runDelay = 0;
+				return new PlayerRunState();
+			}
+
+			//플레이어 오른쪽 걷기
+			player->dir = false;
+			player->runKeyPress = true;
+			player->runDelay = 0;
+			player->isRun = false;
 
 
-		return new PlayerWalkState();
+			return new PlayerWalkState();
+		}
+
+		
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		if (player->dir == true && player->runDelay <= 0.5f && player->runKeyPress == true) {
+		if (player->isCatch == true) //두손무기 들었으면
+		{
+			if (player->dir == true && player->runDelay <= 0.5f && player->runKeyPress == true) 
+			{
+				player->dir = true;
+				player->runKeyPress = false;
+				player->isRun = true;
+
+
+				player->runDelay = 0;
+				return new PlayerRunState();
+			}
+
 			player->dir = true;
-			player->runKeyPress = false;
-			player->isRun = true;
-
-
+			player->runKeyPress = true;
 			player->runDelay = 0;
-			return new PlayerRunState();
+			player->isRun = false;
+
+			return new PlayerWalkState();
 		}
-		//플레이어 왼쪽
-		player->dir = true;
-		player->runKeyPress = true;
-		player->runDelay = 0;
-		player->isRun = false;
+		else
+		{
+			if (player->dir == true && player->runDelay <= 0.5f && player->runKeyPress == true) 
+			{
+				player->dir = true;
+				player->runKeyPress = false;
+				player->isRun = true;
 
 
-		return new PlayerWalkState();
+				player->runDelay = 0;
+				return new PlayerRunState();
+			}
+
+			//플레이어 왼쪽
+			player->dir = true;
+			player->runKeyPress = true;
+			player->runDelay = 0;
+			player->isRun = false;
+
+			return new PlayerWalkState();
+		}
+
+
+
 
 	}
 	//위 아래 걷기 모드
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		if (player->dir == true && player->jumpDelay <= 0.7f && player->jumpZ == true)
+		//두손
+		if (player->isCatch == true)  //두손으로 잡았을 때
 		{
-			player->dir = true;
-			player->jumpZ = false;
-			player->dirZ = true;
-			player->groundZCheck = true;
-			player->groundCheck = false;
+			if (player->dirZ == true && player->dir == true 
+					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = true;
+				player->jumpZ = false;
+				player->dirZ = true;
+				player->groundZCheck = true;
+				player->groundCheck = false;
 
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+			else if (player->dirZ == true && player->dir == false 
+						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = false;
+				player->jumpZ = false;
+				player->dirZ = true;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+
+			}
+
+			player->dirZ = true;
+			player->jumpZ = true;
 			player->jumpDelay = 0;
-			return new PlayerZorderJumpState();
+			return new PlayerWalkState();
 		}
-		if (player->dir == false && player->jumpDelay <= 0.7f && player->jumpZ == true)
+		else //두손으로 안 잡았을 때
 		{
-			player->dir = false;
-			player->jumpZ = false;
+			if (player->dirZ == true && player->dir == true 
+					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = true;
+				player->jumpZ = false;
+				player->dirZ = true;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+			else if (player->dirZ == true && player->dir == false 
+				&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = false;
+				player->jumpZ = false;
+				player->dirZ = true;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+
+			}
+
 			player->dirZ = true;
-			player->groundZCheck = true;
-			player->groundCheck = false;
-
-
+			player->jumpZ = true;
 			player->jumpDelay = 0;
-			return new PlayerZorderJumpState();
+			return new PlayerWalkState();
 		}
-			   		
-		player->jumpZ = true;
-		player->jumpDelay = 0;
-		return new PlayerWalkState();
-
 
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		if (player->dir == true && player->jumpDelay <= 0.7f && player->jumpZ == true)
+		if (player->isCatch == true) //두손으로 잡았을 때
 		{
-			player->dir = true;
-			player->jumpZ = false;
-			player->dirZ = false;
-			player->groundZCheck = true;
-			player->groundCheck = false;
+			if (player->dirZ == false && player->dir == true 
+					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = true;
+				player->jumpZ = false;
+				player->dirZ = false;
+				player->groundZCheck = true;
+				player->groundCheck = false;
 
-			player->jumpDelay = 0;
-			return new PlayerZorderJumpState();
-		}
-		if (player->dir == false && player->jumpDelay <= 0.7f && player->jumpZ == true) 
-		{
-			player->dir = false;
-			player->jumpZ = false;
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+			else if (player->dirZ == false && player->dir == false 
+						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = false;
+				player->jumpZ = false;
+				player->dirZ = false;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+
 			player->dirZ = false;
-			player->groundZCheck = true;
-			player->groundCheck = false;
-					   
+			player->jumpZ = true;
 			player->jumpDelay = 0;
-			return new PlayerZorderJumpState();
+			return new PlayerWalkState();
 		}
-		
-		player->jumpZ = true;
-		player->jumpDelay = 0;
-		return new PlayerWalkState();
+		else //두손으로 안 잡았을 때
+		{
+			if (player->dirZ == false && player->dir == true 
+					&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = true;
+				player->jumpZ = false;
+				player->dirZ = false;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+			else if (player->dirZ == false && player->dir == false 
+						&& player->jumpDelay <= 0.7f && player->jumpZ == true)
+			{
+				player->dir = false;
+				player->jumpZ = false;
+				player->dirZ = false;
+				player->groundZCheck = true;
+				player->groundCheck = false;
+
+				player->jumpDelay = 0;
+				return new PlayerZorderJumpState();
+			}
+
+			player->dirZ = false;
+			player->jumpZ = true;
+			player->jumpDelay = 0;
+			return new PlayerWalkState();
+		}
 
 	}
 
 	//점프
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
+		player->jumpZ = false;
 
 		return new PlayerJumpState();
+		
 	}
 
 	//공격
 	//주먹공격
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
+		player->jumpZ = false;
+		if (player->isCatch == false)
+		{
+			return new PlayerAttackState();
+		}
+		else
+		{
+			return new PlayerTwoHandAttackState();
 
-		return new PlayerAttackState();
+		}
+		
 
 	}
 
 	//발차기
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
+		player->jumpZ = false;
+
 		if (player->item == nullptr)
 		{
 			return new PlayerKickAttackState();
@@ -171,6 +308,8 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//막기
 	if (KEYMANAGER->isStayKeyDown('K'))
 	{
+		player->jumpZ = false;
+
 		player->block = true;
 		return new PlayerBlockState();
 	
@@ -179,6 +318,8 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//공격 스킬
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
+		player->jumpZ = false;
+
 		return new PlayerKickSkillState();
 	}
 

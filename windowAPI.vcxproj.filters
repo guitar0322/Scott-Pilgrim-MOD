@@ -249,6 +249,14 @@
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
     <ClCompile Include="MatthewPalmwindState.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAI.cpp" />
+    <ClCompile Include="EnemyInfo.cpp" />
+    <ClCompile Include="Luke.cpp" />
+    <ClCompile Include="LukeAttackState.cpp" />
+    <ClCompile Include="LukeIdleState.cpp" />
+    <ClCompile Include="LukeRunState.cpp" />
+    <ClCompile Include="PlayerTwoHandAttackState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -505,6 +513,14 @@
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
     <ClInclude Include="MatthewPalmwindState.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAI.h" />
+    <ClInclude Include="EnemyInfo.h" />
+    <ClInclude Include="Luke.h" />
+    <ClInclude Include="LukeAttackState.h" />
+    <ClInclude Include="LukeIdleState.h" />
+    <ClInclude Include="LukeRunState.h" />
+    <ClInclude Include="PlayerTwoHandAttackState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

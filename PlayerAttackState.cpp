@@ -57,7 +57,7 @@ void PlayerAttackState::Update(Player * player)
 
 void PlayerAttackState::Enter(Player * player)
 {
-
+	
 	if (player->dir == false)
 	{
 		player->ChangeClip("attack1_right", false);
@@ -66,7 +66,9 @@ void PlayerAttackState::Enter(Player * player)
 	{
 		player->ChangeClip("attack1_left", false);
 	}
+
 }
+	
 
 void PlayerAttackState::Exit(Player * player)
 {

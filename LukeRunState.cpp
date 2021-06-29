@@ -10,7 +10,7 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	{
 		if (enemy->enemyinfo->GetDir() == true)
 		{
-			enemy->ChangeClip("luke_run_right", false);
+			enemy->ChangeClip("lee_run_right", false);
 			enemy->enemyinfo->SetDir(false);
 		}
 	}
@@ -18,7 +18,7 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	{
 		if (enemy->enemyinfo->GetDir() == false)
 		{
-			enemy->ChangeClip("luke_run_left", false);
+			enemy->ChangeClip("lee_run_left", false);
 			enemy->enemyinfo->SetDir(true);
 		}
 	}
@@ -47,9 +47,9 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 void LukeRunState::Enter(EnemyAI* enemy)
 {
 	if (enemy->enemyinfo->GetDir() == false)
-		enemy->ChangeClip("luke_run_right", true);
+		enemy->ChangeClip("lee_run_right", true);
 	else
-		enemy->ChangeClip("luke_run_left", true);
+		enemy->ChangeClip("lee_run_left", true);
 }
 
 void LukeRunState::Exit(EnemyAI* enemy)
