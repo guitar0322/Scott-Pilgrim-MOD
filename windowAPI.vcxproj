@@ -187,6 +187,7 @@
     <ClInclude Include="Matthewattackstate.h" />
     <ClInclude Include="Matthewidlestate.h" />
     <ClInclude Include="Matthewmovestate.h" />
+    <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Matthewstate.h" />
     <ClInclude Include="Luke.h" />
     <ClInclude Include="LukeAttackState.h" />
@@ -280,6 +281,7 @@
     <ClCompile Include="Matthewattackstate.cpp" />
     <ClCompile Include="Matthewidlestate.cpp" />
     <ClCompile Include="Matthewmovestate.cpp" />
+    <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Matthewstate.cpp" />
     <ClCompile Include="Luke.cpp" />
     <ClCompile Include="LukeAttackState.cpp" />

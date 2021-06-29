@@ -13,8 +13,7 @@ private:
 public:
 	Matthew();
 	~Matthew();
-	Renderer* renderer;
-	Animator* animation;
+	Animator* animator;
 	BoxCollider* collision;
 	virtual void Init();
 	virtual void Release();

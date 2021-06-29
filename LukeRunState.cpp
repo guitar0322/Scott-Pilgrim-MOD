@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "LukeIdleState.h"
 #include "LukeRunState.h"
+#include "LukeAttackState.h"
 
 EnemyState* LukeRunState::Update(EnemyAI* enemy)
 {
@@ -9,7 +10,7 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	{
 		if (enemy->enemyinfo->GetDir() == true)
 		{
-			enemy->ChangeClip("luke_run_right", false);
+			enemy->ChangeClip("lee_run_right", false);
 			enemy->enemyinfo->SetDir(false);
 		}
 	}
@@ -17,7 +18,7 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	{
 		if (enemy->enemyinfo->GetDir() == false)
 		{
-			enemy->ChangeClip("luke_run_left", false);
+			enemy->ChangeClip("lee_run_left", false);
 			enemy->enemyinfo->SetDir(true);
 		}
 	}
@@ -26,6 +27,11 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) > 200)
 	{
 		return new LukeIdleState();
+	}
+	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 100)
+	{
+		return new LukeAttackState();
 	}
 
 	// TODO - AI XÃà, YÃà, 
@@ -41,9 +47,9 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 void LukeRunState::Enter(EnemyAI* enemy)
 {
 	if (enemy->enemyinfo->GetDir() == false)
-		enemy->ChangeClip("luke_run_right", true);
+		enemy->ChangeClip("lee_run_right", true);
 	else
-		enemy->ChangeClip("luke_run_left", true);
+		enemy->ChangeClip("lee_run_left", true);
 }
 
 void LukeRunState::Exit(EnemyAI* enemy)

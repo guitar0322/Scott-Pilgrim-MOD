@@ -78,37 +78,63 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-	/* LUKE CLIP MANAGER  */
-	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 320, 132, 4, 0.20f);
-	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 320, 132, 4, 0.20f);
-	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 1188, 134, 11, 0.20f);
-	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 1188, 134, 11, 0.20f);
-	CLIPMANAGER->AddClip("luke_attack_right", "luke/luke_attack_right.bmp", 585, 64, 9, 0.20f);
-	CLIPMANAGER->AddClip("luke_attack_left", "luke/luke_attack_left.bmp", 585, 64, 9, 0.20f);
+	/* LEE CLIP MANAGER  */
+	CLIPMANAGER->AddClip("lee_idle_right",     "lee/lee_idle_right.bmp",       400, 66, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_idle_left",      "lee/lee_idle_left.bmp",        400, 66, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_run_right",      "lee/lee_run_right.bmp",        432, 72, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_run_left",       "lee/lee_run_left.bmp",         432, 72, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack1_right",  "lee/lee_attack1_right.bmp",    280, 64, 4, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack1_left",   "lee/lee_attack1_left.bmp",     280, 64, 4, 0.20f);
+
+	/*Doberman CLIP MANAGER*/
+	CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
+	CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
+	//CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
+	//CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
+	CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
+
+
 
 	// 210627 시영 추가 (Enemy Update)
-    enemy = new Luke();
+
+   /* enemy = new Luke();
 	enemy->transform->SetPosition(1200, 300);
+
+    enemy = new Luke();
+	enemy->transform->SetPosition(800, 300);
+
 	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
 	enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
 	enemy->enemyinfo->SetSpeed(30.f);
     
-    doberman = new Character();
-    doberman->Init();
+	// 210628 광철 도베르만 개선 //
+	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
+<<<<<<< HEAD
+	doberman->ground->enable = false;
+	doberman->enemyAI->SetPlayer(character);
+	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
+	doberman->enemyinfo->SetSpeed(100.f);
+
+	// 보스 매튜 구현//
+=======
     doberman->collider->isTrigger = true;
     doberman->AddComponent(new Doberman());
     doberman->GetComponent<Doberman>()->Init();
     doberman->GetComponent<Doberman>()->SetPlayer(character);
-
+    
+>>>>>>> 474d9dd2c30a4acde5ceb348f66577c798d963ed
 	matthew = new Character();
 	matthew->Init();
 	matthew->transform->SetPosition(2000, 400);
 	matthew->collider->isTrigger = true;
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	matthew->GetComponent<Matthew>()->SetPlayer(character);*/
 
     BackgroundInit();
     WallInit();
@@ -137,11 +163,16 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
-	doberman->Update();
 	matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
+	doberman->Update();
+	//doberman->Update();
+	//matthew->Update();
+
+    // 210627 시영 추가 (Enemy Update)
+    //enemy->Update();
 }
 
 void StartScene::Render()
@@ -156,8 +187,9 @@ void StartScene::Render()
     }
     testGround->Render();
 	trashBox->Render();
-	doberman->Render();
 	matthew->Render();
+	//doberman->Render();
+	//matthew->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Update)

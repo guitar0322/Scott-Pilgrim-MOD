@@ -4,13 +4,13 @@
 #include "Matthewattackstate.h"
 #include "Matthew.h"
 
-Matthewstate * Matthewmovestate::Update(Matthew * matthew)
+Matthewstate * MatthewMoveState::Update(Matthew * matthew)
 {
 	if (matthew->transform->GetX() < matthew->GetPlayer()->GetX())
 	{
 		if (matthew->Getdir() == true)
 		{
-			matthew->ChangeCilp("MatthewmoveRight", false);
+			matthew->ChangeCilp("matthew_move_right", false);
 			matthew->Setdir(false);
 		}
 	}
@@ -18,40 +18,40 @@ Matthewstate * Matthewmovestate::Update(Matthew * matthew)
 	{
 		if (matthew->Getdir() == false)
 		{
-			matthew->ChangeCilp("MatthewmoveLeft", false);
+			matthew->ChangeCilp("matthew_move_left", false);
 			matthew->Setdir(true);
 		}
 	}
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 200)
 	{
-		return new Matthewidlestate;
+		return new MatthewIdleState;
 	}
 	if (GetDistance(matthew->transform->GetX(),matthew->transform->GetY(),matthew->GetPlayer()->GetX(),matthew->GetPlayer()->GetY())<50)
 	{
-		return new Matthewattackstate;
+		return new MatthewAttackState;
 	}
 
-	float Angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
-	matthew->transform->Move(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(Angle),
-							 matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(Angle));
+	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
+	matthew->transform->Move(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
+							 matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
 
 	return nullptr;
 }
 
-void Matthewmovestate::Enter(Matthew * matthew)
+void MatthewMoveState::Enter(Matthew * matthew)
 {
 	if (matthew->Getdir() == false)
 	{
-		matthew->ChangeCilp("MatthewmoveRight", true);
+		matthew->ChangeCilp("matthew_move_right", true);
 	}
 	else
 	{
-		matthew->ChangeCilp("MatthewmoveLeft", true);
+		matthew->ChangeCilp("matthew_move_left", true);
 	}
 
 }
 
-void Matthewmovestate::Exit(Matthew * matthew)
+void MatthewMoveState::Exit(Matthew * matthew)
 {
 }

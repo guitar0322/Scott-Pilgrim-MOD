@@ -1,45 +1,51 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "Player.h"
 
 void Item::Init()
 {
 	_animator = gameObject->GetComponent<Animator>();
-	//_zOrder = gameObject->GetComponent<ZOrder>();
-	player = gameObject->GetComponent<Player>();
+	_zorder = gameObject->GetComponent<ZOrder>();
 
-	//_itemZ = _zorder->GetZ(); //현재 itemZ값은 item의 zorder gety값이다
-
-	enterNum = 0;
-	exitNum = 0;
-
-	_itemSpeed = 210;
-	////_gravity = 80;
-	//_gravity = 0;
-
-	_leftThrowItem = false;							//아이템 left로 안던짐
-	_rightThrowItem = false;						//아이템 right로 안던짐
-
-	_ItemRangeOutLeftCameraX = false;				//item이 cameraX의 left  좌표로 벗어나지 않았다
-	_ItemRangeOutRightCameraX = false;				//item이 cameraX의 right 좌표로 벗어나지 않았다
+	itemZ = 0;
+	_friction = 0.0007f;		//마찰력
+	_frictionCount = 0;
+	_angle = 0;
+	//_angle = PI;
+	_throwTime = 0;
+	_gravity = 0;
+	_itemSpeed = 290;
 }
 
 void Item::Update()
 {
-	transform->MoveX(_itemSpeed * TIMEMANAGER->getElapsedTime());
-	transform->MoveY(_gravity * TIMEMANAGER->getElapsedTime());
-
+	_throwTime++;
+	transform->MoveX(_moveX * TIMEMANAGER->getElapsedTime());
+	transform->MoveY(_moveY * TIMEMANAGER->getElapsedTime());
+		
 	if (MainCam->transform->GetX() - MainCam->GetRenderWidth() / 2 + 37 >= transform->GetX()
 		|| MainCam->transform->GetX() + MainCam->GetRenderWidth() / 2 - 37 <= transform->GetX())
 	{
-		_itemSpeed *= -1;			//item이 범위 초과시 right로 이동
-		_gravity = 80;
+		_moveX *= -1;					//범위 초과시 x 좌표 방향 바꿔줌		
 	}
 
-	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= _itemZ)
-	{
-		_itemSpeed = 0;
-		_gravity = 0;
+	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= itemZ && itemZ != 0 )
+	{	
+		_frictionCount++;
+
+		if (!_dir)
+		{
+			_moveX * _friction;
+		}
+		if(_dir)
+		{
+			-(_moveX * _friction);
+		}
+		if (_frictionCount > 100)
+		{
+			_moveX = 0;
+			_frictionCount = 0;
+		}
+		_moveY = 0;
 	}
 }
 
@@ -53,32 +59,22 @@ void Item::SetItemImage(string imageName)
 	_animator->SetClip(imageName);
 }
 
-void Item::OnCollision(GameObject* gameObject)
+void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 {
-	enterNum++;
-}
-
-void Item::OnTriggerEnter(GameObject* gameObject)
-{
-	enterNum++;
-}
-
-void Item::OnTriggerExit(GameObject* gameObject)
-{
-	exitNum++;
-}
-
-void Item::Throw(bool dir)
-{
-	_throwDir = dir;
-	_gravity = 0;
-	if (dir == false)
+	throwDir = dir;	
+	
+	if (dir == false)				//right일때
 	{
-		_itemSpeed = 210;
+		_angle = -(PI/8);			//약 -22;
+		//_angle = -(PI / 4);       //약 -45;
 	}
-	else
+	else							//left일때
 	{
-		_itemSpeed = -210;
+		_angle = -(PI / 1.3);				
 	}
+	//_gravity = 160;
+	//_gravity += 25;
+	//_gravity = 10;
+	_moveX += cosf(_angle) * _itemSpeed;
+	_moveY += -sinf(_angle) * _itemSpeed + _gravity;
 }
-

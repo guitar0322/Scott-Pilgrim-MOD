@@ -8,10 +8,13 @@ class Player :
 private:
 	float _speed;		//플레이어 속도
 	float _gravity;		//중력
-//	float _itemZ;		//item의z값을 넣어주기 위한 변수
+
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
+
+	
+	//float _friction;	//마찰
 
 	PlayerState* _state;
 
@@ -90,16 +93,18 @@ public:
 
 	bool block;			//막기 구분
 	bool dirZ;			//Z축 (true -> 위/ false->아래)
+
 	bool onGround;
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
 
+	bool attackChange;
+	
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float pickDelay;		//줍는 시간 딜레이
 	float friction;			//마찰
 	float jumpPower;		//점프력
-
 
 	RECT groundCheckRc;
 

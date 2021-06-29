@@ -3,7 +3,7 @@
 #include "Matthewmovestate.h"
 #include "Matthew.h"
 
-Matthewstate * Matthewidlestate::Update(Matthew* matthew)
+Matthewstate * MatthewIdleState::Update(Matthew* matthew)
 {
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 200)
@@ -12,37 +12,37 @@ Matthewstate * Matthewidlestate::Update(Matthew* matthew)
 		{
 			if (matthew->Getdir() == true)
 			{
-				matthew->ChangeCilp("MatthewidleRight", true);
+				matthew->ChangeCilp("matthew_idle_right", true);
 				matthew->Setdir(false);
 			}
-			return new Matthewmovestate();
+			return new MatthewMoveState();
 		}
 		else
 		{
 			if (matthew->Getdir() == false)
 			{
-				matthew->ChangeCilp("MatthewidleLeft", true);
+				matthew->ChangeCilp("matthew_idle_left", true);
 				matthew->Setdir(true);
 			}
-			return new Matthewmovestate();
+			return new MatthewMoveState();
 		}
 	}
 	return nullptr;
 }
 
-void Matthewidlestate::Enter(Matthew * matthew)
+void MatthewIdleState::Enter(Matthew * matthew)
 {
 	if (matthew->Getdir()==false)
 	{
-		matthew->ChangeCilp("MatthewidleRight", true);
+		matthew->ChangeCilp("matthew_idle_right", true);
 	}
 	else
 	{
-		matthew->ChangeCilp("MatthewidleLeft", true);
+		matthew->ChangeCilp("matthew_idle_left", true);
 	}
 
 }
 
-void Matthewidlestate::Exit(Matthew * matthew)
+void MatthewIdleState::Exit(Matthew * matthew)
 {
 }

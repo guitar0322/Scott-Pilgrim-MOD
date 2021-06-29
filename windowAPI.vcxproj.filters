@@ -248,6 +248,7 @@
     <ClCompile Include="Zone.cpp">
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
+    <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
@@ -511,6 +512,7 @@
     <ClInclude Include="Zone.h">
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
+    <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
