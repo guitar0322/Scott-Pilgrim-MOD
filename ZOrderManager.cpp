@@ -19,8 +19,8 @@ void ZOrderManager::release()
 {
 }
 
-bool CompareBottom(ZOrder* rendererA, ZOrder* rendererB) {
-	return rendererA->GetZ() < rendererB->GetZ();
+bool CompareBottom(ZOrder* zOrderA, ZOrder* zOrderB) {
+	return zOrderA->GetZ() < zOrderB->GetZ();
 }
 void ZOrderManager::Update()
 {

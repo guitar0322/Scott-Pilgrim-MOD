@@ -18,10 +18,8 @@ HRESULT StartScene::Init()
 {
     Scene::Init();
     CameraInit();
-    //sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
-    //sceneInfoLoader.LoadObjectInfo();
-    //_objectV[0]->GetComponent<Renderer>()->SetAlphaMode(true, 125);
-    //_objectV[0]->GetComponent<Renderer>()->SetScale(3.f, 3.f);
+    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
+    sceneInfoLoader.LoadObjectInfo();
 
     //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============

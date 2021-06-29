@@ -193,6 +193,7 @@
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="ObjectInfo.h" />
+    <ClInclude Include="Outline.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackState.h" />
@@ -285,6 +286,7 @@
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
+    <ClCompile Include="Outline.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />

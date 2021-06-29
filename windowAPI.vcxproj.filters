@@ -248,6 +248,7 @@
     <ClCompile Include="Zone.cpp">
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
+    <ClCompile Include="Outline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -503,6 +504,7 @@
     <ClInclude Include="Zone.h">
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
+    <ClInclude Include="Outline.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
