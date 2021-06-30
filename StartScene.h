@@ -27,6 +27,8 @@ public:
     // 210627 시영 추가 (Enemy 동적할당)
     Enemy* enemy;
 	Enemy* doberman;
+	Enemy* malcolm;
+	Enemy* william;
 
     virtual HRESULT Init();
     virtual void Release();
@@ -36,5 +38,6 @@ public:
     void BackgroundInit();
     void CameraInit();
     void WallInit();
+    // 210629 시영 추가 (에너미 클립전용 함수 생성)
+    void EnemyClipManager();
 };
-

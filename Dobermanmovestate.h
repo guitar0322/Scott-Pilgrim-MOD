@@ -3,10 +3,6 @@
 class DobermanMoveState :
 	public EnemyState
 {
-private:
-	float _delaytime;
-
-
 public:
 	virtual EnemyState* Update(EnemyAI* enemy);
 	virtual void Enter(EnemyAI* enemy);

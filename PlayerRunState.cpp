@@ -38,10 +38,14 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
 		return new PlayerKickAttackState();
-
 	}
 	if (player->zOrder->GetZ() == 1000)
 	{
+		return new PlayerFallState();
+	}
+	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
+	{
+		player->onGround = false;
 		return new PlayerFallState();
 	}
 
@@ -76,9 +80,6 @@ void PlayerRunState::Update(Player * player)
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 
-	
-	
-
 }
 
 void PlayerRunState::Enter(Player * player)
@@ -87,22 +88,22 @@ void PlayerRunState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_run_right", false);
+			player->ChangeClip("two_hand_run_right", true);
 		}
 		else
 		{
-			player->ChangeClip("two_hand_run_left", false);
+			player->ChangeClip("two_hand_run_left", true);
 		}
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("run_right", false);
+			player->ChangeClip("run_right", true);
 		}
 		else
 		{
-			player->ChangeClip("run_left", false);
+			player->ChangeClip("run_left", true);
 		}
 	}
 	

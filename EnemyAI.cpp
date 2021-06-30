@@ -36,7 +36,7 @@ void EnemyAI::Update()
 
 void EnemyAI::Render()
 {
-	// 렌더러가 알아서 그려주므로 그려줄 필요가 없다.
+
 }
 
 void EnemyAI::ChangeClip(string clipName, bool isInitFrame)

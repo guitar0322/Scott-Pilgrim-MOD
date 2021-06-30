@@ -48,22 +48,22 @@ void PlayerZorderJumpState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_Zorder_right", false);
+			player->ChangeClip("two_hand_Zorder_right", true);
 		}
 		else
 		{
-			player->ChangeClip("two_hand_Zorder_left", false);
+			player->ChangeClip("two_hand_Zorder_left", true);
 		}
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("jump_Zorder_right", false);
+			player->ChangeClip("jump_Zorder_right", true);
 		}
 		else
 		{
-			player->ChangeClip("jump_Zorder_left", false);
+			player->ChangeClip("jump_Zorder_left", true);
 		}
 	}
 }

@@ -19,7 +19,7 @@ PlayerState * PlayerBlockState::InputHandle(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("walk_right", false);
+			player->ChangeClip("walk_right", true);
 			player->animator->Resume();
 			return new PlayerWalkState();
 		}
@@ -39,7 +39,7 @@ PlayerState * PlayerBlockState::InputHandle(Player * player)
 		}
 		else
 		{
-			player->ChangeClip("walk_left", false);
+			player->ChangeClip("walk_left", true);
 			player->animator->Resume();
 			return new PlayerWalkState();
 		}
@@ -96,11 +96,11 @@ void PlayerBlockState::Enter(Player * player)
 {
 	if (player->dir == false)
 	{
-		player->ChangeClip("block_right", false);
+		player->ChangeClip("block_right", true);
 	}
 	else
 	{
-		player->ChangeClip("block_left", false);
+		player->ChangeClip("block_left", true);
 	}
 }
 

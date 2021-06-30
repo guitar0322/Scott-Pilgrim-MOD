@@ -47,15 +47,6 @@
     <ClCompile Include="Doberman.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="DobermanAttackstate.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="Dobermanidlestate.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="Dobermanmovestate.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>Manager\Framework</Filter>
     </ClCompile>
@@ -92,7 +83,7 @@
     <ClCompile Include="Luke.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="LukeAttackState.cpp">
+    <ClCompile Include="LukeAttack1State.cpp">
       <Filter>EnemyState\Luke</Filter>
     </ClCompile>
     <ClCompile Include="LukeIdleState.cpp">
@@ -103,24 +94,6 @@
     </ClCompile>
     <ClCompile Include="Matthew.cpp">
       <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewattack2state.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewattack3state.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewattackstate.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewidlestate.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewmovestate.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthewstate.cpp">
-      <Filter>EnemyState\Matthew</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAttackState.cpp">
       <Filter>PlayerState</Filter>
@@ -254,7 +227,6 @@
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
     <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeAttackState.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="PlayerTwoHandAttackState.cpp" />
@@ -262,6 +234,51 @@
     <ClCompile Include="MapManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="DobermanAttackState.cpp">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClCompile>
+    <ClCompile Include="DobermanIdleState.cpp">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClCompile>
+    <ClCompile Include="DobermanMoveState.cpp">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewAttack2State.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewAttack3State.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewAttackState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewIdleState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewMoveState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="Malcolm.cpp" />
+    <ClCompile Include="MalcolmIdleState.cpp" />
+    <ClCompile Include="MalcolmMoveState.cpp" />
+    <ClCompile Include="MalcolmAttackState.cpp" />
+    <ClCompile Include="MalcolmhitState.cpp" />
+    <ClCompile Include="William.cpp" />
+    <ClCompile Include="WilliamIdleState.cpp" />
+    <ClCompile Include="WilliamMoveState.cpp" />
+    <ClCompile Include="WilliamAttackState.cpp" />
+    <ClCompile Include="DobermanHitState.cpp" />
+    <ClCompile Include="MatthehHitState.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp" />
+    <ClCompile Include="LukeAttack3State.cpp" />
+    <ClCompile Include="LukeBlockState.cpp" />
+    <ClCompile Include="LukeDieState.cpp" />
+    <ClCompile Include="LukeHitState.cpp" />
+    <ClCompile Include="LukeWalkState.cpp" />
+    <ClCompile Include="LukeKickState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -313,15 +330,6 @@
     <ClInclude Include="Doberman.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="DobermanAttackstate.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="Dobermanidlestate.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="Dobermanmovestate.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>Manager\Framework</Filter>
     </ClInclude>
@@ -358,7 +366,7 @@
     <ClInclude Include="Luke.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="LukeAttackState.h">
+    <ClInclude Include="LukeAttack1State.h">
       <Filter>EnemyState\Luke</Filter>
     </ClInclude>
     <ClInclude Include="LukeIdleState.h">
@@ -369,24 +377,6 @@
     </ClInclude>
     <ClInclude Include="Matthew.h">
       <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewattack2state.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewattack3state.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewattackstate.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewidlestate.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewmovestate.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthewstate.h">
-      <Filter>EnemyState\Matthew</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAttackState.h">
       <Filter>PlayerState</Filter>
@@ -523,7 +513,6 @@
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
     <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeAttackState.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="PlayerTwoHandAttackState.h" />
@@ -531,6 +520,51 @@
     <ClInclude Include="MapManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="DobermanAttackState.h">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClInclude>
+    <ClInclude Include="DobermanIdleState.h">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClInclude>
+    <ClInclude Include="DobermanMoveState.h">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewAttack2State.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewAttack3State.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewAttackState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewIdleState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewMoveState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="Malcolm.h" />
+    <ClInclude Include="MalcolmIdleState.h" />
+    <ClInclude Include="MalcolmMoveState.h" />
+    <ClInclude Include="MalcolmAttackState.h" />
+    <ClInclude Include="MalcolmhitState.h" />
+    <ClInclude Include="William.h" />
+    <ClInclude Include="WilliamIdleState.h" />
+    <ClInclude Include="WilliamMoveState.h" />
+    <ClInclude Include="WilliamAttackState.h" />
+    <ClInclude Include="DobermanHitState.h" />
+    <ClInclude Include="MatthehHitState.h" />
+    <ClInclude Include="LukeAttack2State.h" />
+    <ClInclude Include="LukeAttack3State.h" />
+    <ClInclude Include="LukeBlockState.h" />
+    <ClInclude Include="LukeDieState.h" />
+    <ClInclude Include="LukeHitState.h" />
+    <ClInclude Include="LukeWalkState.h" />
+    <ClInclude Include="LukeKickState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

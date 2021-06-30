@@ -2,6 +2,7 @@
 #include "PlayerBreakState.h"
 #include "PlayerWalkState.h"
 #include "PlayerIdleState.h"
+#include "PlayerWalkState.h"
 #include "player.h"
 
 PlayerState* PlayerBreakState::InputHandle(Player* player)
@@ -65,19 +66,19 @@ void PlayerBreakState::Enter(Player * player)
 	{
 		if (player->dir == false)
 
-			player->ChangeClip("two_hand_idle_right", false);
+			player->ChangeClip("two_hand_idle_right", true);
 		else
-			player->ChangeClip("two_hand_idle_left", false);
+			player->ChangeClip("two_hand_idle_left", true);
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("idle_right", false);
+			player->ChangeClip("idle_right", true);
 		}
 		else
 		{
-			player->ChangeClip("idle_left", false);
+			player->ChangeClip("idle_left", true);
 		}
 	}
 }

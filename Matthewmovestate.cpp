@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "Matthewmovestate.h"
-#include "Matthewidlestate.h"
-#include "Matthewattackstate.h"
+#include "MatthewMoveState.h"
+#include "MatthewIdleState.h"
+#include "MatthewAttackState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewMoveState::Update(Matthew * matthew)

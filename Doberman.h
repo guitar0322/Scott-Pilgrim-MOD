@@ -3,7 +3,6 @@
 
 class Doberman : public Enemy
 {
-private:
 
 public:
 	Doberman();
