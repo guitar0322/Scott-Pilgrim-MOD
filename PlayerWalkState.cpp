@@ -52,10 +52,12 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	}
 	if (KEYMANAGER->isOnceKeyUp('W') && !KEYMANAGER->isStayKeyDown('D') && !KEYMANAGER->isStayKeyDown('A'))
 	{
+		player->runKeyPress = false;
 		return new PlayerIdleState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('S') && !KEYMANAGER->isStayKeyDown('D') && !KEYMANAGER->isStayKeyDown('A'))
 	{
+		player->runKeyPress = false;
 		return new PlayerIdleState();
 	}
 
@@ -103,6 +105,17 @@ void PlayerWalkState::Update(Player * player)
 {
 	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false) 
 	{
+		_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.6f && player->isCatch == true)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->Move(-1.5f,-2.2f);
+			else
+				player->GetItemTransform()->Move(1.5f, 2.2f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
+
 		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
 			player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
@@ -111,6 +124,16 @@ void PlayerWalkState::Update(Player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
+		_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.6f && player->isCatch == true)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->Move(-1.5f,-2.2f);
+			else
+				player->GetItemTransform()->Move(1.5f,2.2f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
 		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
 			player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
@@ -130,14 +153,21 @@ void PlayerWalkState::Update(Player * player)
 }
 
 void PlayerWalkState::Enter(Player * player)
-{
+{	
+	_itemShakeTime = 0;
+
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
-
-			player->ChangeClip("two_hand_walk_right", true);
+		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() - 14, player->transform->GetY() - 77);
+			player->ChangeClip("two_hand_walk_right", false);
+		}
 		else
-			player->ChangeClip("two_hand_walk_left", true);
+		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() + 14, player->transform->GetY() - 77);
+			player->ChangeClip("two_hand_walk_left", false);
+		}
 	}
 	else
 	{
@@ -154,4 +184,8 @@ void PlayerWalkState::Enter(Player * player)
 
 void PlayerWalkState::Exit(Player * player)
 {
+	if (_itemShakeDir == true)
+	{
+		player->GetItemTransform()->Move(-1.5f,-2.2f);
+	}
 }

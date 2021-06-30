@@ -4,7 +4,7 @@
 #include "CameraControler.h"
 #define BG_NUM 23
 #define WALL_NUM 3
-
+#define SUCCUBUSMAX 4
 class WallObj;
 
 class StartScene :
@@ -22,6 +22,7 @@ public:
     ImageObject* imageObj;
     Character* character;
 	Character* matthew;
+	Character* succubus[SUCCUBUSMAX];
 	GameObject* player;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
@@ -32,6 +33,7 @@ public:
 	Enemy* malcolm;
 	Enemy* william;
 
+
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();
@@ -40,6 +42,8 @@ public:
     void BackgroundInit();
     void CameraInit();
     void WallInit();
+	void ItemImageClip();
     // 210629 시영 추가 (에너미 클립전용 함수 생성)
     void EnemyClipManager();
+	void EffectClipInit();
 };

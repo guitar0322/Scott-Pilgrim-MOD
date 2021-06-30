@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#define SUCCUBUSMAX 4
 class Matthewstate;
 class Matthew : public Component
 {
@@ -13,6 +14,7 @@ private:
 public:
 	Matthew();
 	~Matthew();
+	GameObject* _succubus[SUCCUBUSMAX];
 	Animator* animator;
 	BoxCollider* collision;
 	virtual void Init();

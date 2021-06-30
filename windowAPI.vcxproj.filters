@@ -221,15 +221,12 @@
     <ClCompile Include="Zone.cpp">
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
-    <ClCompile Include="Outline.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
     <ClCompile Include="Luke.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
-    <ClCompile Include="PlayerTwoHandAttackState.cpp" />
-    <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="MapManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -299,9 +296,6 @@
     <ClCompile Include="MalcolmMoveState.cpp">
       <Filter>EnemyState\Malcolm</Filter>
     </ClCompile>
-    <ClCompile Include="MatthehHitState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
     <ClCompile Include="MatthewPalmwindState.cpp">
       <Filter>EnemyState\Matthew</Filter>
     </ClCompile>
@@ -318,6 +312,51 @@
       <Filter>EnemyState\William</Filter>
     </ClCompile>
     <ClCompile Include="CameraControler.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MalcolmKickState.cpp">
+      <Filter>EnemyState\Malcolm</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewBlockState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewHitState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewPhaseEndState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewPhaseReadyState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewPhaseSpotlightState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewPhaseStartState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDoubleAttackState.cpp">
+      <Filter>PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTwoHandAttackState.cpp">
+      <Filter>PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SuccubusIdle.cpp">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClCompile>
+    <ClCompile Include="SuccubusState.cpp">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClCompile>
+    <ClCompile Include="SuccubusSummonState.cpp">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClCompile>
+    <ClCompile Include="Succubus.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Outline.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Shadow.cpp">
       <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -548,15 +587,12 @@
     <ClInclude Include="Zone.h">
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
-    <ClInclude Include="Outline.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
     <ClInclude Include="Luke.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
-    <ClInclude Include="PlayerTwoHandAttackState.h" />
-    <ClInclude Include="Shadow.h" />
     <ClInclude Include="MapManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -626,9 +662,6 @@
     <ClInclude Include="MalcolmMoveState.h">
       <Filter>EnemyState\Malcolm</Filter>
     </ClInclude>
-    <ClInclude Include="MatthehHitState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
     <ClInclude Include="MatthewPalmwindState.h">
       <Filter>EnemyState\Matthew</Filter>
     </ClInclude>
@@ -645,6 +678,51 @@
       <Filter>EnemyState\William</Filter>
     </ClInclude>
     <ClInclude Include="CameraControler.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MalcolmKickState.h">
+      <Filter>EnemyState\Malcolm</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewBlockState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewHitState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewPhaseEndState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewPhaseReadyState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewPhaseSpotlightState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewPhaseStartState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDoubleAttackState.h">
+      <Filter>PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTwoHandAttackState.h">
+      <Filter>PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SuccubusSummonState.h">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClInclude>
+    <ClInclude Include="SuccubusIdle.h">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClInclude>
+    <ClInclude Include="SuccubusState.h">
+      <Filter>EnemyState\Succubus</Filter>
+    </ClInclude>
+    <ClInclude Include="Succubus.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Outline.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Shadow.h">
       <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
@@ -706,6 +784,9 @@
     </Filter>
     <Filter Include="EnemyState\William">
       <UniqueIdentifier>{fa35d000-a240-4e74-b290-97d760d6d80a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyState\Succubus">
+      <UniqueIdentifier>{54b5bfdf-3c27-498b-b057-a1b85488dcf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

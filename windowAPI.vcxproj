@@ -183,13 +183,15 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MalcolmHitState.h" />
+    <ClInclude Include="MalcolmKickState.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Malcolm.h" />
     <ClInclude Include="MalcolmAttackState.h" />
-    <ClInclude Include="MalcolmhitState.h" />
     <ClInclude Include="MalcolmIdleState.h" />
     <ClInclude Include="MalcolmMoveState.h" />
-    <ClInclude Include="MatthehHitState.h" />
+    <ClInclude Include="MatthewBlockState.h" />
+    <ClInclude Include="MatthewHitState.h" />
     <ClInclude Include="LukeAttack2State.h" />
     <ClInclude Include="LukeAttack3State.h" />
     <ClInclude Include="LukeBlockState.h" />
@@ -208,6 +210,10 @@
     <ClInclude Include="LukeAttack1State.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
+    <ClInclude Include="MatthewPhaseEndState.h" />
+    <ClInclude Include="MatthewPhaseReadyState.h" />
+    <ClInclude Include="MatthewPhaseSpotlightState.h" />
+    <ClInclude Include="MatthewPhaseStartState.h" />
     <ClInclude Include="MatthewState.h" />
     <ClInclude Include="ObjectInfo.h" />
     <ClInclude Include="Outline.h" />
@@ -217,6 +223,7 @@
     <ClInclude Include="PlayerBlockState.h" />
     <ClInclude Include="PlayerBreakState.h" />
     <ClInclude Include="PlayerControler.h" />
+    <ClInclude Include="PlayerDoubleAttackState.h" />
     <ClInclude Include="PlayerFallState.h" />
     <ClInclude Include="PlayerGroundState.h" />
     <ClInclude Include="PlayerIdleState.h" />
@@ -242,6 +249,10 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Succubus.h" />
+    <ClInclude Include="SuccubusIdle.h" />
+    <ClInclude Include="SuccubusState.h" />
+    <ClInclude Include="SuccubusSummonState.h" />
     <ClInclude Include="TagManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Text.h" />
@@ -299,13 +310,15 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MalcolmHitState.cpp" />
+    <ClCompile Include="MalcolmKickState.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Malcolm.cpp" />
     <ClCompile Include="MalcolmAttackState.cpp" />
-    <ClCompile Include="MalcolmhitState.cpp" />
     <ClCompile Include="MalcolmIdleState.cpp" />
     <ClCompile Include="MalcolmMoveState.cpp" />
-    <ClCompile Include="MatthehHitState.cpp" />
+    <ClCompile Include="MatthewBlockState.cpp" />
+    <ClCompile Include="MatthewHitState.cpp" />
     <ClCompile Include="LukeAttack2State.cpp" />
     <ClCompile Include="LukeAttack3State.cpp" />
     <ClCompile Include="LukeBlockState.cpp" />
@@ -324,6 +337,10 @@
     <ClCompile Include="LukeAttack1State.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
+    <ClCompile Include="MatthewPhaseEndState.cpp" />
+    <ClCompile Include="MatthewPhaseReadyState.cpp" />
+    <ClCompile Include="MatthewPhaseSpotlightState.cpp" />
+    <ClCompile Include="MatthewPhaseStartState.cpp" />
     <ClCompile Include="MatthewState.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
     <ClCompile Include="Outline.cpp" />
@@ -333,6 +350,7 @@
     <ClCompile Include="PlayerBlockState.cpp" />
     <ClCompile Include="PlayerBreakState.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
+    <ClCompile Include="PlayerDoubleAttackState.cpp" />
     <ClCompile Include="PlayerFallState.cpp" />
     <ClCompile Include="PlayerGroundState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
@@ -360,6 +378,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Succubus.cpp" />
+    <ClCompile Include="SuccubusIdle.cpp" />
+    <ClCompile Include="SuccubusState.cpp" />
+    <ClCompile Include="SuccubusSummonState.cpp" />
     <ClCompile Include="TagManager.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextDataManager.cpp" />

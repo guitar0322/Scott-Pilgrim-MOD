@@ -7,8 +7,10 @@
 
 PlayerState* PlayerBreakState::InputHandle(Player* player)
 {
+
 	if (_dashSpeed < 0)
 	{
+
 		return new PlayerIdleState();
 	}
 
@@ -48,6 +50,7 @@ PlayerState* PlayerBreakState::InputHandle(Player* player)
 void PlayerBreakState::Update(Player * player)
 {
 	_dashSpeed -= player->GetFriction() * TIMEMANAGER->getElapsedTime();
+
 	if (player->dir == false)
 	{
 		player->transform->MoveX(_dashSpeed * TIMEMANAGER->getElapsedTime());
@@ -56,12 +59,24 @@ void PlayerBreakState::Update(Player * player)
 	{
 		player->transform->MoveX(-_dashSpeed * TIMEMANAGER->getElapsedTime());
 	}
+
+	
 }
 
 void PlayerBreakState::Enter(Player * player)
 {
 	_dashSpeed = 100;
 	player->isRun = false;
+
+
+	if (player->dir == false)
+	{
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_right", player->transform->GetX()+8, player->zOrder->GetZ() - 12);
+	}
+	else
+	{
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_left", player->transform->GetX()- 8, player->zOrder->GetZ() - 12);
+	}
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)

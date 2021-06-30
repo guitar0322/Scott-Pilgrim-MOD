@@ -34,7 +34,7 @@ void PlayerGroundState::Enter(Player * player)
 	_jumpTime = 0;
 	player->isRun = false;
 	player->runKeyPress = false;
-
+	EFFECTMANAGER->EmissionEffect("ground_effect", player->transform->GetX(), player->zOrder->GetZ());
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
