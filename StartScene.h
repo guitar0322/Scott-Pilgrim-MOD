@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "SceneInfoLoader.h"
+#include "CameraControler.h"
 #define BG_NUM 23
 #define WALL_NUM 3
 
@@ -15,6 +16,7 @@ public:
     vector<GameObject*> _propV;
     vector<GameObject*> _enemyV;
     SceneInfoLoader sceneInfoLoader;
+    CameraControler cameraControler;
     ImageObject* background[BG_NUM];
     Box* box;
     ImageObject* imageObj;

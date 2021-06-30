@@ -45,6 +45,33 @@ GameObject* SceneInfoLoader::MakeObject(float x, float y, int type)
 		newObject = MakeFencePillar2(x, y);
 		break;
 	case 4:
+		newObject = MakeGuardRail(x, y);
+		break;
+	case 5:
+		newObject = MakeFirePlug(x, y);
+		break;
+	case 6:
+		newObject = MakeHorse1(x, y);
+		break;
+	case 7:
+		newObject = MakeHorse2(x, y);
+		break;
+	case 8:
+		newObject = MakePostbox(x, y);
+		break;
+	case 9:
+		newObject = MakeShovel(x, y);
+		break;
+	case 10:
+		newObject = MakeSignBoard(x, y);
+		break;
+	case 11:
+		newObject = MakeWell(x, y);
+		break;
+	case 12:
+		newObject = MakeWood(x, y);
+		break;
+	case 13:
 		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
 			newObject = MakeLee(x, y);
 		else
@@ -102,10 +129,124 @@ GameObject* SceneInfoLoader::MakeFencePillar2(float x, float y)
 	return fencePillar2;
 }
 
+GameObject* SceneInfoLoader::MakeGuardRail(float x, float y)
+{
+	GameObject* guardRail = new GameObject();
+	guardRail->transform->SetPosition(x, y);
+	guardRail->AddComponent(new Renderer());
+	guardRail->GetComponent<Renderer>()->Init("map/guardrail.bmp", 106, 112);
+	guardRail->AddComponent(new ZOrder());
+	guardRail->GetComponent<ZOrder>()->Init();
+	guardRail->GetComponent<ZOrder>()->SetZ(guardRail->transform->GetY() + 56);
+	return guardRail;
+}
+
+GameObject* SceneInfoLoader::MakeFirePlug(float x, float y)
+{
+	GameObject* firePlug = new GameObject();
+	firePlug->transform->SetPosition(x, y);
+	firePlug->AddComponent(new Renderer());
+	firePlug->GetComponent<Renderer>()->Init("map/fireplug.bmp", 98, 100);
+	firePlug->AddComponent(new ZOrder());
+	firePlug->GetComponent<ZOrder>()->Init();
+	firePlug->GetComponent<ZOrder>()->SetZ(firePlug->transform->GetY() + 50);
+	return firePlug;
+}
+
+GameObject* SceneInfoLoader::MakeHorse1(float x, float y)
+{
+	GameObject* horse1 = new GameObject();
+	horse1->transform->SetPosition(x, y);
+	horse1->AddComponent(new Renderer());
+	horse1->GetComponent<Renderer>()->Init("map/horse1.bmp", 110, 116);
+	horse1->AddComponent(new ZOrder());
+	horse1->GetComponent<ZOrder>()->Init();
+	horse1->GetComponent<ZOrder>()->SetZ(horse1->transform->GetY() + 58);
+	return horse1;
+}
+
+GameObject* SceneInfoLoader::MakeHorse2(float x, float y)
+{
+	GameObject* horse2 = new GameObject();
+	horse2->transform->SetPosition(x, y);
+	horse2->AddComponent(new Renderer());
+	horse2->GetComponent<Renderer>()->Init("map/horse2.bmp", 106, 130);
+	horse2->AddComponent(new ZOrder());
+	horse2->GetComponent<ZOrder>()->Init();
+	horse2->GetComponent<ZOrder>()->SetZ(horse2->transform->GetY() + 58);
+	return horse2;
+}
+
+GameObject* SceneInfoLoader::MakePostbox(float x, float y)
+{
+	GameObject* postbox = new GameObject();
+	postbox->transform->SetPosition(x, y);
+	postbox->AddComponent(new Renderer());
+	postbox->GetComponent<Renderer>()->Init("map/postbox.bmp", 74, 104);
+	postbox->AddComponent(new ZOrder());
+	postbox->GetComponent<ZOrder>()->Init();
+	postbox->GetComponent<ZOrder>()->SetZ(postbox->transform->GetY() + 52);
+	return postbox;
+}
+
+GameObject* SceneInfoLoader::MakeShovel(float x, float y)
+{
+	GameObject* shovel = new GameObject();
+	shovel->transform->SetPosition(x, y);
+	shovel->AddComponent(new Renderer());
+	shovel->GetComponent<Renderer>()->Init("map/shovel.bmp", 52, 94);
+	shovel->AddComponent(new ZOrder());
+	shovel->GetComponent<ZOrder>()->Init();
+	shovel->GetComponent<ZOrder>()->SetZ(shovel->transform->GetY() + 52);
+	return shovel;
+}
+
+GameObject* SceneInfoLoader::MakeSignBoard(float x, float y)
+{
+	GameObject* signBoard = new GameObject();
+	signBoard->transform->SetPosition(x, y);
+	signBoard->AddComponent(new Renderer());
+	signBoard->GetComponent<Renderer>()->Init("map/signboard.bmp", 108, 102);
+	signBoard->AddComponent(new ZOrder());
+	signBoard->GetComponent<ZOrder>()->Init();
+	signBoard->GetComponent<ZOrder>()->SetZ(signBoard->transform->GetY() + 51);
+	return signBoard;
+}
+
+GameObject* SceneInfoLoader::MakeWell(float x, float y)
+{
+	GameObject* well = new GameObject();
+	well->transform->SetPosition(x, y);
+	well->AddComponent(new Renderer());
+	well->GetComponent<Renderer>()->Init("map/well.bmp", 106, 82);
+	well->AddComponent(new ZOrder());
+	well->GetComponent<ZOrder>()->Init();
+	well->GetComponent<ZOrder>()->SetZ(well->transform->GetY() + 41);
+	well->AddComponent(new Ground());
+	well->GetComponent<Ground>()->Init(106, 10, 0, -35);
+	return well;
+}
+
+GameObject* SceneInfoLoader::MakeWood(float x, float y)
+{
+	GameObject* wood = new GameObject();
+	wood->transform->SetPosition(x, y);
+	wood->AddComponent(new Renderer());
+	wood->GetComponent<Renderer>()->Init("map/wood.bmp", 370, 74);
+	wood->AddComponent(new ZOrder());
+	wood->GetComponent<ZOrder>()->Init();
+	wood->GetComponent<ZOrder>()->SetZ(wood->transform->GetY() + 37);
+	wood->AddComponent(new Ground());
+	wood->GetComponent<Ground>()->Init(370, 10, 0, -25);
+	return wood;
+}
+
 GameObject* SceneInfoLoader::MakeLee(float x, float y)
 {
 	GameObject* lee = new Luke();
 	lee->transform->SetPosition(x, y);
+	lee->SetActive(false);
+	lee->Init();
 	return lee;
 }
 

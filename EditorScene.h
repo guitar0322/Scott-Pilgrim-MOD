@@ -4,14 +4,14 @@
 
 #define BG_NUM 23
 #define SNOW1 0
-#define TYPE_NUM 5
+#define TYPE_NUM 14
 #define NAME_STARTX 700
 #define NAME_STARTY 50
 #define NAME_WIDTH 150
 #define NAME_HEIGHT 20
 
 #define OBJECT_MENU_STARTX 100
-#define OBJECT_MENU_STARTY 460
+#define OBJECT_MENU_STARTY 500
 #define OBJECT_MENU_TERM 100
 class EditorScene :
     public Scene
@@ -28,8 +28,8 @@ private:
     }MOUSEINFO;
     typedef struct tagObjectMenu {
         RECT rc;
-        int left;
-        int top;
+        int x;
+        int y;
         int width;
         int height;
         int type;
@@ -64,13 +64,15 @@ private:
     vector<OBJECTNAME> _objectNameV[TYPE_NUM];
     string _typeNameArr[TYPE_NUM];
     GameObject _outline;
-    BUTTON _nextButton, _beforeButton;
+    BUTTON _nameNextButton, _nameBeforeButton;
+    BUTTON _menuNextButton, _menuBeforeButton;
     float _mouseDeltaX;
     int _selectIdxType;
     int _selectIdxObject;
     int _selectIdxObjectType;
     int _selectIdxName;
     int _selectIdxNameType;
+    int _selectIdxMenu;
     bool _clickScreen;
     RECT _selectNameRect;
     ImageObject* _background[BG_NUM];

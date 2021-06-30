@@ -8,6 +8,7 @@
 #include "Matthew.h"
 #include "Malcolm.h"
 #include "William.h"
+
 StartScene::StartScene()
 {
 }
@@ -20,38 +21,20 @@ HRESULT StartScene::Init()
 {    
     Scene::Init();
     CameraInit();
-
-    sceneInfoLoader.SetLinkObjectVAddress(&_propV);
-    sceneInfoLoader.LoadObjectInfo(0);
-    sceneInfoLoader.LoadObjectInfo(1);
-    sceneInfoLoader.LoadObjectInfo(2);
-    sceneInfoLoader.LoadObjectInfo(3);
-
-    sceneInfoLoader.SetLinkObjectVAddress(&_enemyV);
-    sceneInfoLoader.LoadObjectInfo(4);
-
-
-    // 210629 시영 추가
     EnemyClipManager();
 
+    sceneInfoLoader.SetLinkObjectVAddress(&_propV);
+    for (int i = 0; i < 13; i++)
+    {
+        sceneInfoLoader.LoadObjectInfo(i);
+    }
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(0));
+    sceneInfoLoader.LoadObjectInfo(13);
+
+    // 210629 시영 추가
+
     //위에는 건들지 마시오
-    //=============미리 만들어져 있는 예시 오브젝트============
-    //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
-    //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
-
-    //1.ImageObject
-    //Renderer컴포넌트가 미리 추가되어있는 오브젝트
-    //imageObj->renderer 로 접근이 가능
-    imageObj = new ImageObject();
-	
-    //2.Box
-    //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
-    //->renderer,  ->collider 로 접근이 가능
-    box = new Box();
-
-    //3.Character
-    //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
-    //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
 
 	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 100, 76, 1, 1);
 	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
@@ -66,7 +49,9 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-
+    ENEMYMANAGER->SetPlayerTransform(character->transform);
+    cameraControler.Init();
+    cameraControler.SetPlayerTransform(character->transform);
     for (int i = 0; i < _enemyV.size(); i++)
     {
         _enemyV[i]->Init();
@@ -157,18 +142,17 @@ void StartScene::Update()
     {
         _enemyV[i]->Update();
     }
-    MainCam->transform->SetX(character->transform->GetX());
-    if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
-        MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
+
     testGround->Update();
 	trashBox->Update();
     character->Update();
+    cameraControler.Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-
+    ENEMYMANAGER->Update();
     // 광철 에너미 Update
 	malcolm->Update();
 	william->Update();

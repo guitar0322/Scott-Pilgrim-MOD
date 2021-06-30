@@ -5,16 +5,6 @@
 
 Luke::Luke()
 {
-	AnimationClip* testClip = CLIPMANAGER->FindClip("lee_idle_right");
-
-	animator->AddClip("lee_idle_right", CLIPMANAGER->FindClip("lee_idle_right"));
-	animator->AddClip("lee_idle_left", CLIPMANAGER->FindClip("lee_idle_left"));
-
-	animator->AddClip("lee_run_right", CLIPMANAGER->FindClip("lee_run_right"));
-	animator->AddClip("lee_run_left", CLIPMANAGER->FindClip("lee_run_left"));
-	
-	animator->AddClip("lee_attack1_right", CLIPMANAGER->FindClip("lee_attack1_right"));
-	animator->AddClip("lee_attack1_left", CLIPMANAGER->FindClip("lee_attack1_left"));
 	/* 210630 LUKE CLIP MANAGER */
 	// IDLE
 	animator->AddClip("luke_idle_right", CLIPMANAGER->FindClip("luke_idle_right"));
