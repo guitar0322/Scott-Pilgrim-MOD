@@ -16,13 +16,13 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = false;
-			player->ChangeClip("two_hand_walk_right", false);
+			player->ChangeClip("two_hand_walk_right", true);
 
 		}
 		else
 		{
 			player->dir = false;
-			player->ChangeClip("walk_right", false);
+			player->ChangeClip("walk_right", true);
 
 		}
 	
@@ -40,13 +40,13 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = true;
-			player->ChangeClip("two_hand_walk_left", false);
+			player->ChangeClip("two_hand_walk_left", true);
 
 		}
 		else
 		{
 			player->dir = true;
-			player->ChangeClip("walk_left", false);
+			player->ChangeClip("walk_left", true);
 
 		}
 	}
@@ -71,15 +71,7 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('J'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerJumpState();
-
-		}
-		else
-		{
-			return new PlayerJumpState();
-		}
+		return new PlayerJumpState();
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
@@ -147,19 +139,19 @@ void PlayerWalkState::Enter(Player * player)
 	{
 		if (player->dir == false)
 
-			player->ChangeClip("two_hand_walk_right", false);
+			player->ChangeClip("two_hand_walk_right", true);
 		else
-			player->ChangeClip("two_hand_walk_left", false);
+			player->ChangeClip("two_hand_walk_left", true);
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("walk_right", false);
+			player->ChangeClip("walk_right", true);
 		}
 		else
 		{
-			player->ChangeClip("walk_left", false);
+			player->ChangeClip("walk_left", true);
 		}
 	}
 	

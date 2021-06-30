@@ -17,15 +17,13 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 	{
 		return new PlayerIdleState();
 	}
-
-
-
 	return nullptr;
 }
 
 void PlayerAttackState::Update(Player * player)
 {
-	
+	//int enemyHp = player->enemyInfo->GetHp();
+
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
 		if (_pressL == false && _doubleAttack != true)
@@ -33,7 +31,10 @@ void PlayerAttackState::Update(Player * player)
 			_attackTime = 0;
 			_pressL = true;
 		}
-	
+		if (player->isAttack == false)
+		{
+		
+		}
 	}
 
 	//최대 프레임이되면 attack2이미지로 
@@ -41,32 +42,33 @@ void PlayerAttackState::Update(Player * player)
 		if (_pressL == true) {
 			if (player->dir == false)
 			{
-				player->ChangeClip("attack2_right", false);
+				player->ChangeClip("attack2_right", true);
 			}
 			else
 			{
-				player->ChangeClip("attack2_left", false);
+				player->ChangeClip("attack2_left", true);
 			}
 			_doubleAttack = true;
 			_pressL = false;
 		}
 	}
-
-
 }
 
 void PlayerAttackState::Enter(Player * player)
 {
-	
+	if (GetDistance(player->transform->GetX(), player->transform->GetY(),
+		player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY()) > 20);
+	{
+		player->enemy->GetComponent<EnemyInfo>()->Hit(player->attack);
+	}
 	if (player->dir == false)
 	{
-		player->ChangeClip("attack1_right", false);
+		player->ChangeClip("attack1_right", true);
 	}
 	else
 	{
-		player->ChangeClip("attack1_left", false);
+		player->ChangeClip("attack1_left", true);
 	}
-
 }
 	
 

@@ -21,6 +21,9 @@ HRESULT StartScene::Init()
     sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
     sceneInfoLoader.LoadObjectInfo();
 
+
+
+
     //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
     //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
@@ -54,6 +57,8 @@ HRESULT StartScene::Init()
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
+	
+
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
     wall[1] = new WallObj();
@@ -76,47 +81,55 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-	/* LEE CLIP MANAGER  */
-	CLIPMANAGER->AddClip("lee_idle_right",     "lee/lee_idle_right.bmp",       400, 66, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_idle_left",      "lee/lee_idle_left.bmp",        400, 66, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_run_right",      "lee/lee_run_right.bmp",        432, 72, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_run_left",       "lee/lee_run_left.bmp",         432, 72, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_attack1_right",  "lee/lee_attack1_right.bmp",    280, 64, 4, 0.20f);
-	CLIPMANAGER->AddClip("lee_attack1_left",   "lee/lee_attack1_left.bmp",     280, 64, 4, 0.20f);
-
-	/*Doberman CLIP MANAGER*/
-	CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
-	CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
-	//CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
-	//CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
-	CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
-	CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
-
-
+	/* LEE CLIP MANAGER */
+   // IDLE
+	CLIPMANAGER->AddClip("lee_idle_right", "lee/lee_idle_right.bmp", 800, 132, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_idle_left", "lee/lee_idle_left.bmp", 800, 132, 8, 0.20f);
+	// WALK               
+	CLIPMANAGER->AddClip("lee_walk_right", "lee/lee_walk_right.bmp", 576, 138, 6, 0.20f);
+	CLIPMANAGER->AddClip("lee_walk_left", "lee/lee_walk_left.bmp", 576, 138, 6, 0.20f);
+	// RUN                
+	CLIPMANAGER->AddClip("lee_run_right", "lee/lee_run_right.bmp", 864, 144, 8, 0.20f);
+	CLIPMANAGER->AddClip("lee_run_left", "lee/lee_run_left.bmp", 864, 144, 8, 0.20f);
+	// BLOCK              
+	CLIPMANAGER->AddClip("lee_block_right", "lee/lee_block_right.bmp", 88, 132, 1, 0.20f);
+	CLIPMANAGER->AddClip("lee_block_left", "lee/lee_block_left.bmp", 88, 132, 1, 0.20f);
+	// HIT                
+	CLIPMANAGER->AddClip("lee_hit_right", "lee/lee_hit_right.bmp", 550, 134, 5, 0.20f);
+	CLIPMANAGER->AddClip("lee_hit_left", "lee/lee_hit_left.bmp", 550, 134, 5, 0.20f);
+	// KICK               
+	CLIPMANAGER->AddClip("lee_kick_right", "lee/lee_kick_right.bmp", 1050, 136, 7, 0.20f);
+	CLIPMANAGER->AddClip("lee_kick_left", "lee/lee_kick_left.bmp", 1050, 136, 7, 0.20f);
+	// ATTACK 1       
+	CLIPMANAGER->AddClip("lee_attack1_right", "lee/lee_attack1_right.bmp", 560, 128, 4, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack1_left", "lee/lee_attack1_left.bmp", 560, 128, 4, 0.20f);
+	// ATTACK 2
+	CLIPMANAGER->AddClip("lee_attack2_right", "lee/lee_attack2_right.bmp", 568, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack2_left", "lee/lee_attack2_left.bmp", 568, 132, 4, 0.20f);
+	// ATTACK 3       
+	CLIPMANAGER->AddClip("lee_attack3_right", "lee/lee_attack3_right.bmp", 672, 156, 7, 0.20f);
+	CLIPMANAGER->AddClip("lee_attack3_left", "lee/lee_attack3_left.bmp", 672, 156, 7, 0.20f);
+	// DIE                
+	CLIPMANAGER->AddClip("lee_die_right", "lee/lee_die_right.bmp", 2072, 172, 14, 0.20f);
+	CLIPMANAGER->AddClip("lee_die_left", "lee/lee_die_left.bmp", 2072, 172, 14, 0.20f);
 
 	// 210627 시영 추가 (Enemy Update)
+	enemy = new Luke();
+	enemy->Init();
+	enemy->transform->SetPosition(800, 300);
+	enemy->ground->enable = false;
+	enemy->enemyAI->SetPlayer(character);
 
- //   enemy = new Luke();
-	//enemy->transform->SetPosition(800, 300);
-
-	//enemy->ground->enable = false;
-	//enemy->enemyAI->SetPlayer(character);
-	//enemy->zOrder->SetZ(enemy->transform->GetY() + 132 / 2);
-	//enemy->enemyinfo->SetSpeed(30.f);
- //   
+	character->GetComponent<Player>()->SetEnemy(enemy);
 	//// 210628 광철 도베르만 개선 //
 	//doberman = new Doberman();
  //   doberman->transform->SetPosition(1200, 400);
-
 	//doberman->ground->enable = false;
 	//doberman->enemyAI->SetPlayer(character);
 	//doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	//doberman->enemyinfo->SetSpeed(100.f);
-
+	
 	//// 보스 매튜 구현//
-
 	//matthew = new Character();
 	//matthew->Init();
 	//matthew->transform->SetPosition(2000, 400);
@@ -152,13 +165,11 @@ void StartScene::Update()
     EFFECTMANAGER->Update();
     ZORDER->Update();
     mainCam->Update();
-	//matthew->Update();
-
-	//doberman->Update();
-	//matthew->Update();
+	/*matthew->Update();
+	doberman->Update();*/
 
     // 210627 시영 추가 (Enemy Update)
-	//enemy->Update();
+	enemy->Update();
 }
 
 void StartScene::Render()

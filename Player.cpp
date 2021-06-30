@@ -46,6 +46,10 @@ void Player::Init()
 	_enterNum = 0;
 	_exitNum = 0;
 
+	hp = 100;
+	attack = 2;
+	isAttack = false;
+
 }
 
 void Player::Update()
@@ -59,21 +63,20 @@ void Player::Update()
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 
-
-	if (isCatch == false)
-	{
-			if (KEYMANAGER->isOnceKeyDown('I'))
-			{
-				PickItem();
-			}
-	}
-	if (isCatch == true)
-	{
-			if (KEYMANAGER->isOnceKeyDown('I'))
-			{
-				PutItem();
-			}
-	}
+	//if (isCatch == false)
+	//{
+	//	if (KEYMANAGER->isOnceKeyDown('I'))
+	//	{
+	//		PickItem();
+	//	}
+	//}
+	//if (isCatch == true)
+	//{
+	//		if (KEYMANAGER->isOnceKeyDown('I'))
+	//		{
+	//			PutItem();
+	//		}
+	//}
 
 	if(isCatch == true)
 		pickDelay += TIMEMANAGER->getElapsedTime();
@@ -103,11 +106,11 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 {
 	if (isInitFrame == false)
 	{
-		animator->SetClip(animator->GetClip(clipName));
+		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
 	else
 	{
-		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
+		animator->SetClip(animator->GetClip(clipName));
 	}
 }
 
@@ -154,9 +157,9 @@ void Player::ClipInit()
 	walkJumpKickRight.isLoop = false;
 	walkJumpKickLeft.Init("player/walk_jump_kick_left.bmp", 980, 106, 7, 0.1f);
 	walkJumpKickLeft.isLoop = false;
-	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickRight.isLoop = false;
-	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
 	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);

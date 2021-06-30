@@ -24,5 +24,7 @@ Luke::~Luke()
 
 void Luke::Init()
 {
-
+	zOrder->SetZ(transform->GetY() + 132 / 2);
+	enemyinfo->SetSpeed(30.f);
+	enemyinfo->Sethp(50);
 }

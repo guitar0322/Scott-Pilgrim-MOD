@@ -5,6 +5,7 @@
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
 #include "PlayerTwoHandAttackState.h"
+#include "PlayerFallState.h"
 #include "Player.h"
 
 PlayerState * PlayerRunState::InputHandle(Player * player)
@@ -37,9 +38,13 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
 		return new PlayerKickAttackState();
-
 	}
 
+	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
+	{
+		player->onGround = false;
+		return new PlayerFallState();
+	}
 
 	return nullptr;
 }
@@ -64,9 +69,6 @@ void PlayerRunState::Update(Player * player)
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 
-	
-	
-
 }
 
 void PlayerRunState::Enter(Player * player)
@@ -75,22 +77,22 @@ void PlayerRunState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_run_right", false);
+			player->ChangeClip("two_hand_run_right", true);
 		}
 		else
 		{
-			player->ChangeClip("two_hand_run_left", false);
+			player->ChangeClip("two_hand_run_left", true);
 		}
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("run_right", false);
+			player->ChangeClip("run_right", true);
 		}
 		else
 		{
-			player->ChangeClip("run_left", false);
+			player->ChangeClip("run_left", true);
 		}
 	}
 	

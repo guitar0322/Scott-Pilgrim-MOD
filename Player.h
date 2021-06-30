@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 class PlayerState;
+//class Enemy;
 
 class Player :
 	public Component
@@ -11,6 +12,7 @@ private:
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
+
 
 	
 	//float _friction;	//마찰
@@ -81,6 +83,8 @@ public:
 	Animator* animator;
 	ZOrder* zOrder;
 	Item* item;
+	GameObject* enemy;
+
 
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
@@ -105,6 +109,11 @@ public:
 	float friction;			//마찰
 	float jumpPower;		//점프력
 
+	int hp;
+	int attack;
+	bool isAttack;
+	int enemyHp;
+
 	RECT groundCheckRc;
 
 	void InputHandle();
@@ -125,6 +134,7 @@ public:
 	virtual void PickItem();		//아이템 획득 함수
 	virtual void PutItem();			//아이템 놓는 함수
 
-
+	void SetEnemy(GameObject* _enemy) { enemy = _enemy; }
+	Transform* GetEnemyTransform() const { return enemy -> transform; }
 };
 
