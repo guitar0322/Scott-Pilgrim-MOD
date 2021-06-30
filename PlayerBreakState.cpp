@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerBreakState.h"
 #include "PlayerIdleState.h"
+#include "PlayerWalkState.h"
 #include "player.h"
 
 PlayerState * PlayerBreakState::InputHandle(Player * player)
@@ -15,14 +16,14 @@ PlayerState * PlayerBreakState::InputHandle(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = false;
-			player->ChangeClip("two_hand_walk_right", false);
-
+			player->ChangeClip("two_hand_walk_right", true);
+			return new PlayerWalkState();
 		}
 		else
 		{
 			player->dir = false;
-			player->ChangeClip("walk_right", false);
-
+			player->ChangeClip("walk_right", true);
+			return new PlayerWalkState();
 		}
 
 	}
@@ -39,14 +40,14 @@ PlayerState * PlayerBreakState::InputHandle(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = true;
-			player->ChangeClip("two_hand_walk_left", false);
-
+			player->ChangeClip("two_hand_walk_left", true);
+			return new PlayerWalkState();
 		}
 		else
 		{
 			player->dir = true;
-			player->ChangeClip("walk_left", false);
-
+			player->ChangeClip("walk_left", true);
+			return new PlayerWalkState();
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
@@ -113,26 +114,26 @@ void PlayerBreakState::Enter(Player * player)
 	{
 		if (player->dir == false)
 
-			player->ChangeClip("two_hand_idle_right", false);
+			player->ChangeClip("two_hand_idle_right", true);
 		else
-			player->ChangeClip("two_hand_idle_left", false);
+			player->ChangeClip("two_hand_idle_left", true);
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("idle_right", false);
+			player->ChangeClip("idle_right", true);
 		}
 		else
 		{
-			player->ChangeClip("idle_left", false);
+			player->ChangeClip("idle_left", true);
 		}
 	}
 }
 
 void PlayerBreakState::Exit(Player * player)
 {
-	
+
 
 
 }

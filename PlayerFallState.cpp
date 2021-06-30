@@ -33,32 +33,33 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 void PlayerFallState::Update(Player * player)
 {
 	//중력값을 올려서 좀 더 빨리 떨어지는 효과를 보여줌
-	_speedY += player->GetGravity()*TIMEMANAGER->getElapsedTime();
+	player->jumpPower += player->GetGravity()*TIMEMANAGER->getElapsedTime();
 
-	player->transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());
+	player->transform->MoveY(player->jumpPower * TIMEMANAGER->getElapsedTime());
 
-	if (KEYMANAGER->isStayKeyDown('D'))
+	if (player->isRun == true) //뛸 때 -> 점프
 	{
-		if (player->isRun == true) //뛸 때 -> 점프
+		if (player->dir == false)
 		{
 			player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-
-		}
-		else // 안 뒬 때 -> 점프
-		{
-			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		}
-	}
-	if (KEYMANAGER->isStayKeyDown('A'))
-	{
-		if (player->isRun == true)
-		{
-			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		}
 		else
 		{
-			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
+			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown('D'))
+	{
+		if (player->isRun == false) // 안 뒬 때 -> 점프
+			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		
+	}
+	if (KEYMANAGER->isStayKeyDown('A'))
+	{
+		if (player->isRun == false) // 안 뒬 때 -> 점프
+			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
+
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
@@ -74,13 +75,13 @@ void PlayerFallState::Update(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = false;
-			player->ChangeClip("two_hand_fall_right", false);
+			player->ChangeClip("two_hand_fall_right", true);
 
 		}
 		else
 		{
 			player->dir = false;
-			player->ChangeClip("fall_right", true);
+			player->ChangeClip("fall_right", false);
 
 		}
 	
@@ -90,13 +91,13 @@ void PlayerFallState::Update(Player * player)
 		if (player->isCatch == true)
 		{
 			player->dir = true;
-			player->ChangeClip("two_hand_fall_left", false);
+			player->ChangeClip("two_hand_fall_left", true);
 
 		}
 		else
 		{
 			player->dir = true;
-			player->ChangeClip("fall_left", true);
+			player->ChangeClip("fall_left", false);
 
 		}
 	
@@ -106,27 +107,27 @@ void PlayerFallState::Update(Player * player)
 
 void PlayerFallState::Enter(Player * player)
 {
-	_speedY = 0;
+	player->jumpPower = 0;
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_fall_right", false);
+			player->ChangeClip("two_hand_fall_right", true);
 		}
 		else
 		{
-			player->ChangeClip("two_hand_fall_left", false);
+			player->ChangeClip("two_hand_fall_left", true);
 		}
 	}
 	else
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("fall_right", false);
+			player->ChangeClip("fall_right", true);
 		}
 		else
 		{
-			player->ChangeClip("fall_left", false);
+			player->ChangeClip("fall_left", true);
 		}
 	}
 

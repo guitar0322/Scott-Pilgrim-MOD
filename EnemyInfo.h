@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+class Player;
 
 class EnemyInfo : public Component
 {
@@ -24,7 +25,7 @@ public:
 	bool GetDir() const { return _dir; }
 	void SetDir(bool dir) { _dir = dir; }
 
-	int GetHp() const { return _hp; }
+	int GetHp() { return _hp; }
 	void Sethp(int hp) { _hp = hp; }
 
 	int GetDamage() const { return _damage; }
@@ -33,4 +34,6 @@ public:
 	/* 스피드는 불확실, 보류- */
 	float GetSpeed() const { return _speed; }
 	void SetSpeed(float speed) { _speed = speed; }
+
+	void Hit(int damage);
 };

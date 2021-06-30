@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
+
 Enemy::Enemy()
 {
 	renderer = new Renderer();
-	collider = new BoxCollider();
+	//collider = new BoxCollider();
 	animator = new Animator();
 	zOrder = new ZOrder();
 	ground = new Ground();
@@ -14,8 +15,8 @@ Enemy::Enemy()
 	AddComponent(renderer);
 	renderer->Init();
 
-	AddComponent(collider);
-	collider->Init();
+	//AddComponent(collider);
+	//collider->Init();
 
 	AddComponent(animator);
 	animator->Init();

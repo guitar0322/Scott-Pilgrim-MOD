@@ -21,11 +21,11 @@ void PlayerKickSkillState::Enter(Player * player)
 {
 	if (player->dir == false)
 	{
-		player->ChangeClip("kick_skill_right", false);
+		player->ChangeClip("kick_skill_right", true);
 	}
 	else
 	{
-		player->ChangeClip("kick_skill_left", false);
+		player->ChangeClip("kick_skill_left", true);
 	}
 
 }

@@ -8,18 +8,18 @@ private:
 	Animator* _animator;
 	ZOrder* _zorder;
 
-	int _frictionCount;						//마찰력카운트
-	int _throwTime;							//throw후 시간
-
 	float _itemSpeed;						//아이템의 속도
 	float _gravity;							//중력
 	float _angle;							//각도
-	float _friction;						//마찰력
 
-	float _moveX;
-	float _moveY;
+	float _friction;						//마찰력
+	float _dashSpeed;						//이동이 끝난 후 속도
+
+	float _speedX;
+	float _speedY;
 
 	bool _dir;								//방향값 false가 right   /// true가 left
+	bool _onGround;							//땅에 착지 했나?
 
 public:
 	
