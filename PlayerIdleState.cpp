@@ -272,14 +272,11 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		else
 		{
 			return new PlayerTwoHandAttackState();
-
 		}
-		
-
 	}
 
 	//¹ßÂ÷±â
-	if (KEYMANAGER->isStayKeyDown('I'))
+	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		player->jumpZ = false;
 
@@ -289,10 +286,11 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		}
 		else
 		{
-			if (player->isCatch == false && player->isCatch == false)
+			if (player->isCatch == false && player->isPick == false)
 			{
 				player->isCatch = true;
 				player->isPick = true;
+				player->PickItem();
 				if (player->dir == false)
 				{
 					player->ChangeClip("two_hand_pick_right", false);
@@ -302,21 +300,21 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 					player->ChangeClip("two_hand_pick_left", false);
 				}
 			}
-			/*
-			if (player->isCatch == true && player->isPick == true)
+			
+			else if (player->isCatch == true)
 			{
 				player->PutItem();
 				player->isPick = false;
 				if (player->dir == false)
 				{
-					player->ChangeClip("player_idle_right", false);
+					player->ChangeClip("idle_right", false);
 				}
 				else
 				{
-					player->ChangeClip("player_idle_left", false);
+					player->ChangeClip("idle_left", false);
 
 				}
-			}*/
+			}
 		}
 
 	}
@@ -352,12 +350,29 @@ void PlayerIdleState::Update(Player * player)
 		player->PickItem();
 		player->isPick = false;
 	}
+
+	if (player->isCatch == true)
+	{
+		_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.5 && player->isCatch == true)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->MoveY(-1);
+			else
+				player->GetItemTransform()->MoveY(1);
+
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
+	}
 }
 
 void PlayerIdleState::Enter(Player * player)
 {
+	_itemShakeTime = 0;
 	if (player->isCatch == true)
 	{
+		player->equipItem->GetComponent<Item>()->ChangeClip("trashbox", false);
 		if(player->dir == false)
 			player->ChangeClip("two_hand_idle_right", false);
 		else
@@ -378,4 +393,8 @@ void PlayerIdleState::Enter(Player * player)
 
 void PlayerIdleState::Exit(Player * player)
 {
+	if (_itemShakeDir == true && player->isCatch == true)
+	{
+		player->GetItemTransform()->MoveY(-1);
+	}
 }

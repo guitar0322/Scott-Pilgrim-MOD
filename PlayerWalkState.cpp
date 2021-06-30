@@ -17,13 +17,11 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		{
 			player->dir = false;
 			player->ChangeClip("two_hand_walk_right", false);
-
 		}
 		else
 		{
 			player->dir = false;
 			player->ChangeClip("walk_right", false);
-
 		}
 	
 	}
@@ -59,27 +57,17 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyUp('W'))
 	{
 		player->runKeyPress = false;
-
 		return new PlayerIdleState();
 	}
 	if (KEYMANAGER->isOnceKeyUp('S'))
 	{
 		player->runKeyPress = false;
-
 		return new PlayerIdleState();
 	}
 
 	if (KEYMANAGER->isStayKeyDown('J'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerJumpState();
-
-		}
-		else
-		{
-			return new PlayerJumpState();
-		}
+		return new PlayerJumpState();
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
@@ -90,7 +78,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		else
 		{
 			return new PlayerTwoHandAttackState();
-
 		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
@@ -116,13 +103,33 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 
 void PlayerWalkState::Update(Player * player)
 {
-	
 	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false) 
 	{
+		_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.6f && player->isCatch == true)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->Move(-1.5f,-2.2f);
+			else
+				player->GetItemTransform()->Move(1.5f, 2.2f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
+
 		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
+		_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.6f && player->isCatch == true)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->Move(-1.5f,-2.2f);
+			else
+				player->GetItemTransform()->Move(1.5f,2.2f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
 		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
@@ -142,14 +149,21 @@ void PlayerWalkState::Update(Player * player)
 }
 
 void PlayerWalkState::Enter(Player * player)
-{
+{	
+	_itemShakeTime = 0;
+
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
-
+		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() - 14, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_walk_right", false);
+		}
 		else
+		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() + 14, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_walk_left", false);
+		}
 	}
 	else
 	{
@@ -169,4 +183,8 @@ void PlayerWalkState::Enter(Player * player)
 
 void PlayerWalkState::Exit(Player * player)
 {
+	if (_itemShakeDir == true)
+	{
+		player->GetItemTransform()->Move(-1.5f,-2.2f);
+	}
 }

@@ -35,5 +35,6 @@ public:
     void BackgroundInit();
     void CameraInit();
     void WallInit();
+	void ItemImageClip();
 };
 

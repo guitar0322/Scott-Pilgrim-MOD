@@ -40,7 +40,6 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 
 	}
 
-
 	return nullptr;
 }
 
@@ -48,10 +47,30 @@ void PlayerRunState::Update(Player * player)
 {
 	if (player->dir == false)
 	{
+		if (player->isCatch == true)
+			_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.415f)
+		{
+			if(_itemShakeDir == false)
+				player->GetItemTransform()->Move(-5, -6.5f);
+			else player->GetItemTransform()->Move(5, 6.5f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
 		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 	else
 	{
+		if (player->isCatch == true)
+			_itemShakeTime += TIMEMANAGER->getElapsedTime();
+		if (_itemShakeTime >= 0.6f)
+		{
+			if (_itemShakeDir == false)
+				player->GetItemTransform()->Move(-5, -6.5f);
+			else player->GetItemTransform()->Move(5, 6.5f);
+			_itemShakeDir = !_itemShakeDir;
+			_itemShakeTime = 0;
+		}
 		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
 
@@ -71,14 +90,17 @@ void PlayerRunState::Update(Player * player)
 
 void PlayerRunState::Enter(Player * player)
 {
+	_itemShakeTime = 0;
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
 		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() - 38, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_run_right", false);
 		}
 		else
 		{
+			player->GetItemTransform()->SetPosition(player->transform->GetX() + 38, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_run_left", false);
 		}
 	}
@@ -98,4 +120,8 @@ void PlayerRunState::Enter(Player * player)
 
 void PlayerRunState::Exit(Player * player)
 {
+	if (_itemShakeDir == true)
+	{
+		player->GetItemTransform()->Move(-1, 2.5f);
+	}
 }

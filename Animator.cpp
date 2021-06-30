@@ -28,8 +28,6 @@ void Animator::Update()
 	if (_isPause == true) return;
 	frameTime += TIMEMANAGER->getElapsedTime();
 	if (frameTime >= curClip->frameTerm) {
-		BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
-			curClip->wholeDC, curClip->frameWidth * currentFrame, 0, SRCCOPY);
 		currentFrame++;
 		if (currentFrame == curClip->frameNum) {
 			if (curClip->isLoop == true)
@@ -43,6 +41,8 @@ void Animator::Update()
 				}
 			}
 		}
+		BitBlt(renderer->memDC, 0, 0, curClip->frameWidth, curClip->frameHeight,
+			curClip->wholeDC, curClip->frameWidth * currentFrame, 0, SRCCOPY);
 		frameTime = 0;
 	}
 }

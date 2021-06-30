@@ -40,8 +40,7 @@ HRESULT StartScene::Init()
     //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
     //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
 
-	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 100, 76, 1, 1);
-	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
+	ItemImageClip();
 
     character = new Character();
     character->name = "character";
@@ -167,12 +166,12 @@ void StartScene::Render()
     for (int i = 0; i < _objectV.size(); i++) {
         _objectV[i]->Render();
     }
+	trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
     testGround->Render();
-	trashBox->Render();
 	//matthew->Render();
 	//doberman->Render();
     EFFECTMANAGER->Render();
@@ -227,4 +226,16 @@ void StartScene::WallInit()
 
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
+}
+
+void StartScene::ItemImageClip()	
+{
+	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 115, 87, 1, 1);
+	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
+
+	//walk attack 
+	CLIPMANAGER->AddClip("trashbox_walk_attack_right", "item/trashbox_walk_attack_right.bmp", 805, 93, 7, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_attack_right")->isLoop = false;
+	
+	//trashBox->animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
 }
