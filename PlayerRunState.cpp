@@ -5,6 +5,7 @@
 #include "PlayerKickAttackState.h"
 #include "PlayerAttackState.h"
 #include "PlayerTwoHandAttackState.h"
+#include "PlayerFallState.h"
 #include "Player.h"
 
 PlayerState * PlayerRunState::InputHandle(Player * player)
@@ -37,7 +38,16 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
 		return new PlayerKickAttackState();
+	}
 
+	if (player->zOrder->GetZ() == 1000)
+	{
+		return new PlayerFallState();
+	}
+	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
+	{
+		player->onGround = false;
+		return new PlayerFallState();
 	}
 
 	return nullptr;
@@ -58,6 +68,10 @@ void PlayerRunState::Update(Player * player)
 			_itemShakeTime = 0;
 		}
 		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	else
 	{
@@ -72,6 +86,10 @@ void PlayerRunState::Update(Player * player)
 			_itemShakeTime = 0;
 		}
 		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 
 	if (KEYMANAGER->isStayKeyDown('W'))
@@ -83,14 +101,20 @@ void PlayerRunState::Update(Player * player)
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
 
-	
-	
-
 }
 
 void PlayerRunState::Enter(Player * player)
 {
 	_itemShakeTime = 0;
+	if (player->dir == false)
+	{
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_left", player->transform->GetX() + 12, player->zOrder->GetZ() - 12);
+	}
+	else
+	{
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_right", player->transform->GetX() - 12, player->zOrder->GetZ() - 12);
+	}
+
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
@@ -108,11 +132,11 @@ void PlayerRunState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("run_right", false);
+			player->ChangeClip("run_right", true);
 		}
 		else
 		{
-			player->ChangeClip("run_left", false);
+			player->ChangeClip("run_left", true);
 		}
 	}
 	

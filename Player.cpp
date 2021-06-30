@@ -33,8 +33,7 @@ void Player::Init()
 	runKeyPress = false;					//뛰는 키를 눌렀는 지 유무
 	jumpZ = false;							//Z축 점프 확인용
 	block = false;							//막기 확인용
-	groundCheck = false;					//플레이어 그라운드 착지 확인용
-	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
+	isZJump = false;						//Z축 점프 시 플레이어 그라운드 착지 확인용
 	onGround = false;
 
 	isPick = false;							//아이템을 주었는지 유무
@@ -45,6 +44,11 @@ void Player::Init()
 	runDelay = 0;
 	jumpDelay = 0;
 	pickDelay = 0;
+
+	hp = 100;
+	attack = 2;
+	isUppercut = false;
+	pressL = false;
 
 }
 
@@ -101,11 +105,11 @@ void Player::ChangeClip(string clipName, bool isInitFrame)
 {
 	if (isInitFrame == false)
 	{
-		animator->SetClip(animator->GetClip(clipName));
+		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
 	else
 	{
-		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
+		animator->SetClip(animator->GetClip(clipName));
 	}
 }
 
@@ -152,9 +156,9 @@ void Player::ClipInit()
 	walkJumpKickRight.isLoop = false;
 	walkJumpKickLeft.Init("player/walk_jump_kick_left.bmp", 980, 106, 7, 0.1f);
 	walkJumpKickLeft.isLoop = false;
-	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickRight.isLoop = false;
-	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.2f);
+	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
 	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);

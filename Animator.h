@@ -19,6 +19,7 @@ private:
 private:
     float frameTime;
 	bool _isPause;
+    bool _isEnd;
 public:
     Animator();
     ~Animator();
@@ -41,5 +42,6 @@ public:
     void AddTransaction(string name, AnimationClip* startClip, AnimationClip* nextClip);
 	void Pause();
 	void Resume();
+    bool GetEnd() const { return _isEnd; }
 };
 

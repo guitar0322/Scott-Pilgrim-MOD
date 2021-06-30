@@ -4,8 +4,7 @@ class PlayerFallState :
 	public PlayerState
 {
 private:
-	float _speedY;
-
+	float _speedX;
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player * player);

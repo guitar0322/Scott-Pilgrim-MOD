@@ -3,7 +3,7 @@
 #include "SceneInfoLoader.h"
 #define BG_NUM 23
 #define WALL_NUM 3
-
+#define SUCCUBUSMAX 4
 class WallObj;
 
 class StartScene :
@@ -12,13 +12,15 @@ class StartScene :
 public:
     StartScene();
     ~StartScene();
-    vector<GameObject*> _objectV;
+    vector<GameObject*> _propV;
+    vector<GameObject*> _enemyV;
     SceneInfoLoader sceneInfoLoader;
     ImageObject* background[BG_NUM];
     Box* box;
     ImageObject* imageObj;
     Character* character;
 	Character* matthew;
+	Character* succubus[SUCCUBUSMAX];
 	GameObject* player;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
@@ -26,6 +28,9 @@ public:
     // 210627 시영 추가 (Enemy 동적할당)
     Enemy* enemy;
 	Enemy* doberman;
+	Enemy* malcolm;
+	Enemy* william;
+
 
     virtual HRESULT Init();
     virtual void Release();
@@ -36,5 +41,7 @@ public:
     void CameraInit();
     void WallInit();
 	void ItemImageClip();
+    // 210629 시영 추가 (에너미 클립전용 함수 생성)
+    void EnemyClipManager();
+	void EffectClipInit();
 };
-

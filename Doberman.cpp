@@ -13,7 +13,8 @@ Doberman::Doberman()
 	animator->AddClip("doberman_move_right", CLIPMANAGER->FindClip("doberman_move_right"));
 	animator->AddClip("doberman_attack_left", CLIPMANAGER->FindClip("doberman_attack_left"));
 	animator->AddClip("doberman_attack_right",CLIPMANAGER->FindClip("doberman_attack_right"));
-
+	animator->AddClip("doberman_hit_left", CLIPMANAGER->FindClip("doberman_hit_left"));
+	animator->AddClip("doberman_hit_right", CLIPMANAGER->FindClip("doberman_hit_right"));
 
 	enemyAI->SetState(new DobermanIdleState());
 }

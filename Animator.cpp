@@ -19,6 +19,7 @@ void Animator::Init()
 	}
 	currentFrame = 0;
 	_isPause = false;
+	_isEnd = false;
 }
 
 void Animator::Update()
@@ -33,6 +34,7 @@ void Animator::Update()
 			if (curClip->isLoop == true)
 				currentFrame = 0;
 			else {
+				_isEnd = true;
 				currentFrame = curClip->frameNum - 1;
 				for (transactionIter = transactionMap.begin(); transactionIter != transactionMap.end(); transactionIter++) {
 					if (transactionIter->second.startClip == curClip) {
@@ -56,6 +58,7 @@ void Animator::SetClip(AnimationClip* newClip)
 {
 	preClip = curClip;
 	curClip = newClip;
+	_isEnd = false;
 	currentFrame = 0;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
@@ -67,6 +70,7 @@ void Animator::SetClip(AnimationClip* newClip, int startFrame)
 {
 	preClip = curClip;
 	curClip = newClip;
+	_isEnd = false;
 	currentFrame = startFrame;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
@@ -78,6 +82,7 @@ void Animator::SetClip(string clipName)
 {
 	preClip = curClip;
 	curClip = GetClip(clipName);
+	_isEnd = false;
 	currentFrame = 0;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);
@@ -89,6 +94,7 @@ void Animator::SetClip(string clipName, int startFrame)
 {
 	preClip = curClip;
 	curClip = GetClip(clipName);
+	_isEnd = false;
 	currentFrame = startFrame;
 	frameTime = 0;
 	renderer->Resize(curClip->frameWidth, curClip->frameHeight);

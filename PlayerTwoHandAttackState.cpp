@@ -5,17 +5,11 @@
 
 PlayerState * PlayerTwoHandAttackState::InputHandle(Player * player)
 {
-	//if (player->animator->currentFrame == 3)
-	//{
-	//	player->animator->Pause();
-	//	player->equipItem->GetComponent<Item>()->_animator->Pause();
-	//}
-	if (player->animator->currentFrame == player->animator->curClip->frameNum - 1)
+	if (player->animator->GetEnd())
 	{
 		player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 77);
 		return new PlayerIdleState();
 	}
-
 	return nullptr;
 }
 
