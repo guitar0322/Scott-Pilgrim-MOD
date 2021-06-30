@@ -5,6 +5,8 @@
 
 Luke::Luke()
 {
+	AnimationClip* testClip = CLIPMANAGER->FindClip("lee_idle_right");
+
 	animator->AddClip("lee_idle_right", CLIPMANAGER->FindClip("lee_idle_right"));
 	animator->AddClip("lee_idle_left", CLIPMANAGER->FindClip("lee_idle_left"));
 
@@ -24,5 +26,7 @@ Luke::~Luke()
 
 void Luke::Init()
 {
-
+	ground->enable = false;
+	zOrder->SetZ(transform->GetY() + 132 / 2);
+	enemyinfo->SetSpeed(30.f);
 }

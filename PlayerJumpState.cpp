@@ -36,10 +36,18 @@ void PlayerJumpState::Update(Player * player)
 		if (player->isRun == true) //뛸 때 -> 점프
 		{
 			player->transform->MoveX(player->GetSpeed()* 2 *TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 		else // 안 뒬 때 -> 점프
 		{
 			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 		
 	}
@@ -48,10 +56,18 @@ void PlayerJumpState::Update(Player * player)
 		if (player->isRun == true)
 		{
 			player->transform->MoveX(-player->GetSpeed() * 2 *TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 		else
 		{
 			player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
@@ -98,7 +114,7 @@ void PlayerJumpState::Update(Player * player)
 void PlayerJumpState::Enter(Player * player)
 {
 	player->jumpPower = 200;
-
+	player->isZJump = false;
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)

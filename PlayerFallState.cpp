@@ -9,15 +9,12 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
-		player->groundCheck = true;
-
 		player->transform->MoveY(-intersectHeight);
 		player->onGround = true;
 		return new PlayerGroundState();
 	}
 
 	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
-		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
 
@@ -42,11 +39,18 @@ void PlayerFallState::Update(Player * player)
 		if (player->isRun == true) //뛸 때 -> 점프
 		{
 			player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 		else // 안 뒬 때 -> 점프
 		{
 			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
@@ -54,10 +58,18 @@ void PlayerFallState::Update(Player * player)
 		if (player->isRun == true)
 		{
 			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 		else
 		{
 			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+				player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+				MainCam->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			}
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))

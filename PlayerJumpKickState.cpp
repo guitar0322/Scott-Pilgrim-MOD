@@ -8,14 +8,11 @@ PlayerState * PlayerJumpKickState::InputHandle(Player * player)
 	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
-		player->groundCheck = true;
-
 		player->transform->MoveY(-intersectHeight);
 		player->onGround = true;
 		return new PlayerIdleState();
 	}
 	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
-		player->groundCheck = true;
 		return new PlayerIdleState();
 	}
 
@@ -35,15 +32,10 @@ void PlayerJumpKickState::Update(Player* player)
 	{
 		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 	}
-
-
-
-	
 }
 
 void PlayerJumpKickState::Enter(Player* player)
 {
-	
 	if (player->isRun == false)
 	{
 		if (player->dir == false)
@@ -66,12 +58,9 @@ void PlayerJumpKickState::Enter(Player* player)
 			player->ChangeClip("run_jump_kick_left", false);
 		}
 	}
-
-
 }
 
 void PlayerJumpKickState::Exit(Player* player)
 {
-	
 
 }

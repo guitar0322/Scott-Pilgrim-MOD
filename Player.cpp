@@ -32,8 +32,7 @@ void Player::Init()
 	runKeyPress = false;					//뛰는 키를 눌렀는 지 유무
 	jumpZ = false;							//Z축 점프 확인용
 	block = false;							//막기 확인용
-	groundCheck = false;					//플레이어 그라운드 착지 확인용
-	groundZCheck = false;					//Z축 점프 시 플레이어 그라운드 착지 확인용
+	isZJump = false;						//Z축 점프 시 플레이어 그라운드 착지 확인용
 	onGround = false;
 	isCatch = false;						//아이템을 잡았는지 유무
 	isPick = false;							//아이템을 주었는지 유무

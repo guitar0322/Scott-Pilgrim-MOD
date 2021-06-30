@@ -7,14 +7,17 @@ Character::Character()
 	collider = new BoxCollider();
 	animator = new Animator();
 	zOrder = new ZOrder();
+	shadow = new Shadow();
+	AddComponent(zOrder);
+	zOrder->Init();
+	AddComponent(shadow);
+	shadow->Init();
 	AddComponent(renderer);
 	renderer->Init();
 	AddComponent(collider);
 	collider->Init();
 	AddComponent(animator);
 	animator->Init();
-	AddComponent(zOrder);
-	zOrder->Init();
 }
 
 Character::~Character()

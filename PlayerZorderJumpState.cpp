@@ -6,7 +6,6 @@
 
 PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 {
-
 	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
@@ -16,7 +15,6 @@ PlayerState * PlayerZorderJumpState::InputHandle(Player * player)
 	}
 
 	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
-		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
 	return nullptr;
@@ -44,6 +42,7 @@ void PlayerZorderJumpState::Enter(Player * player)
 {
 	_jumpPower = 150;
 	_speedZ = 70;
+	player->isZJump = true;
 
 	if (player->isCatch == true)
 	{
@@ -67,7 +66,6 @@ void PlayerZorderJumpState::Enter(Player * player)
 			player->ChangeClip("jump_Zorder_left", false);
 		}
 	}
-
 }
 
 void PlayerZorderJumpState::Exit(Player * player)

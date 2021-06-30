@@ -19,5 +19,6 @@ public:
 	void LoadScene(string sceneName);
 	Scene* GetScene(string sceneName);
 	Scene* GetCurScene();
+	int GetCurSceneIdx();
 };
 

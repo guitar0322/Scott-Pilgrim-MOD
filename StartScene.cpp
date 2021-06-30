@@ -18,8 +18,34 @@ HRESULT StartScene::Init()
 {
     Scene::Init();
     CameraInit();
-    sceneInfoLoader.SetLinkObjectVAddress(&_objectV);
-    sceneInfoLoader.LoadObjectInfo();
+
+    /* LEE CLIP MANAGER  */
+    CLIPMANAGER->AddClip("lee_idle_right", "lee/lee_idle_right.bmp", 800, 132, 8, 0.20f);
+    CLIPMANAGER->AddClip("lee_idle_left", "lee/lee_idle_left.bmp", 800, 132, 8, 0.20f);
+    CLIPMANAGER->AddClip("lee_run_right", "lee/lee_run_right.bmp", 864, 144, 8, 0.20f);
+    CLIPMANAGER->AddClip("lee_run_left", "lee/lee_run_left.bmp", 864, 144, 8, 0.20f);
+    CLIPMANAGER->AddClip("lee_attack1_right", "lee/lee_attack1_right.bmp", 560, 128, 4, 0.20f);
+    CLIPMANAGER->AddClip("lee_attack1_left", "lee/lee_attack1_left.bmp", 560, 128, 4, 0.20f);
+
+    /*Doberman CLIP MANAGER*/
+    CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
+    CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
+    CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
+    CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
+    //CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
+    //CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
+    CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
+    CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
+
+    sceneInfoLoader.SetLinkObjectVAddress(&_propV);
+    sceneInfoLoader.LoadObjectInfo(0);
+    sceneInfoLoader.LoadObjectInfo(1);
+    sceneInfoLoader.LoadObjectInfo(2);
+    sceneInfoLoader.LoadObjectInfo(3);
+
+    sceneInfoLoader.SetLinkObjectVAddress(&_enemyV);
+    sceneInfoLoader.LoadObjectInfo(4);
+
 
     //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
@@ -54,6 +80,12 @@ HRESULT StartScene::Init()
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
 
+    for (int i = 0; i < _enemyV.size(); i++)
+    {
+        _enemyV[i]->Init();
+        _enemyV[i]->GetComponent<EnemyAI>()->SetPlayer(character);
+    }
+
     wall[0] = new WallObj();
     wall[0]->Init(0, 300, 1000, 300);
     wall[1] = new WallObj();
@@ -76,23 +108,6 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-	/* LEE CLIP MANAGER  */
-	CLIPMANAGER->AddClip("lee_idle_right",     "lee/lee_idle_right.bmp",       400, 66, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_idle_left",      "lee/lee_idle_left.bmp",        400, 66, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_run_right",      "lee/lee_run_right.bmp",        432, 72, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_run_left",       "lee/lee_run_left.bmp",         432, 72, 8, 0.20f);
-	CLIPMANAGER->AddClip("lee_attack1_right",  "lee/lee_attack1_right.bmp",    280, 64, 4, 0.20f);
-	CLIPMANAGER->AddClip("lee_attack1_left",   "lee/lee_attack1_left.bmp",     280, 64, 4, 0.20f);
-
-	/*Doberman CLIP MANAGER*/
-	CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
-	CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
-	//CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
-	//CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
-	CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
-	CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
 
 
 
@@ -128,6 +143,8 @@ HRESULT StartScene::Init()
     BackgroundInit();
     WallInit();
 
+    MAPMANAGER->player = character;
+    MAPMANAGER->enemyV = &_enemyV;
     return S_OK;
 }
 
@@ -141,17 +158,23 @@ void StartScene::Update()
     //if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
     //    character->transform->MoveX(15);
     //}
-    for (int i = 0; i < _objectV.size(); i++) {
-        _objectV[i]->Update();
+    for (int i = 0; i < _propV.size(); i++) {
+        _propV[i]->Update();
     }
-    mainCam->transform->SetPosition(character->transform->GetX(), mainCam->transform->GetY());
+    for (int i = 0; i < _enemyV.size(); i++) {
+        _enemyV[i]->Update();
+    }
+    MainCam->transform->SetX(character->transform->GetX());
+    if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
+        MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
     testGround->Update();
 	trashBox->Update();
     character->Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
     ZORDER->Update();
-    mainCam->Update();
+    MainCam->Update();
+    MAPMANAGER->Update();
 	//matthew->Update();
 
 	//doberman->Update();
@@ -164,9 +187,6 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
-    for (int i = 0; i < _objectV.size(); i++) {
-        _objectV[i]->Render();
-    }
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
@@ -180,14 +200,12 @@ void StartScene::Render()
     // 210627 시영 추가 (Enemy Render)
     //enemy->Render();
 
-    sprintf_s(debug[0], "Player X : %f ", character->transform->GetX());
+    sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
-    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 20, debug[0], strlen(debug[0]));
-    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 40, debug[1], strlen(debug[1]));
-    TextOut(BackBuffer, mainCam->transform->GetX() - 300, 60, debug[2], strlen(debug[2]));
-    mainCam->camera->Render(_hdc);
-
-
+    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
+    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 40, debug[1], strlen(debug[1]));
+    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 60, debug[2], strlen(debug[2]));
+    MainCam->Render(_hdc);
 }
 
 void StartScene::BackgroundInit()

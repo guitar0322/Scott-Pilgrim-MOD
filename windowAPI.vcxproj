@@ -181,6 +181,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MapManager.h" />
     <ClInclude Include="Matthew.h" />
     <ClInclude Include="Matthewattack2state.h" />
     <ClInclude Include="Matthewattack3state.h" />
@@ -220,7 +221,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneInfoLoader.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SecondScene.h" />
+    <ClInclude Include="EditorScene.h" />
+    <ClInclude Include="Shadow.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="StartScene.h" />
@@ -276,6 +278,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Matthew.cpp" />
     <ClCompile Include="Matthewattack2state.cpp" />
     <ClCompile Include="Matthewattack3state.cpp" />
@@ -313,7 +316,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneInfoLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SecondScene.cpp" />
+    <ClCompile Include="EditorScene.cpp" />
+    <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -15,6 +15,7 @@ public:
 	BoxCollider* collider;
 	Animator* animator;
 	ZOrder* zOrder;
+	Shadow* shadow;
 	Ground* ground;
 
 	// 210625 TODO - AI, INFO 추가, CPP에서 동적할당 및 Init

@@ -41,6 +41,7 @@ HRESULT gameNode::init(bool managerInit)
 		BGMANAGER->Init();
 		WALLMANAGER->Init();
 		EFFECTMANAGER->Init();
+		MAPMANAGER->Init();
 	}
 
 	return S_OK;
@@ -87,6 +88,9 @@ void gameNode::release()
 
 	EFFECTMANAGER->Release();
 	EFFECTMANAGER->releaseSingleton();
+
+	MAPMANAGER->Release();
+	MAPMANAGER->releaseSingleton();
 }
 
 void gameNode::update()

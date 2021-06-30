@@ -194,7 +194,7 @@
     <ClCompile Include="SceneInfoLoader.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SecondScene.cpp">
+    <ClCompile Include="EditorScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
@@ -258,6 +258,10 @@
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="PlayerTwoHandAttackState.cpp" />
+    <ClCompile Include="Shadow.cpp" />
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -456,7 +460,7 @@
     <ClInclude Include="SceneInfoLoader.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SecondScene.h">
+    <ClInclude Include="EditorScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
@@ -523,6 +527,10 @@
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="PlayerTwoHandAttackState.h" />
+    <ClInclude Include="Shadow.h" />
+    <ClInclude Include="MapManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

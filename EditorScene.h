@@ -4,7 +4,7 @@
 
 #define BG_NUM 23
 #define SNOW1 0
-#define TYPE_NUM 2
+#define TYPE_NUM 5
 #define NAME_STARTX 700
 #define NAME_STARTY 50
 #define NAME_WIDTH 150
@@ -13,7 +13,7 @@
 #define OBJECT_MENU_STARTX 100
 #define OBJECT_MENU_STARTY 460
 #define OBJECT_MENU_TERM 100
-class SecondScene :
+class EditorScene :
     public Scene
 {
 private:
@@ -62,25 +62,24 @@ private:
     SceneInfoLoader _sceneInfoLoader;
     vector<GameObject*> _objectV[TYPE_NUM];
     vector<OBJECTNAME> _objectNameV[TYPE_NUM];
-    string typeNameArr[TYPE_NUM];
+    string _typeNameArr[TYPE_NUM];
     GameObject _outline;
-    BUTTON nextButton, beforeButton;
+    BUTTON _nextButton, _beforeButton;
+    float _mouseDeltaX;
+    int _selectIdxType;
+    int _selectIdxObject;
+    int _selectIdxObjectType;
+    int _selectIdxName;
+    int _selectIdxNameType;
+    bool _clickScreen;
+    RECT _selectNameRect;
+    ImageObject* _background[BG_NUM];
+    OBJECTMENU _objectMenu[TYPE_NUM];
+    SELECTOBJECT _selectObject;
+    MOUSEINFO _mouseInfo;
 public:
-    ImageObject* background[BG_NUM];
-    OBJECTMENU objectMenu[TYPE_NUM];
-    SELECTOBJECT selectObject;
-    MOUSEINFO mouseInfo;
-    float mouseDeltaX;
-    int selectIdxType;
-    int selectIdxObject;
-    int selectIdxObjectType;
-    int selectIdxName;
-    int selectIdxNameType;
-    bool clickScreen;
-    RECT selectNameRect;
-public:
-    SecondScene();
-    ~SecondScene();
+    EditorScene();
+    ~EditorScene();
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();

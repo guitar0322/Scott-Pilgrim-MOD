@@ -15,6 +15,10 @@ public:
 	GameObject* MakeObject(float x, float y, int type);
 	GameObject* MakeSnow1(float x, float y);
 	GameObject* MakeSnow2(float x, float y);
+	GameObject* MakeFencePillar(float x, float y);
+	GameObject* MakeFencePillar2(float x, float y);
+	GameObject* MakeLee(float x, float y);
+	GameObject* MakeLeeEditor(float x, float y);
 	vector<int> GetTypeV() const { return _typeV; }
 };
 

@@ -12,7 +12,8 @@ class StartScene :
 public:
     StartScene();
     ~StartScene();
-    vector<GameObject*> _objectV;
+    vector<GameObject*> _propV;
+    vector<GameObject*> _enemyV;
     SceneInfoLoader sceneInfoLoader;
     ImageObject* background[BG_NUM];
     Box* box;
