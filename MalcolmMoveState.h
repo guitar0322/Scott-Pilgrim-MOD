@@ -1,7 +1,6 @@
 #pragma once
 #include "EnemyState.h"
-class DobermanMoveState :
-	public EnemyState
+class MalcolmMoveState : public EnemyState
 {
 public:
 	virtual EnemyState* Update(EnemyAI* enemy);

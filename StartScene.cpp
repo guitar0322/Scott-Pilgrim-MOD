@@ -6,6 +6,8 @@
 #include "Wall.h"
 #include "Doberman.h"
 #include "Matthew.h"
+#include "Malcolm.h"
+#include "William.h"
 StartScene::StartScene()
 {
 }
@@ -85,18 +87,31 @@ HRESULT StartScene::Init()
 	CLIPMANAGER->AddClip("lee_attack1_left",   "lee/lee_attack1_left.bmp",     280, 64, 4, 0.20f);
 
 	/*Doberman CLIP MANAGER*/
-	CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
-	CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
-	CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
-	//CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
-	//CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
-	CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
-	CLIPMANAGER->FindClip("doberman_attack_left")->isLoop = false;
-	CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
-	CLIPMANAGER->FindClip("doberman_attack_right")->isLoop = false;
+	CLIPMANAGER->AddClip("doberman_idle_left", "doberman/idle_left.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_idle_right", "doberman/idle_right.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_move_left", "doberman/move_left.bmp", 1146, 96, 6, 0.2f);
+	CLIPMANAGER->AddClip("doberman_move_right", "doberman/move_right.bmp", 1146, 96, 6, 0.2f);
+	CLIPMANAGER->AddClip("doberman_attack_left", "doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->AddClip("doberman_attack_right", "doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->AddClip("doberman_hit_left", "doberman/hit_left.bmp", 664, 160, 4, 0.2f);
+	CLIPMANAGER->AddClip("doberman_hit_right", "doberman/hit_right.bmp", 664, 160, 4, 0.2f);
 
-
+	/*malcolm*/
+	CLIPMANAGER->AddClip("malcolm_idle_left","malcolm/malcolm_idle_left.bmp",456,159,4,0.3f);
+	CLIPMANAGER->AddClip("malcolm_idle_right","malcolm/malcolm_idle_right.bmp",456,159,4,0.3f);
+	CLIPMANAGER->AddClip("malcolm_move_left","malcolm/malcolm_move_left.bmp",832,164,8,0.3f);
+	CLIPMANAGER->AddClip("malcolm_move_right","malcolm/malcolm_move_right.bmp",832,164,8,0.2f);
+	CLIPMANAGER->AddClip("malcolm_attack_left", "malcolm/malcolm_attack_left.bmp", 1638, 174, 9, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_attack_right","malcolm/malcolm_attack_right.bmp",1638,174,9,0.2f);
+	 CLIPMANAGER->AddClip("malcolm_hit_left","malcolm/malcolm_hit_left.bmp",576,158,4,0.2f);
+	 CLIPMANAGER->AddClip("malcolm_hit_right","malcom/malcolm_hit_right.bmp",576,158,4,0.2f);
+	 /*william*/
+	 CLIPMANAGER->AddClip("william_idle_left","william/william_idle_left.bmp",488,146,4,0.3f);
+	 CLIPMANAGER->AddClip("william_idle_right","william/william_idle_right.bmp",488,146,4,0.3f);
+	 CLIPMANAGER->AddClip("william_move_left","william/william_move_left.bmp",1160,144,8,0.3f);
+	 CLIPMANAGER->AddClip("william_move_right","william/william_move_right.bmp",1160,144,8,0.3f);
+	 CLIPMANAGER->AddClip("william_attack_left","william/william_attack_left.bmp",2024,138,11,0.2f);
+	 CLIPMANAGER->AddClip("william_attack_right","william/william_attack_right.bmp",2024,138,11,0.2f);
 	// 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
 
     enemy = new Luke();
@@ -116,6 +131,21 @@ HRESULT StartScene::Init()
 	doberman->enemyAI->SetPlayer(character);
 	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	doberman->enemyinfo->SetSpeed(60.0f);
+	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
+	malcolm = new Malcolm();
+	malcolm->transform->SetPosition(1300, 500);
+	malcolm->ground->enable = false;
+	malcolm->enemyAI->SetPlayer(character);
+	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
+	malcolm->enemyinfo->SetSpeed(30.0f);
+	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
+	william = new William();
+	william->transform->SetPosition(1500, 500);
+	william->ground->enable = false;
+	william->enemyAI->SetPlayer(character);
+	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
+	william->enemyinfo->SetSpeed(20.0f);
+
 
 	// º¸½º ¸ÅÆ© ±¸Çö//
 
@@ -156,10 +186,13 @@ void StartScene::Update()
     ZORDER->Update();
     mainCam->Update();
 	matthew->Update();
+	
 
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
     enemy->Update();
 	doberman->Update();
+	malcolm->Update();
+	william->Update();
 	//doberman->Update();
 	//matthew->Update();
 

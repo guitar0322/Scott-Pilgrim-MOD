@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "DobermanAttackState.h"
 #include "DobermanIdleState.h"
-#include "Enemy.h"
 
 EnemyState * DobermanAttackState::Update(EnemyAI * enemy)
 {

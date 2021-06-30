@@ -1,12 +1,10 @@
 #pragma once
 #include "Enemy.h"
-
-class Doberman : public Enemy
+class Malcolm : public Enemy
 {
-
 public:
-	Doberman();
-	~Doberman();
+	Malcolm();
+	~Malcolm();
 
 	virtual void Init();
 };

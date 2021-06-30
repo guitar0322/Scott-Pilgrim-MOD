@@ -2,7 +2,6 @@
 #include "DobermanMoveState.h"
 #include "DobermanIdleState.h"
 #include "DobermanAttackState.h"
-#include "Enemy.h"
 
 EnemyState * DobermanMoveState::Update(EnemyAI* enemy)
 {
@@ -43,18 +42,18 @@ EnemyState * DobermanMoveState::Update(EnemyAI* enemy)
 	return nullptr;
 }
 
-void DobermanMoveState::Enter(EnemyAI * doberman)
+void DobermanMoveState::Enter(EnemyAI * enemy)
 {
-	if (doberman->enemyinfo->GetDir() == false)
+	if (enemy->enemyinfo->GetDir() == false)
 	{
-		doberman->ChangeClip("doberman_move_right", true);
+		enemy->ChangeClip("doberman_move_right", true);
 	}
 	else
 	{
-		doberman->ChangeClip("doberman_move_left", true);
+		enemy->ChangeClip("doberman_move_left", true);
 	}
 }
 
-void DobermanMoveState::Exit(EnemyAI * doberman)
+void DobermanMoveState::Exit(EnemyAI * enemy)
 {
 }
