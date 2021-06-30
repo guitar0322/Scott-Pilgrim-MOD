@@ -88,8 +88,7 @@ public:
 
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
-	bool groundCheck;	//그라운드 체크 구분
-	bool groundZCheck;	//Z축 그라운드 체크 구분
+	bool isZJump;		//Z축 그라운드 체크 구분
 
 	bool isRun;			//뛰는 거 구분
 	bool runKeyPress;	//키 더블했는지

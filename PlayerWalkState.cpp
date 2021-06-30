@@ -17,17 +17,14 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		{
 			player->dir = false;
 			player->ChangeClip("two_hand_walk_right", true);
-
 		}
 		else
 		{
 			player->dir = false;
 			player->ChangeClip("walk_right", true);
-
 		}
-	
 	}
-	if (KEYMANAGER->isOnceKeyUp('D'))
+	if (KEYMANAGER->isOnceKeyUp('D') && !KEYMANAGER->isStayKeyDown('W') && !KEYMANAGER->isStayKeyDown('S'))
 	{
 		if (player->dir == true)
 			player->runKeyPress = false;
@@ -36,36 +33,29 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 
 	if (KEYMANAGER->isOnceKeyDown('A')) 
 	{
-
 		if (player->isCatch == true)
 		{
 			player->dir = true;
 			player->ChangeClip("two_hand_walk_left", true);
-
 		}
 		else
 		{
 			player->dir = true;
 			player->ChangeClip("walk_left", true);
-
 		}
 	}
-	if (KEYMANAGER->isOnceKeyUp('A'))
+	if (KEYMANAGER->isOnceKeyUp('A') && !KEYMANAGER->isStayKeyDown('W') && !KEYMANAGER->isStayKeyDown('S'))
 	{
 		if (player->dir == false)
 			player->runKeyPress = false;
 		return new PlayerIdleState();
 	}
-	if (KEYMANAGER->isOnceKeyUp('W'))
+	if (KEYMANAGER->isOnceKeyUp('W') && !KEYMANAGER->isStayKeyDown('D') && !KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->runKeyPress = false;
-
 		return new PlayerIdleState();
 	}
-	if (KEYMANAGER->isOnceKeyUp('S'))
+	if (KEYMANAGER->isOnceKeyUp('S') && !KEYMANAGER->isStayKeyDown('D') && !KEYMANAGER->isStayKeyDown('A'))
 	{
-		player->runKeyPress = false;
-
 		return new PlayerIdleState();
 	}
 
@@ -82,7 +72,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		else
 		{
 			return new PlayerTwoHandAttackState();
-
 		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
@@ -103,19 +92,30 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 		return new PlayerFallState();
 	}
 
+	if (player->zOrder->GetZ() == 1000)
+	{
+		return new PlayerFallState();
+	}
 	return nullptr;
 }
 
 void PlayerWalkState::Update(Player * player)
 {
-	
 	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false) 
 	{
 		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
 		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
@@ -127,10 +127,6 @@ void PlayerWalkState::Update(Player * player)
 		player->runKeyPress = false;
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	}
-
-	//player->playerBoxCheckRc = RectMakeCenter(player->transform->GetX(), 
-	//												player->transform->GetY()+55, 100, 4);
-
 }
 
 void PlayerWalkState::Enter(Player * player)
@@ -154,9 +150,6 @@ void PlayerWalkState::Enter(Player * player)
 			player->ChangeClip("walk_left", true);
 		}
 	}
-	
-
-
 }
 
 void PlayerWalkState::Exit(Player * player)

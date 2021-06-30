@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "PlayerBreakState.h"
+#include "PlayerWalkState.h"
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
 #include "player.h"
 
-PlayerState * PlayerBreakState::InputHandle(Player * player)
+PlayerState* PlayerBreakState::InputHandle(Player* player)
 {
 	if (_dashSpeed < 0)
 	{
@@ -13,60 +14,32 @@ PlayerState * PlayerBreakState::InputHandle(Player * player)
 
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		if (player->isCatch == true)
-		{
-			player->dir = false;
-			player->ChangeClip("two_hand_walk_right", true);
-			return new PlayerWalkState();
-		}
-		else
-		{
-			player->dir = false;
-			player->ChangeClip("walk_right", true);
-			return new PlayerWalkState();
-		}
-
-	}
-	if (KEYMANAGER->isOnceKeyUp('D'))
-	{
-		if (player->dir == true)
-			player->runKeyPress = false;
-		return new PlayerIdleState();
+		player->dir = false;
+		player->runKeyPress = true;
+		return new PlayerWalkState();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
+		player->dir = true;
+		player->runKeyPress = true;
+		return new PlayerWalkState();
+	}
 
-		if (player->isCatch == true)
-		{
-			player->dir = true;
-			player->ChangeClip("two_hand_walk_left", true);
-			return new PlayerWalkState();
-		}
-		else
-		{
-			player->dir = true;
-			player->ChangeClip("walk_left", true);
-			return new PlayerWalkState();
-		}
-	}
-	if (KEYMANAGER->isOnceKeyUp('A'))
-	{
-		if (player->dir == false)
-			player->runKeyPress = false;
-		return new PlayerIdleState();
-	}
-	if (KEYMANAGER->isOnceKeyUp('W'))
+	if (KEYMANAGER->isOnceKeyDown('W'))
 	{
 		player->runKeyPress = false;
-
-		return new PlayerIdleState();
+		player->jumpZ = true;
+		player->dirZ = true;
+		return new PlayerWalkState();
 	}
-	if (KEYMANAGER->isOnceKeyUp('S'))
+
+	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
 		player->runKeyPress = false;
-
-		return new PlayerIdleState();
+		player->jumpZ = true;
+		player->dirZ = false;
+		return new PlayerWalkState();
 	}
 
 	return nullptr;
@@ -83,33 +56,12 @@ void PlayerBreakState::Update(Player * player)
 	{
 		player->transform->MoveX(-_dashSpeed * TIMEMANAGER->getElapsedTime());
 	}
-
-	if (KEYMANAGER->isStayKeyDown('D') && player->dir == false)
-	{
-		player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	}
-	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
-	{
-		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	}
-	if (KEYMANAGER->isStayKeyDown('W'))
-	{
-		player->runKeyPress = false;
-		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	}
-	if (KEYMANAGER->isStayKeyDown('S'))
-	{
-		player->runKeyPress = false;
-		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	}
-
-
 }
 
 void PlayerBreakState::Enter(Player * player)
 {
 	_dashSpeed = 100;
-
+	player->isRun = false;
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
@@ -133,7 +85,5 @@ void PlayerBreakState::Enter(Player * player)
 
 void PlayerBreakState::Exit(Player * player)
 {
-
-
 
 }

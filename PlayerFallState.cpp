@@ -9,15 +9,12 @@ PlayerState * PlayerFallState::InputHandle(Player * player)
 	int intersectHeight = GROUNDMANAGER->CheckGround(player->collider->rc, player->zOrder->GetZ());
 	if (intersectHeight != 0)
 	{
-		player->groundCheck = true;
-
 		player->transform->MoveY(-intersectHeight);
 		player->onGround = true;
 		return new PlayerGroundState();
 	}
 
 	if (player->transform->GetY() + 52 >= player->zOrder->GetZ()) {
-		player->groundCheck = true;
 		return new PlayerGroundState();
 	}
 
@@ -37,34 +34,25 @@ void PlayerFallState::Update(Player * player)
 
 	player->transform->MoveY(player->jumpPower * TIMEMANAGER->getElapsedTime());
 
-	if (player->isRun == true) //뛸 때 -> 점프
-	{
-		if (player->dir == false)
-		{
-			player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-		}
-		else
-		{
-			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-		}
-	}
-
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		if (player->isRun == false) // 안 뒬 때 -> 점프
-			player->transform->MoveX(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		
+		player->transform->MoveX(_speedX * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		if (player->isRun == false) // 안 뒬 때 -> 점프
-			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-
+		player->transform->MoveX(-_speedX * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(-_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(-_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
 		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
@@ -100,14 +88,16 @@ void PlayerFallState::Update(Player * player)
 			player->ChangeClip("fall_left", false);
 
 		}
-	
 	}
-
 }
 
 void PlayerFallState::Enter(Player * player)
 {
 	player->jumpPower = 0;
+	if (player->isRun == true)
+		_speedX = player->GetSpeed() * 2;
+	else
+		_speedX = player->GetSpeed();
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
@@ -130,8 +120,6 @@ void PlayerFallState::Enter(Player * player)
 			player->ChangeClip("fall_left", true);
 		}
 	}
-
-	
 }
 
 void PlayerFallState::Exit(Player * player)

@@ -10,24 +10,17 @@ PlayerState * PlayerGroundState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyUp('W'));
 	if (KEYMANAGER->isOnceKeyUp('S'));
 
-	if (player->groundZCheck == true && _jumpTime >= 0.4f)
+	if (player->isZJump == true && _jumpTime >= 0.4f)
 	{
 		player->jumpZ = false;
-		player->groundZCheck = false;
-
-
 		return new PlayerIdleState();
 	}
 
-	if (player->groundCheck == true && _jumpTime >= 0.7f) 
+	if (player->isZJump == false && _jumpTime >= 0.7f) 
 	{
 		player->jumpZ = false;
-		player->groundCheck = false;
-
-
 		return new PlayerIdleState();
 	}
-
 	return nullptr;
 }
 
@@ -64,8 +57,6 @@ void PlayerGroundState::Enter(Player * player)
 			player->ChangeClip("ground_left", true);
 		}
 	}
-	
-
 }
 
 void PlayerGroundState::Exit(Player * player)

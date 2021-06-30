@@ -12,7 +12,8 @@ class StartScene :
 public:
     StartScene();
     ~StartScene();
-    vector<GameObject*> _objectV;
+    vector<GameObject*> _propV;
+    vector<GameObject*> _enemyV;
     SceneInfoLoader sceneInfoLoader;
     ImageObject* background[BG_NUM];
     Box* box;
@@ -37,5 +38,6 @@ public:
     void BackgroundInit();
     void CameraInit();
     void WallInit();
+    // 210629 시영 추가 (에너미 클립전용 함수 생성)
+    void EnemyClipManager();
 };
-

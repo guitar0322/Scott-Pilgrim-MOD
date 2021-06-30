@@ -39,7 +39,10 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	{
 		return new PlayerKickAttackState();
 	}
-
+	if (player->zOrder->GetZ() == 1000)
+	{
+		return new PlayerFallState();
+	}
 	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
 	{
 		player->onGround = false;
@@ -54,10 +57,18 @@ void PlayerRunState::Update(Player * player)
 	if (player->dir == false)
 	{
 		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 	else
 	{
 		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
 	}
 
 	if (KEYMANAGER->isStayKeyDown('W'))

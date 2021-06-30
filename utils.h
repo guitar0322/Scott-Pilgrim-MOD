@@ -18,6 +18,7 @@
 #include "Zone.h"
 #include "Item.h"
 #include "ImageObject.h"
+#include "Shadow.h"
 #include "Character.h"
 #include "Ground.h"
 #include "ZOrder.h"
@@ -26,6 +27,7 @@
 #include "Wall.h"
 #include "WallObj.h"
 #include "Player.h"
+#include "MapManager.h"
 #include <typeinfo>
 
 // 210625 시영 Enemy 작업 관련 include

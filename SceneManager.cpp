@@ -54,3 +54,15 @@ Scene* SceneManager::GetCurScene()
 {
     return _curScene;
 }
+
+int SceneManager::GetCurSceneIdx()
+{
+    int idx = 0;
+    for (sceneIter = sceneMap.begin(); sceneIter != sceneMap.end(); sceneIter++)
+    {
+        if (sceneIter->second == _curScene)
+            return idx;
+        idx++;
+    }
+    return -1;
+}

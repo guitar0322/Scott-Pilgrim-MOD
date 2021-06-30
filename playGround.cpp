@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "playGround.h"
 #include "StartScene.h"
-#include "SecondScene.h"
+#include "EditorScene.h"
 playGround::playGround()
 {
 
@@ -22,10 +22,10 @@ HRESULT playGround::init()
 	SCENEMANAGER->LoadScene("start");
 	SCENEMANAGER->GetCurScene()->Init();
 
-	//SecondScene* secondscene = new SecondScene();
-	//SCENEMANAGER->AddScene("second", secondscene);
-	//SCENEMANAGER->LoadScene("second");
-	//secondscene->Init();
+	//EditorScene* editorScene = new EditorScene();
+	//SCENEMANAGER->AddScene("editor", editorScene);
+	//SCENEMANAGER->LoadScene("editor");
+	//editorScene->Init();
 
 	//_mainCam.transform->SetX(_mainCam.transform->GetX() + 100);
 	//testParticle = new image();
@@ -41,7 +41,6 @@ HRESULT playGround::init()
 	//demoParticleSys->SetSpeed(0);
 	//demoParticleSys->SetLoop(true);
 	
-
 	//_mainCam.camera->Shake(3, 2);
 	_ui.uiRenderer->Resize(WINSIZEX, WINSIZEY);
 	return S_OK;
