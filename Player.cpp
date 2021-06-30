@@ -47,7 +47,8 @@ void Player::Init()
 
 	hp = 100;
 	attack = 2;
-	isAttack = false;
+	isUppercut = false;
+	pressL = false;
 
 }
 

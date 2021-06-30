@@ -108,10 +108,10 @@ public:
 	float friction;			//마찰
 	float jumpPower;		//점프력
 
-	int hp;
-	int attack;
-	bool isAttack;
-	int enemyHp;
+	int hp;					//플레이어 hp
+	int attack;				//플레이어 공격력 (추후 레벨 별 구분)
+	bool isUppercut;		//어퍼컷 유무
+	bool pressL;			//L키 누른 거 여부
 
 	RECT groundCheckRc;
 

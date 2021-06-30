@@ -33,6 +33,7 @@ HRESULT StartScene::Init()
 
     // 210629 시영 추가
     EnemyClipManager();
+	EffectClipInit();
 
     //위에는 건들지 마시오
     //=============미리 만들어져 있는 예시 오브젝트============
@@ -436,4 +437,13 @@ void StartScene::EnemyClipManager()
     CLIPMANAGER->AddClip("william_move_right", "william/william_move_right.bmp", 1160, 144, 8, 0.3f);
     CLIPMANAGER->AddClip("william_attack_left", "william/william_attack_left.bmp", 2024, 138, 11, 0.2f);
     CLIPMANAGER->AddClip("william_attack_right", "william/william_attack_right.bmp", 2024, 138, 11, 0.2f);
+}
+
+void StartScene::EffectClipInit()
+{
+	CLIPMANAGER->AddClip("ground_effect", "effect/ground_effect.bmp", 671, 65, 4, 0.12f);
+	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
+	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
+	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 614, 135, 5, 0.12f);
+
 }
