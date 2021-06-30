@@ -181,6 +181,13 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="LukeAttack2State.h" />
+    <ClInclude Include="LukeAttack3State.h" />
+    <ClInclude Include="LukeBlockState.h" />
+    <ClInclude Include="LukeDieState.h" />
+    <ClInclude Include="LukeHitState.h" />
+    <ClInclude Include="LukeKickState.h" />
+    <ClInclude Include="LukeWalkState.h" />
     <ClInclude Include="Matthew.h" />
     <ClInclude Include="Matthewattack2state.h" />
     <ClInclude Include="Matthewattack3state.h" />
@@ -190,7 +197,7 @@
     <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Matthewstate.h" />
     <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeAttackState.h" />
+    <ClInclude Include="LukeAttack1State.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="ObjectInfo.h" />
@@ -276,6 +283,13 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp" />
+    <ClCompile Include="LukeAttack3State.cpp" />
+    <ClCompile Include="LukeBlockState.cpp" />
+    <ClCompile Include="LukeDieState.cpp" />
+    <ClCompile Include="LukeHitState.cpp" />
+    <ClCompile Include="LukeKickState.cpp" />
+    <ClCompile Include="LukeWalkState.cpp" />
     <ClCompile Include="Matthew.cpp" />
     <ClCompile Include="Matthewattack2state.cpp" />
     <ClCompile Include="Matthewattack3state.cpp" />
@@ -285,7 +299,7 @@
     <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Matthewstate.cpp" />
     <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeAttackState.cpp" />
+    <ClCompile Include="LukeAttack1State.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
