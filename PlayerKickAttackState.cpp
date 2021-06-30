@@ -7,7 +7,7 @@
 PlayerState * PlayerKickAttackState::InputHandle(Player * player)
 {
 	
-	if (player->animator->currentFrame == player->animator->curClip->frameNum - 1)
+	if (player->animator->GetEnd())
 	{
 		return new PlayerIdleState();
 	}
