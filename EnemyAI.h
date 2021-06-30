@@ -73,6 +73,8 @@ public:
 
 	/* _player를 찾기 위한 GETTER/SETTER */
 	void SetPlayer(GameObject* player) { _player = player; }
-	void SetState(EnemyState* newState);
 	Transform* GetPlayerTransform() const { return _player->transform; }
+
+	/* 210629 상태를 지정하기 위한 SETTER */
+	void SetState(EnemyState* newState);
 };

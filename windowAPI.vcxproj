@@ -188,6 +188,13 @@
     <ClInclude Include="MalcolmIdleState.h" />
     <ClInclude Include="MalcolmMoveState.h" />
     <ClInclude Include="MatthehHitState.h" />
+    <ClInclude Include="LukeAttack2State.h" />
+    <ClInclude Include="LukeAttack3State.h" />
+    <ClInclude Include="LukeBlockState.h" />
+    <ClInclude Include="LukeDieState.h" />
+    <ClInclude Include="LukeHitState.h" />
+    <ClInclude Include="LukeKickState.h" />
+    <ClInclude Include="LukeWalkState.h" />
     <ClInclude Include="Matthew.h" />
     <ClInclude Include="MatthewAttack2State.h" />
     <ClInclude Include="MatthewAttack3State.h" />
@@ -196,7 +203,7 @@
     <ClInclude Include="MatthewMoveState.h" />
     <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeAttackState.h" />
+    <ClInclude Include="LukeAttack1State.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="MatthewState.h" />
@@ -294,6 +301,13 @@
     <ClCompile Include="MalcolmIdleState.cpp" />
     <ClCompile Include="MalcolmMoveState.cpp" />
     <ClCompile Include="MatthehHitState.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp" />
+    <ClCompile Include="LukeAttack3State.cpp" />
+    <ClCompile Include="LukeBlockState.cpp" />
+    <ClCompile Include="LukeDieState.cpp" />
+    <ClCompile Include="LukeHitState.cpp" />
+    <ClCompile Include="LukeKickState.cpp" />
+    <ClCompile Include="LukeWalkState.cpp" />
     <ClCompile Include="Matthew.cpp" />
     <ClCompile Include="MatthewAttack2State.cpp" />
     <ClCompile Include="MatthewAttack3State.cpp" />
@@ -302,7 +316,7 @@
     <ClCompile Include="MatthewMoveState.cpp" />
     <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeAttackState.cpp" />
+    <ClCompile Include="LukeAttack1State.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="MatthewState.cpp" />

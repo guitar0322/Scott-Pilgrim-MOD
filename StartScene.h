@@ -37,5 +37,6 @@ public:
     void BackgroundInit();
     void CameraInit();
     void WallInit();
+    // 210629 시영 추가 (에너미 클립전용 함수 생성)
+    void EnemyClipManager();
 };
-

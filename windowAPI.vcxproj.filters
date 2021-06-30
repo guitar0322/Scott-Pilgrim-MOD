@@ -83,7 +83,7 @@
     <ClCompile Include="Luke.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="LukeAttackState.cpp">
+    <ClCompile Include="LukeAttack1State.cpp">
       <Filter>EnemyState\Luke</Filter>
     </ClCompile>
     <ClCompile Include="LukeIdleState.cpp">
@@ -227,7 +227,6 @@
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
     <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeAttackState.cpp" />
     <ClCompile Include="LukeIdleState.cpp" />
     <ClCompile Include="LukeRunState.cpp" />
     <ClCompile Include="PlayerTwoHandAttackState.cpp" />
@@ -269,6 +268,13 @@
     <ClCompile Include="WilliamAttackState.cpp" />
     <ClCompile Include="DobermanHitState.cpp" />
     <ClCompile Include="MatthehHitState.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp" />
+    <ClCompile Include="LukeAttack3State.cpp" />
+    <ClCompile Include="LukeBlockState.cpp" />
+    <ClCompile Include="LukeDieState.cpp" />
+    <ClCompile Include="LukeHitState.cpp" />
+    <ClCompile Include="LukeWalkState.cpp" />
+    <ClCompile Include="LukeKickState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -356,7 +362,7 @@
     <ClInclude Include="Luke.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="LukeAttackState.h">
+    <ClInclude Include="LukeAttack1State.h">
       <Filter>EnemyState\Luke</Filter>
     </ClInclude>
     <ClInclude Include="LukeIdleState.h">
@@ -503,7 +509,6 @@
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
     <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeAttackState.h" />
     <ClInclude Include="LukeIdleState.h" />
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="PlayerTwoHandAttackState.h" />
@@ -545,6 +550,13 @@
     <ClInclude Include="WilliamAttackState.h" />
     <ClInclude Include="DobermanHitState.h" />
     <ClInclude Include="MatthehHitState.h" />
+    <ClInclude Include="LukeAttack2State.h" />
+    <ClInclude Include="LukeAttack3State.h" />
+    <ClInclude Include="LukeBlockState.h" />
+    <ClInclude Include="LukeDieState.h" />
+    <ClInclude Include="LukeHitState.h" />
+    <ClInclude Include="LukeWalkState.h" />
+    <ClInclude Include="LukeKickState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
