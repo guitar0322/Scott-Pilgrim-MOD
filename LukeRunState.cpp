@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "LukeIdleState.h"
 #include "LukeRunState.h"
-#include "LukeAttackState.h"
+#include "LukeAttack1State.h"
 
 EnemyState* LukeRunState::Update(EnemyAI* enemy)
 {
@@ -31,7 +31,7 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 100)
 	{
-		return new LukeAttackState();
+		return new LukeAttack1State();
 	}
 
 	// TODO - AI XÃà, YÃà, 
