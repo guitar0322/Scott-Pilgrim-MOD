@@ -99,13 +99,11 @@ HRESULT StartScene::Init()
     enemy = new Luke();
     enemy->Init();
     enemy->transform->SetPosition(800, 300);
-    enemy->ground->enable = false;
     enemy->enemyAI->SetPlayer(character);
 
 	// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
 	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
-	doberman->ground->enable = false;
 	doberman->enemyAI->SetPlayer(character);
 	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	doberman->enemyinfo->SetSpeed(60.0f);
@@ -113,7 +111,6 @@ HRESULT StartScene::Init()
 	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
 	malcolm = new Malcolm();
 	malcolm->transform->SetPosition(1300, 500);
-	malcolm->ground->enable = false;
 	malcolm->enemyAI->SetPlayer(character);
 	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	malcolm->enemyinfo->SetSpeed(30.0f);
@@ -121,7 +118,6 @@ HRESULT StartScene::Init()
 	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
-	william->ground->enable = false;
 	william->enemyAI->SetPlayer(character);
 	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	william->enemyinfo->SetSpeed(20.0f);
@@ -153,9 +149,12 @@ void StartScene::Release()
 
 void StartScene::Update()
 {
-    for (int i = 0; i < _propV.size(); i++) {
+    for (int i = 0; i < _propV.size(); i++) 
+    {
         _propV[i]->Update();
-    for (int i = 0; i < _enemyV.size(); i++) {
+    }
+    for (int i = 0; i < _enemyV.size(); i++)
+    {
         _enemyV[i]->Update();
     }
     MainCam->transform->SetX(character->transform->GetX());

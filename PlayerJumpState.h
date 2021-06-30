@@ -6,7 +6,7 @@ class PlayerJumpState :
 
 private:
 	int _gravity;		//플레이어 중력값
-
+	float _speedX;
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player * player);

@@ -56,8 +56,6 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		{
 			player->jumpZ = false;
 			player->dirZ = true;
-			player->groundZCheck = true;
-			player->groundCheck = false;
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
 		}
@@ -73,8 +71,6 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 		{
 			player->jumpZ = false;
 			player->dirZ = false;
-			player->groundZCheck = true;
-			player->groundCheck = false;
 			player->jumpDelay = 0;
 			return new PlayerZorderJumpState();
 		}

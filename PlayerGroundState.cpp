@@ -57,8 +57,6 @@ void PlayerGroundState::Enter(Player * player)
 			player->ChangeClip("ground_left", true);
 		}
 	}
-	
-
 }
 
 void PlayerGroundState::Exit(Player * player)

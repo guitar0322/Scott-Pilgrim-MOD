@@ -34,65 +34,20 @@ void PlayerFallState::Update(Player * player)
 
 	player->transform->MoveY(player->jumpPower * TIMEMANAGER->getElapsedTime());
 
-	if (player->isRun == true) //¶Û ¶§ -> Á¡ÇÁ
-	{
-		if (player->dir == false)
-		{
-			player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-				player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-			}
-		}
-		else
-		{
-			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-				player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-			}
-		}
-	}
-
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		if (player->isRun == true) //¶Û ¶§ -> Á¡ÇÁ
-		{
-			if (player->dir == false)
-			{
-				player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-				if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-					player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-					MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				}
-			}
-			else
-			{
-				player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-				if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-					player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-					MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				}
-			}
+		player->transform->MoveX(_speedX * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		if (player->isRun == true)
-		{
-			player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
-			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-				player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				MainCam->transform->MoveY(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-			}
-		}
-		else
-		{
-			player->transform->MoveX(-player->GetSpeed()*TIMEMANAGER->getElapsedTime());
-			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
-				player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-				MainCam->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
-			}
+		player->transform->MoveX(-_speedX * TIMEMANAGER->getElapsedTime());
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			player->zOrder->MoveZ(-_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+			MainCam->transform->MoveY(-_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown('W'))
@@ -133,14 +88,16 @@ void PlayerFallState::Update(Player * player)
 			player->ChangeClip("fall_left", false);
 
 		}
-	
 	}
-
 }
 
 void PlayerFallState::Enter(Player * player)
 {
 	player->jumpPower = 0;
+	if (player->isRun == true)
+		_speedX = player->GetSpeed() * 2;
+	else
+		_speedX = player->GetSpeed();
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
