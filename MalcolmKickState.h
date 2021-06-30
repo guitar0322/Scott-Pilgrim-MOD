@@ -1,15 +1,13 @@
 #pragma once
 #include "EnemyState.h"
-class MalcolmHitState :
-	public EnemyState
+class MalcolmKickState :public EnemyState
 {
 private:
-	float _hittime;
+	float _kickTime;
 
 public:
 	virtual EnemyState* Update(EnemyAI* enemy);
 	virtual void Enter(EnemyAI* enemy);
 	virtual void Exit(EnemyAI* enemy);
-
 };
 

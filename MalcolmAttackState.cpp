@@ -2,13 +2,14 @@
 #include "MalcolmAttackState.h"
 #include "MalcolmIdleState.h"
 #include "MalcolmhitState.h"
+#include "MalcolmKickState.h"
 
 EnemyState * MalcolmAttackState::Update(EnemyAI * enemy)
 {
 	_attackTime += TIMEMANAGER->getElapsedTime();
-	if (_attackTime >= 2.0f)
+	if (_attackTime >= 1.0f)
 	{
-		return new MalcolmhitState();
+		return new MalcolmKickState();
 	}
 	return nullptr;
 }

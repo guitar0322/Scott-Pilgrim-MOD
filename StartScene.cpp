@@ -8,6 +8,7 @@
 #include "Matthew.h"
 #include "Malcolm.h"
 #include "William.h"
+#include "Succubus.h"
 StartScene::StartScene()
 {
 }
@@ -122,20 +123,29 @@ HRESULT StartScene::Init()
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
-	matthew->transform->SetPosition(2000, 400);
+	matthew->transform->SetPosition(1000, 400);
 	matthew->collider->isTrigger = true;
 	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
-	
+
 	// 210627 시영 추가 (Enemy Update)
 	enemy = new Luke();
 	enemy->Init();
 	enemy->transform->SetPosition(800, 300);
-	enemy->ground->enable = false;
 	enemy->enemyAI->SetPlayer(character);
-
+	for ( int i = 0; i < SUCCUBUSMAX; i++)
+	{
+		succubus[i] = new Character();
+		succubus[i]->Init();
+		succubus[i]->transform->SetPosition(600, 200);
+		succubus[i]->collider->isTrigger = true;
+		succubus[i]->AddComponent(new Succubus());
+		succubus[i]->GetComponent<Succubus>()->Init();
+		succubus[i]->SetActive(false);
+		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
+	}
 	character->GetComponent<Player>()->SetEnemy(enemy);
 
     BackgroundInit();
@@ -178,7 +188,10 @@ void StartScene::Update()
 	william->Update();
 	doberman->Update();
 	matthew->Update();
-
+	for (int i = 0; i < SUCCUBUSMAX; i++)
+	{
+		succubus[i]->Update();
+	}
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
 }
@@ -427,7 +440,7 @@ void StartScene::EnemyClipManager()
 	CLIPMANAGER->AddClip("malcolm_block_left", "malcolm/malcolm_block_left.bmp", 214, 154, 2, 0.2f);
 	CLIPMANAGER->AddClip("malcolm_block_right", "malcolm/malcolm_block_right.bmp", 214, 154, 2, 0.2f);
 	CLIPMANAGER->AddClip("malcolm_hit_left", "malcolm/malcolm_hit_left.bmp", 576, 158, 4, 0.2f);
-	CLIPMANAGER->AddClip("malcolm_hit_right", "malcom/malcolm_hit_right.bmp", 576, 158, 4, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_hit_right", "malcolm/malcolm_hit_right.bmp", 576, 158, 4, 0.2f);
 
 	/*william*/
 	CLIPMANAGER->AddClip("william_idle_left", "william/william_idle_left.bmp", 488, 146, 4, 0.3f);

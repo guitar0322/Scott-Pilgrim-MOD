@@ -3,7 +3,7 @@
 #include "SceneInfoLoader.h"
 #define BG_NUM 23
 #define WALL_NUM 3
-
+#define SUCCUBUSMAX 4
 class WallObj;
 
 class StartScene :
@@ -20,6 +20,7 @@ public:
     ImageObject* imageObj;
     Character* character;
 	Character* matthew;
+	Character* succubus[SUCCUBUSMAX];
 	GameObject* player;
     WallObj* wall[WALL_NUM];
     GameObject* testGround;
@@ -29,6 +30,7 @@ public:
 	Enemy* doberman;
 	Enemy* malcolm;
 	Enemy* william;
+
 
     virtual HRESULT Init();
     virtual void Release();
