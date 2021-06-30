@@ -98,10 +98,17 @@ HRESULT StartScene::Init()
 	CLIPMANAGER->AddClip("malcolm_idle_right","malcolm/malcolm_idle_right.bmp",456,159,4,0.3f);
 	CLIPMANAGER->AddClip("malcolm_move_left","malcolm/malcolm_move_left.bmp",832,164,8,0.3f);
 	CLIPMANAGER->AddClip("malcolm_move_right","malcolm/malcolm_move_right.bmp",832,164,8,0.2f);
+	CLIPMANAGER->AddClip("malcolm_run_left","malcolm/malcolm_run_left.bmp",1320,158,8,0.2f);
+	CLIPMANAGER->AddClip("malcolm_run_right", "malcolm/malcolm_run_right.bmp", 1320, 158, 8, 0.2f);
 	CLIPMANAGER->AddClip("malcolm_attack_left", "malcolm/malcolm_attack_left.bmp", 1638, 174, 9, 0.2f);
 	CLIPMANAGER->AddClip("malcolm_attack_right","malcolm/malcolm_attack_right.bmp",1638,174,9,0.2f);
-	 CLIPMANAGER->AddClip("malcolm_hit_left","malcolm/malcolm_hit_left.bmp",576,158,4,0.2f);
-	 CLIPMANAGER->AddClip("malcolm_hit_right","malcom/malcolm_hit_right.bmp",576,158,4,0.2f);
+	CLIPMANAGER->AddClip("malcolm_kick_left","malcolm/malcolm_kick_left.bmp",1050,159,5,0.2f);
+	CLIPMANAGER->AddClip("malcolm_kick_right","malcolm/malcolm_kick_right.bmp",1050,159,5,0.2f);
+	CLIPMANAGER->AddClip("malcolm_block_left","malcolm/malcolm_block_left.bmp",214,154,2,0.2f);
+	CLIPMANAGER->AddClip("malcolm_block_right","malcolm/malcolm_block_right.bmp",214,154,2,0.2f);
+	CLIPMANAGER->AddClip("malcolm_hit_left","malcolm/malcolm_hit_left.bmp",576,158,4,0.2f);
+	CLIPMANAGER->AddClip("malcolm_hit_right","malcom/malcolm_hit_right.bmp",576,158,4,0.2f);
+
 	 /*william*/
 	 CLIPMANAGER->AddClip("william_idle_left","william/william_idle_left.bmp",488,146,4,0.3f);
 	 CLIPMANAGER->AddClip("william_idle_right","william/william_idle_right.bmp",488,146,4,0.3f);
@@ -109,6 +116,13 @@ HRESULT StartScene::Init()
 	 CLIPMANAGER->AddClip("william_move_right","william/william_move_right.bmp",1160,144,8,0.3f);
 	 CLIPMANAGER->AddClip("william_attack_left","william/william_attack_left.bmp",2024,138,11,0.2f);
 	 CLIPMANAGER->AddClip("william_attack_right","william/william_attack_right.bmp",2024,138,11,0.2f);
+	 CLIPMANAGER->AddClip("william_belly_left","william/william_belly_left.bmp",952,134,7,0.2f);
+	 CLIPMANAGER->AddClip("william_belly_right", "william/william_belly_right.bmp", 952, 134, 7, 0.2f);
+	 CLIPMANAGER->AddClip("william_block_left", "william/william_block_left.bmp", 198,131,2,0.2f);
+	 CLIPMANAGER->AddClip("william_block_right", "william/william_block_right.bmp", 198, 131, 2, 0.2f);
+	 CLIPMANAGER->AddClip("william_hit_left", "william/william_hit_left.bmp", 429, 148, 4, 0.3f);
+	 CLIPMANAGER->AddClip("william_hit_right", "william/william_hit_right.bmp", 429, 148, 4, 0.3f);
+
 	// 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
 
     enemy = new Luke();
@@ -128,6 +142,7 @@ HRESULT StartScene::Init()
 	doberman->enemyAI->SetPlayer(character);
 	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	doberman->enemyinfo->SetSpeed(60.0f);
+	
 	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
 	malcolm = new Malcolm();
 	malcolm->transform->SetPosition(1300, 500);
@@ -135,6 +150,7 @@ HRESULT StartScene::Init()
 	malcolm->enemyAI->SetPlayer(character);
 	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	malcolm->enemyinfo->SetSpeed(30.0f);
+	
 	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
@@ -142,10 +158,8 @@ HRESULT StartScene::Init()
 	william->enemyAI->SetPlayer(character);
 	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	william->enemyinfo->SetSpeed(20.0f);
-
-
+	
 	// º¸½º ¸ÅÆ© ±¸Çö//
-
 	matthew = new Character();
 	matthew->Init();
 	matthew->transform->SetPosition(2000, 400);
@@ -154,6 +168,7 @@ HRESULT StartScene::Init()
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	
 	/* LEE CLIP MANAGER */
    // IDLE
 	CLIPMANAGER->AddClip("lee_idle_right", "lee/lee_idle_right.bmp", 800, 132, 8, 0.20f);
