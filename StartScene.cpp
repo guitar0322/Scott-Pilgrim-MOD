@@ -189,13 +189,13 @@ void StartScene::Update()
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	malcolm->Update();
-	william->Update();
-	doberman->Update();
-	for (int i = 0; i < SUCCUBUSMAX; i++)
-	{
-		succubus[i]->Update();
-	}
+	//malcolm->Update();
+	//william->Update();
+	//doberman->Update();
+	//for (int i = 0; i < SUCCUBUSMAX; i++)
+	//{
+	//	succubus[i]->Update();
+	//}
 
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
     enemy->Update();
@@ -482,5 +482,6 @@ void StartScene::EffectClipInit()
 	CLIPMANAGER->AddClip("ground_effect", "effect/ground_effect.bmp", 671, 65, 4, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
-	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 614, 135, 5, 0.12f);
+	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 660, 145, 5, 0.12f);
+	//CLIPMANAGER->AddClip("block_effect", "effect/block_effect.bmp", 725, 145, 5, 0.12f);
 }
