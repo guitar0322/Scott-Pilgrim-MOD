@@ -7,6 +7,7 @@ void Player::InputHandle()
 	PlayerState* newState = _state->InputHandle(this);
 	if (newState != nullptr)
 	{
+		_state->Exit(this);
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
@@ -34,16 +35,15 @@ void Player::Init()
 	block = false;							//막기 확인용
 	isZJump = false;						//Z축 점프 시 플레이어 그라운드 착지 확인용
 	onGround = false;
-	isCatch = false;						//아이템을 잡았는지 유무
+
 	isPick = false;							//아이템을 주었는지 유무
+	isCatch = false;						//아이템을 잡았는지 유무
 
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
 	runDelay = 0;
 	jumpDelay = 0;
 	pickDelay = 0;
-	_enterNum = 0;
-	_exitNum = 0;
 
 	hp = 100;
 	attack = 2;
@@ -63,24 +63,23 @@ void Player::Update()
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 
-	//if (isCatch == false)
-	//{
-	//	if (KEYMANAGER->isOnceKeyDown('I'))
-	//	{
-	//		PickItem();
-	//	}
-	//}
-	//if (isCatch == true)
-	//{
-	//		if (KEYMANAGER->isOnceKeyDown('I'))
-	//		{
-	//			PutItem();
-	//		}
-	//}
-
-	if(isCatch == true)
+	if (isPick == true)
+	{
 		pickDelay += TIMEMANAGER->getElapsedTime();
-
+		if (pickDelay >= 0.3f)
+		{
+			if (!dir)
+			{
+				item->transform->SetPosition(transform->GetX() - 14, transform->GetY() - 77);
+			}
+			if (dir)
+			{
+				item->transform->SetPosition(transform->GetX() + 14, transform->GetY() - 77);
+			}
+			pickDelay = 0;
+			isPick = false;
+		}
+	}
 }
 
 void Player::Render()
@@ -162,8 +161,8 @@ void Player::ClipInit()
 	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
-	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);
-	attack2Right.Init("player/attack2_right.bmp", 472, 134, 4, 0.1f);
+	attack1Right.Init("player/attack1_right.bmp", 480, 118, 3, 0.1f);
+	attack2Right.Init("player/attack2_right.bmp", 640, 118, 4, 0.1f);
 	attack3Right.Init("player/attack3_right.bmp", 366, 130, 3, 0.15f);
 	attack4Right.Init("player/attack4_right.bmp", 864, 166, 8, 0.15f);
 
@@ -172,8 +171,8 @@ void Player::ClipInit()
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("player/attack1_left.bmp", 354, 134, 3, 0.1f);
-	attack2Left.Init("player/attack2_left.bmp", 472, 134, 4, 0.1f);
+	attack1Left.Init("player/attack1_left.bmp", 480, 118, 3, 0.1f);
+	attack2Left.Init("player/attack2_left.bmp", 640, 118, 4, 0.1f);
 	attack3Left.Init("player/attack3_left.bmp", 366, 130, 3, 0.15f);
 	attack4Left.Init("player/attack4_left.bmp", 864, 166, 8, 0.15f);
 
@@ -287,48 +286,34 @@ void Player::ClipInit()
 
 void Player::OnTriggerEnter(GameObject * gameObject)
 {
-	_enterNum++;
 	item = gameObject->GetComponent<Item>();
 }
 
 void Player::OnTriggerExit(GameObject * gameObject)
 {
-	_exitNum++;
 	item = nullptr;
 }
 
-void Player::PickItem()							// item 획득 했을때
+void Player::PickItem()								// item 획득 했을때
 {
-	if (item != nullptr)						//enter 했을때 item은 값을 가진다
+	if (transform->GetChildCount() == 0)		//player가 자식이 없을때
 	{
-		//isCatch = true;
-		//transform->AddChild(item->transform);
-		//item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
-
-		if (transform->GetChildCount() == 0)		//player가 자식이 없을때
-		{
-			isCatch = true;							//isCatch = true가 된다
-			transform->AddChild(item->transform);	//player는 item을 자식으로 가진다
-			if (!dir)
-			{
-				item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
-			}
-			if (dir)
-			{
-				item->transform->SetPosition(transform->GetX() + 30, transform->GetY() - 80);
-			}
-		}
+		transform->AddChild(item->transform);	//player는 item을 자식으로 가지고
+		isCatch = true;							//item을 가지고 있는 상태가 된다
+		equipItem = item->gameObject;
 	}
 }
 
+
 void Player::PutItem()								//item을 놓았을때
 {
-	if (item != nullptr)							//item이 값을 가지고 있을때
+	if (equipItem != nullptr)							//item이 값을 가지고 있을때
 	{
-		isCatch = false;							//isCatch == false가 되고
-		item->transform->DetachParent();			//item은 부모를 잃는다
-		item->itemZ = this->zOrder->GetZ();			//item의 z값은 player의 z값을 갖는다
-		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
-		item->Throw(dir);							//dir에 따른 throw
+		equipItem->transform->DetachParent();			//item은 부모를 잃는다
+		equipItem->GetComponent<Item>()->SetItemZ(this->zOrder->GetZ());		//던졌을때 itemz는 player의 z값을 가진다
+		equipItem->GetComponent<Item>()->Throw(dir);	//dir에 따른 throw	
+		equipItem = nullptr;							
 	}	
+	isCatch = false;								//item이 없는 상태이고
+	item = nullptr;									//item은 값을 잃는다	
 }

@@ -83,8 +83,8 @@ public:
 	Animator* animator;
 	ZOrder* zOrder;
 	Item* item;
+	GameObject* equipItem;
 	GameObject* enemy;
-
 
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
@@ -99,6 +99,7 @@ public:
 	bool onGround;
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
+
 
 	bool attackChange;
 	
@@ -133,6 +134,8 @@ public:
 	virtual void PickItem();		//아이템 획득 함수
 	virtual void PutItem();			//아이템 놓는 함수
 
+	Transform* GetItemTransform() const { return equipItem->transform; }
+	Item* GetItem() const { return item; }
 	void SetEnemy(GameObject* _enemy) { enemy = _enemy; }
 	Transform* GetEnemyTransform() const { return enemy -> transform; }
 };

@@ -5,7 +5,8 @@ class PlayerWalkState :
 	public PlayerState
 {
 private:
-
+	float _itemShakeDir;
+	float _itemShakeTime;
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player* player);
