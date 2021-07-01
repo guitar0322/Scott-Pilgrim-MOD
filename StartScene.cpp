@@ -48,9 +48,10 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-    ENEMYMANAGER->SetPlayerTransform(character->transform);
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetCameraControler(&cameraControler);
     for (int i = 0; i < _enemyV.size(); i++)
     {
         _enemyV[i]->Init();
@@ -63,14 +64,6 @@ HRESULT StartScene::Init()
     wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
-
-    testGround = new GameObject();
-    testGround->transform->SetPosition(500, 350);
-    testGround->AddComponent(new ZOrder());
-    testGround->GetComponent<ZOrder>()->Init();
-    testGround->GetComponent<ZOrder>()->SetZ(400);
-    testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
@@ -89,20 +82,20 @@ HRESULT StartScene::Init()
 	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
 	doberman->enemyAI->SetPlayer(character);
-	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	doberman->enemyinfo->SetSpeed(60.0f);
+    doberman->Init();
+
 	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
 	malcolm = new Malcolm();
 	malcolm->transform->SetPosition(1300, 500);
 	malcolm->enemyAI->SetPlayer(character);
-	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	malcolm->enemyinfo->SetSpeed(30.0f);
+    malcolm->Init();
+
 	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
 	william->enemyAI->SetPlayer(character);
-	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	william->enemyinfo->SetSpeed(20.0f);
+    william->Init();
+
 	// º¸½º ¸ÅÆ© ±¸Çö//
 	matthew = new Character();
 	matthew->Init();
@@ -113,11 +106,6 @@ HRESULT StartScene::Init()
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
-	// 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
-	enemy = new Luke();
-	enemy->Init();
-	enemy->transform->SetPosition(800, 300);
-	enemy->enemyAI->SetPlayer(character);
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i] = new Character();
@@ -155,7 +143,6 @@ void StartScene::Update()
         _enemyV[i]->Update();
     }
 
-    testGround->Update();
 	trashBox->Update();
     character->Update();
     cameraControler.Update();
@@ -186,7 +173,6 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();
     EFFECTMANAGER->Render();
 
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Render)
@@ -456,5 +442,4 @@ void StartScene::EffectClipInit()
 	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 614, 135, 5, 0.12f);
-
 }

@@ -46,7 +46,7 @@ void Player::Init()
 	pickDelay = 0;
 
 	hp = 100;
-	attack = 2;
+	attack = 10;
 	isUppercut = false;
 	pressL = false;
 

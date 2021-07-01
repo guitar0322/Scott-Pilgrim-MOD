@@ -44,9 +44,6 @@
     <ClCompile Include="DebugText.cpp">
       <Filter>Component\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Doberman.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>Manager\Framework</Filter>
     </ClCompile>
@@ -359,6 +356,9 @@
     <ClCompile Include="Shadow.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="Doberman.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -406,9 +406,6 @@
     </ClInclude>
     <ClInclude Include="DebugText.h">
       <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Doberman.h">
-      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>Manager\Framework</Filter>
@@ -724,6 +721,9 @@
     </ClInclude>
     <ClInclude Include="Shadow.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Doberman.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

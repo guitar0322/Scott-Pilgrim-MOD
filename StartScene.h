@@ -25,7 +25,6 @@ public:
 	Character* succubus[SUCCUBUSMAX];
 	GameObject* player;
     WallObj* wall[WALL_NUM];
-    GameObject* testGround;
 	ItemObject* trashBox;
     // 210627 시영 추가 (Enemy 동적할당)
     Enemy* enemy;

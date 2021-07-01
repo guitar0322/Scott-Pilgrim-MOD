@@ -68,6 +68,8 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void Hit(float damage);
+	void Dead();
 	/* 상태별 Clip 변경하기 위한 함수 */
 	void ChangeClip(string clipName, bool isInitFrame);
 

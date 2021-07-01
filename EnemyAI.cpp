@@ -39,6 +39,19 @@ void EnemyAI::Render()
 
 }
 
+void EnemyAI::Hit(float damage)
+{
+	enemyinfo->Hit(damage);
+	if (enemyinfo->GetHp() <= 0)
+		Dead();
+}
+
+void EnemyAI::Dead()
+{
+	gameObject->SetActive(false);
+	ENEMYMANAGER->DeadEvent(gameObject);
+}
+
 void EnemyAI::ChangeClip(string clipName, bool isInitFrame)
 {
 	AnimationClip* newClip = animator->GetClip(clipName);

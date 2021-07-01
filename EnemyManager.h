@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
-
+#include "CameraControler.h"
+class Player;
 using namespace std;
 
-#define SECTOR_NUM 1
+#define SECTOR_NUM 2
 
 #define TYPE_NUM 1
 
@@ -20,6 +21,8 @@ private:
 	vector<GameObject*> _sectorEnemyV;
 	vector<pair<TYPE, int>> _sectorEnemyIdxV[SECTOR_NUM];
 	Transform* _playerTr;
+	Player* _playerComponent;
+	CameraControler* _cameraControler;
 public:
 	HRESULT Init();
 	void Update();
@@ -34,7 +37,11 @@ public:
 	void SetSectorNum(int sectorNum) { _curSector = sectorNum; }
 
 	void SetPlayerTransform(Transform* playerTr);
+	void SetCameraControler(CameraControler* cameraControler) { _cameraControler = cameraControler; }
 
-	void Clear() { _curSector++; }
+	void Clear();
+	void MakeSectorEnemyV();
+
+	void DeadEvent(GameObject* deadObject);
 };
 

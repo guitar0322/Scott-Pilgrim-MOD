@@ -8,6 +8,7 @@ void CameraControler::Init()
         _isLockPoint[i] = false;
     }
     _camLockPoint[0] = 600;
+    _camLockPoint[1] = 1500;
     _camSpeed = 150.f;
 }
 
@@ -43,14 +44,5 @@ void CameraControler::Update()
         }
 		if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
 			MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
-    }
-    else
-    {
-        _lockTime += TIMEMANAGER->getElapsedTime();
-        if (_lockTime >= 10.f)
-        {
-            _lockTime = 0;
-            _lock = false;
-        }
     }
 }

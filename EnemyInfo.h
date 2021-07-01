@@ -9,7 +9,6 @@ private:
 	int _hp;		// 체력
 	int _damage;	// 공격력 (필요한지 조금 더 생각해보기)
 	float _speed;	// 속도
-
 public:	
 	virtual void Init();
 

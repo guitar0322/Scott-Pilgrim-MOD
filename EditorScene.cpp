@@ -521,10 +521,11 @@ void EditorScene::InitObjectMenu()
     _objectMenu[12].height = 24;
     _objectMenu[12].rc = RectMakeCenter(_objectMenu[12].x, _objectMenu[12].y, _objectMenu[12].width, _objectMenu[12].height);
 
-    _objectMenu[13].img->init("lee/lee_block_left.bmp", 88, 132, true, RGB(255, 0, 255));
+    _objectMenu[13].img->init("luke/luke.bmp", 96, 128, true, RGB(255, 0, 255));
     _objectMenu[13].width = 80;
     _objectMenu[13].height = 100;
     _objectMenu[13].rc = RectMakeCenter(_objectMenu[13].x, _objectMenu[13].y, _objectMenu[13].width, _objectMenu[13].height);
+
 }
 
 void EditorScene::InitTypeName()
