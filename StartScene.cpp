@@ -73,10 +73,10 @@ HRESULT StartScene::Init()
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
     // 210630 시영 추가
- //   enemy = new Luke();
- //   enemy->Init();
- //   enemy->transform->SetPosition(800, 300);
- //   enemy->enemyAI->SetPlayer(character);
+	enemy = new Luke();
+	enemy->transform->SetPosition(800, 300);
+	enemy->Init();
+	enemy->enemyAI->SetPlayer(character);
 
 	//// 210628 광철 도베르만 개선 //
 	//doberman = new Doberman();
@@ -164,7 +164,7 @@ void StartScene::Update()
 	//	succubus[i]->Update();
 	//}
     //// 210627 시영 추가 (Enemy Update)
-    //enemy->Update();
+    enemy->Update();
 }
 
 void StartScene::Render()
