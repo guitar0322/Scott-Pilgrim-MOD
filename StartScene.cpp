@@ -304,38 +304,37 @@ void StartScene::EnemyClipManager()
     CLIPMANAGER->AddClip("lee_die_right", "lee/lee_die_right.bmp", 2072, 172, 14, 0.20f);
     CLIPMANAGER->AddClip("lee_die_left", "lee/lee_die_left.bmp", 2072, 172, 14, 0.20f);
 
-    /* LUKE CLIP MANAGER */
-    // IDLE
-    CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 800, 128, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 800, 128, 8, 0.20f);
-    // WALK
-    CLIPMANAGER->AddClip("luke_walk_right", "luke/luke_walk_right.bmp", 564, 136, 6, 0.20f);
-    CLIPMANAGER->AddClip("luke_walk_left", "luke/luke_walk_left.bmp", 564, 136, 6, 0.20f);
-    // RUN
-    CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 880, 130, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 880, 130, 8, 0.20f);
-    // BLOCK
-    CLIPMANAGER->AddClip("luke_block_right", "luke/luke_block_right.bmp", 264, 128, 3, 0.20f);
-    CLIPMANAGER->AddClip("luke_block_left", "luke/luke_block_left.bmp", 264, 128, 3, 0.20f);
-    // HIT
-    CLIPMANAGER->AddClip("luke_hit_right", "luke/luke_hit_right.bmp", 600, 130, 5, 0.20f);
-    CLIPMANAGER->AddClip("luke_hit_left", "luke/luke_hit_left.bmp", 600, 130, 5, 0.20f);
-    // KICK
-    CLIPMANAGER->AddClip("luke_kick_right", "luke/luke_kick_right.bmp", 1050, 134, 7, 0.20f);
-    CLIPMANAGER->AddClip("luke_kick_left", "luke/luke_kick_left.bmp", 1050, 134, 7, 0.20f);
-    // ATTACK 1
-    CLIPMANAGER->AddClip("luke_attack1_right", "luke/luke_attack1_right.bmp", 560, 134, 4, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack1_left", "luke/luke_attack1_left.bmp", 560, 134, 4, 0.20f);
-    // ATTACK 2
-    CLIPMANAGER->AddClip("luke_attack2_right", "luke/luke_attack2_right.bmp", 568, 132, 4, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack2_left", "luke/luke_attack2_left.bmp", 568, 132, 4, 0.20f);
-    // ATTACK 3
-    CLIPMANAGER->AddClip("luke_attack3_right", "luke/luke_attack3_right.bmp", 832, 170, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack3_left", "luke/luke_attack3_left.bmp", 832, 170, 8, 0.20f);
-    // DIE
-    CLIPMANAGER->AddClip("luke_die_right", "luke/luke_die_right.bmp", 2100, 172, 14, 0.20f);
-    CLIPMANAGER->AddClip("luke_die_left", "luke/luke_die_left.bmp", 2100, 172, 14, 0.20f);
-
+	/* LUKE CLIP MANAGER */
+// IDLE
+	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 800, 128, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 800, 128, 8, 0.20f);
+	// WALK
+	CLIPMANAGER->AddClip("luke_walk_right", "luke/luke_walk_right.bmp", 564, 136, 6, 0.20f);
+	CLIPMANAGER->AddClip("luke_walk_left", "luke/luke_walk_left.bmp", 564, 136, 6, 0.20f);
+	// RUN
+	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 880, 130, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 880, 130, 8, 0.20f);
+	// BLOCK
+	CLIPMANAGER->AddClip("luke_block_right", "luke/luke_block_right.bmp", 264, 128, 3, 0.20f);
+	CLIPMANAGER->AddClip("luke_block_left", "luke/luke_block_left.bmp", 264, 128, 3, 0.20f);
+	// HIT
+	CLIPMANAGER->AddClip("luke_hit_right", "luke/luke_hit_right.bmp", 600, 130, 5, 0.20f);
+	CLIPMANAGER->AddClip("luke_hit_left", "luke/luke_hit_left.bmp", 600, 130, 5, 0.20f);
+	// KICK
+	CLIPMANAGER->AddClip("luke_kick_right", "luke/luke_kick_right.bmp", 1050, 134, 7, 0.20f);
+	CLIPMANAGER->AddClip("luke_kick_left", "luke/luke_kick_left.bmp", 1050, 134, 7, 0.20f);
+	// ATTACK 1
+	CLIPMANAGER->AddClip("luke_attack1_right", "luke/luke_attack1_right.bmp", 560, 134, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack1_left", "luke/luke_attack1_left.bmp", 560, 134, 4, 0.20f);
+	// ATTACK 2
+	CLIPMANAGER->AddClip("luke_attack2_right", "luke/luke_attack2_right.bmp", 568, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack2_left", "luke/luke_attack2_left.bmp", 568, 132, 4, 0.20f);
+	// ATTACK 3
+	CLIPMANAGER->AddClip("luke_attack3_right", "luke/luke_attack3_right.bmp", 832, 170, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack3_left", "luke/luke_attack3_left.bmp", 832, 170, 8, 0.20f);
+	// DIE
+	CLIPMANAGER->AddClip("luke_die_right", "luke/luke_die_right.bmp", 2100, 172, 14, 0.20f);
+	CLIPMANAGER->AddClip("luke_die_left", "luke/luke_die_left.bmp", 2100, 172, 14, 0.20f);
     /* MIKE CLIP MANAGER */
     // IDLE
     CLIPMANAGER->AddClip("mike_idle_right", "mike/mike_idle_right.bmp", 798, 134, 8, 0.20f);

@@ -23,7 +23,9 @@ void PlayerDoubleAttackState::Update(Player * player)
 
 void PlayerDoubleAttackState::Enter(Player * player)
 {
-
+	player->enemy->GetComponent<EnemyInfo>()->Hit(player->attack);
+	EFFECTMANAGER->EmissionEffect("attack_effect", player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY());
+	
 	if (player->isUppercut == true)
 	{
 		if (player->dir == false)
@@ -34,8 +36,7 @@ void PlayerDoubleAttackState::Enter(Player * player)
 		{
 			player->ChangeClip("attack4_left", true);
 		}
-		player->enemy->GetComponent<EnemyInfo>()->Hit(player->attack);
-		EFFECTMANAGER->EmissionEffect("attack_effect", player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY());
+
 
 	}
 	else

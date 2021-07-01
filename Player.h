@@ -51,7 +51,14 @@ private:
 	AnimationClip runJumpKickLeft;
 	AnimationClip shieldRight;
 	AnimationClip shieldLeft;
-
+	AnimationClip hit1Right;
+	AnimationClip hit2Right;
+	AnimationClip hit3Right;
+	AnimationClip hit1Left;
+	AnimationClip hit2Left;
+	AnimationClip hit3Left;
+	AnimationClip hitJumpRight;
+	AnimationClip hitJumpLeft;
 
 	//두손이미지
 	AnimationClip twoHandPickRight;
@@ -135,5 +142,9 @@ public:
 
 	void SetEnemy(GameObject* _enemy) { enemy = _enemy; }
 	Transform* GetEnemyTransform() const { return enemy -> transform; }
+
+	/* Player.h */
+   /* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
+	void Hit(int damage);
 };
 

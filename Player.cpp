@@ -162,26 +162,40 @@ void Player::ClipInit()
 	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
-	attack1Right.Init("player/attack1_right.bmp", 480, 118, 3, 0.1f);
-	attack2Right.Init("player/attack2_right.bmp", 640, 118, 4, 0.1f);
-	attack3Right.Init("player/attack3_right.bmp", 366, 130, 3, 0.15f);
-	attack4Right.Init("player/attack4_right.bmp", 864, 166, 8, 0.15f);
+	attack1Right.Init("player/attack1_right.bmp", 456, 120, 3, 0.1f);
+	attack2Right.Init("player/attack2_right.bmp", 608, 120, 4, 0.1f);
+	attack3Right.Init("player/attack3_right.bmp", 456, 120, 3, 0.15f);
+	attack4Right.Init("player/attack4_right.bmp", 864, 196, 8, 0.15f);
 
 	attack1Right.isLoop = false;
 	attack2Right.isLoop = false;
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("player/attack1_left.bmp", 480, 118, 3, 0.1f);
-	attack2Left.Init("player/attack2_left.bmp", 640, 118, 4, 0.1f);
-	attack3Left.Init("player/attack3_left.bmp", 366, 130, 3, 0.15f);
-	attack4Left.Init("player/attack4_left.bmp", 864, 166, 8, 0.15f);
+	attack1Left.Init("player/attack1_left.bmp", 456, 120, 3, 0.1f);
+	attack2Left.Init("player/attack2_left.bmp", 608, 120, 4, 0.1f);
+	attack3Left.Init("player/attack3_left.bmp", 456, 120, 3, 0.15f);
+	attack4Left.Init("player/attack4_left.bmp", 864, 196, 8, 0.15f);
 
 	attack1Left.isLoop = false;
 	attack2Left.isLoop = false;
 	attack3Left.isLoop = false;
 	attack4Left.isLoop = false;
 
+	//맞는 이미지
+	hit1Right.Init("player/hit1_right.bmp", 258, 138, 3, 0.1f);
+	hit2Right.Init("player/hit2_right.bmp", 400, 122, 4, 0.1f);
+	hit3Right.Init("player/hit3_right.bmp", 384, 124, 3, 0.15f);
+	hit1Right.isLoop = false;
+	hit2Right.isLoop = false;
+	hit3Right.isLoop = false;
+
+	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.1f);
+	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.1f);
+	hit3Left.Init("player/hit3_left.bmp", 384, 124, 3, 0.15f);
+	hit1Left.isLoop = false;
+	hit2Left.isLoop = false;
+	hit3Left.isLoop = false;
 
 	//두손 이미지
 	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
@@ -258,6 +272,13 @@ void Player::ClipInit()
 	animator->AddClip("attack3_left", &attack3Left);
 	animator->AddClip("attack4_left", &attack4Left);
 
+
+	animator->AddClip("hit1_right", &hit1Right);
+	animator->AddClip("hit2_right", &hit2Right);
+	animator->AddClip("hit3_right", &hit3Right);
+	animator->AddClip("hit1_left",  &hit1Left);
+	animator->AddClip("hit2_left",  &hit2Left);
+	animator->AddClip("hit3_left",  &hit3Left);
 	//두손 이미지
 
 	animator->AddClip("two_hand_idle_right", &twoHandIdleRight);
@@ -331,4 +352,14 @@ void Player::PutItem()								//item을 놓았을때
 		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
 		item->Throw(dir);							//dir에 따른 throw
 	}	
+}
+
+void Player::Hit(int damage)
+{
+	hp -= damage;
+	if (hp <= 0)
+	{
+		gameObject->SetActive(false);
+		// TODO - DEAD
+	}
 }
