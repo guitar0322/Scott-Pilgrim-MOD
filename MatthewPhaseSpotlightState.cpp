@@ -7,7 +7,7 @@
 Matthewstate * MatthewPhaseSpotlightState::Update(Matthew * matthew)
 {
 	_spotLightTime += TIMEMANAGER->getElapsedTime();
-	if (_spotLightTime >= 5.0f)
+	if (_spotLightTime >= 20.0f)
 	{
 		return new MatthewPhaseEndState();
 	}
@@ -21,9 +21,9 @@ void MatthewPhaseSpotlightState::Enter(Matthew * matthew)
 	{
 		matthew->_succubus[i]->SetActive(true);
 	}
-	matthew->_succubus[0]->transform->SetPosition(matthew->transform->GetX() + 100, matthew->transform->GetY()-100);
-	matthew->_succubus[1]->transform->SetPosition(matthew->transform->GetX() - 100, matthew->transform->GetY()-100);
-	matthew->_succubus[2]->transform->SetPosition(matthew->transform->GetX()-100, matthew->transform->GetY()+100);
+	matthew->_succubus[0]->transform->SetPosition(matthew->transform->GetX() + 100, matthew->transform->GetY()-300);
+	matthew->_succubus[1]->transform->SetPosition(matthew->transform->GetX() - 100, matthew->transform->GetY()-300);
+	matthew->_succubus[2]->transform->SetPosition(matthew->transform->GetX()-100, matthew->transform->GetY()-100);
 	matthew->_succubus[3]->transform->SetPosition(matthew->transform->GetX()+100, matthew->transform->GetY()-100);
 
 	_spotLightTime = 0;

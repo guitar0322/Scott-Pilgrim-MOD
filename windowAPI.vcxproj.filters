@@ -359,6 +359,11 @@
     <ClCompile Include="Doberman.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDoubleAttackState.cpp" />
+    <ClCompile Include="MatthewRunState.cpp" />
+    <ClCompile Include="SuccubusIdleState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
+    <ClCompile Include="PlayerDieState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -725,6 +730,11 @@
     <ClInclude Include="Doberman.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerDoubleAttackState.h" />
+    <ClInclude Include="MatthewRunState.h" />
+    <ClInclude Include="SuccubusIdleState.h" />
+    <ClInclude Include="PlayerHitState.h" />
+    <ClInclude Include="PlayerDieState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

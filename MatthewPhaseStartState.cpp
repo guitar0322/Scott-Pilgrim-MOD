@@ -18,7 +18,7 @@ void MatthewPhaseStartState::Enter(Matthew * matthew)
 	_startTime = 0;
 	if (matthew->Getdir() == false)
 	{
-		matthew->ChangeCilp("matthewphase_start_right", false);
+		matthew->ChangeCilp("matthew_phase_start_right", false);
 	}
 	else
 	{

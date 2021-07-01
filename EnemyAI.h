@@ -77,4 +77,8 @@ public:
 	void SetPlayer(GameObject* player) { _player = player; }
 	void SetState(EnemyState* newState);
 	Transform* GetPlayerTransform() const { return _player->transform; }
+
+	/* ENEMY AI.H */
+/* 210630 private Player 가져오기 위한 함수 충돌(히트) */
+	GameObject* GetPlayer() const { return _player; }
 };

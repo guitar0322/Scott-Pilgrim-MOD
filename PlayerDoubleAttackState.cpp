@@ -23,7 +23,6 @@ void PlayerDoubleAttackState::Update(Player * player)
 
 void PlayerDoubleAttackState::Enter(Player * player)
 {
-	_speedY = 50;
 
 	if (player->isUppercut == true)
 	{
