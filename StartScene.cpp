@@ -173,6 +173,7 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
+    testGround->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Render)
