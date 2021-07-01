@@ -4,7 +4,7 @@
 
 #define BG_NUM 23
 #define SNOW1 0
-#define TYPE_NUM 14
+#define TYPE_NUM 17
 #define NAME_STARTX 700
 #define NAME_STARTY 50
 #define NAME_WIDTH 150

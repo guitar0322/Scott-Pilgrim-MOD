@@ -41,6 +41,11 @@
 #include "Mike.h"
 #include "Richard.h"
 
+//±¤Ã¶ ¾Ö³Ê¹Ì
+#include "Doberman.h"
+#include "Malcolm.h"
+#include "William.h"
+
 typedef RECT ELLIPSE;
 typedef struct tagPOINTF {
 	float x;

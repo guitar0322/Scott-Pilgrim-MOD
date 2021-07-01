@@ -138,6 +138,12 @@
     <ClCompile Include="Zone.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="ZOrderManager.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="WilliamBellyState.cpp" />
+    <ClCompile Include="MalcolmRunState.cpp" />
+    <ClCompile Include="MalcolmBlockState.cpp" />
+    <ClCompile Include="WilliamBlockState.cpp" />
+    <ClCompile Include="WilliamHitState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerLastHitState.cpp" />
     <ClCompile Include="PlayerKnockoutState.cpp" />
@@ -317,6 +323,12 @@
     <ClInclude Include="Zone.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="ZOrderManager.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="WilliamBellyState.h" />
+    <ClInclude Include="MalcolmRunState.h" />
+    <ClInclude Include="MalcolmBlockState.h" />
+    <ClInclude Include="WilliamBlockState.h" />
+    <ClInclude Include="WilliamHitState.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerLastHitState.h" />
     <ClInclude Include="PlayerKnockoutState.h" />

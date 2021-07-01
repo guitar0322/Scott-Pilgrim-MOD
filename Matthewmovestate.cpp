@@ -34,11 +34,6 @@ Matthewstate * MatthewMoveState::Update(Matthew * matthew)
 		return new MatthewRunState();
 	}
 
-	/*if (GetDistance(matthew->transform->GetX(),matthew->transform->GetY(),matthew->GetPlayer()->GetX(),matthew->GetPlayer()->GetY())<50)
-	{
-		return new MatthewAttackState;
-	}*/
-
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
 	matthew->transform->Move(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
 							 matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));

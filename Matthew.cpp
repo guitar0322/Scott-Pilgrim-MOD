@@ -3,6 +3,7 @@
 #include "Matthewstate.h"
 #include "Matthewidlestate.h"
 #include "Succubus.h"
+#include "MatthewPhaseReadyState.h"
 
 Matthew::Matthew()
 {
@@ -47,11 +48,21 @@ void Matthew::Init()
 	CLIPMANAGER->FindClip("matthew_palmwind_right")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_phase_ready_left")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_phase_ready_right")->isLoop = false;
-
-	gameObject->tag = TAGMANAGER->GetTag("enemy");//Àû ÅÂ±× 
+	CLIPMANAGER->FindClip("matthew_phase_start_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_phase_start_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_phase_end_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_phase_end_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack1_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack1_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack2_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack2_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack3_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_attack3_right")->isLoop = false;
 	_hp = 500;
 	_speed = 30;
 	_dir = true;
+	_attackTime = 0;
+	_phaseTime = 0;
 	_matthewstate = new MatthewIdleState();
 	_matthewstate->Enter(this);
 }
@@ -70,6 +81,13 @@ void Matthew::Update()
 		_matthewstate->Enter(this);
 	}
 
+	//_phaseTime += TIMEMANAGER->getElapsedTime();
+	//if (_phaseTime >= 10)
+	//{
+	//	_phaseTime = 0;
+	//	_matthewstate = new MatthewPhaseReadyState();
+	//	_matthewstate->Enter(this);
+	//}
 }
 
 void Matthew::Render()

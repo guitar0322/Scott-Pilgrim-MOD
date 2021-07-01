@@ -21,9 +21,8 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {    
     Scene::Init();
-    EnemyClipManager();
     CameraInit();
-
+    EnemyClipManager();
     sceneInfoLoader.SetLinkObjectVAddress(&_propV);
     for (int i = 0; i < 13; i++)
     {
@@ -33,8 +32,16 @@ HRESULT StartScene::Init()
     sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(0));
     sceneInfoLoader.LoadObjectInfo(13);
 
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(1));
+    sceneInfoLoader.LoadObjectInfo(14);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(2));
+    sceneInfoLoader.LoadObjectInfo(15);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(3));
+    sceneInfoLoader.LoadObjectInfo(16);
+
     // 210629 ½Ã¿µ Ãß°¡
-    EnemyClipManager();
 	EffectClipInit();
     ItemImageClip();
     //À§¿¡´Â °ÇµéÁö ¸¶½Ã¿À
@@ -73,85 +80,29 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 ½Ã¿µ Ãß°¡
-    //enemy = new Luke();
-    //enemy->Init();
-    //enemy->transform->SetPosition(800, 300);
-    //enemy->enemyAI->SetPlayer(character);
 
-	//// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
-	//doberman = new Doberman();
-    //doberman->transform->SetPosition(1200, 400);
-	//doberman->enemyAI->SetPlayer(character);
-    //doberman->Init();
+	// º¸½º ¸ÅÆ© ±¸Çö//
+	matthew = new Character();
+	matthew->Init();
+	matthew->transform->SetPosition(1000, 400);
+	matthew->collider->isTrigger = true;
+	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
+	matthew->AddComponent(new Matthew());
+	matthew->GetComponent<Matthew>()->Init();
+	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
-    //enemy = new Jesse();
-    //enemy->transform->SetPosition(600, 400);
-    //enemy->Init();
-    //enemy->enemyAI->SetPlayer(character);
-    //
-    //enemy = new Lee();
-    //enemy->transform->SetPosition(700, 400);
-    //enemy->Init();
-    //enemy->enemyAI->SetPlayer(character);
-    //
-    //enemy = new Luke();
-    //enemy->transform->SetPosition(800, 400);
-    //enemy->Init();
-    //enemy->enemyAI->SetPlayer(character);
-    //
-    //enemy = new Mike();
-    //enemy->transform->SetPosition(900, 400);
-    //enemy->Init();
-    //enemy->enemyAI->SetPlayer(character);
-    
-    enemy = new Richard();
-    enemy->transform->SetPosition(800, 400);
-    enemy->Init();
-    enemy->enemyAI->SetPlayer(character);
-
-	//// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
-	//doberman = new Doberman();
-    //doberman->transform->SetPosition(1200, 400);
-	//doberman->enemyAI->SetPlayer(character);
-    //doberman->Init();
-    
-	//// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
-	//malcolm = new Malcolm();
-	//malcolm->transform->SetPosition(1300, 500);
-	//malcolm->enemyAI->SetPlayer(character);
-	//malcolm->Init();
-    
-	//// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
-	//william = new William();
-	//william->transform->SetPosition(1500, 500);
-	//william->enemyAI->SetPlayer(character);
-    //william->Init();
-
-    //william->Init();
-    
-	//// º¸½º ¸ÅÆ© ±¸Çö//
-	//matthew = new Character();
-	//matthew->Init();
-	//matthew->transform->SetPosition(1000, 400);
-	//matthew->collider->isTrigger = true;
-	//matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
-	//matthew->AddComponent(new Matthew());
-	//matthew->GetComponent<Matthew>()->Init();
-	//matthew->GetComponent<Matthew>()->SetPlayer(character);
-
-	//for ( int i = 0; i < SUCCUBUSMAX; i++)
-	//{
-	//	succubus[i] = new Character();
-	//	succubus[i]->Init();
-	//	succubus[i]->transform->SetPosition(600, 200);
-	//	succubus[i]->collider->isTrigger = true;
-	//	succubus[i]->AddComponent(new Succubus());
-	//	succubus[i]->GetComponent<Succubus>()->Init();
-	//	succubus[i]->SetActive(false);
-	//	matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
-	//}
-	character->GetComponent<Player>()->SetEnemy(enemy);
+	for ( int i = 0; i < SUCCUBUSMAX; i++)
+	{
+		succubus[i] = new Character();
+		succubus[i]->Init();
+		succubus[i]->transform->SetPosition(600, 200);
+		succubus[i]->collider->enable = false;
+		succubus[i]->AddComponent(new Succubus());
+		succubus[i]->GetComponent<Succubus>()->Init();
+		succubus[i]->SetActive(false);
+		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
+	}
+	
 
     BackgroundInit();
     WallInit();
@@ -177,9 +128,6 @@ void StartScene::Update()
         _enemyV[i]->Update();
     }
 	trashBox->Update();
-    MainCam->transform->SetX(character->transform->GetX());
-    if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
-        MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
     character->Update();
     cameraControler.Update();
     BGMANAGER->Update();
@@ -188,23 +136,14 @@ void StartScene::Update()
     MainCam->Update();
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
-    // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	//malcolm->Update();
-	//william->Update();
-	//doberman->Update();
-	//for (int i = 0; i < SUCCUBUSMAX; i++)
-	//{
-	//	succubus[i]->Update();
-	//}
+
 
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
-    enemy->Update();
 }
 
 void StartScene::Render()
 {
     BGMANAGER->Render();
-	//trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();

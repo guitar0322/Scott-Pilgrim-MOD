@@ -194,6 +194,7 @@
     <ClInclude Include="JesseRunState.h" />
     <ClInclude Include="JesseWalkState.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MalcolmBlockState.h" />
     <ClInclude Include="LeeAttack1State.h" />
     <ClInclude Include="LeeAttack2State.h" />
     <ClInclude Include="LeeAttack3State.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="MalcolmKickState.h" />
     <ClInclude Include="Lee.h" />
     <ClInclude Include="LeeIdleState.h" />
+    <ClInclude Include="MalcolmRunState.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Malcolm.h" />
     <ClInclude Include="MalcolmAttackState.h" />
@@ -308,6 +310,7 @@
     <ClInclude Include="TextDataManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="UIRenderer.h" />
@@ -317,6 +320,9 @@
     <ClInclude Include="WallObj.h" />
     <ClInclude Include="William.h" />
     <ClInclude Include="WilliamAttackState.h" />
+    <ClInclude Include="WilliamBellyState.h" />
+    <ClInclude Include="WilliamBlockState.h" />
+    <ClInclude Include="WilliamHitState.h" />
     <ClInclude Include="WilliamIdleState.h" />
     <ClInclude Include="WilliamMoveState.h" />
     <ClInclude Include="Zone.h" />
@@ -370,6 +376,7 @@
     <ClCompile Include="JesseRunState.cpp" />
     <ClCompile Include="JesseWalkState.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MalcolmBlockState.cpp" />
     <ClCompile Include="LeeAttack1State.cpp" />
     <ClCompile Include="LeeAttack2State.cpp" />
     <ClCompile Include="LeeAttack3State.cpp" />
@@ -383,6 +390,7 @@
     <ClCompile Include="MalcolmKickState.cpp" />
     <ClCompile Include="Lee.cpp" />
     <ClCompile Include="LeeIdleState.cpp" />
+    <ClCompile Include="MalcolmRunState.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Malcolm.cpp" />
     <ClCompile Include="MalcolmAttackState.cpp" />
@@ -485,6 +493,7 @@
     <ClCompile Include="TextDataManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="UIRenderer.cpp" />
@@ -494,6 +503,9 @@
     <ClCompile Include="WallObj.cpp" />
     <ClCompile Include="William.cpp" />
     <ClCompile Include="WilliamAttackState.cpp" />
+    <ClCompile Include="WilliamBellyState.cpp" />
+    <ClCompile Include="WilliamBlockState.cpp" />
+    <ClCompile Include="WilliamHitState.cpp" />
     <ClCompile Include="WilliamIdleState.cpp" />
     <ClCompile Include="WilliamMoveState.cpp" />
     <ClCompile Include="winMain.cpp" />

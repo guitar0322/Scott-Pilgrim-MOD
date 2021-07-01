@@ -5,10 +5,9 @@
 
 EnemyState * MalcolmHitState::Update(EnemyAI * enemy)
 {
-	_hittime += TIMEMANAGER->getElapsedTime();
-	if (_hittime >= 2.0f)
+	if (enemy->animator->GetEnd() == true)
 	{
-		return new MalcolmHitState();
+		return new MalcolmIdleState();
 	}
 
 
@@ -18,7 +17,6 @@ EnemyState * MalcolmHitState::Update(EnemyAI * enemy)
 
 void MalcolmHitState::Enter(EnemyAI * enemy)
 {
-	_hittime = 0;
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->ChangeClip("malcolm_hit_right", true);

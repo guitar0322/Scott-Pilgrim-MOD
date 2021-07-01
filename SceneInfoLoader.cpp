@@ -73,9 +73,27 @@ GameObject* SceneInfoLoader::MakeObject(float x, float y, int type)
 		break;
 	case 13:
 		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
-			newObject = MakeLee(x, y);
+			newObject = MakeLuke(x, y);
 		else
-			newObject = MakeLeeEditor(x, y);
+			newObject = MakeLukeEditor(x, y);
+		break;
+	case 14:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeDoberman(x, y);
+		else
+			newObject = MakeDobermanEditor(x, y);
+		break;
+	case 15:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeMalcolm(x, y);
+		else
+			newObject = MakeMalcolmEditor(x, y);
+		break;
+	case 16:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeWilliam(x, y);
+		else
+			newObject = MakeWilliamEditor(x, y);
 		break;
 	}
 	return newObject;
@@ -241,23 +259,86 @@ GameObject* SceneInfoLoader::MakeWood(float x, float y)
 	return wood;
 }
 
-GameObject* SceneInfoLoader::MakeLee(float x, float y)
+GameObject* SceneInfoLoader::MakeLuke(float x, float y)
 {
-	GameObject* lee = new Luke();
-	lee->transform->SetPosition(x, y);
-	lee->SetActive(false);
-	lee->Init();
-	return lee;
+	GameObject* luke = new Luke();
+	luke->transform->SetPosition(x, y);
+	luke->SetActive(false);
+	luke->Init();
+	return luke;
 }
 
-GameObject* SceneInfoLoader::MakeLeeEditor(float x, float y)
+GameObject* SceneInfoLoader::MakeLukeEditor(float x, float y)
 {
-	GameObject* demoLee = new GameObject();
-	demoLee->transform->SetPosition(x, y);
-	demoLee->AddComponent(new Renderer());
-	demoLee->GetComponent<Renderer>()->Init("lee/lee_block_left.bmp", 88, 132);
-	demoLee->AddComponent(new ZOrder());
-	demoLee->GetComponent<ZOrder>()->Init();
-	demoLee->GetComponent<ZOrder>()->SetZ(demoLee->transform->GetY() + 66);
-	return demoLee;
+	GameObject* demoLuke = new GameObject();
+	demoLuke->transform->SetPosition(x, y);
+	demoLuke->AddComponent(new Renderer());
+	demoLuke->GetComponent<Renderer>()->Init("luke/luke.bmp", 96, 128);
+	demoLuke->AddComponent(new ZOrder());
+	demoLuke->GetComponent<ZOrder>()->Init();
+	demoLuke->GetComponent<ZOrder>()->SetZ(demoLuke->transform->GetY() + 64);
+	return demoLuke;
+}
+
+GameObject* SceneInfoLoader::MakeDoberman(float x, float y)
+{
+	GameObject* doberman = new Doberman();
+	doberman->transform->SetPosition(x, y);
+	doberman->SetActive(false);
+	doberman->Init();
+	return doberman;
+}
+
+GameObject* SceneInfoLoader::MakeDobermanEditor(float x, float y)
+{
+	GameObject* demoDoberman = new GameObject();
+	demoDoberman->transform->SetPosition(x, y);
+	demoDoberman->AddComponent(new Renderer());
+	demoDoberman->GetComponent<Renderer>()->Init("doberman/doberman.bmp", 164, 96);
+	demoDoberman->AddComponent(new ZOrder());
+	demoDoberman->GetComponent<ZOrder>()->Init();
+	demoDoberman->GetComponent<ZOrder>()->SetZ(demoDoberman->transform->GetY() + 48);
+	return demoDoberman;
+}
+
+GameObject* SceneInfoLoader::MakeMalcolm(float x, float y)
+{
+	GameObject* malcolm = new Malcolm();
+	malcolm->transform->SetPosition(x, y);
+	malcolm->SetActive(false);
+	malcolm->Init();
+	return malcolm;
+}
+
+GameObject* SceneInfoLoader::MakeMalcolmEditor(float x, float y)
+{
+	GameObject* demoMalcolm = new GameObject();
+	demoMalcolm->transform->SetPosition(x, y);
+	demoMalcolm->AddComponent(new Renderer());
+	demoMalcolm->GetComponent<Renderer>()->Init("malcolm/malcolm.bmp", 114, 159);
+	demoMalcolm->AddComponent(new ZOrder());
+	demoMalcolm->GetComponent<ZOrder>()->Init();
+	demoMalcolm->GetComponent<ZOrder>()->SetZ(demoMalcolm->transform->GetY() + 79);
+	return demoMalcolm;
+}
+
+GameObject* SceneInfoLoader::MakeWilliam(float x, float y)
+{
+	GameObject* william = new William();
+	william->transform->SetPosition(x, y);
+	william->SetActive(false);
+	william->Init();
+	return william;
+}
+
+GameObject* SceneInfoLoader::MakeWilliamEditor(float x, float y)
+{
+	GameObject* demoWilliam = new GameObject();
+	demoWilliam->transform->SetPosition(x, y);
+	demoWilliam->AddComponent(new Renderer());
+	demoWilliam->GetComponent<Renderer>()->Init("william/william.bmp", 122, 146);
+	demoWilliam->AddComponent(new ZOrder());
+	demoWilliam->GetComponent<ZOrder>()->Init();
+	demoWilliam->GetComponent<ZOrder>()->SetZ(demoWilliam->transform->GetY() + 73);
+	return demoWilliam;
 }

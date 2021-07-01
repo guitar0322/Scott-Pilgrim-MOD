@@ -2,6 +2,8 @@
 #include "MalcolmMoveState.h"
 #include "MalcolmIdleState.h"
 #include "MalcolmAttackState.h"
+#include "MalcolmKickState.h"
+#include "MalcolmRunState.h"
 
 EnemyState * MalcolmMoveState::Update(EnemyAI * enemy)
 {
@@ -23,20 +25,21 @@ EnemyState * MalcolmMoveState::Update(EnemyAI * enemy)
 
 	}
 	if (GetDistance(enemy->transform->GetX(),enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY())>200)
+		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY()) >500)
 	{
 		return new MalcolmIdleState();
 	}
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 50)
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 200)
 	{
-		return new MalcolmAttackState();
+		return new MalcolmRunState();
 	}
 
 	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
-	enemy->transform->Move(enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
-		enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
+
+	enemy->transform->MoveX(enemy->enemyinfo->GetSpeed() * TIMEMANAGER->getElapsedTime() * cosf(angle));
+	enemy->zOrder->MoveZ(enemy->enemyinfo->GetSpeed() * TIMEMANAGER->getElapsedTime() * -sinf(angle));
 
 	return nullptr;
 }
