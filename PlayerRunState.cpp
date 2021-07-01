@@ -49,7 +49,13 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 		player->onGround = false;
 		return new PlayerFallState();
 	}
-
+	if( player->isCatch == true)
+	{ 
+		if (player->animator->currentFrame == 5)
+		{
+			player->animator->Pause();
+		}
+	}
 	return nullptr;
 }
 
@@ -57,34 +63,49 @@ void PlayerRunState::Update(Player * player)
 {
 	if (player->dir == false)
 	{
-		if (player->isCatch == true)
-			_itemShakeTime += TIMEMANAGER->getElapsedTime();
-		if (_itemShakeTime >= 0.415f)
-		{
-			if(_itemShakeDir == false)
-				player->GetItemTransform()->Move(-5, -6.5f);
-			else player->GetItemTransform()->Move(5, 6.5f);
-			_itemShakeDir = !_itemShakeDir;
-			_itemShakeTime = 0;
-		}
 		player->transform->MoveX(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
 			player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 			MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 		}
+		if (player->isCatch == true)
+		{
+			if (player->animator->currentFrame == 0)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 64);
+			}
+			if (player->animator->currentFrame == 1)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 74);
+			}
+			if (player->animator->currentFrame == 2)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 37.5, player->transform->GetY() - 78);
+			}
+			if (player->animator->currentFrame == 3)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 43, player->transform->GetY() - 78);
+			}
+			if (player->animator->currentFrame == 4)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 45, player->transform->GetY() - 65);
+			}
+			if (player->animator->currentFrame == 5)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 75);
+			}
+			if (player->animator->currentFrame == 6)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 60, player->transform->GetY() - 75);
+			}
+			if (player->animator->currentFrame == 7)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 60, player->transform->GetY() - 75);
+			}
+		}
 	}
 	else
 	{
-		if (player->isCatch == true)
-			_itemShakeTime += TIMEMANAGER->getElapsedTime();
-		if (_itemShakeTime >= 0.6f)
-		{
-			if (_itemShakeDir == false)
-				player->GetItemTransform()->Move(-5, -6.5f);
-			else player->GetItemTransform()->Move(5, 6.5f);
-			_itemShakeDir = !_itemShakeDir;
-			_itemShakeTime = 0;
-		}
 		player->transform->MoveX(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime());
 		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
 			player->zOrder->MoveZ(-player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
@@ -105,7 +126,6 @@ void PlayerRunState::Update(Player * player)
 
 void PlayerRunState::Enter(Player * player)
 {
-	_itemShakeTime = 0;
 	if (player->dir == false)
 	{
 		EFFECTMANAGER->EmissionEffect("run_or_break_effect_left", player->transform->GetX() + 12, player->zOrder->GetZ() - 12);
@@ -144,8 +164,4 @@ void PlayerRunState::Enter(Player * player)
 
 void PlayerRunState::Exit(Player * player)
 {
-	if (_itemShakeDir == true)
-	{
-		player->GetItemTransform()->Move(-1, 2.5f);
-	}
 }

@@ -199,15 +199,13 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
-    for (int i = 0; i < _objectV.size(); i++) {
-        _objectV[i]->Render();
-    }
+
 	trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();x
+    testGround->Render();
     EFFECTMANAGER->Render();
 
     // 210627 시영 추가 (Enemy Render)
