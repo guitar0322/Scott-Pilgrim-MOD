@@ -86,11 +86,11 @@ void PlayerRunState::Enter(Player * player)
 {
 	if (player->dir == false)
 	{
-		EFFECTMANAGER->EmissionEffect("run_or_break_effect_left", player->transform->GetX() + 12, player->zOrder->GetZ() - 12);
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_left", player->transform->GetX() - 20, player->zOrder->GetZ() - 12);
 	}
 	else
 	{
-		EFFECTMANAGER->EmissionEffect("run_or_break_effect_right", player->transform->GetX() - 12, player->zOrder->GetZ() - 12);
+		EFFECTMANAGER->EmissionEffect("run_or_break_effect_right", player->transform->GetX() + 20, player->zOrder->GetZ() - 12);
 	}
 
 	if (player->isCatch == true)

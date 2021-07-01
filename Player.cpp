@@ -162,8 +162,8 @@ void Player::ClipInit()
 	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
-	attack1Right.Init("player/attack1_right.bmp", 354, 134, 3, 0.1f);
-	attack2Right.Init("player/attack2_right.bmp", 472, 134, 4, 0.1f);
+	attack1Right.Init("player/attack1_right.bmp", 480, 118, 3, 0.1f);
+	attack2Right.Init("player/attack2_right.bmp", 640, 118, 4, 0.1f);
 	attack3Right.Init("player/attack3_right.bmp", 366, 130, 3, 0.15f);
 	attack4Right.Init("player/attack4_right.bmp", 864, 166, 8, 0.15f);
 
@@ -172,8 +172,8 @@ void Player::ClipInit()
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("player/attack1_left.bmp", 354, 134, 3, 0.1f);
-	attack2Left.Init("player/attack2_left.bmp", 472, 134, 4, 0.1f);
+	attack1Left.Init("player/attack1_left.bmp", 480, 118, 3, 0.1f);
+	attack2Left.Init("player/attack2_left.bmp", 640, 118, 4, 0.1f);
 	attack3Left.Init("player/attack3_left.bmp", 366, 130, 3, 0.15f);
 	attack4Left.Init("player/attack4_left.bmp", 864, 166, 8, 0.15f);
 

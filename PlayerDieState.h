@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerState.h"
-class PlayerDoubleAttackState :
+class PlayerDieState :
 	public PlayerState
 {
 private:
