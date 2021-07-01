@@ -6,9 +6,16 @@ using namespace std;
 
 #define SECTOR_NUM 2
 
-#define TYPE_NUM 4
+#define TYPE_NUM 8
 
 #define LUKE 0
+#define DOBERMAN 1
+#define MALCOLM 2
+#define WILLIAM 3
+#define JESSE 4
+#define MIKE 5
+#define LEE 6
+#define RICHARD 7
 class EnemyManager : public singletonBase<EnemyManager>
 {
 private:

@@ -41,6 +41,17 @@ HRESULT StartScene::Init()
     sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(3));
     sceneInfoLoader.LoadObjectInfo(16);
 
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(4));
+    sceneInfoLoader.LoadObjectInfo(17);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(5));
+    sceneInfoLoader.LoadObjectInfo(18);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(6));
+    sceneInfoLoader.LoadObjectInfo(19);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(7));
+    sceneInfoLoader.LoadObjectInfo(20);
     // 210629 ½Ã¿µ Ãß°¡
 	EffectClipInit();
     ItemImageClip();
@@ -56,6 +67,10 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
+    character->transform->SetX(4500);
+    character->transform->SetY(400);
+    character->zOrder->SetZ(452);
+    MainCam->transform->SetX(4500);
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
     ENEMYMANAGER->SetPlayerTransform(character);
@@ -65,13 +80,6 @@ HRESULT StartScene::Init()
         _enemyV[i]->Init();
         _enemyV[i]->GetComponent<EnemyAI>()->SetPlayer(character);
     }
-
-    wall[0] = new WallObj();
-    wall[0]->Init(0, 300, 1000, 300);
-    wall[1] = new WallObj();
-    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
-    wall[2] = new WallObj();
-    wall[2]->Init(800, 200, 1000, 300);
 
 	trashBox = new ItemObject();
 	trashBox->Init();
@@ -135,7 +143,7 @@ void StartScene::Update()
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-    ENEMYMANAGER->Update();
+    //ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
 	matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)
@@ -191,14 +199,47 @@ void StartScene::CameraInit()
 
 void StartScene::WallInit()
 {
-    wall[0] = new WallObj();
+    for (int i = 0; i < WALL_NUM; i++)
+    {
+		wall[i] = new WallObj();
+    }
     wall[0]->Init(0, 300, 1000, 300);
 
-    wall[1] = new WallObj();
-    wall[1]->Init(0, WINSIZEY, 1000, WINSIZEY);
+    wall[1]->Init(0, WINSIZEY, 2960, WINSIZEY);
 
-    wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
+
+    wall[3]->Init(800, 200, 1450, 200);
+
+    wall[4]->Init(1450, 200, 1650, 280);
+
+    wall[5]->Init(1650, 280, 4650, 280);
+
+    wall[6]->Init(4650, 280, 4450, 200);
+
+    wall[7]->Init(4450, 200, 4850, 200);
+    
+    wall[8]->Init(4850, 200, 5150, 350);
+
+    wall[9]->Init(5150, 350, 7135, 350);
+
+    wall[10]->Init(7135, 350, 6935, 200);
+
+    wall[11]->Init(6932, 200, 7340, 200);
+
+    wall[12]->Init(7340, 200, 7640, 350);
+
+    wall[13]->Init(7640, 350, 16750, 350);
+
+    wall[14]->Init(16750, 350, 17100, 500);
+
+    wall[15]->Init(17100, 500, 21000, 500);
+
+    wall[16]->Init(3470, WINSIZEY, 16900, WINSIZEY);
+
+    wall[17]->Init(16900, WINSIZEY, 17250, WINSIZEY + 120);
+
+    wall[18]->Init(17250, WINSIZEY + 120, 21000, WINSIZEY + 120);
 }
 
 void StartScene::ItemImageClip()

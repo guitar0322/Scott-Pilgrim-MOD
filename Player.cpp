@@ -23,7 +23,7 @@ void Player::Init()
 	zOrder = gameObject->GetComponent<ZOrder>();
 
 	ClipInit();
-	_speed = 48;							//플레이어 속도
+	_speed = 100;							//플레이어 속도
 	_gravity = 200;							//플레이어 중력 (점프 후 중력값)
 	friction = 130;							//플레이어 마찰 (런뛰고 미끄러질 때)
 	jumpPower = 200;						//플레이어 점프력
