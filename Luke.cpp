@@ -43,9 +43,6 @@ Luke::Luke()
 	animator->AddClip("luke_die_right", CLIPMANAGER->FindClip("luke_die_right"));
 	animator->AddClip("luke_die_left", CLIPMANAGER->FindClip("luke_die_left"));
 
-	/* LUKE INIT */
-	Init();
-
 	// AI STATE 동적 할당
 	enemyAI->SetState(new LukeIdleState());
 }

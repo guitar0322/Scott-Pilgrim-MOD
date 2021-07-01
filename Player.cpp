@@ -45,6 +45,7 @@ void Player::Init()
 	runDelay = 0;
 	jumpDelay = 0;
 	pickDelay = 0;
+	throwDelay = 0;
 
 	hp = 100;
 	attack = 10;
@@ -65,6 +66,10 @@ void Player::Update()
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 
+	if (isCatch == true)
+	{
+		equipItem->GetComponent<ZOrder>()->SetZ(zOrder->GetZ() - 1);
+	}
 	if (isPick == true)
 	{
 		pickDelay += TIMEMANAGER->getElapsedTime();
@@ -80,6 +85,24 @@ void Player::Update()
 			}
 			pickDelay = 0;
 			isPick = false;
+		}
+	}
+	if (isThrow == true)
+	{
+		throwDelay += TIMEMANAGER->getElapsedTime();
+		if (throwDelay >= 0.4f)
+		{
+			//if (!dir)
+			//{
+			//	item->transform->SetPosition(transform->GetX() - 14, transform->GetY() - 77);
+			//}
+			//if (dir)
+			//{
+			//	item->transform->SetPosition(transform->GetX() + 14, transform->GetY() - 77);
+			//}
+			PutItem();
+			isThrow = false;	
+			throwDelay = 0;
 		}
 	}
 }
@@ -235,6 +258,13 @@ void Player::ClipInit()
 	twoHandWalkAttackRight.isLoop = false;
 	twoHandWalkAttackLeft.Init("player/two_hand_walk_attack_left.bmp", 938, 126, 7, 0.2f);
 	twoHandWalkAttackLeft.isLoop = false;
+
+	twoHandWalkThrowRight.Init("player/two_hand_walk_throw_right.bmp", 756, 136, 7, 0.2f);
+	twoHandWalkThrowRight.isLoop = false;
+	twoHandWalkThrowLeft.Init("player/two_hand_walk_throw_left.bmp", 756, 136, 7, 0.2f);
+	twoHandWalkThrowLeft.isLoop = false;
+
+
 	twoHandRunAttackRight.Init("player/two_hand_run_attack_right.bmp", 756, 138, 6, 0.15f);
 	twoHandRunAttackRight.isLoop = false;
 	twoHandRunAttackLeft.Init("player/two_hand_run_attack_left.bmp", 756, 138, 6, 0.15f);
@@ -310,9 +340,13 @@ void Player::ClipInit()
 	animator->AddClip("two_hand_walk_attack_left", &twoHandWalkAttackLeft);
 	animator->AddClip("two_hand_run_attack_right", &twoHandRunAttackRight);
 	animator->AddClip("two_hand_run_attack_left", &twoHandRunAttackLeft);
+	animator->AddClip("two_hand_walk_throw_right", &twoHandWalkThrowRight);
+	animator->AddClip("two_hand_walk_throw_left", &twoHandWalkThrowLeft);
 
 	animator->AddTransaction("pickup_to_pickup_idle_right", &twoHandPickRight, &twoHandIdleRight);
 	animator->AddTransaction("pickup_to_pickup_idle_left", &twoHandPickLeft, &twoHandIdleLeft);
+	animator->AddTransaction("throw_idle_right", &twoHandWalkThrowRight, &idleRight);
+	animator->AddTransaction("throw_idle_left", &twoHandWalkThrowLeft, &idleLeft);
 }
 
 void Player::OnTriggerEnter(GameObject * gameObject)
@@ -332,6 +366,7 @@ void Player::PickItem()								// item 획득 했을때
 		transform->AddChild(item->transform);	//player는 item을 자식으로 가지고
 		isCatch = true;							//item을 가지고 있는 상태가 된다
 		equipItem = item->gameObject;
+		equipItem->GetComponent<ZOrder>()->SetZ(zOrder->GetZ());
 	}
 }
 

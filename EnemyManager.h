@@ -36,7 +36,7 @@ public:
 	int GetSectorNum() const { return _curSector; }
 	void SetSectorNum(int sectorNum) { _curSector = sectorNum; }
 
-	void SetPlayerTransform(Transform* playerTr);
+	void SetPlayerTransform(GameObject* player);
 	void SetCameraControler(CameraControler* cameraControler) { _cameraControler = cameraControler; }
 
 	void Clear();

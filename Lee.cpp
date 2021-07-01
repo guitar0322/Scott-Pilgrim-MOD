@@ -43,9 +43,6 @@ Lee::Lee()
 	animator->AddClip("lee_die_right", CLIPMANAGER->FindClip("lee_die_right"));
 	animator->AddClip("lee_die_left", CLIPMANAGER->FindClip("lee_die_left"));
 
-	/* LEE INIT */
-	Init();
-
 	// AI STATE 동적 할당
 	enemyAI->SetState(new LeeIdleState());
 }
