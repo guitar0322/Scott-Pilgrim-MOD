@@ -44,8 +44,10 @@ EnemyState * MalcolmRunState::Update(EnemyAI * enemy)
 	}
 	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
-	enemy->transform->Move((enemy->enemyinfo->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*cosf(angle),
-		(enemy->enemyinfo->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*-sinf(angle));
+
+	enemy->transform->MoveX(enemy->enemyinfo->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() * cosf(angle));
+	enemy->zOrder->MoveZ(enemy->enemyinfo->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() * -sinf(angle));
+
 	return nullptr;
 }
 

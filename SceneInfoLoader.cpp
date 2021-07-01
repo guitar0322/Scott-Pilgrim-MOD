@@ -95,6 +95,30 @@ GameObject* SceneInfoLoader::MakeObject(float x, float y, int type)
 		else
 			newObject = MakeWilliamEditor(x, y);
 		break;
+	case 17:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeJesse(x, y);
+		else
+			newObject = MakeJesseEditor(x, y);
+		break;
+	case 18:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeMike(x, y);
+		else
+			newObject = MakeMikeEditor(x, y);
+		break;
+	case 19:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeLee(x, y);
+		else
+			newObject = MakeLeeEditor(x, y);
+		break;
+	case 20:
+		if (SCENEMANAGER->GetCurScene() == SCENEMANAGER->GetScene("start"))
+			newObject = MakeRichard(x, y);
+		else
+			newObject = MakeRichardEditor(x, y);
+		break;
 	}
 	return newObject;
 }
@@ -341,4 +365,88 @@ GameObject* SceneInfoLoader::MakeWilliamEditor(float x, float y)
 	demoWilliam->GetComponent<ZOrder>()->Init();
 	demoWilliam->GetComponent<ZOrder>()->SetZ(demoWilliam->transform->GetY() + 73);
 	return demoWilliam;
+}
+
+GameObject* SceneInfoLoader::MakeJesse(float x, float y)
+{
+	GameObject* jesse = new Jesse();
+	jesse->transform->SetPosition(x, y);
+	jesse->SetActive(false);
+	jesse->Init();
+	return jesse;
+}
+
+GameObject* SceneInfoLoader::MakeJesseEditor(float x, float y)
+{
+	GameObject* jesse = new GameObject();
+	jesse->transform->SetPosition(x, y);
+	jesse->AddComponent(new Renderer());
+	jesse->GetComponent<Renderer>()->Init("jesse/jesse.bmp", 90, 132);
+	jesse->AddComponent(new ZOrder());
+	jesse->GetComponent<ZOrder>()->Init();
+	jesse->GetComponent<ZOrder>()->SetZ(jesse->transform->GetY() + 66);
+	return jesse;
+}
+
+GameObject* SceneInfoLoader::MakeMike(float x, float y)
+{
+	GameObject* mike = new Mike();
+	mike->transform->SetPosition(x, y);
+	mike->SetActive(false);
+	mike->Init();
+	return mike;
+}
+
+GameObject* SceneInfoLoader::MakeMikeEditor(float x, float y)
+{
+	GameObject* mike = new GameObject();
+	mike->transform->SetPosition(x, y);
+	mike->AddComponent(new Renderer());
+	mike->GetComponent<Renderer>()->Init("mike/mike.bmp", 110, 134);
+	mike->AddComponent(new ZOrder());
+	mike->GetComponent<ZOrder>()->Init();
+	mike->GetComponent<ZOrder>()->SetZ(mike->transform->GetY() + 67);
+	return mike;
+}
+
+GameObject* SceneInfoLoader::MakeLee(float x, float y)
+{
+	GameObject* lee = new Lee();
+	lee->transform->SetPosition(x, y);
+	lee->SetActive(false);
+	lee->Init();
+	return lee;
+}
+
+GameObject* SceneInfoLoader::MakeLeeEditor(float x, float y)
+{
+	GameObject* lee = new GameObject();
+	lee->transform->SetPosition(x, y);
+	lee->AddComponent(new Renderer());
+	lee->GetComponent<Renderer>()->Init("lee/lee.bmp", 100, 132);
+	lee->AddComponent(new ZOrder());
+	lee->GetComponent<ZOrder>()->Init();
+	lee->GetComponent<ZOrder>()->SetZ(lee->transform->GetY() + 66);
+	return lee;
+}
+
+GameObject* SceneInfoLoader::MakeRichard(float x, float y)
+{
+	GameObject* richard = new Richard();
+	richard->transform->SetPosition(x, y);
+	richard->SetActive(false);
+	richard->Init();
+	return richard;
+}
+
+GameObject* SceneInfoLoader::MakeRichardEditor(float x, float y)
+{
+	GameObject* richard = new GameObject();
+	richard->transform->SetPosition(x, y);
+	richard->AddComponent(new Renderer());
+	richard->GetComponent<Renderer>()->Init("richard/richard.bmp", 108, 132);
+	richard->AddComponent(new ZOrder());
+	richard->GetComponent<ZOrder>()->Init();
+	richard->GetComponent<ZOrder>()->SetZ(richard->transform->GetY() + 66);
+	return richard;
 }

@@ -108,7 +108,7 @@ public:
 	bool onGround;
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
-	bool isThrow;
+	bool isThrow;		//아이템을 던졌는가?
 
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때

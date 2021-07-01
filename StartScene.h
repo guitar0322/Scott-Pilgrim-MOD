@@ -3,7 +3,7 @@
 #include "SceneInfoLoader.h"
 #include "CameraControler.h"
 #define BG_NUM 23
-#define WALL_NUM 3
+#define WALL_NUM 19
 #define SUCCUBUSMAX 4
 class WallObj;
 

@@ -4,7 +4,7 @@
 
 #define BG_NUM 23
 #define SNOW1 0
-#define TYPE_NUM 17
+#define TYPE_NUM 21
 #define NAME_STARTX 700
 #define NAME_STARTY 50
 #define NAME_WIDTH 150
@@ -25,6 +25,10 @@ private:
         bool clickedRight;
         float preX;
         float preY;
+        float clickX;
+        float clickY;
+        float releaseX;
+        float releaseY;
     }MOUSEINFO;
     typedef struct tagObjectMenu {
         RECT rc;
@@ -56,6 +60,7 @@ private:
         image* img;
     }BUTTON;
 private:
+    bool _isWallMode;
     float _worldEditorRatio;
     float _editorWidth;
     float _editorHeight;

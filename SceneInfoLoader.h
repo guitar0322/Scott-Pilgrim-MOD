@@ -34,6 +34,14 @@ public:
 	GameObject* MakeMalcolmEditor(float x, float y);
 	GameObject* MakeWilliam(float x, float y);
 	GameObject* MakeWilliamEditor(float x, float y);
+	GameObject* MakeJesse(float x, float y);
+	GameObject* MakeJesseEditor(float x, float y);
+	GameObject* MakeMike(float x, float y);
+	GameObject* MakeMikeEditor(float x, float y);
+	GameObject* MakeLee(float x, float y);
+	GameObject* MakeLeeEditor(float x, float y);
+	GameObject* MakeRichard(float x, float y);
+	GameObject* MakeRichardEditor(float x, float y);
 	vector<int> GetTypeV() const { return _typeV; }
 };
 

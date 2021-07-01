@@ -50,6 +50,7 @@ HRESULT EditorScene::Init()
     _selectIdxNameType = 0;
     _selectIdxMenu = 0;
     _clickScreen = false;
+    _isWallMode = false;
 
     InitTypeName();
     InitObjectMenu();
@@ -86,31 +87,36 @@ void EditorScene::Update()
     //1.월드를 클릭했을 경우
     //2.배치된 오브젝트를 클릭했을 경우
     //3.오브젝트 메뉴를 클릭했을 경우
+    if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
+        _isWallMode = !_isWallMode;
+
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-        _mouseInfo.clickedLeft = true;
-        _clickScreen = false;
-        _selectIdxObject = -1;
-        _selectIdxObjectType = -1;
-        _selectIdxType = -1;
-        _mouseInfo.preX = _ptMouse.x;
-        _mouseInfo.preY = _ptMouse.y;
+		_mouseInfo.clickedLeft = true;
+		_clickScreen = false;
+		_selectIdxObject = -1;
+		_selectIdxObjectType = -1;
+		_selectIdxType = -1;
+		_mouseInfo.preX = _ptMouse.x;
+		_mouseInfo.preY = _ptMouse.y;
+
+		//에디터 화면쪽을 클릭했을 때
 		if (_ptMouse.x <= 650 && _ptMouse.y <= 400)
 		{
-            _clickScreen = true;
-            POINT worldPtMouse = ScreenToWorld(_ptMouse.x, _ptMouse.y);
+			_clickScreen = true;
+			POINT worldPtMouse = ScreenToWorld(_ptMouse.x, _ptMouse.y);
 
-            //배치된 오브젝트를 클릭했을 때
-            for (int i = 0; i < TYPE_NUM; i++)
-            {
+			//배치된 오브젝트를 클릭했을 때
+			for (int i = 0; i < TYPE_NUM; i++)
+			{
 				for (int j = 0; j < _objectV[i].size(); j++) {
 					if (PtInRect(&(_objectV[i][j]->GetComponent<Renderer>()->GetRc()), worldPtMouse)) {
-                        if (KEYMANAGER->isStayKeyDown(VK_MENU))
-                        {
-                            RemoveObject(i, j);
-                        }
-                        else
-                        {
+						if (KEYMANAGER->isStayKeyDown(VK_MENU))
+						{
+							RemoveObject(i, j);
+						}
+						else
+						{
 							_clickScreen = false;
 							_selectIdxObjectType = i;
 							_selectIdxNameType = i;
@@ -118,29 +124,29 @@ void EditorScene::Update()
 							_selectIdxName = j;
 							SetOutline(_objectV[i][j]);
 							break;
-                        }
+						}
 					}
 				}
-            }
+			}
 		}
-        else
-        {
-            //오브젝트 메뉴를 클릭했을때
-            for (int i = _selectIdxMenu * 5; i < _selectIdxMenu * 5 + 5; i++)
-            {
-                if (i == TYPE_NUM) break;
-                if (PtInRect(&_objectMenu[i].rc, _ptMouse))
-                {
-                    _selectIdxType = i;
-                    _selectObject.deltaX = _ptMouse.x - _objectMenu[i].x;
-                    _selectObject.deltaY = _ptMouse.y - _objectMenu[i].y;
-                    _selectObject.width = _objectMenu[i].img->getWidth() * _worldEditorRatio;
-                    _selectObject.height = _objectMenu[i].img->getHeight() * _worldEditorRatio;
-                    _selectObject.img = _objectMenu[i].img;
-                    break;
-                }
-            }
-            //오브젝트 이름을 클릭했을 때
+		else
+		{
+			//오브젝트 메뉴를 클릭했을때
+			for (int i = _selectIdxMenu * 5; i < _selectIdxMenu * 5 + 5; i++)
+			{
+				if (i == TYPE_NUM) break;
+				if (PtInRect(&_objectMenu[i].rc, _ptMouse))
+				{
+					_selectIdxType = i;
+					_selectObject.deltaX = _ptMouse.x - _objectMenu[i].x;
+					_selectObject.deltaY = _ptMouse.y - _objectMenu[i].y;
+					_selectObject.width = _objectMenu[i].img->getWidth() * _worldEditorRatio;
+					_selectObject.height = _objectMenu[i].img->getHeight() * _worldEditorRatio;
+					_selectObject.img = _objectMenu[i].img;
+					break;
+				}
+			}
+			//오브젝트 이름을 클릭했을 때
 			for (int j = 0; j < _objectNameV[_selectIdxNameType].size(); j++)
 			{
 				if (PtInRect(&_objectNameV[_selectIdxNameType][j].rc, _ptMouse))
@@ -151,8 +157,8 @@ void EditorScene::Update()
 				}
 			}
 
-            //이름 타입 네비게이션 버튼을 눌렀을 때
-            {
+			//이름 타입 네비게이션 버튼을 눌렀을 때
+			{
 				if (PtInRect(&_nameBeforeButton.rc, _ptMouse) && _selectIdxNameType != 0)
 				{
 					_selectIdxNameType--;
@@ -175,20 +181,20 @@ void EditorScene::Update()
 					else
 						_selectIdxName = -1;
 				}
-            }
+			}
 
-            //오브젝트 메뉴 네비게이션 버튼을 눌렀을 때
-            {
-                if (PtInRect(&_menuBeforeButton.rc, _ptMouse) && _selectIdxMenu != 0)
-                {
-                    _selectIdxMenu--;
-                }
-                if (PtInRect(&_menuNextButton.rc, _ptMouse) && _selectIdxMenu != (TYPE_NUM - 1) / 5)
-                {
-                    _selectIdxMenu++;
-                }
-            }
-        }
+			//오브젝트 메뉴 네비게이션 버튼을 눌렀을 때
+			{
+				if (PtInRect(&_menuBeforeButton.rc, _ptMouse) && _selectIdxMenu != 0)
+				{
+					_selectIdxMenu--;
+				}
+				if (PtInRect(&_menuNextButton.rc, _ptMouse) && _selectIdxMenu != (TYPE_NUM - 1) / 5)
+				{
+					_selectIdxMenu++;
+				}
+			}
+		}
 	}
 
     //마우스가 클릭된채로 움직일때 동작
@@ -222,6 +228,7 @@ void EditorScene::Update()
     if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
     {
         _mouseInfo.clickedLeft = false;
+
         //오브젝트 메뉴를 클릭했을 경우 마우스를 뗐을 때 배치된 오브젝트 벡터에 오브젝트 추가
         if (_selectIdxType != -1 && _ptMouse.x <= 650 && _ptMouse.y <= 400) 
         {
@@ -279,6 +286,18 @@ void EditorScene::Update()
                 break;
             case 16:
                 newObject = _sceneInfoLoader.MakeWilliamEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 17:
+                newObject = _sceneInfoLoader.MakeJesseEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 18:
+                newObject = _sceneInfoLoader.MakeMikeEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 19:
+                newObject = _sceneInfoLoader.MakeLeeEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 20:
+                newObject = _sceneInfoLoader.MakeRichardEditor(worldPoint.x, worldPoint.y);
                 break;
             }
             _objectV[_selectIdxType].push_back(newObject);
@@ -549,6 +568,26 @@ void EditorScene::InitObjectMenu()
     _objectMenu[16].width = 84;
     _objectMenu[16].height = 100;
     _objectMenu[16].rc = RectMakeCenter(_objectMenu[16].x, _objectMenu[16].y, _objectMenu[16].width, _objectMenu[16].height);
+
+    _objectMenu[17].img->init("jesse/jesse.bmp", 90, 132, true, RGB(255, 0, 255));
+    _objectMenu[17].width = 68;
+    _objectMenu[17].height = 100;
+    _objectMenu[17].rc = RectMakeCenter(_objectMenu[17].x, _objectMenu[17].y, _objectMenu[17].width, _objectMenu[17].height);
+
+    _objectMenu[18].img->init("mike/mike.bmp", 110, 134, true, RGB(255, 0, 255));
+    _objectMenu[18].width = 82;
+    _objectMenu[18].height = 100;
+    _objectMenu[18].rc = RectMakeCenter(_objectMenu[18].x, _objectMenu[18].y, _objectMenu[18].width, _objectMenu[18].height);
+
+    _objectMenu[19].img->init("lee/lee.bmp", 100, 132, true, RGB(255, 0, 255));
+    _objectMenu[19].width = 76;
+    _objectMenu[19].height = 100;
+    _objectMenu[19].rc = RectMakeCenter(_objectMenu[19].x, _objectMenu[19].y, _objectMenu[19].width, _objectMenu[19].height);
+
+    _objectMenu[20].img->init("richard/richard.bmp", 108, 132, true, RGB(255, 0, 255));
+    _objectMenu[20].width = 82;
+    _objectMenu[20].height = 100;
+    _objectMenu[20].rc = RectMakeCenter(_objectMenu[20].x, _objectMenu[20].y, _objectMenu[20].width, _objectMenu[20].height);
 }
 
 void EditorScene::InitTypeName()
@@ -570,6 +609,10 @@ void EditorScene::InitTypeName()
     _typeNameArr[14] = "doberman";
     _typeNameArr[15] = "malcolm";
     _typeNameArr[16] = "william";
+    _typeNameArr[17] = "jesse";
+    _typeNameArr[18] = "mike";
+    _typeNameArr[19] = "lee";
+    _typeNameArr[20] = "richard";
 }
 
 void EditorScene::InitButton()
