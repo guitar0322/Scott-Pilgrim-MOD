@@ -305,17 +305,17 @@ void Player::PickItem()								// item 획득 했을때
 }
 
 
-void Player::PutItem()								//item을 놓았을때
+void Player::PutItem()															//item을 놓았을때
 {
-	if (equipItem != nullptr)							//item이 값을 가지고 있을때
+	if (equipItem != nullptr)													//item이 값을 가지고 있을때
 	{
-		equipItem->transform->DetachParent();			//item은 부모를 잃는다
+		equipItem->transform->DetachParent();									//item은 부모를 잃는다
 		equipItem->GetComponent<Item>()->SetItemZ(this->zOrder->GetZ());		//던졌을때 itemz는 player의 z값을 가진다
-		equipItem->GetComponent<Item>()->Throw(dir);	//dir에 따른 throw	
-		equipItem = nullptr;							
+		equipItem->GetComponent<Item>()->Throw(dir);							//dir에 따른 throw	
+		equipItem = nullptr;													
 	}	
-	isCatch = false;								//item이 없는 상태이고
-	item = nullptr;									//item은 값을 잃는다	
+	isCatch = false;															//item이 없는 상태이고
+	item = nullptr;																//item은 값을 잃는다	
 }
 
 void Player::Hit(int damage)
