@@ -8,8 +8,19 @@
 
 Matthewstate * MatthewPalmwindState::Update(Matthew * matthew)
 {
+	if (matthew->animator->currentFrame == 12 && _ishit == false)
+	{
+		if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
+			matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 50)
+		{
+			matthew->GetPlayer()->gameObject->GetComponent<Player>()->Hit(matthew->GetDamage() + 4);
+		}
+		_ishit = true;
+	}
+
 	if (matthew->animator->GetEnd() == true)
 	{
+
 		if (matthew->Getdir() == false)
 		{
 			matthew->transform->Move(-90, 40);
@@ -17,6 +28,8 @@ Matthewstate * MatthewPalmwindState::Update(Matthew * matthew)
 		else
 		{
 			matthew->transform->Move(90, 40);
+
+
 		}
 		return new MatthewPhaseReadyState();
 	}
@@ -28,11 +41,13 @@ void MatthewPalmwindState::Enter(Matthew * matthew)
 	if (matthew->Getdir() == false)
 	{
 		matthew->transform->Move(90, -40);
+
 		matthew->ChangeCilp("matthew_palmwind_right", true);
 	}
 	else
 	{
 		matthew->transform->Move(-90, -40);
+
 		matthew->ChangeCilp("matthew_palmwind_left", true);
 	}
 }

@@ -135,7 +135,7 @@ void StartScene::Update()
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-    ENEMYMANAGER->Update();
+    //ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
 	matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)

@@ -31,6 +31,15 @@ Matthewstate * MatthewAttackState::Update(Matthew * matthew)
 void MatthewAttackState::Enter(Matthew * matthew)
 {
 	matthew->_attackTime++;
+	float distanceZ = matthew->_player->GetComponent<ZOrder>()->GetZ() - matthew->zOrder->GetZ();
+
+	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
+		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 200
+		&& distanceZ < 5)
+	{
+		matthew->GetPlayer()->gameObject->GetComponent<Player>()->Hit(matthew->GetDamage());
+	}
+
 	if (matthew->Getdir() == false)
 	{
 		matthew->ChangeCilp("matthew_attack1_right", true);

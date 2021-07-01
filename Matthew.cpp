@@ -17,6 +17,7 @@ void Matthew::Init()
 {
 	animator = gameObject->GetComponent<Animator>(); // 매튜의 행동 애니메이션
 	collision = gameObject->GetComponent<BoxCollider>(); // 매튜의 박스 충돌크기
+	zOrder = gameObject->GetComponent<ZOrder>(); // 매튜의 ZOrder 설정
 	animator->AddClip("matthew_idle_left", CLIPMANAGER->AddClip("matthew_idle_left", "matthew/idle_left.bmp", 686, 136, 6, 0.3f));
 	animator->AddClip("matthew_idle_right", CLIPMANAGER->AddClip("matthew_idle_right", "matthew/idle_right.bmp", 686, 136, 6, 0.3f));
 	animator->AddClip("matthew_move_left", CLIPMANAGER->AddClip("matthew_move_left", "matthew/move_left.bmp", 1160, 136, 10, 0.2f));
@@ -60,11 +61,14 @@ void Matthew::Init()
 	CLIPMANAGER->FindClip("matthew_attack3_right")->isLoop = false;
 	_hp = 500;
 	_speed = 30;
+	_damage = 10;
 	_dir = true;
 	_attackTime = 0;
 	_phaseTime = 0;
 	_matthewstate = new MatthewIdleState();
+	zOrder->SetZ(transform->GetY() + 132 / 2);
 	_matthewstate->Enter(this);
+
 }
 
 void Matthew::Release()

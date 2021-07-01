@@ -6,6 +6,18 @@
 
 Matthewstate * MatthewPhaseSpotlightState::Update(Matthew * matthew)
 {
+	if (spotLightMax <=10)
+	{
+		float distanceZ = matthew->_player->GetComponent<ZOrder>()->GetZ() - matthew->zOrder->GetZ();
+		
+		if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
+			matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 200 &&
+			distanceZ <100 && matthew->_player->GetComponent<Player>()->hitable == true)
+		{
+			spotLightMax++;
+			matthew->GetPlayer()->gameObject->GetComponent<Player>()->Hit(matthew->GetDamage() + 5);
+		}
+	}
 	_spotLightTime += TIMEMANAGER->getElapsedTime();
 	if (_spotLightTime >= 10.0f)
 	{

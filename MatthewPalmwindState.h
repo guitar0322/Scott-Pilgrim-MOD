@@ -4,8 +4,7 @@ class MatthewPalmwindState :
 	public Matthewstate
 {
 private:
-	float _palmwindtime;
-
+	bool _ishit;
 public:
 	virtual Matthewstate* Update(Matthew* matthew);
 	virtual void Enter(Matthew* matthew);

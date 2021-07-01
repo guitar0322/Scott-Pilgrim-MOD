@@ -6,17 +6,20 @@ class Matthew : public Component
 {
 private:
 	Matthewstate* _matthewstate;
-	GameObject* _player;
-	float _hp;
+	
+	int _hp;
 	float _speed;
+	int _damage;
 	bool _dir;
 
 public:
 	Matthew();
 	~Matthew();
+	GameObject* _player;
 	GameObject* _succubus[SUCCUBUSMAX];
 	Animator* animator;
 	BoxCollider* collision;
+	ZOrder* zOrder;
 	int _attackTime;
 	float _phaseTime;
 	virtual void Init();
@@ -27,8 +30,14 @@ public:
 	bool Getdir() const { return _dir; }
 	void Setdir(bool dir) { _dir = dir; }
 	float GetSpeed() const { return _speed; }
-	float GetHp(){ return _hp; }
+	int GetHp(){ return _hp; }
+	void Sethp(int hp) { _hp = hp; }
+	int GetDamage()const { return _damage; }
+	void SetDamage(int damage) { _damage = damage; }
 	Transform* GetPlayer() const { return _player->transform; }
+
 	void SetPlayer(GameObject* player) { _player = player; }
+
+	void Hit(int damage);
 };
 

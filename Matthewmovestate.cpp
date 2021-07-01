@@ -35,8 +35,8 @@ Matthewstate * MatthewMoveState::Update(Matthew * matthew)
 	}
 
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
-	matthew->transform->Move(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
-							 matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
+	matthew->transform->MoveX(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle));
+	matthew->zOrder->MoveZ(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
 
 	return nullptr;
 }

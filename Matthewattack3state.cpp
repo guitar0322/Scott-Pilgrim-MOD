@@ -26,17 +26,19 @@ Matthewstate * MatthewAttack3State::Update(Matthew * matthew)
 		}
 		/*return new MatthewPalmwindState;*/
 	}
-	//if (_attackTime3 >= 2.0f)
-	//{
-	//	return new MatthewIdleState;
-	//}
 	return nullptr;
 }
 
 void MatthewAttack3State::Enter(Matthew * matthew)
 {
-	_attackTime3 = 0;
 	matthew->_attackTime++;
+	float distanceZ = matthew->_player->GetComponent<ZOrder>()->GetZ() - matthew->zOrder->GetZ();
+	if (GetDistance(matthew->transform->GetX(),matthew->transform->GetY(),
+		matthew->GetPlayer()->GetX(),matthew->GetPlayer()->GetY())<200
+		&&distanceZ<5)
+	{
+		matthew->GetPlayer()->gameObject->GetComponent<Player>()->Hit(matthew->GetDamage()+2);
+	}
 	if (matthew->Getdir()==false)
 	{
 		matthew->ChangeCilp("matthew_attack3_right", true);

@@ -31,7 +31,7 @@ EnemyState* LukeAttack1State::Update(EnemyAI* enemy)
 void LukeAttack1State::Enter(EnemyAI* enemy)
 {
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->transform->GetY()) > 20)
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) > 20)
 	{
 		enemy->GetPlayer()->GetComponent<Player>()->Hit(enemy->enemyinfo->GetDamage());
 	}

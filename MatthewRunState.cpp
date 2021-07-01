@@ -32,7 +32,7 @@ Matthewstate * MatthewRunState::Update(Matthew * matthew)
 	}
 
 
-	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 50)
+	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 100)
 	{
 		switch (RND->getInt(4))
 		{
@@ -49,12 +49,12 @@ Matthewstate * MatthewRunState::Update(Matthew * matthew)
 			return new MatthewPalmwindState();
 			break;
 		}
+		return new MatthewPalmwindState();
 	}
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
-	matthew->transform->Move((matthew->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*cosf(angle),
-		(matthew->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*-sinf(angle));
-
+	matthew->transform->MoveX((matthew->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*cosf(angle));
+	matthew->zOrder->MoveZ((matthew->GetSpeed() * 2)*TIMEMANAGER->getElapsedTime()*-sinf(angle));
 
 	return nullptr;
 }
