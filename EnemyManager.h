@@ -6,7 +6,7 @@ using namespace std;
 
 #define SECTOR_NUM 2
 
-#define TYPE_NUM 1
+#define TYPE_NUM 4
 
 #define LUKE 0
 class EnemyManager : public singletonBase<EnemyManager>
@@ -36,12 +36,14 @@ public:
 	int GetSectorNum() const { return _curSector; }
 	void SetSectorNum(int sectorNum) { _curSector = sectorNum; }
 
-	void SetPlayerTransform(Transform* playerTr);
+	void SetPlayerTransform(GameObject* player);
 	void SetCameraControler(CameraControler* cameraControler) { _cameraControler = cameraControler; }
 
 	void Clear();
 	void MakeSectorEnemyV();
 
 	void DeadEvent(GameObject* deadObject);
+
+	void InitSectorEnemyIdx();
 };
 

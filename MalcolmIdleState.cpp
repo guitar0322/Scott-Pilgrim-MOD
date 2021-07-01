@@ -5,7 +5,7 @@
 EnemyState * MalcolmIdleState::Update(EnemyAI * enemy)
 {
 	if (GetDistance(enemy->transform->GetX(),enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY()) < 200)
+		enemy->GetPlayerTransform()->GetX(),enemy->GetPlayerTransform()->GetY()) < 500)
 	{
 		if (enemy->transform->GetX() < enemy->GetPlayerTransform()->GetX())
 		{

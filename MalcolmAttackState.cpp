@@ -6,10 +6,9 @@
 
 EnemyState * MalcolmAttackState::Update(EnemyAI * enemy)
 {
-	_attackTime += TIMEMANAGER->getElapsedTime();
-	if (_attackTime >= 1.0f)
+	if (enemy->animator->GetEnd()==true)
 	{
-		return new MalcolmKickState();
+		return new MalcolmIdleState();
 	}
 	return nullptr;
 }

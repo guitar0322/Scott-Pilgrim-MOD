@@ -6,7 +6,7 @@ class Outline :
 private:
     COLORREF _lineColor;
     Renderer* renderer;
-    float _factor;
+    int _lineWidth;
 public:
     virtual void Init();
     virtual void Update();

@@ -5,7 +5,7 @@ void Outline::Init()
 {
 	renderer = gameObject->GetComponent<Renderer>();
 	_lineColor = RGB(255, 230, 89);
-	_factor = 1.1f;
+	_lineWidth = 10;
 }
 
 void Outline::Update()
@@ -27,7 +27,7 @@ void Outline::SetTargetObject(GameObject* gameObject)
 	blendFunc.BlendFlags = 0;
 	blendFunc.AlphaFormat = 0;
 	blendFunc.SourceConstantAlpha = 5;
-	renderer->Resize(targetRenderer->GetWidth() * _factor, targetRenderer->GetHeight() * _factor);
+	renderer->Resize(targetRenderer->GetWidth() + _lineWidth, targetRenderer->GetHeight() + _lineWidth);
 	oBrush = (HBRUSH)SelectObject(renderer->memDC, lineBrush);
 	PatBlt(renderer->memDC, 0, 0, renderer->GetWidth(), renderer->GetHeight(), PATCOPY);
 	AlphaBlend(renderer->memDC, 0, 0, renderer->GetWidth(), renderer->GetHeight(),

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "PlayerIdleState.h"
+#include "PlayerHitState.h"
 
 void Player::InputHandle()
 {
@@ -50,7 +51,8 @@ void Player::Init()
 	attack = 10;
 	isUppercut = false;
 	pressL = false;
-
+	hitCount = 0;
+	hitable = true;
 }
 
 void Player::Update()
@@ -184,26 +186,45 @@ void Player::ClipInit()
 	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
 	runJumpKickLeft.isLoop = false;
 	//공격 이미지
-	attack1Right.Init("player/attack1_right.bmp", 480, 118, 3, 0.1f);
-	attack2Right.Init("player/attack2_right.bmp", 640, 118, 4, 0.1f);
-	attack3Right.Init("player/attack3_right.bmp", 366, 130, 3, 0.15f);
-	attack4Right.Init("player/attack4_right.bmp", 864, 166, 8, 0.15f);
+	attack1Right.Init("player/attack1_right.bmp", 456, 120, 3, 0.1f);
+	attack2Right.Init("player/attack2_right.bmp", 608, 120, 4, 0.1f);
+	attack3Right.Init("player/attack3_right.bmp", 456, 120, 3, 0.15f);
+	attack4Right.Init("player/attack4_right.bmp", 864, 196, 8, 0.15f);
 
 	attack1Right.isLoop = false;
 	attack2Right.isLoop = false;
 	attack3Right.isLoop = false;
 	attack4Right.isLoop = false;
 
-	attack1Left.Init("player/attack1_left.bmp", 480, 118, 3, 0.1f);
-	attack2Left.Init("player/attack2_left.bmp", 640, 118, 4, 0.1f);
-	attack3Left.Init("player/attack3_left.bmp", 366, 130, 3, 0.15f);
-	attack4Left.Init("player/attack4_left.bmp", 864, 166, 8, 0.15f);
+	attack1Left.Init("player/attack1_left.bmp", 456, 120, 3, 0.1f);
+	attack2Left.Init("player/attack2_left.bmp", 608, 120, 4, 0.1f);
+	attack3Left.Init("player/attack3_left.bmp", 456, 120, 3, 0.15f);
+	attack4Left.Init("player/attack4_left.bmp", 864, 196, 8, 0.15f);
 
 	attack1Left.isLoop = false;
 	attack2Left.isLoop = false;
 	attack3Left.isLoop = false;
 	attack4Left.isLoop = false;
 
+	//맞는 이미지
+	hit1Right.Init("player/hit1_right.bmp", 258, 138, 3, 0.12f);
+	hit2Right.Init("player/hit2_right.bmp", 400, 122, 4, 0.12f);
+	lastHitRight.Init("player/last_hit_right.bmp", 816, 184, 6, 0.15f);
+	knockoutRight.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
+	hit1Right.isLoop = false;
+	hit2Right.isLoop = false;
+	lastHitRight.isLoop = false;
+	knockoutRight.isLoop = false;
+
+	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.12f);
+	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.12f);
+	lastHitLeft.Init("player/last_hit_left.bmp", 816, 184, 6, 0.15f);
+	knockoutLeft.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
+
+	hit1Left.isLoop = false;
+	hit2Left.isLoop = false;
+	lastHitLeft.isLoop = false;
+	knockoutLeft.isLoop = false;
 
 	//두손 이미지
 	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
@@ -287,6 +308,16 @@ void Player::ClipInit()
 	animator->AddClip("attack3_left", &attack3Left);
 	animator->AddClip("attack4_left", &attack4Left);
 
+
+	animator->AddClip("hit1_right", &hit1Right);
+	animator->AddClip("hit2_right", &hit2Right);
+	animator->AddClip("last_hit_right", &lastHitRight);
+	animator->AddClip("knockout_right", &knockoutRight);
+	animator->AddClip("hit1_left",  &hit1Left);
+	animator->AddClip("hit2_left",  &hit2Left);
+	animator->AddClip("last_hit_left",  &lastHitLeft);
+	animator->AddClip("knockout_left", &knockoutLeft);
+
 	//두손 이미지
 
 	animator->AddClip("two_hand_idle_right", &twoHandIdleRight);
@@ -355,10 +386,20 @@ void Player::PutItem()															//item을 놓았을때
 
 void Player::Hit(int damage)
 {
+	if (hitable == false) return;
 	hp -= damage;
+	_state->Exit(this);
+	hitCount++;
+
+	_state = new PlayerHitState();
+	_state->Enter(this);
 	if (hp <= 0)
 	{
-		gameObject->SetActive(false);
+		//gameObject->SetActive(false);
 		// TODO - DEAD
 	}
+
+
 }
+
+

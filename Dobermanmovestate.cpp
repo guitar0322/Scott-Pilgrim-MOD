@@ -36,8 +36,8 @@ EnemyState * DobermanMoveState::Update(EnemyAI* enemy)
 	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(), 
 				enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
 
-	enemy->transform->Move(enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
-		enemy->enemyinfo->GetSpeed()*TIMEMANAGER->getElapsedTime()*-sinf(angle));
+	enemy->transform->MoveX(enemy->enemyinfo->GetSpeed() * TIMEMANAGER->getElapsedTime() * cosf(angle));
+	enemy->zOrder->MoveZ(enemy->enemyinfo->GetSpeed() * TIMEMANAGER->getElapsedTime() * -sinf(angle));
 
 	return nullptr;
 }

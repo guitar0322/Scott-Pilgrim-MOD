@@ -9,8 +9,8 @@ HRESULT EnemyManager::Init()
 	}
 	_spawnPointV[0] = 600;
 	_spawnPointV[1] = 1500;
-	_sectorEnemyIdxV[0].push_back({ 0, 0 });
-	_sectorEnemyIdxV[1].push_back({ 0, 1 });
+
+	InitSectorEnemyIdx();
 	_curSector = 0;
 	return S_OK;
 }
@@ -65,15 +65,15 @@ bool EnemyManager::IsClearSector()
 	return true;
 }
 
-void EnemyManager::SetPlayerTransform(Transform* playerTr)
+void EnemyManager::SetPlayerTransform(GameObject* player)
 {
-	_playerTr = playerTr;
+	_playerTr = player->transform;
 	_playerComponent = _playerTr->gameObject->GetComponent<Player>();
 	for (int i = 0; i < TYPE_NUM; i++)
 	{
 		for (int j = 0; j < _enemyV[i].size(); j++)
 		{
-			_enemyV[i][j]->GetComponent<EnemyAI>()->SetPlayer(_playerTr->gameObject);
+			_enemyV[i][j]->GetComponent<EnemyAI>()->SetPlayer(player);
 		}
 	}
 }
@@ -104,4 +104,14 @@ void EnemyManager::DeadEvent(GameObject* deadObject)
 	}
 	Clear();
 	return;
+}
+
+void EnemyManager::InitSectorEnemyIdx()
+{
+	_sectorEnemyIdxV[0].push_back({ 0, 0 });
+	_sectorEnemyIdxV[0].push_back({ 1, 0 });
+	_sectorEnemyIdxV[0].push_back({ 2, 0 });
+	_sectorEnemyIdxV[0].push_back({ 3, 0 });
+
+	_sectorEnemyIdxV[1].push_back({ 0, 1 });
 }

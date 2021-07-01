@@ -17,7 +17,7 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 	}
 	//1연타 공격 시 L키 안 누르고 이미지 프레임이 끝나면 기본자세
 
-	if (_attackTime > 0.5f && _doubleAttack == true && player->pressL == true)
+	if (_attackTime > 0.5f && _doubleAttack == true && player->pressL == false)
 	{
 		player->isUppercut = false;
 		_doubleAttack = false;
@@ -30,13 +30,9 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 
 	if (_attackTime < 0.5f && _doubleAttack == true && player->pressL == true) //연타에 들어 갔을 때
 	{
-		if (KEYMANAGER->isStayKeyDown('L'))
-		{
-			player->pressL = true;
-			_attackTime = 0;
+		_attackTime = 0;
 
-			return new PlayerDoubleAttackState();
-		}
+		return new PlayerDoubleAttackState();
 		
 	}
 	
@@ -62,8 +58,9 @@ void PlayerAttackState::Update(Player * player)
 			if (player->pressL == true)
 			{
 				_doubleAttack = true;
-				player->isUppercut = false;		//에너미가 없을 때 3연타 확인 위하여
+				player->pressL = false;
 
+				player->isUppercut = false;		//에너미가 없을 때 3연타 확인 위하여
 
 				//거리내에 에너미가 있을 때 3타 공격은 어퍼컷으로 한다.
 
@@ -81,8 +78,6 @@ void PlayerAttackState::Update(Player * player)
 			Attack(player);
 		}
 	}
-
-	
 	
 	
 }

@@ -6,6 +6,12 @@ Malcolm::Malcolm()
 {
 	CLIPMANAGER->FindClip("malcolm_attack_left")->isLoop = false;
 	CLIPMANAGER->FindClip("malcolm_attack_right")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_kick_left")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_kick_right")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_block_left")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_block_right")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_hit_left")->isLoop = false;
+	CLIPMANAGER->FindClip("malcolm_hit_right")->isLoop = false;
 
 	animator->AddClip("malcolm_idle_left", CLIPMANAGER->FindClip("malcolm_idle_left"));
 	animator->AddClip("malcolm_idle_right", CLIPMANAGER->FindClip("malcolm_idle_right"));
@@ -32,7 +38,7 @@ Malcolm::~Malcolm()
 
 void Malcolm::Init()
 {
-	zOrder->SetZ(transform->GetX() + 132 / 2);
+	zOrder->SetZ(transform->GetY() + 132 / 2);
 	enemyinfo->SetSpeed(30.0f);
 	enemyinfo->Sethp(100.f);
 }

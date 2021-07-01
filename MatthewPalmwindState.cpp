@@ -8,7 +8,6 @@
 
 Matthewstate * MatthewPalmwindState::Update(Matthew * matthew)
 {
-	_palmwindtime += TIMEMANAGER->getElapsedTime();
 	if (matthew->animator->GetEnd() == true)
 	{
 		if (matthew->Getdir() == false)
@@ -21,24 +20,11 @@ Matthewstate * MatthewPalmwindState::Update(Matthew * matthew)
 		}
 		return new MatthewPhaseReadyState();
 	}
-	//if (_palmwindtime >= 2.0f)
-	//{
-	//	if (matthew->Getdir() == false)
-	//	{
-	//		matthew->transform->Move(-90, 40);
-	//	}
-	//	else
-	//	{
-	//		matthew->transform->Move(90, 40);
-	//	}
-	//	return new MatthewPhaseStartState();
-	//}
 	return nullptr;
 }
 
 void MatthewPalmwindState::Enter(Matthew * matthew)
 {
-	_palmwindtime = 0;
 	if (matthew->Getdir() == false)
 	{
 		matthew->transform->Move(90, -40);

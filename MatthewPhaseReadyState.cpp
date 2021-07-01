@@ -10,8 +10,6 @@ Matthewstate * MatthewPhaseReadyState::Update(Matthew * matthew)
 		return new MatthewPhaseStartState();
 	}
 
-
-
 	return nullptr;
 }
 

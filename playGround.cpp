@@ -2,6 +2,8 @@
 #include "playGround.h"
 #include "StartScene.h"
 #include "EditorScene.h"
+#include "TitleScene.h"
+
 playGround::playGround()
 {
 
@@ -18,6 +20,10 @@ HRESULT playGround::init()
 	gameNode::init(true);
 	_camShakeFrame = 0;
 	_isEdit = false;
+
+	TitleScene* titleScene = new TitleScene();
+	SCENEMANAGER->AddScene("title", titleScene);
+
 	StartScene* startScene = new StartScene();
 	SCENEMANAGER->AddScene("start", startScene);
 
@@ -25,8 +31,10 @@ HRESULT playGround::init()
 	SCENEMANAGER->AddScene("editor", editorScene);
 	if (_isEdit == false)
 	{
-		SCENEMANAGER->LoadScene("start");
+		SCENEMANAGER->LoadScene("title");
 		SCENEMANAGER->GetCurScene()->Init();
+		//SCENEMANAGER->LoadScene("start");
+		//SCENEMANAGER->GetCurScene()->Init();
 	}
 	else
 	{

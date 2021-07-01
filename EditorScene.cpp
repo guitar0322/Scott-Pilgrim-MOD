@@ -183,7 +183,7 @@ void EditorScene::Update()
                 {
                     _selectIdxMenu--;
                 }
-                if (PtInRect(&_menuNextButton.rc, _ptMouse) && _selectIdxMenu != TYPE_NUM - 1)
+                if (PtInRect(&_menuNextButton.rc, _ptMouse) && _selectIdxMenu != (TYPE_NUM - 1) / 5)
                 {
                     _selectIdxMenu++;
                 }
@@ -269,7 +269,16 @@ void EditorScene::Update()
                 newObject = _sceneInfoLoader.MakeWood(worldPoint.x, worldPoint.y);
                 break;
             case 13:
-                newObject = _sceneInfoLoader.MakeLeeEditor(worldPoint.x, worldPoint.y);
+                newObject = _sceneInfoLoader.MakeLukeEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 14:
+                newObject = _sceneInfoLoader.MakeDobermanEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 15:
+                newObject = _sceneInfoLoader.MakeMalcolmEditor(worldPoint.x, worldPoint.y);
+                break;
+            case 16:
+                newObject = _sceneInfoLoader.MakeWilliamEditor(worldPoint.x, worldPoint.y);
                 break;
             }
             _objectV[_selectIdxType].push_back(newObject);
@@ -526,6 +535,20 @@ void EditorScene::InitObjectMenu()
     _objectMenu[13].height = 100;
     _objectMenu[13].rc = RectMakeCenter(_objectMenu[13].x, _objectMenu[13].y, _objectMenu[13].width, _objectMenu[13].height);
 
+    _objectMenu[14].img->init("doberman/doberman.bmp", 164, 96, true, RGB(255, 0, 255));
+    _objectMenu[14].width = 100;
+    _objectMenu[14].height = 65;
+    _objectMenu[14].rc = RectMakeCenter(_objectMenu[14].x, _objectMenu[14].y, _objectMenu[14].width, _objectMenu[14].height);
+
+    _objectMenu[15].img->init("malcolm/malcolm.bmp", 114, 159, true, RGB(255, 0, 255));
+    _objectMenu[15].width = 71;
+    _objectMenu[15].height = 100;
+    _objectMenu[15].rc = RectMakeCenter(_objectMenu[15].x, _objectMenu[15].y, _objectMenu[15].width, _objectMenu[15].height);
+
+    _objectMenu[16].img->init("william/william.bmp", 122, 146, true, RGB(255, 0, 255));
+    _objectMenu[16].width = 84;
+    _objectMenu[16].height = 100;
+    _objectMenu[16].rc = RectMakeCenter(_objectMenu[16].x, _objectMenu[16].y, _objectMenu[16].width, _objectMenu[16].height);
 }
 
 void EditorScene::InitTypeName()
@@ -543,7 +566,10 @@ void EditorScene::InitTypeName()
     _typeNameArr[10] = "signboard";
     _typeNameArr[11] = "well";
     _typeNameArr[12] = "wood";
-    _typeNameArr[13] = "lee";
+    _typeNameArr[13] = "luke";
+    _typeNameArr[14] = "doberman";
+    _typeNameArr[15] = "malcolm";
+    _typeNameArr[16] = "william";
 }
 
 void EditorScene::InitButton()
