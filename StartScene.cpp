@@ -32,6 +32,15 @@ HRESULT StartScene::Init()
     sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(0));
     sceneInfoLoader.LoadObjectInfo(13);
 
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(1));
+    sceneInfoLoader.LoadObjectInfo(14);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(2));
+    sceneInfoLoader.LoadObjectInfo(15);
+
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(3));
+    sceneInfoLoader.LoadObjectInfo(16);
+
     // 210629 ½Ã¿µ Ãß°¡
     EnemyClipManager();
 	EffectClipInit();
@@ -72,29 +81,8 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 ½Ã¿µ Ãß°¡
-    enemy = new Luke();
-    enemy->Init();
-    enemy->transform->SetPosition(800, 300);
-    enemy->enemyAI->SetPlayer(character);
-
-	// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
-	doberman = new Doberman();
-    doberman->transform->SetPosition(1200, 400);
-	doberman->enemyAI->SetPlayer(character);
-    doberman->Init();
-
-	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
-	malcolm = new Malcolm();
-	malcolm->transform->SetPosition(1300, 500);
-	malcolm->enemyAI->SetPlayer(character);
-    malcolm->Init();
-
-	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
-	william = new William();
-	william->transform->SetPosition(1500, 500);
-	william->enemyAI->SetPlayer(character);
-    william->Init();
+    // ¾Ö³Ê¹Ì Á¦°Å 0701
+    
 
 	// º¸½º ¸ÅÆ© ±¸Çö//
 	matthew = new Character();
@@ -117,7 +105,6 @@ HRESULT StartScene::Init()
 		succubus[i]->SetActive(false);
 		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
 	}
-	character->GetComponent<Player>()->SetEnemy(enemy);
 
     BackgroundInit();
     WallInit();
@@ -143,10 +130,6 @@ void StartScene::Update()
         _enemyV[i]->Update();
     }
 	trashBox->Update();
-    MainCam->transform->SetX(character->transform->GetX());
-    if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
-        MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
-    testGround->Update();
     character->Update();
     cameraControler.Update();
     BGMANAGER->Update();
@@ -156,16 +139,12 @@ void StartScene::Update()
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	malcolm->Update();
-	william->Update();
-	doberman->Update();
 	matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i]->Update();
 	}
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
-    enemy->Update();
 }
 
 void StartScene::Render()
@@ -176,7 +155,6 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());

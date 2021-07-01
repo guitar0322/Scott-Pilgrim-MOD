@@ -30,7 +30,7 @@ William::~William()
 
 void William::Init()
 {
-	zOrder->SetZ(transform->GetX() + 132 / 2);
+	zOrder->SetZ(transform->GetY() + 132 / 2);
 	enemyinfo->SetSpeed(20.0f);
 	enemyinfo->Sethp(100.f);
 }

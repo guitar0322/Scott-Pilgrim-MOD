@@ -41,7 +41,6 @@ void PlayerJumpState::Update(Player * player)
 				MainCam->transform->MoveY(-_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 			}
 		}
-
 	}
 	else
 	{

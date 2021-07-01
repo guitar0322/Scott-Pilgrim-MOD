@@ -27,12 +27,6 @@ public:
 	GameObject* player;
     WallObj* wall[WALL_NUM];
 	ItemObject* trashBox;
-    // 210627 시영 추가 (Enemy 동적할당)
-    Enemy* enemy;
-	Enemy* doberman;
-	Enemy* malcolm;
-	Enemy* william;
-
 
     virtual HRESULT Init();
     virtual void Release();
