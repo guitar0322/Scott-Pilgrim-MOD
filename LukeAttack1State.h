@@ -1,4 +1,3 @@
-/* LUKE ATTACK1 STATE ~.H~ */
 #pragma once
 #include "EnemyState.h"
 

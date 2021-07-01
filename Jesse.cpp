@@ -25,16 +25,13 @@ Jesse::Jesse()
 	animator->AddClip("jesse_kick_left", CLIPMANAGER->FindClip("jesse_kick_left"));
 	animator->GetClip("jesse_kick_left")->isLoop = false;
 	// ATTACK
-	animator->AddClip("jesse_attack1_right", CLIPMANAGER->FindClip("jesse_attack1_right"));
-	animator->GetClip("jesse_attack1_right")->isLoop = false;
-	animator->AddClip("jesse_attack1_left", CLIPMANAGER->FindClip("jesse_attack1_left"));
-	animator->GetClip("jesse_attack1_left")->isLoop = false;
+	animator->AddClip("jesse_attack_right", CLIPMANAGER->FindClip("jesse_attack_right"));
+	animator->GetClip("jesse_attack_right")->isLoop = false;
+	animator->AddClip("jesse_attack_left", CLIPMANAGER->FindClip("jesse_attack_left"));
+	animator->GetClip("jesse_attack_left")->isLoop = false;
 	// DIE
 	animator->AddClip("jesse_die_right", CLIPMANAGER->FindClip("jesse_die_right"));
 	animator->AddClip("jesse_die_left", CLIPMANAGER->FindClip("jesse_die_left"));
-
-	/* JESSE INIT */
-	Init();
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new JesseIdleState());
