@@ -89,18 +89,13 @@ void Player::Update()
 	}
 	if (isThrow == true)
 	{
+		equipItem = item->gameObject;
+		equipItem->GetComponent<Item>()->itemAttack = true;
 		throwDelay += TIMEMANAGER->getElapsedTime();
 		if (throwDelay >= 0.4f)
 		{
-			//if (!dir)
-			//{
-			//	item->transform->SetPosition(transform->GetX() - 14, transform->GetY() - 77);
-			//}
-			//if (dir)
-			//{
-			//	item->transform->SetPosition(transform->GetX() + 14, transform->GetY() - 77);
-			//}
 			PutItem();
+
 			isThrow = false;	
 			throwDelay = 0;
 		}

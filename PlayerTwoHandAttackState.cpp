@@ -85,6 +85,7 @@ void PlayerTwoHandAttackState::Update(Player * player)
 
 void PlayerTwoHandAttackState::Enter(Player * player)
 {
+	player->equipItem->GetComponent<Item>()->itemAttack = true;
 	if (player->isRun == false)
 	{
 		if (player->dir == false)

@@ -135,13 +135,12 @@ void StartScene::Update()
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
 
-	matthew->Update();
-	for (int i = 0; i < SUCCUBUSMAX; i++)
-	{
-		succubus[i]->Update();
-	}
+	//matthew->Update();
+	//for (int i = 0; i < SUCCUBUSMAX; i++)
+	//{
+	//	succubus[i]->Update();
+	//}
 
-    // 210627 시영 추가 (Enemy Update)
 }
 
 void StartScene::Render()

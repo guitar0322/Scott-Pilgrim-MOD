@@ -108,7 +108,7 @@ public:
 	bool onGround;
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
-	bool isThrow;
+	bool isThrow;		//아이템을 던졌는가?
 
 
 	bool attackChange;
