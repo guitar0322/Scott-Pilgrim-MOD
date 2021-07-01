@@ -331,3 +331,13 @@ void Player::PutItem()								//item을 놓았을때
 		item->Throw(dir);							//dir에 따른 throw
 	}	
 }
+
+void Player::Hit(int damage)
+{
+	hp -= damage;
+	if (hp <= 0)
+	{
+		gameObject->SetActive(false);
+		// TODO - DEAD
+	}
+}

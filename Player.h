@@ -135,5 +135,8 @@ public:
 
 	void SetEnemy(GameObject* _enemy) { enemy = _enemy; }
 	Transform* GetEnemyTransform() const { return enemy -> transform; }
+
+	/* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
+	void Hit(int damage);
 };
 

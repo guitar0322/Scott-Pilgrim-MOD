@@ -50,9 +50,6 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>Manager\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyAI.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
     <ClCompile Include="ItemObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Luke.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="LukeAttack1State.cpp">
@@ -222,7 +216,6 @@
       <Filter>GameObject\Framwork</Filter>
     </ClCompile>
     <ClCompile Include="Outline.cpp" />
-    <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
@@ -270,15 +263,73 @@
     <ClCompile Include="WilliamIdleState.cpp" />
     <ClCompile Include="WilliamMoveState.cpp" />
     <ClCompile Include="WilliamAttackState.cpp" />
-    <ClCompile Include="DobermanHitState.cpp" />
-    <ClCompile Include="MatthehHitState.cpp" />
-    <ClCompile Include="LukeAttack2State.cpp" />
-    <ClCompile Include="LukeAttack3State.cpp" />
-    <ClCompile Include="LukeBlockState.cpp" />
-    <ClCompile Include="LukeDieState.cpp" />
-    <ClCompile Include="LukeHitState.cpp" />
-    <ClCompile Include="LukeWalkState.cpp" />
-    <ClCompile Include="LukeKickState.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeAttack3State.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeBlockState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeDieState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeHitState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeKickState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="LukeWalkState.cpp">
+      <Filter>EnemyState\Luke</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthehHitState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="MatthewPalmwindState.cpp">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClCompile>
+    <ClCompile Include="DobermanHitState.cpp">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseAttackState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseBlockState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseDieState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseHitState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseIdleState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseKickState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseRunState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="JesseWalkState.cpp">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClCompile>
+    <ClCompile Include="Luke.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Jesse.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Lee.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LeeIdleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -333,9 +384,6 @@
     <ClInclude Include="EffectManager.h">
       <Filter>Manager\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyAI.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -361,9 +409,6 @@
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
     <ClInclude Include="ItemObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Luke.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="LukeAttack1State.h">
@@ -508,7 +553,6 @@
       <Filter>GameObject\Framwork</Filter>
     </ClInclude>
     <ClInclude Include="Outline.h" />
-    <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
@@ -556,15 +600,73 @@
     <ClInclude Include="WilliamIdleState.h" />
     <ClInclude Include="WilliamMoveState.h" />
     <ClInclude Include="WilliamAttackState.h" />
-    <ClInclude Include="DobermanHitState.h" />
-    <ClInclude Include="MatthehHitState.h" />
-    <ClInclude Include="LukeAttack2State.h" />
-    <ClInclude Include="LukeAttack3State.h" />
-    <ClInclude Include="LukeBlockState.h" />
-    <ClInclude Include="LukeDieState.h" />
-    <ClInclude Include="LukeHitState.h" />
-    <ClInclude Include="LukeWalkState.h" />
-    <ClInclude Include="LukeKickState.h" />
+    <ClInclude Include="LukeAttack2State.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeAttack3State.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeBlockState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeDieState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeHitState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeKickState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="LukeWalkState.h">
+      <Filter>EnemyState\Luke</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthehHitState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="MatthewPalmwindState.h">
+      <Filter>EnemyState\Matthew</Filter>
+    </ClInclude>
+    <ClInclude Include="DobermanHitState.h">
+      <Filter>EnemyState\Doberman</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseAttackState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseBlockState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseDieState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseHitState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseIdleState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseKickState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseRunState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="JesseWalkState.h">
+      <Filter>EnemyState\Jesse</Filter>
+    </ClInclude>
+    <ClInclude Include="Luke.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Jesse.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Lee.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LeeIdleState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
@@ -618,6 +720,15 @@
     </Filter>
     <Filter Include="Component\Enemy">
       <UniqueIdentifier>{7d6c3acd-d20c-4035-8f5d-68e0e3b8cbfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyState\Jesse">
+      <UniqueIdentifier>{edc0605c-9f2e-4c24-af18-b86434f7f900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Enemy">
+      <UniqueIdentifier>{ae3f0aab-8e4c-4cd2-903b-543900c65d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyState\Lee">
+      <UniqueIdentifier>{a2021663-121e-476f-b7ab-e69b0cdeb68b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

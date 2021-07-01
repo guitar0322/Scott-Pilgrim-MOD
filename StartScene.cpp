@@ -95,7 +95,7 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 시영 추가 (Enemy Update)
+    // 210630 시영 추가
     enemy = new Luke();
     enemy->Init();
     enemy->transform->SetPosition(800, 300);
@@ -114,14 +114,14 @@ HRESULT StartScene::Init()
 	malcolm->enemyAI->SetPlayer(character);
 	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	malcolm->enemyinfo->SetSpeed(30.0f);
-
+    
 	// 210629 광철 윌리엄 구현//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
 	william->enemyAI->SetPlayer(character);
 	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
 	william->enemyinfo->SetSpeed(20.0f);
-
+    
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
@@ -161,7 +161,7 @@ void StartScene::Update()
     if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
         MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
     testGround->Update();
-	trashBox->Update();
+	//trashBox->Update();
     character->Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
@@ -170,10 +170,10 @@ void StartScene::Update()
     MAPMANAGER->Update();
 
     // 광철 에너미 Update
-	malcolm->Update();
-	william->Update();
-	doberman->Update();
-	matthew->Update();
+	//malcolm->Update();
+	//william->Update();
+	//doberman->Update();
+	//matthew->Update();
 
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
@@ -187,11 +187,8 @@ void StartScene::Render()
 		wall[i]->Render();
     }
     testGround->Render();
-	trashBox->Render();
+	//trashBox->Render();
     EFFECTMANAGER->Render();
-
-    // 210627 시영 추가 (Enemy Render)
-
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
