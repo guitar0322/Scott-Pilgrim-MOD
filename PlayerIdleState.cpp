@@ -153,7 +153,6 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	if (KEYMANAGER->isStayKeyDown('K'))
 	{
 		player->jumpZ = false;
-
 		player->block = true;
 		return new PlayerBlockState();
 
@@ -251,6 +250,7 @@ void PlayerIdleState::Update(Player * player)
 void PlayerIdleState::Enter(Player * player)
 {
 	_playerJump = false;
+	player->block = false;
 	player->isRun = false;
 	if (player->isCatch == true)
 	{

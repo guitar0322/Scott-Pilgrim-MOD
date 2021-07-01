@@ -3,15 +3,15 @@
 
 void Item::Init()
 {
-	_animator = gameObject->GetComponent<Animator>();
+	animator = gameObject->GetComponent<Animator>();
 	_zorder = gameObject->GetComponent<ZOrder>();
 
-	_animator->AddClip("trashbox_left", CLIPMANAGER->FindClip("trashbox_left"));
-	_animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
-	_animator->AddClip("trashbox_walk_attack_left", CLIPMANAGER->FindClip("trashbox_walk_attack_left"));
+	animator->AddClip("trashbox_left", CLIPMANAGER->FindClip("trashbox_left"));
+	animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
+	animator->AddClip("trashbox_walk_attack_left", CLIPMANAGER->FindClip("trashbox_walk_attack_left"));
 
-	_animator->AddClip("trashbox_walk_throw_right", CLIPMANAGER->FindClip("trashbox_walk_throw_right"));
-	_animator->AddClip("trashbox_walk_throw_left", CLIPMANAGER->FindClip("trashbox_walk_throw_left"));
+	animator->AddClip("trashbox_walk_throw_right", CLIPMANAGER->FindClip("trashbox_walk_throw_right"));
+	animator->AddClip("trashbox_walk_throw_left", CLIPMANAGER->FindClip("trashbox_walk_throw_left"));
 
 	_itemSpeed = 320.f;		// 아이템의 속도
 	_gravity = 560.f;
@@ -19,23 +19,23 @@ void Item::Init()
 							//위 값들은 변하지 않기에 init에서 값 줌
 
 	_angle = 0.f;			// 각도
-	_accel = 65.f;			// 가속력
 	_itemZ = 0.f;			// 플레이어의 Z 값을 가져오기 위한 변수
 	
 	_speedX = 0.f;			// 스피드와 앵글 값을 이용하기 위한 변수
 	_speedY = 0.f;			// 상동
 	
 	_isGround = true;		//땅 위에 있는가? 아이템은 맨 처음 땅 위에 있기에 true
+	itemAttack = false;
 }
 
 void Item::Update()
 {
 	transform->MoveX(_speedX * TIMEMANAGER->getElapsedTime());
-   
+	
 	if (_isGround == false)					//땅 위에 있지 않다면
 	{
-		transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());		
-		_speedY += _gravity *TIMEMANAGER->getElapsedTime();
+		transform->MoveY(_speedY * TIMEMANAGER->getElapsedTime());
+		_speedY += _gravity * TIMEMANAGER->getElapsedTime();
 	}
 
 	if (_isGround == true)					//throw해서 땅 위에 착지 한다면 마찰력 부여
@@ -53,7 +53,7 @@ void Item::Update()
 		}
 	}
 	//땅에 착지 시
-	if(transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= _itemZ && _itemZ != 0)
+	if (transform->GetY() + gameObject->GetComponent<Renderer>()->GetHeight() / 2 >= _itemZ && _itemZ != 0)
 	{
 		_speedY = 0.0f;
 		_isGround = true;
@@ -65,16 +65,39 @@ void Item::Update()
 	{
 		_speedX *= -1;					//범위 초과시 x 좌표 방향 바꿔줌		
 	}
+	
+	if (itemAttack)
+	{
+		ItemAttack();
+	}
 }
-
 void Item::Render()
 {
 }
 
 void Item::SetItemImage(string imageName)
 {
-	_animator->AddClip(imageName, CLIPMANAGER->FindClip(imageName));
-	_animator->SetClip(imageName);
+	animator->AddClip(imageName, CLIPMANAGER->FindClip(imageName));
+	animator->SetClip(imageName);
+}
+
+void Item::ItemAttack()
+{
+	itemAttack = false;
+	vector<GameObject*> _sectorEnemyV = ENEMYMANAGER->GetSectorEnemy();
+	for (int i = 0; i < _sectorEnemyV.size(); i++)
+	{
+		if (_sectorEnemyV[i]->isActive == false) continue;
+
+		float _distance = GetDistance(transform->GetX(), transform->gameObject->GetComponent<ZOrder>()->GetZ(),
+			_sectorEnemyV[i]->transform->GetX(),
+			_sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ());
+		if (_distance < 80)
+		{
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(49);
+		}
+	}
+
 }
 
 void Item::Throw(bool dir)			//throw시 bool값 dir 반환
@@ -98,10 +121,10 @@ void Item::ChangeClip(string clipName, bool isInitFrame)
 {
 	if (isInitFrame == false)
 	{
-		_animator->SetClip(_animator->GetClip(clipName));
+		animator->SetClip(animator->GetClip(clipName));
 	}
 	else
 	{
-		_animator->SetClip(_animator->GetClip(clipName), _animator->currentFrame);
+		animator->SetClip(animator->GetClip(clipName), animator->currentFrame);
 	}
 }

@@ -7,6 +7,7 @@
 #include "PlayerAttackState.h"
 #include "PlayerFallState.h"
 #include "PlayerTwoHandAttackState.h"
+#include "PlayerKickSkillState.h"
 #include "Player.h"
 
 PlayerState * PlayerWalkState::InputHandle(Player * player)
@@ -76,18 +77,14 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 			return new PlayerTwoHandAttackState();
 		}
 	}
+	if (KEYMANAGER->isOnceKeyDown('I'))
+	{
+		return new PlayerKickAttackState();
+	}
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		if (player->dir == false)
-		{
-			return new PlayerKickAttackState();
-		}
-		else
-		{
-			return new PlayerKickAttackState();
-		}
+		return new PlayerKickSkillState();
 	}
-
 	if (GROUNDMANAGER->CheckGround(player->groundCheckRc, player->zOrder->GetZ()) == 0 && player->onGround == true)
 	{
 		player->onGround = false;

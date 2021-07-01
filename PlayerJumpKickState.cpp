@@ -50,6 +50,7 @@ void PlayerJumpKickState::Update(Player* player)
 
 void PlayerJumpKickState::Enter(Player* player)
 {
+	Attack(player);
 	player->jumpPower = 0;
 
 	if (player->isRun == false)
@@ -78,5 +79,35 @@ void PlayerJumpKickState::Enter(Player* player)
 
 void PlayerJumpKickState::Exit(Player* player)
 {
+
+}
+
+void PlayerJumpKickState::Attack(Player * player)
+{
+
+	vector<GameObject*> _sectorEnemyV = ENEMYMANAGER->GetSectorEnemy();
+	for (int i = 0; i < _sectorEnemyV.size(); i++)
+	{
+		if (_sectorEnemyV[i]->isActive == false) continue;
+		float distance =
+			GetDistance(player->transform->GetX(), player->transform->GetY(),
+				_sectorEnemyV[i]->transform->GetX(), _sectorEnemyV[i]->transform->GetY());
+		float distanceZ = player->zOrder->GetZ() - _sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ();
+		if (distanceZ < 0)
+			distanceZ *= -1;
+		if (distance < 130 && distanceZ < 10)
+		{
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+
+			if (player->dir == false)
+			{
+				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 40, player->transform->GetY() + 20);
+			}
+			else
+			{
+				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() - 40, player->transform->GetY() + 20);
+			}
+		}
+	}
 
 }

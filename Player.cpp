@@ -23,7 +23,7 @@ void Player::Init()
 	zOrder = gameObject->GetComponent<ZOrder>();
 
 	ClipInit();
-	_speed = 48;							//플레이어 속도
+	_speed = 100;							//플레이어 속도
 	_gravity = 200;							//플레이어 중력 (점프 후 중력값)
 	friction = 130;							//플레이어 마찰 (런뛰고 미끄러질 때)
 	jumpPower = 200;						//플레이어 점프력
@@ -48,7 +48,7 @@ void Player::Init()
 	throwDelay = 0;
 
 	hp = 100;
-	attack = 10;
+	attack = 0;
 	isUppercut = false;
 	pressL = false;
 	hitCount = 0;
@@ -89,18 +89,13 @@ void Player::Update()
 	}
 	if (isThrow == true)
 	{
+		equipItem = item->gameObject;
+		equipItem->GetComponent<Item>()->itemAttack = true;
 		throwDelay += TIMEMANAGER->getElapsedTime();
 		if (throwDelay >= 0.4f)
 		{
-			//if (!dir)
-			//{
-			//	item->transform->SetPosition(transform->GetX() - 14, transform->GetY() - 77);
-			//}
-			//if (dir)
-			//{
-			//	item->transform->SetPosition(transform->GetX() + 14, transform->GetY() - 77);
-			//}
 			PutItem();
+
 			isThrow = false;	
 			throwDelay = 0;
 		}
@@ -219,7 +214,7 @@ void Player::ClipInit()
 	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.12f);
 	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.12f);
 	lastHitLeft.Init("player/last_hit_left.bmp", 816, 184, 6, 0.15f);
-	knockoutLeft.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
+	knockoutLeft.Init("player/knockout_left.bmp", 426, 78, 3, 0.15f);
 
 	hit1Left.isLoop = false;
 	hit2Left.isLoop = false;
@@ -386,6 +381,19 @@ void Player::PutItem()															//item을 놓았을때
 
 void Player::Hit(int damage)
 {
+	if (block == true)
+	{
+		if (dir == false)
+		{
+			EFFECTMANAGER->EmissionEffect("block_effect", transform->GetX() + 30, transform->GetY() - 10);
+		}
+		else
+		{
+			EFFECTMANAGER->EmissionEffect("block_effect", transform->GetX() - 30, transform->GetY() - 10);
+		}
+		return;
+	} 
+
 	if (hitable == false) return;
 	hp -= damage;
 	_state->Exit(this);

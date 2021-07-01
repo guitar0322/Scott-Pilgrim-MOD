@@ -89,7 +89,6 @@ void PlayerAttackState::Enter(Player * player)
 	_doubleAttack = false;
 	_attackTime = 0;
 
-
 	if (player->dir == false)
 	{
 		player->ChangeClip("attack1_right", true);
@@ -99,7 +98,6 @@ void PlayerAttackState::Enter(Player * player)
 		player->ChangeClip("attack1_left", true);
 	}
 }
-	
 
 void PlayerAttackState::Exit(Player * player)
 {
@@ -118,11 +116,20 @@ void PlayerAttackState::Attack(Player* player)
 		float distanceZ = player->zOrder->GetZ() - _sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ();
 		if (distanceZ < 0)
 			distanceZ *= -1;
-		if (distance < 100 && distanceZ < 5)
+		if (distance < 100 && distanceZ < 10)
 		{
 			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
-			EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 60, player->transform->GetY() - 10);
+
 			player->isUppercut = true;
+
+			if (player->dir == false)
+			{
+				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 60, player->transform->GetY() - 10);
+			}
+			else
+			{
+				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() - 60, player->transform->GetY() - 10);
+			}
 		}
 	}
 }

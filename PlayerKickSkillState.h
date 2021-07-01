@@ -9,6 +9,7 @@ public:
 	virtual void Update(Player* player);
 	virtual void Enter(Player* player);
 	virtual void Exit(Player* palyer);
+	void Attack(Player* player);
 
 };
 

@@ -24,7 +24,6 @@ EnemyState* LukeAttack1State::Update(EnemyAI* enemy)
 		}
 		return new LukeAttack2State();
 	}
-
 	return nullptr;
 }
 

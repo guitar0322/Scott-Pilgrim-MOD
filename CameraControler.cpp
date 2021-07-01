@@ -7,9 +7,9 @@ void CameraControler::Init()
     {
         _isLockPoint[i] = false;
     }
-    _camLockPoint[0] = 600;
-    _camLockPoint[1] = 1500;
-    _camSpeed = 150.f;
+    _camLockPoint[0] = 20000;
+    _camLockPoint[1] = 20000;
+    _camSpeed = 300.f;
 }
 
 void CameraControler::Update()

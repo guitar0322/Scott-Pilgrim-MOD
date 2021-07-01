@@ -31,10 +31,10 @@ HRESULT playGround::init()
 	SCENEMANAGER->AddScene("editor", editorScene);
 	if (_isEdit == false)
 	{
-		SCENEMANAGER->LoadScene("title");
-		SCENEMANAGER->GetCurScene()->Init();
-		//SCENEMANAGER->LoadScene("start");
+		//SCENEMANAGER->LoadScene("title");
 		//SCENEMANAGER->GetCurScene()->Init();
+		SCENEMANAGER->LoadScene("start");
+		SCENEMANAGER->GetCurScene()->Init();
 	}
 	else
 	{
