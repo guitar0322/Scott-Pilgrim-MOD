@@ -13,6 +13,10 @@ William::William()
 	animator->AddClip("william_move_right", CLIPMANAGER->FindClip("william_move_right"));
 	animator->AddClip("william_attack_left", CLIPMANAGER->FindClip("william_attack_left"));
 	animator->AddClip("william_attack_right", CLIPMANAGER->FindClip("william_attack_right"));
+	animator->AddClip("william_belly_left",CLIPMANAGER->FindClip("william_belly_left"));
+	animator->AddClip("william_belly_right",CLIPMANAGER->FindClip("william_belly_right"));
+	animator->AddClip("william_block_left",CLIPMANAGER->FindClip("william_block_left"));
+	animator->AddClip("william_block_right",CLIPMANAGER->FindClip("william_block_right"));
 	animator->AddClip("william_hit_left", CLIPMANAGER->FindClip("william_hit_left"));
 	animator->AddClip("william_hit_right", CLIPMANAGER->FindClip("william_hit_right"));
 
@@ -22,4 +26,11 @@ William::William()
 
 William::~William()
 {
+}
+
+void William::Init()
+{
+	zOrder->SetZ(transform->GetX() + 132 / 2);
+	enemyinfo->SetSpeed(20.0f);
+	enemyinfo->Sethp(100.f);
 }

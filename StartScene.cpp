@@ -8,6 +8,7 @@
 #include "Matthew.h"
 #include "Malcolm.h"
 #include "William.h"
+#include "Succubus.h"
 StartScene::StartScene()
 {
 }
@@ -20,42 +21,22 @@ HRESULT StartScene::Init()
 {    
     Scene::Init();
     CameraInit();
+    EnemyClipManager();
 
     sceneInfoLoader.SetLinkObjectVAddress(&_propV);
-    sceneInfoLoader.LoadObjectInfo(0);
-    sceneInfoLoader.LoadObjectInfo(1);
-    sceneInfoLoader.LoadObjectInfo(2);
-    sceneInfoLoader.LoadObjectInfo(3);
+    for (int i = 0; i < 13; i++)
+    {
+        sceneInfoLoader.LoadObjectInfo(i);
+    }
 
-    sceneInfoLoader.SetLinkObjectVAddress(&_enemyV);
-    sceneInfoLoader.LoadObjectInfo(4);
-
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(0));
+    sceneInfoLoader.LoadObjectInfo(13);
 
     // 210629 시영 추가
     EnemyClipManager();
 	EffectClipInit();
-
+    ItemImageClip();
     //위에는 건들지 마시오
-    //=============미리 만들어져 있는 예시 오브젝트============
-    //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
-    //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
-
-    //1.ImageObject
-    //Renderer컴포넌트가 미리 추가되어있는 오브젝트
-    //imageObj->renderer 로 접근이 가능
-    imageObj = new ImageObject();
-	
-    //2.Box
-    //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
-    //->renderer,  ->collider 로 접근이 가능
-    box = new Box();
-
-    //3.Character
-    //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
-    //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
-
-	CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 100, 76, 1, 1);
-	CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
 
     character = new Character();
     character->name = "character";
@@ -67,7 +48,10 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-
+    cameraControler.Init();
+    cameraControler.SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetCameraControler(&cameraControler);
     for (int i = 0; i < _enemyV.size(); i++)
     {
         _enemyV[i]->Init();
@@ -81,14 +65,6 @@ HRESULT StartScene::Init()
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
 
-    testGround = new GameObject();
-    testGround->transform->SetPosition(500, 350);
-    testGround->AddComponent(new ZOrder());
-    testGround->GetComponent<ZOrder>()->Init();
-    testGround->GetComponent<ZOrder>()->SetZ(400);
-    testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
-
 	trashBox = new ItemObject();
 	trashBox->Init();
 	trashBox->item->SetItemImage("trashbox");
@@ -96,7 +72,7 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 시영 추가 (Enemy Update)
+    // 210630 시영 추가
     enemy = new Luke();
     enemy->Init();
     enemy->transform->SetPosition(800, 300);
@@ -106,33 +82,41 @@ HRESULT StartScene::Init()
 	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
 	doberman->enemyAI->SetPlayer(character);
-	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	doberman->enemyinfo->SetSpeed(60.0f);
-    
+    doberman->Init();
+
 	// 210629 광철 말콤 구현//
 	malcolm = new Malcolm();
 	malcolm->transform->SetPosition(1300, 500);
 	malcolm->enemyAI->SetPlayer(character);
-	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	malcolm->enemyinfo->SetSpeed(30.0f);
+    malcolm->Init();
 
 	// 210629 광철 윌리엄 구현//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
 	william->enemyAI->SetPlayer(character);
-	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	william->enemyinfo->SetSpeed(20.0f);
+    william->Init();
 
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
-	matthew->transform->SetPosition(2000, 400);
+	matthew->transform->SetPosition(1000, 400);
 	matthew->collider->isTrigger = true;
 	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
+	for ( int i = 0; i < SUCCUBUSMAX; i++)
+	{
+		succubus[i] = new Character();
+		succubus[i]->Init();
+		succubus[i]->transform->SetPosition(600, 200);
+		succubus[i]->collider->isTrigger = true;
+		succubus[i]->AddComponent(new Succubus());
+		succubus[i]->GetComponent<Succubus>()->Init();
+		succubus[i]->SetActive(false);
+		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
+	}
 	character->GetComponent<Player>()->SetEnemy(enemy);
 
     BackgroundInit();
@@ -158,24 +142,26 @@ void StartScene::Update()
     {
         _enemyV[i]->Update();
     }
+	trashBox->Update();
     MainCam->transform->SetX(character->transform->GetX());
     if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
         MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
-    testGround->Update();
-	trashBox->Update();
     character->Update();
+    cameraControler.Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-
+    ENEMYMANAGER->Update();
     // 광철 에너미 Update
 	malcolm->Update();
 	william->Update();
 	doberman->Update();
-	matthew->Update();
-
+	for (int i = 0; i < SUCCUBUSMAX; i++)
+	{
+		succubus[i]->Update();
+	}
     // 210627 시영 추가 (Enemy Update)
     enemy->Update();
 }
@@ -183,16 +169,12 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
+	trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();
-	trashBox->Render();
     EFFECTMANAGER->Render();
-
-    // 210627 시영 추가 (Enemy Render)
-
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
@@ -240,6 +222,17 @@ void StartScene::WallInit()
     wall[2]->Init(800, 200, 1000, 300);
 }
 
+void StartScene::ItemImageClip()
+{
+    CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 115, 87, 1, 1);
+    CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
+
+    //walk attack 
+    CLIPMANAGER->AddClip("trashbox_walk_attack_right", "item/trashbox_walk_attack_right.bmp", 805, 93, 7, 0.2f);
+    CLIPMANAGER->FindClip("trashbox_walk_attack_right")->isLoop = false;
+
+    //trashBox->animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
+}
 void StartScene::EnemyClipManager()
 {
     /*
@@ -399,43 +392,45 @@ void StartScene::EnemyClipManager()
     CLIPMANAGER->AddClip("richard_die_right", "richard/richard_die_right.bmp", 2072, 172, 14, 0.20f);
     CLIPMANAGER->AddClip("richard_die_left", "richard/richard_die_left.bmp", 2072, 172, 14, 0.20f);
 
-    /*Doberman CLIP MANAGER*/
-    CLIPMANAGER->AddClip("doberman_idle_left", "Doberman/idle_left.bmp", 656, 96, 4, 0.3f);
-    CLIPMANAGER->AddClip("doberman_idle_right", "Doberman/idle_right.bmp", 656, 96, 4, 0.3f);
-    CLIPMANAGER->AddClip("doberman_move_left", "Doberman/move_left.bmp", 1146, 96, 6, 0.2f);
-    CLIPMANAGER->AddClip("doberman_move_right", "Doberman/move_right.bmp", 1146, 96, 6, 0.2f);
-    //CLIPMANAGER->AddClip("runLeft", "Doberman/DogRunLeft.bmp", 1539, 96, 9, 0.1f));
-    //CLIPMANAGER->AddClip("runRight", "Doberman/DogRunRight.bmp", 1539, 96, 9, 0.1f));
-    CLIPMANAGER->AddClip("doberman_attack_left", "Doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
-    CLIPMANAGER->AddClip("doberman_attack_right", "Doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
+	/*Doberman CLIP MANAGER*/
+	CLIPMANAGER->AddClip("doberman_idle_left", "doberman/idle_left.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_idle_right", "doberman/idle_right.bmp", 656, 96, 4, 0.3f);
+	CLIPMANAGER->AddClip("doberman_move_left", "doberman/move_left.bmp", 1146, 96, 6, 0.2f);
+	CLIPMANAGER->AddClip("doberman_move_right", "doberman/move_right.bmp", 1146, 96, 6, 0.2f);
+	CLIPMANAGER->AddClip("doberman_attack_left", "doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->AddClip("doberman_attack_right", "doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
+	CLIPMANAGER->AddClip("doberman_hit_left", "doberman/hit_left.bmp", 664, 160, 4, 0.2f);
+	CLIPMANAGER->AddClip("doberman_hit_right", "doberman/hit_right.bmp", 664, 160, 4, 0.2f);
 
-    /* Doberman CLIP MANAGER */
-    CLIPMANAGER->AddClip("doberman_idle_left", "doberman/idle_left.bmp", 656, 96, 4, 0.3f);
-    CLIPMANAGER->AddClip("doberman_idle_right", "doberman/idle_right.bmp", 656, 96, 4, 0.3f);
-    CLIPMANAGER->AddClip("doberman_move_left", "doberman/move_left.bmp", 1146, 96, 6, 0.2f);
-    CLIPMANAGER->AddClip("doberman_move_right", "doberman/move_right.bmp", 1146, 96, 6, 0.2f);
-    CLIPMANAGER->AddClip("doberman_attack_left", "doberman/attack_left.bmp", 1075, 96, 7, 0.2f);
-    CLIPMANAGER->AddClip("doberman_attack_right", "doberman/attack_right.bmp", 1075, 96, 7, 0.2f);
-    CLIPMANAGER->AddClip("doberman_hit_left", "doberman/hit_left.bmp", 664, 160, 4, 0.2f);
-    CLIPMANAGER->AddClip("doberman_hit_right", "doberman/hit_right.bmp", 664, 160, 4, 0.2f);
+	/*malcolm*/
+	CLIPMANAGER->AddClip("malcolm_idle_left", "malcolm/malcolm_idle_left.bmp", 456, 159, 4, 0.3f);
+	CLIPMANAGER->AddClip("malcolm_idle_right", "malcolm/malcolm_idle_right.bmp", 456, 159, 4, 0.3f);
+	CLIPMANAGER->AddClip("malcolm_move_left", "malcolm/malcolm_move_left.bmp", 832, 164, 8, 0.3f);
+	CLIPMANAGER->AddClip("malcolm_move_right", "malcolm/malcolm_move_right.bmp", 832, 164, 8, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_run_left", "malcolm/malcolm_run_left.bmp", 1320, 158, 8, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_run_right", "malcolm/malcolm_run_right.bmp", 1320, 158, 8, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_attack_left", "malcolm/malcolm_attack_left.bmp", 1638, 174, 9, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_attack_right", "malcolm/malcolm_attack_right.bmp", 1638, 174, 9, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_kick_left", "malcolm/malcolm_kick_left.bmp", 1050, 159, 5, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_kick_right", "malcolm/malcolm_kick_right.bmp", 1050, 159, 5, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_block_left", "malcolm/malcolm_block_left.bmp", 214, 154, 2, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_block_right", "malcolm/malcolm_block_right.bmp", 214, 154, 2, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_hit_left", "malcolm/malcolm_hit_left.bmp", 576, 158, 4, 0.2f);
+	CLIPMANAGER->AddClip("malcolm_hit_right", "malcolm/malcolm_hit_right.bmp", 576, 158, 4, 0.2f);
 
-    /* malcolm */
-    CLIPMANAGER->AddClip("malcolm_idle_left", "malcolm/malcolm_idle_left.bmp", 456, 159, 4, 0.3f);
-    CLIPMANAGER->AddClip("malcolm_idle_right", "malcolm/malcolm_idle_right.bmp", 456, 159, 4, 0.3f);
-    CLIPMANAGER->AddClip("malcolm_move_left", "malcolm/malcolm_move_left.bmp", 832, 164, 8, 0.3f);
-    CLIPMANAGER->AddClip("malcolm_move_right", "malcolm/malcolm_move_right.bmp", 832, 164, 8, 0.2f);
-    CLIPMANAGER->AddClip("malcolm_attack_left", "malcolm/malcolm_attack_left.bmp", 1638, 174, 9, 0.2f);
-    CLIPMANAGER->AddClip("malcolm_attack_right", "malcolm/malcolm_attack_right.bmp", 1638, 174, 9, 0.2f);
-    CLIPMANAGER->AddClip("malcolm_hit_left", "malcolm/malcolm_hit_left.bmp", 576, 158, 4, 0.2f);
-    CLIPMANAGER->AddClip("malcolm_hit_right", "malcom/malcolm_hit_right.bmp", 576, 158, 4, 0.2f);
-
-    /* william */
-    CLIPMANAGER->AddClip("william_idle_left", "william/william_idle_left.bmp", 488, 146, 4, 0.3f);
-    CLIPMANAGER->AddClip("william_idle_right", "william/william_idle_right.bmp", 488, 146, 4, 0.3f);
-    CLIPMANAGER->AddClip("william_move_left", "william/william_move_left.bmp", 1160, 144, 8, 0.3f);
-    CLIPMANAGER->AddClip("william_move_right", "william/william_move_right.bmp", 1160, 144, 8, 0.3f);
-    CLIPMANAGER->AddClip("william_attack_left", "william/william_attack_left.bmp", 2024, 138, 11, 0.2f);
-    CLIPMANAGER->AddClip("william_attack_right", "william/william_attack_right.bmp", 2024, 138, 11, 0.2f);
+	/*william*/
+	CLIPMANAGER->AddClip("william_idle_left", "william/william_idle_left.bmp", 488, 146, 4, 0.3f);
+	CLIPMANAGER->AddClip("william_idle_right", "william/william_idle_right.bmp", 488, 146, 4, 0.3f);
+	CLIPMANAGER->AddClip("william_move_left", "william/william_move_left.bmp", 1160, 144, 8, 0.3f);
+	CLIPMANAGER->AddClip("william_move_right", "william/william_move_right.bmp", 1160, 144, 8, 0.3f);
+	CLIPMANAGER->AddClip("william_attack_left", "william/william_attack_left.bmp", 2024, 138, 11, 0.2f);
+	CLIPMANAGER->AddClip("william_attack_right", "william/william_attack_right.bmp", 2024, 138, 11, 0.2f);
+	CLIPMANAGER->AddClip("william_belly_left", "william/william_belly_left.bmp", 952, 134, 7, 0.2f);
+	CLIPMANAGER->AddClip("william_belly_right", "william/william_belly_right.bmp", 952, 134, 7, 0.2f);
+	CLIPMANAGER->AddClip("william_block_left", "william/william_block_left.bmp", 198, 131, 2, 0.2f);
+	CLIPMANAGER->AddClip("william_block_right", "william/william_block_right.bmp", 198, 131, 2, 0.2f);
+	CLIPMANAGER->AddClip("william_hit_left", "william/william_hit_left.bmp", 429, 148, 4, 0.3f);
+	CLIPMANAGER->AddClip("william_hit_right", "william/william_hit_right.bmp", 429, 148, 4, 0.3f);
 }
 
 void StartScene::EffectClipInit()
@@ -444,5 +439,4 @@ void StartScene::EffectClipInit()
 	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 614, 135, 5, 0.12f);
-
 }

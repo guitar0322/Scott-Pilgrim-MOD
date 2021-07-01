@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "PlayerIdleState.h"
+#include "PlayerHitState.h"
 
 void Player::InputHandle()
 {
 	PlayerState* newState = _state->InputHandle(this);
 	if (newState != nullptr)
 	{
+		_state->Exit(this);
 		SAFE_DELETE(_state);
 		_state = newState;
 		_state->Enter(this);
@@ -34,22 +36,22 @@ void Player::Init()
 	block = false;							//막기 확인용
 	isZJump = false;						//Z축 점프 시 플레이어 그라운드 착지 확인용
 	onGround = false;
-	isCatch = false;						//아이템을 잡았는지 유무
+
 	isPick = false;							//아이템을 주었는지 유무
+	isCatch = false;						//아이템을 잡았는지 유무
 
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
 	runDelay = 0;
 	jumpDelay = 0;
 	pickDelay = 0;
-	_enterNum = 0;
-	_exitNum = 0;
 
 	hp = 100;
-	attack = 2;
+	attack = 10;
 	isUppercut = false;
 	pressL = false;
-
+	hitCount = 0;
+	hitable = true;
 }
 
 void Player::Update()
@@ -63,24 +65,23 @@ void Player::Update()
 	if (jumpZ == true)
 		jumpDelay += TIMEMANAGER->getElapsedTime();
 
-	//if (isCatch == false)
-	//{
-	//	if (KEYMANAGER->isOnceKeyDown('I'))
-	//	{
-	//		PickItem();
-	//	}
-	//}
-	//if (isCatch == true)
-	//{
-	//		if (KEYMANAGER->isOnceKeyDown('I'))
-	//		{
-	//			PutItem();
-	//		}
-	//}
-
-	if(isCatch == true)
+	if (isPick == true)
+	{
 		pickDelay += TIMEMANAGER->getElapsedTime();
-
+		if (pickDelay >= 0.3f)
+		{
+			if (!dir)
+			{
+				item->transform->SetPosition(transform->GetX() - 14, transform->GetY() - 77);
+			}
+			if (dir)
+			{
+				item->transform->SetPosition(transform->GetX() + 14, transform->GetY() - 77);
+			}
+			pickDelay = 0;
+			isPick = false;
+		}
+	}
 }
 
 void Player::Render()
@@ -183,19 +184,24 @@ void Player::ClipInit()
 	attack4Left.isLoop = false;
 
 	//맞는 이미지
-	hit1Right.Init("player/hit1_right.bmp", 258, 138, 3, 0.1f);
-	hit2Right.Init("player/hit2_right.bmp", 400, 122, 4, 0.1f);
-	hit3Right.Init("player/hit3_right.bmp", 384, 124, 3, 0.15f);
+	hit1Right.Init("player/hit1_right.bmp", 258, 138, 3, 0.12f);
+	hit2Right.Init("player/hit2_right.bmp", 400, 122, 4, 0.12f);
+	lastHitRight.Init("player/last_hit_right.bmp", 816, 184, 6, 0.15f);
+	knockoutRight.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
 	hit1Right.isLoop = false;
 	hit2Right.isLoop = false;
-	hit3Right.isLoop = false;
+	lastHitRight.isLoop = false;
+	knockoutRight.isLoop = false;
 
-	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.1f);
-	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.1f);
-	hit3Left.Init("player/hit3_left.bmp", 384, 124, 3, 0.15f);
+	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.12f);
+	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.12f);
+	lastHitLeft.Init("player/last_hit_left.bmp", 816, 184, 6, 0.15f);
+	knockoutLeft.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
+
 	hit1Left.isLoop = false;
 	hit2Left.isLoop = false;
-	hit3Left.isLoop = false;
+	lastHitLeft.isLoop = false;
+	knockoutLeft.isLoop = false;
 
 	//두손 이미지
 	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
@@ -275,10 +281,13 @@ void Player::ClipInit()
 
 	animator->AddClip("hit1_right", &hit1Right);
 	animator->AddClip("hit2_right", &hit2Right);
-	animator->AddClip("hit3_right", &hit3Right);
+	animator->AddClip("last_hit_right", &lastHitRight);
+	animator->AddClip("knockout_right", &knockoutRight);
 	animator->AddClip("hit1_left",  &hit1Left);
 	animator->AddClip("hit2_left",  &hit2Left);
-	animator->AddClip("hit3_left",  &hit3Left);
+	animator->AddClip("last_hit_left",  &lastHitLeft);
+	animator->AddClip("knockout_left", &knockoutLeft);
+
 	//두손 이미지
 
 	animator->AddClip("two_hand_idle_right", &twoHandIdleRight);
@@ -308,58 +317,54 @@ void Player::ClipInit()
 
 void Player::OnTriggerEnter(GameObject * gameObject)
 {
-	_enterNum++;
 	item = gameObject->GetComponent<Item>();
 }
 
 void Player::OnTriggerExit(GameObject * gameObject)
 {
-	_exitNum++;
 	item = nullptr;
 }
 
-void Player::PickItem()							// item 획득 했을때
+void Player::PickItem()								// item 획득 했을때
 {
-	if (item != nullptr)						//enter 했을때 item은 값을 가진다
+	if (transform->GetChildCount() == 0)		//player가 자식이 없을때
 	{
-		//isCatch = true;
-		//transform->AddChild(item->transform);
-		//item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
-
-		if (transform->GetChildCount() == 0)		//player가 자식이 없을때
-		{
-			isCatch = true;							//isCatch = true가 된다
-			transform->AddChild(item->transform);	//player는 item을 자식으로 가진다
-			if (!dir)
-			{
-				item->transform->SetPosition(transform->GetX() - 30, transform->GetY() - 80);
-			}
-			if (dir)
-			{
-				item->transform->SetPosition(transform->GetX() + 30, transform->GetY() - 80);
-			}
-		}
+		transform->AddChild(item->transform);	//player는 item을 자식으로 가지고
+		isCatch = true;							//item을 가지고 있는 상태가 된다
+		equipItem = item->gameObject;
 	}
 }
 
-void Player::PutItem()								//item을 놓았을때
+
+void Player::PutItem()															//item을 놓았을때
 {
-	if (item != nullptr)							//item이 값을 가지고 있을때
+	if (equipItem != nullptr)													//item이 값을 가지고 있을때
 	{
-		isCatch = false;							//isCatch == false가 되고
-		item->transform->DetachParent();			//item은 부모를 잃는다
-		item->itemZ = this->zOrder->GetZ();			//item의 z값은 player의 z값을 갖는다
-		// 던졌을떄 itemz 값은 player의 zorder gety값을 갖고있는다
-		item->Throw(dir);							//dir에 따른 throw
+		equipItem->transform->DetachParent();									//item은 부모를 잃는다
+		equipItem->GetComponent<Item>()->SetItemZ(this->zOrder->GetZ());		//던졌을때 itemz는 player의 z값을 가진다
+		equipItem->GetComponent<Item>()->Throw(dir);							//dir에 따른 throw	
+		equipItem = nullptr;													
 	}	
+	isCatch = false;															//item이 없는 상태이고
+	item = nullptr;																//item은 값을 잃는다	
 }
 
 void Player::Hit(int damage)
 {
+	if (hitable == false) return;
 	hp -= damage;
+	_state->Exit(this);
+	hitCount++;
+
+	_state = new PlayerHitState();
+	_state->Enter(this);
 	if (hp <= 0)
 	{
-		gameObject->SetActive(false);
+		//gameObject->SetActive(false);
 		// TODO - DEAD
 	}
+
+
 }
+
+

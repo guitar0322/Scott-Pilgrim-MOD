@@ -62,15 +62,6 @@ void PlayerAttackState::Update(Player * player)
 
 				player->isUppercut = false;		//에너미가 없을 때 3연타 확인 위하여
 
-				if (GetDistance(player->transform->GetX(), player->transform->GetY(),
-					player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY()) < 50)
-				{
-					player->enemy->GetComponent<EnemyInfo>()->Hit(player->attack);
-					EFFECTMANAGER->EmissionEffect("attack_effect", player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY());
-					player->isUppercut = true;
-					player->pressL = true;
-				}
-
 				//거리내에 에너미가 있을 때 3타 공격은 어퍼컷으로 한다.
 
 				if (player->dir == false)
@@ -84,6 +75,7 @@ void PlayerAttackState::Update(Player * player)
 
 				// 그리고 1연타 공격이 마무리되고 L키를 누를 시 2연타 공격으로 넘어간다.
 			}
+			Attack(player);
 		}
 	}
 	
@@ -92,18 +84,11 @@ void PlayerAttackState::Update(Player * player)
 
 void PlayerAttackState::Enter(Player * player)
 {
+	Attack(player);
 	player->pressL = false;
 	_doubleAttack = false;
 	_attackTime = 0;
 
-	if (GetDistance(player->transform->GetX(), player->transform->GetY(),
-		player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY()) < 50)
-	{
-		player->enemy->GetComponent<EnemyInfo>()->Hit(player->attack);
-		EFFECTMANAGER->EmissionEffect("attack_effect", player->GetEnemyTransform()->GetX(), player->GetEnemyTransform()->GetY());
-		
-	}
-	//1연타 공격 시 에너미와 플레이어가 거리 내에 있으면 공격에 들어간다.
 
 	if (player->dir == false)
 	{
@@ -119,4 +104,25 @@ void PlayerAttackState::Enter(Player * player)
 void PlayerAttackState::Exit(Player * player)
 {
 
+}
+
+void PlayerAttackState::Attack(Player* player)
+{
+	vector<GameObject*> _sectorEnemyV = ENEMYMANAGER->GetSectorEnemy();
+	for (int i = 0; i < _sectorEnemyV.size(); i++)
+	{
+		if (_sectorEnemyV[i]->isActive == false) continue;
+		float distance =
+			GetDistance(player->transform->GetX(), player->transform->GetY(),
+				_sectorEnemyV[i]->transform->GetX(), _sectorEnemyV[i]->transform->GetY());
+		float distanceZ = player->zOrder->GetZ() - _sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ();
+		if (distanceZ < 0)
+			distanceZ *= -1;
+		if (distance < 100 && distanceZ < 5)
+		{
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 60, player->transform->GetY() - 10);
+			player->isUppercut = true;
+		}
+	}
 }

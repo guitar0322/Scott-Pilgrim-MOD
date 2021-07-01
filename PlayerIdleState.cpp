@@ -120,6 +120,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			{
 				player->isCatch = true;
 				player->isPick = true;
+				player->PickItem();
 				if (player->dir == false)
 				{
 					player->ChangeClip("two_hand_pick_right", true);
@@ -129,18 +130,18 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 					player->ChangeClip("two_hand_pick_left", true);
 				}
 			}
-			else if (player->isCatch == true && player->isPick == false)
+			
+			else if (player->isCatch == true)
 			{
 				player->PutItem();
 				player->isPick = false;
 				if (player->dir == false)
 				{
-					player->ChangeClip("idle_right", true);
+					player->ChangeClip("idle_right", false);
 				}
 				else
 				{
-					player->ChangeClip("idle_left", true);
-
+					player->ChangeClip("idle_left", false);
 				}
 			}
 		}
@@ -166,7 +167,13 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 
 		return new PlayerKickSkillState();
 	}
-
+	//if (player->isCatch == true && player->isPick == false && player->isRun == false)
+	//{
+	//	if (player->animator->currentFrame == 1)
+	//	{
+	//		player->animator->Pause();
+	//	}
+	//}
 
 	return nullptr;
 }
@@ -178,15 +185,39 @@ void PlayerIdleState::Update(Player * player)
 		player->PickItem();
 		player->isPick = false;
 	}
+
+	if (player->isCatch == true)
+	{
+		if (player->dir == false)
+		{
+			if (player->animator->currentFrame == 0)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 76);
+			}
+			if (player->animator->currentFrame == 1)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY()  - 78);
+			}
+			if (player->animator->currentFrame == 2)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 76);
+			}
+			if (player->animator->currentFrame == 3)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY()  -78);
+			}
+		}
+	}
 }
 
 void PlayerIdleState::Enter(Player * player)
 {
 	player->isRun = false;
-
+	_itemShakeTime = 0;
 	if (player->isCatch == true)
 	{
-		if (player->dir == false)
+		player->equipItem->GetComponent<Item>()->ChangeClip("trashbox", false);
+		if(player->dir == false)
 			player->ChangeClip("two_hand_idle_right", true);
 		else
 			player->ChangeClip("two_hand_idle_left", true);
@@ -206,4 +237,8 @@ void PlayerIdleState::Enter(Player * player)
 
 void PlayerIdleState::Exit(Player * player)
 {
+	if (_itemShakeDir == true && player->isCatch == true)
+	{
+		player->GetItemTransform()->MoveY(-1);
+	}
 }

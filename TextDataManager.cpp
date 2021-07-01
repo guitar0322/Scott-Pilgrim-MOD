@@ -15,26 +15,26 @@ void TextDataManager::txtSave(const char* saveFileName, vector<string> vStr)
 	HANDLE file;
 	DWORD write;
 
-	char str[512];
+	char str[1024];
 
-	strncpy_s(str, 512, vectorArrayCombine(vStr), 510);
+	strncpy_s(str, 1024, vectorArrayCombine(vStr), 1022);
 
 	file = CreateFile(saveFileName, GENERIC_WRITE, NULL, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	WriteFile(file, str, 512, &write, NULL);
+	WriteFile(file, str, 1024, &write, NULL);
 
 	CloseHandle(file);
 }
 
 char* TextDataManager::vectorArrayCombine(vector<string> vArray)
 {
-	char str[512];
+	char str[1024];
 	ZeroMemory(str, sizeof(str));
 
 	for (int i = 0; i < vArray.size(); ++i)
 	{
-		strncat_s(str, 512, vArray[i].c_str(), 510);
+		strncat_s(str, 1024, vArray[i].c_str(), 1022);
 		if (i + 1 < vArray.size()) strcat_s(str, ",");
 	}
 
@@ -46,12 +46,12 @@ vector<string> TextDataManager::txtLoad(const char* loadFileName)
 	HANDLE file;
 	DWORD read;
 
-	char str[512];
+	char str[1024];
 
 	file = CreateFile(loadFileName, GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(file, str, 512, &read, NULL);
+	ReadFile(file, str, 1024, &read, NULL);
 
 	CloseHandle(file);
 

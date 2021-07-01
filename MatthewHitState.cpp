@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "MatthehHitState.h"
+#include "MatthewHitState.h"
 #include "MatthewIdleState.h"
 #include "Matthew.h"
 
-Matthewstate * MatthehHitState::Update(Matthew * matthew)
+Matthewstate * MatthewHitState::Update(Matthew * matthew)
 {
 	_hitTime = TIMEMANAGER->getElapsedTime();
 	if (_hitTime >= 2.0)
@@ -14,7 +14,7 @@ Matthewstate * MatthehHitState::Update(Matthew * matthew)
 	return nullptr;
 }
 
-void MatthehHitState::Enter(Matthew * matthew)
+void MatthewHitState::Enter(Matthew * matthew)
 {
 	_hitTime = 0;
 	if (matthew->Getdir() == false)
@@ -28,6 +28,6 @@ void MatthehHitState::Enter(Matthew * matthew)
 
 }
 
-void MatthehHitState::Exit(Matthew * matthew)
+void MatthewHitState::Exit(Matthew * matthew)
 {
 }

@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "EnemyState.h"
 #include "Luke.h"
 #include "LukeIdleState.h"
 
@@ -43,23 +42,32 @@ Luke::Luke()
 	// DIE
 	animator->AddClip("luke_die_right", CLIPMANAGER->FindClip("luke_die_right"));
 	animator->AddClip("luke_die_left", CLIPMANAGER->FindClip("luke_die_left"));
+
+	/* LUKE INIT */
+	Init();
+
+	// AI STATE 동적 할당
+	enemyAI->SetState(new LukeIdleState());
 }
 
 Luke::~Luke()
 {
-
 }
 
 void Luke::Init()
 {
+	/* 210629~30 LUKE INFO SETTING */
 	zOrder->SetZ(transform->GetY() + 132 / 2);
-
+	
 	bool randomDir = RND->getInt(2);
 	enemyinfo->SetDir(randomDir);
 
 	enemyinfo->Sethp(50);
 
-	int randomAttackDamage = RND->getInt(50);
+	//int randomAttackDamage = RND->getInt(10);
+	int randomAttackDamage = 0;
+
+	//int randomAttackDamage = RND->getInt(5);
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);

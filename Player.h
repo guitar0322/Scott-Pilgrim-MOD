@@ -12,8 +12,6 @@ private:
 	
 	int _enterNum;		//플레이어와 gameObject가 겹칠때++
 	int _exitNum;		//플레이어와 gameObject가 겹쳐짐이 끝낫을떄++
-
-
 	
 	//float _friction;	//마찰
 
@@ -53,10 +51,12 @@ private:
 	AnimationClip shieldLeft;
 	AnimationClip hit1Right;
 	AnimationClip hit2Right;
-	AnimationClip hit3Right;
 	AnimationClip hit1Left;
 	AnimationClip hit2Left;
-	AnimationClip hit3Left;
+	AnimationClip lastHitRight;
+	AnimationClip lastHitLeft;
+	AnimationClip knockoutRight;
+	AnimationClip knockoutLeft;
 	AnimationClip hitJumpRight;
 	AnimationClip hitJumpLeft;
 
@@ -90,8 +90,8 @@ public:
 	Animator* animator;
 	ZOrder* zOrder;
 	Item* item;
+	GameObject* equipItem;
 	GameObject* enemy;
-
 
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
@@ -107,6 +107,7 @@ public:
 	bool isCatch;		//아이템을 획득 유무 
 	bool isPick;		//아이템을 들어올렸는지 유무
 
+
 	bool attackChange;
 	
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
@@ -119,6 +120,9 @@ public:
 	int attack;				//플레이어 공격력 (추후 레벨 별 구분)
 	bool isUppercut;		//어퍼컷 유무
 	bool pressL;			//L키 누른 거 여부
+	bool hitable;
+	int hitCount;
+
 
 	RECT groundCheckRc;
 
@@ -140,11 +144,15 @@ public:
 	virtual void PickItem();		//아이템 획득 함수
 	virtual void PutItem();			//아이템 놓는 함수
 
+	Transform* GetItemTransform() const { return equipItem->transform; }
+	Item* GetItem() const { return item; }
 	void SetEnemy(GameObject* _enemy) { enemy = _enemy; }
 	Transform* GetEnemyTransform() const { return enemy -> transform; }
 
 	/* Player.h */
-   /* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
+	/* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
 	void Hit(int damage);
+
+
 };
 

@@ -25,4 +25,7 @@ Doberman::~Doberman()
 
 void Doberman::Init()
 {
+	zOrder->SetZ(transform->GetY() + 96 / 2);
+	enemyinfo->SetSpeed(60.0f);
+	enemyinfo->SetSpeed(30.f);
 }

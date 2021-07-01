@@ -1,13 +1,14 @@
 #include "stdafx.h"
-#include "MalcolmhitState.h"
+#include "MalcolmHitState.h"
+#include "MalcolmIdleState.h"
 
 
-EnemyState * MalcolmhitState::Update(EnemyAI * enemy)
+EnemyState * MalcolmHitState::Update(EnemyAI * enemy)
 {
 	_hittime += TIMEMANAGER->getElapsedTime();
 	if (_hittime >= 2.0f)
 	{
-		return new MalcolmhitState();
+		return new MalcolmHitState();
 	}
 
 
@@ -15,7 +16,7 @@ EnemyState * MalcolmhitState::Update(EnemyAI * enemy)
 	return nullptr;
 }
 
-void MalcolmhitState::Enter(EnemyAI * enemy)
+void MalcolmHitState::Enter(EnemyAI * enemy)
 {
 	_hittime = 0;
 	if (enemy->enemyinfo->GetDir() == false)
@@ -30,6 +31,6 @@ void MalcolmhitState::Enter(EnemyAI * enemy)
 
 }
 
-void MalcolmhitState::Exit(EnemyAI * enemy)
+void MalcolmHitState::Exit(EnemyAI * enemy)
 {
 }

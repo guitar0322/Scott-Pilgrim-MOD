@@ -39,6 +39,7 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	{
 		return new PlayerKickAttackState();
 	}
+
 	if (player->zOrder->GetZ() == 1000)
 	{
 		return new PlayerFallState();
@@ -48,7 +49,13 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 		player->onGround = false;
 		return new PlayerFallState();
 	}
-
+	if( player->isCatch == true)
+	{ 
+		if (player->animator->currentFrame == 5)
+		{
+			player->animator->Pause();
+		}
+	}
 	return nullptr;
 }
 
@@ -60,6 +67,41 @@ void PlayerRunState::Update(Player * player)
 		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
 			player->zOrder->MoveZ(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 			MainCam->transform->MoveY(player->GetSpeed() * 2 * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
+		}
+		if (player->isCatch == true)
+		{
+			if (player->animator->currentFrame == 0)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 64);
+			}
+			if (player->animator->currentFrame == 1)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 74);
+			}
+			if (player->animator->currentFrame == 2)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 37.5, player->transform->GetY() - 78);
+			}
+			if (player->animator->currentFrame == 3)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 43, player->transform->GetY() - 78);
+			}
+			if (player->animator->currentFrame == 4)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 45, player->transform->GetY() - 65);
+			}
+			if (player->animator->currentFrame == 5)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 75);
+			}
+			if (player->animator->currentFrame == 6)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 60, player->transform->GetY() - 75);
+			}
+			if (player->animator->currentFrame == 7)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 60, player->transform->GetY() - 75);
+			}
 		}
 	}
 	else
@@ -97,11 +139,13 @@ void PlayerRunState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_run_right", true);
+			player->GetItemTransform()->SetPosition(player->transform->GetX() - 38, player->transform->GetY() - 77);
+			player->ChangeClip("two_hand_run_right", false);
 		}
 		else
 		{
-			player->ChangeClip("two_hand_run_left", true);
+			player->GetItemTransform()->SetPosition(player->transform->GetX() + 38, player->transform->GetY() - 77);
+			player->ChangeClip("two_hand_run_left", false);
 		}
 	}
 	else
