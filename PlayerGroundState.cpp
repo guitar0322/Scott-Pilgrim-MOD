@@ -45,6 +45,7 @@ void PlayerGroundState::Enter(Player * player)
 		{
 			player->ChangeClip("two_hand_ground_left", true);
 		}
+		player->equipItem->transform->MoveY(50);
 	}
 	else
 	{

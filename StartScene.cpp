@@ -67,56 +67,56 @@ HRESULT StartScene::Init()
 
 	trashBox = new ItemObject();
 	trashBox->Init();
-	trashBox->item->SetItemImage("trashbox");
+	trashBox->item->SetItemImage("trashbox_right");
 	trashBox->transform->SetPosition(640, 300);
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
     // 210630 ½Ã¿µ Ãß°¡
-    enemy = new Luke();
-    enemy->Init();
-    enemy->transform->SetPosition(800, 300);
-    enemy->enemyAI->SetPlayer(character);
+ //   enemy = new Luke();
+ //   enemy->Init();
+ //   enemy->transform->SetPosition(800, 300);
+ //   enemy->enemyAI->SetPlayer(character);
 
-	// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
-	doberman = new Doberman();
-    doberman->transform->SetPosition(1200, 400);
-	doberman->enemyAI->SetPlayer(character);
-    doberman->Init();
+	//// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
+	//doberman = new Doberman();
+ //   doberman->transform->SetPosition(1200, 400);
+	//doberman->enemyAI->SetPlayer(character);
+ //   doberman->Init();
 
-	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
-	malcolm = new Malcolm();
-	malcolm->transform->SetPosition(1300, 500);
-	malcolm->enemyAI->SetPlayer(character);
-    malcolm->Init();
+	//// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
+	//malcolm = new Malcolm();
+	//malcolm->transform->SetPosition(1300, 500);
+	//malcolm->enemyAI->SetPlayer(character);
+ //   malcolm->Init();
 
-	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
-	william = new William();
-	william->transform->SetPosition(1500, 500);
-	william->enemyAI->SetPlayer(character);
-    william->Init();
+	//// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
+	//william = new William();
+	//william->transform->SetPosition(1500, 500);
+	//william->enemyAI->SetPlayer(character);
+ //   william->Init();
 
-	// º¸½º ¸ÅÆ© ±¸Çö//
-	matthew = new Character();
-	matthew->Init();
-	matthew->transform->SetPosition(1000, 400);
-	matthew->collider->isTrigger = true;
-	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
-	matthew->AddComponent(new Matthew());
-	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	//// º¸½º ¸ÅÆ© ±¸Çö//
+	//matthew = new Character();
+	//matthew->Init();
+	//matthew->transform->SetPosition(1000, 400);
+	//matthew->collider->isTrigger = true;
+	//matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
+	//matthew->AddComponent(new Matthew());
+	//matthew->GetComponent<Matthew>()->Init();
+	//matthew->GetComponent<Matthew>()->SetPlayer(character);
 
-	for ( int i = 0; i < SUCCUBUSMAX; i++)
-	{
-		succubus[i] = new Character();
-		succubus[i]->Init();
-		succubus[i]->transform->SetPosition(600, 200);
-		succubus[i]->collider->isTrigger = true;
-		succubus[i]->AddComponent(new Succubus());
-		succubus[i]->GetComponent<Succubus>()->Init();
-		succubus[i]->SetActive(false);
-		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
-	}
+	//for ( int i = 0; i < SUCCUBUSMAX; i++)
+	//{
+	//	succubus[i] = new Character();
+	//	succubus[i]->Init();
+	//	succubus[i]->transform->SetPosition(600, 200);
+	//	succubus[i]->collider->isTrigger = true;
+	//	succubus[i]->AddComponent(new Succubus());
+	//	succubus[i]->GetComponent<Succubus>()->Init();
+	//	succubus[i]->SetActive(false);
+	//	matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
+	//}
 	character->GetComponent<Player>()->SetEnemy(enemy);
 
     BackgroundInit();
@@ -146,7 +146,6 @@ void StartScene::Update()
     MainCam->transform->SetX(character->transform->GetX());
     if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
         MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
-    testGround->Update();
     character->Update();
     cameraControler.Update();
     BGMANAGER->Update();
@@ -154,18 +153,18 @@ void StartScene::Update()
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-    ENEMYMANAGER->Update();
+    //ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	malcolm->Update();
-	william->Update();
-	doberman->Update();
-	matthew->Update();
-	for (int i = 0; i < SUCCUBUSMAX; i++)
-	{
-		succubus[i]->Update();
-	}
-    // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
-    enemy->Update();
+	//malcolm->Update();
+	//william->Update();
+	//doberman->Update();
+	//matthew->Update();
+	//for (int i = 0; i < SUCCUBUSMAX; i++)
+	//{
+	//	succubus[i]->Update();
+	//}
+    //// 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
+    //enemy->Update();
 }
 
 void StartScene::Render()
@@ -176,7 +175,6 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
@@ -227,14 +225,22 @@ void StartScene::WallInit()
 
 void StartScene::ItemImageClip()
 {
-    CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 115, 87, 1, 1);
+    CLIPMANAGER->AddClip("trashbox_right", "item/trashbox_right.bmp", 115, 87, 1, 1);
+	CLIPMANAGER->AddClip("trashbox_left", "item/trashbox_left.bmp", 115, 87, 1, 1);
     CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
 
     //walk attack 
     CLIPMANAGER->AddClip("trashbox_walk_attack_right", "item/trashbox_walk_attack_right.bmp", 805, 93, 7, 0.2f);
     CLIPMANAGER->FindClip("trashbox_walk_attack_right")->isLoop = false;
 
-    //trashBox->animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
+	CLIPMANAGER->AddClip("trashbox_walk_attack_left", "item/trashbox_walk_attack_left.bmp", 805, 93, 7, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_attack_left")->isLoop = false;
+	//throw
+	CLIPMANAGER->AddClip("trashbox_walk_throw_right", "item/trashbox_walk_throw_right.bmp", 807, 69, 7, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_throw_right")->isLoop = false;
+
+	CLIPMANAGER->AddClip("trashbox_walk_throw_left", "item/trashbox_walk_throw_left.bmp", 460, 87, 4, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_throw_left")->isLoop = false;
 }
 void StartScene::EnemyClipManager()
 {
