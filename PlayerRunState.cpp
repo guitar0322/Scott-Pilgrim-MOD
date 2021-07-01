@@ -51,9 +51,9 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 	}
 	if( player->isCatch == true)
 	{ 
-		if (player->animator->currentFrame == 1)
+		if (player->animator->currentFrame == 6)
 		{
-			//player->animator->Pause();
+			player->animator->Pause();
 		}
 	}	
 	return nullptr;
@@ -76,31 +76,31 @@ void PlayerRunState::Update(Player * player)
 			}
 			if (player->animator->currentFrame == 1)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 74);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 41, player->transform->GetY() - 74);
 			}
 			if (player->animator->currentFrame == 2)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 78);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 29, player->transform->GetY() - 77);
 			}
 			if (player->animator->currentFrame == 3)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 51, player->transform->GetY() - 78);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 44, player->transform->GetY() - 77);
 			}
 			if (player->animator->currentFrame == 4)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 65);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 50, player->transform->GetY() - 62);
 			}
 			if (player->animator->currentFrame == 5)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 75);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 50, player->transform->GetY() - 75);
 			}
 			if (player->animator->currentFrame == 6)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 75);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 38, player->transform->GetY() - 75);
 			}
 			if (player->animator->currentFrame == 7)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 55, player->transform->GetY() - 75);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 50, player->transform->GetY() - 75);
 			}
 		}
 	}
