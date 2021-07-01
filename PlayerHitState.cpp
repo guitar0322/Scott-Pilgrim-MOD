@@ -19,7 +19,11 @@ PlayerState * PlayerHitState::InputHandle(Player* player)
 
 void PlayerHitState::Update(Player* player)
 {
-	
+
+	if (KEYMANAGER->isOnceKeyUp('K'))
+	{
+		player->block = false;
+	}
 	
 
 }

@@ -121,6 +121,7 @@ void PlayerAttackState::Attack(Player* player)
 		if (distance < 100 && distanceZ < 5)
 		{
 			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+
 			player->isUppercut = true;
 
 			if (player->dir == false)
@@ -129,7 +130,7 @@ void PlayerAttackState::Attack(Player* player)
 			}
 			else
 			{
-				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 60, player->transform->GetY() + 10);
+				EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() - 60, player->transform->GetY() - 10);
 			}
 		}
 	}

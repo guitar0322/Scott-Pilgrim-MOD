@@ -90,10 +90,12 @@ void PlayerBlockState::Update(Player * player)
 	{
 		player->animator->Resume();
 	}
+
 }
 
 void PlayerBlockState::Enter(Player * player)
 {
+
 	if (player->dir == false)
 	{
 		player->ChangeClip("block_right", true);
@@ -107,3 +109,4 @@ void PlayerBlockState::Enter(Player * player)
 void PlayerBlockState::Exit(Player * player)
 {
 }
+

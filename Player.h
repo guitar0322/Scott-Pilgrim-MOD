@@ -110,9 +110,6 @@ public:
 	bool isPick;		//아이템을 들어올렸는지 유무
 	bool isThrow;
 
-
-	bool attackChange;
-	
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
 	float pickDelay;		//줍는 시간 딜레이
@@ -124,8 +121,8 @@ public:
 	int attack;				//플레이어 공격력 (추후 레벨 별 구분)
 	bool isUppercut;		//어퍼컷 유무
 	bool pressL;			//L키 누른 거 여부
-	bool hitable;
-	int hitCount;
+	bool hitable;			
+	int hitCount;			//타격 맞은 횟수
 
 
 	RECT groundCheckRc;

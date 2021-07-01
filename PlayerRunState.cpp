@@ -6,6 +6,7 @@
 #include "PlayerAttackState.h"
 #include "PlayerTwoHandAttackState.h"
 #include "PlayerFallState.h"
+#include "PlayerKickSkillState.h"
 #include "Player.h"
 
 PlayerState * PlayerRunState::InputHandle(Player * player)
@@ -35,9 +36,13 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 			return new PlayerTwoHandAttackState();
 ;		}
 	}
-	if (KEYMANAGER->isOnceKeyDown('O'))
+	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		return new PlayerKickAttackState();
+	}
+	if (KEYMANAGER->isOnceKeyDown('O'))
+	{
+		return new PlayerKickSkillState();
 	}
 
 	if (player->zOrder->GetZ() == 1000)

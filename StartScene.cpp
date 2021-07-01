@@ -422,5 +422,5 @@ void StartScene::EffectClipInit()
 	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 660, 145, 5, 0.12f);
-	//CLIPMANAGER->AddClip("block_effect", "effect/block_effect.bmp", 725, 145, 5, 0.12f);
+	CLIPMANAGER->AddClip("block_effect", "effect/block_effect.bmp", 725, 145, 5, 0.12f);
 }

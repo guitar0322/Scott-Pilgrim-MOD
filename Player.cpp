@@ -48,7 +48,7 @@ void Player::Init()
 	throwDelay = 0;
 
 	hp = 100;
-	attack = 10;
+	attack = 0;
 	isUppercut = false;
 	pressL = false;
 	hitCount = 0;
@@ -219,7 +219,7 @@ void Player::ClipInit()
 	hit1Left.Init("player/hit1_left.bmp", 258, 138, 3, 0.12f);
 	hit2Left.Init("player/hit2_left.bmp", 400, 122, 4, 0.12f);
 	lastHitLeft.Init("player/last_hit_left.bmp", 816, 184, 6, 0.15f);
-	knockoutLeft.Init("player/knockout_right.bmp", 426, 78, 3, 0.15f);
+	knockoutLeft.Init("player/knockout_left.bmp", 426, 78, 3, 0.15f);
 
 	hit1Left.isLoop = false;
 	hit2Left.isLoop = false;
@@ -386,6 +386,19 @@ void Player::PutItem()															//item을 놓았을때
 
 void Player::Hit(int damage)
 {
+	if (block == true)
+	{
+		if (dir == false)
+		{
+			EFFECTMANAGER->EmissionEffect("block_effect", transform->GetX() + 30, transform->GetY() - 10);
+		}
+		else
+		{
+			EFFECTMANAGER->EmissionEffect("block_effect", transform->GetX() - 30, transform->GetY() - 10);
+		}
+		return;
+	} 
+
 	if (hitable == false) return;
 	hp -= damage;
 	_state->Exit(this);
