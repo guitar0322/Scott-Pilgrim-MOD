@@ -4,7 +4,6 @@ class MalcolmHitState :
 	public EnemyState
 {
 private:
-	float _hittime;
 
 public:
 	virtual EnemyState* Update(EnemyAI* enemy);

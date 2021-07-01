@@ -84,6 +84,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//점프
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
+		_playerJump = true;
 		player->jumpZ = false;
 		return new PlayerJumpState();
 	}
@@ -133,23 +134,21 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			
 			else if (player->isCatch == true)
 			{
-				player->PutItem();
 				player->isPick = false;
+				player->isThrow = true;
 				if (player->dir == false)
 				{
-					player->ChangeClip("idle_right", false);
+					player->ChangeClip("two_hand_walk_throw_right", true);
+					player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_walk_throw_right", false);
 				}
 				else
 				{
-					player->ChangeClip("idle_left", false);
+					player->ChangeClip("two_hand_walk_throw_left", true);
+					player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_walk_throw_left", false);
 				}
 			}
 		}
-
 	}
-
-
-
 	//막기
 	if (KEYMANAGER->isStayKeyDown('K'))
 	{
@@ -167,60 +166,104 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 
 		return new PlayerKickSkillState();
 	}
-	//if (player->isCatch == true && player->isPick == false && player->isRun == false)
-	//{
-	//	if (player->animator->currentFrame == 1)
-	//	{
-	//		player->animator->Pause();
-	//	}
-	//}
-
 	return nullptr;
 }
 
 void PlayerIdleState::Update(Player * player)
 {
-	if (player->pickDelay > 0.3f && player->isPick == true)
-	{
-		player->PickItem();
-		player->isPick = false;
-	}
-
-	if (player->isCatch == true)
+	if (player->isCatch == true && player->isPick == false)
 	{
 		if (player->dir == false)
 		{
 			if (player->animator->currentFrame == 0)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 76);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 78);
 			}
 			if (player->animator->currentFrame == 1)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY()  - 78);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 80);
 			}
 			if (player->animator->currentFrame == 2)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 76);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 79);
 			}
 			if (player->animator->currentFrame == 3)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY()  -78);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 79);
+			}
+
+			if (player->isThrow)
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 50, player->transform->GetY() - 50);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 44, player->transform->GetY() - 43);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 41, player->transform->GetY() - 40);
+				}
+			}
+		}
+		else
+		{
+			if(player->animator->currentFrame == 0)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 78);
+			}
+			if (player->animator->currentFrame == 1)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 79);
+			}
+			if (player->animator->currentFrame == 2)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 79);
+			}
+			if (player->animator->currentFrame == 3)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 79);
+			}
+
+			if (player->isThrow)			
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 50, player->transform->GetY() - 50);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 44, player->transform->GetY() - 43);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 41, player->transform->GetY() - 40);
+				}
 			}
 		}
 	}
+
+	
 }
 
 void PlayerIdleState::Enter(Player * player)
 {
+	_playerJump = false;
 	player->isRun = false;
-	_itemShakeTime = 0;
 	if (player->isCatch == true)
 	{
-		player->equipItem->GetComponent<Item>()->ChangeClip("trashbox", false);
-		if(player->dir == false)
+		if (player->dir == false)
+		{
+			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_right", false);
 			player->ChangeClip("two_hand_idle_right", true);
+		}
 		else
+		{
+			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_left", false);
 			player->ChangeClip("two_hand_idle_left", true);
+		}
 	}
 	else
 	{
@@ -237,8 +280,4 @@ void PlayerIdleState::Enter(Player * player)
 
 void PlayerIdleState::Exit(Player * player)
 {
-	if (_itemShakeDir == true && player->isCatch == true)
-	{
-		player->GetItemTransform()->MoveY(-1);
-	}
 }

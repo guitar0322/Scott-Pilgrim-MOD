@@ -1,4 +1,3 @@
-/* LUKE ATTACK1 STATE ~CPP~ */
 #include "stdafx.h"
 #include "Enemy.h"
 #include "LukeIdleState.h"

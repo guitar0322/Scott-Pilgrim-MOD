@@ -65,15 +65,15 @@ bool EnemyManager::IsClearSector()
 	return true;
 }
 
-void EnemyManager::SetPlayerTransform(Transform* playerTr)
+void EnemyManager::SetPlayerTransform(GameObject* player)
 {
-	_playerTr = playerTr;
+	_playerTr = player->transform;
 	_playerComponent = _playerTr->gameObject->GetComponent<Player>();
 	for (int i = 0; i < TYPE_NUM; i++)
 	{
 		for (int j = 0; j < _enemyV[i].size(); j++)
 		{
-			_enemyV[i][j]->GetComponent<EnemyAI>()->SetPlayer(_playerTr->gameObject);
+			_enemyV[i][j]->GetComponent<EnemyAI>()->SetPlayer(player);
 		}
 	}
 }

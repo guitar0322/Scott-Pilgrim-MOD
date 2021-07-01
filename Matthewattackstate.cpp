@@ -1,23 +1,36 @@
 #include "stdafx.h"
 #include "MatthewAttackState.h"
 #include "MatthewAttack2State.h"
+#include "MatthewAttack3State.h"
 #include "MatthewIdleState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewAttackState::Update(Matthew * matthew)
 {
-	_attackTime += TIMEMANAGER->getElapsedTime();
-	if (_attackTime >= 1.0f)
+	if (matthew->animator->GetEnd()==true)
 	{
-		return new MatthewAttack2State;
+		if (matthew->_attackTime == 5)
+		{
+			matthew->_attackTime = 0;
+			return new MatthewIdleState();
+		}
+		switch (RND->getInt(2))
+		{
+		case 0:
+		return new MatthewAttack2State();
+		break;
+
+		case 1:
+		return new MatthewAttack3State();
+		break;
+		}
 	}
 	return nullptr;
 }
 
 void MatthewAttackState::Enter(Matthew * matthew)
 {
-	_attackTime = 0;
-
+	matthew->_attackTime++;
 	if (matthew->Getdir() == false)
 	{
 		matthew->ChangeCilp("matthew_attack1_right", true);

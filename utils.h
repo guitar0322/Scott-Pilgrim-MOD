@@ -30,12 +30,16 @@
 #include "MapManager.h"
 #include <typeinfo>
 
-// 210625 시영 Enemy 작업 관련 include
+// 210625~ 시영 Enemy 작업 관련 include
 #include "Enemy.h"
 #include "EnemyAI.h"
 #include "EnemyInfo.h"
 #include "EnemyState.h"
+#include "Jesse.h"
+#include "Lee.h"
 #include "Luke.h"
+#include "Mike.h"
+#include "Richard.h"
 
 //광철 애너미
 #include "Doberman.h"

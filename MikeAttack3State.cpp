@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "JesseIdleState.h"
-#include "JesseAttackState.h"
+#include "MikeAttack3State.h"
+#include "MikeIdleState.h"
 
-EnemyState* JesseAttackState::Update(EnemyAI* enemy)
+EnemyState* MikeAttack3State::Update(EnemyAI* enemy)
 {
-	/* EDIT 필요 - 3연타 동일 모션 공격 후 IDEL로 IF문 써서 하기 */
 	if (enemy->enemyinfo->GetDir() == true)
 		enemy->enemyinfo->SetDir(false);
 	else
 		enemy->enemyinfo->SetDir(true);
 
-	/* 위치 좌표 보정 */
 	if (enemy->animator->GetEnd())
 	{
+		/* 위치 좌표 보정 */
+		enemy->transform->MoveY(10);
 		if (enemy->enemyinfo->GetDir())
 		{
 			enemy->transform->MoveX(40);
@@ -21,14 +21,12 @@ EnemyState* JesseAttackState::Update(EnemyAI* enemy)
 		{
 			enemy->transform->MoveX(-40);
 		}
-		return new JesseAttackState();
-		// return new JesseIdleState();
+		return new MikeIdleState();
 	}
-
     return nullptr;
 }
 
-void JesseAttackState::Enter(EnemyAI* enemy)
+void MikeAttack3State::Enter(EnemyAI* enemy)
 {
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->transform->GetY()) > 20)
@@ -37,18 +35,19 @@ void JesseAttackState::Enter(EnemyAI* enemy)
 	}
 
 	/* 위치 좌표 보정 */
+	enemy->transform->MoveY(-10);
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->transform->MoveX(40);
-		enemy->ChangeClip("jesse_attack_right", true);
+		enemy->ChangeClip("mike_attack3_right", true);
 	}
 	else
 	{
 		enemy->transform->MoveX(-40);
-		enemy->ChangeClip("jesse_attack_left", true);
+		enemy->ChangeClip("mike_attack3_left", true);
 	}
 }
 
-void JesseAttackState::Exit(EnemyAI* enemy)
+void MikeAttack3State::Exit(EnemyAI* enemy)
 {
 }

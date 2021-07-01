@@ -98,13 +98,6 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 	{
 		return new PlayerFallState();
 	}
-	if(player->isCatch == true && player->isPick == false)
-	{
-		if (player->animator->currentFrame == 4)
-		{
-			//player->animator->Pause();
-		}
-	}
 	return nullptr;
 }
 
@@ -120,69 +113,212 @@ void PlayerWalkState::Update(Player * player)
 		}
 		if (player->isCatch == true)
 		{
-			if (player->animator->currentFrame == 0)
+			if (player->dir == false)
 			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 83);
-			}
-			if (player->animator->currentFrame == 1)
-			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
-			}
-			if (player->animator->currentFrame == 2)
-			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 83);
-			}
-			if (player->animator->currentFrame == 3)
-			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
-			}
-			if (player->animator->currentFrame == 4)
-			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 79);
-			}
-			if (player->animator->currentFrame == 5)
-			{
-				player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 3)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 86);
+				}
+				if (player->animator->currentFrame == 4)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 79);
+				}
+				if (player->animator->currentFrame == 5)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 80);
+				}
 			}
 		}
 	}
-	
-
-	
-
-	if(KEYMANAGER->isStayKeyDown('A') && player->dir == true)
+	if (KEYMANAGER->isStayKeyDown('A') && player->dir == true)
 	{
 		player->transform->MoveX(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
-		if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+		if (MAPMANAGER->IsInSlope1(player->gameObject) == true)
+		{
 			player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 			MainCam->transform->MoveY(-player->GetSpeed() * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 		}
+		if (player->isCatch == true)
+		{
+			if (player->animator->currentFrame == 0)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 83);
+			}
+			if (player->animator->currentFrame == 1)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 81);
+			}
+			if (player->animator->currentFrame == 2)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 83);
+			}
+			if (player->animator->currentFrame == 3)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 86);
+			}
+			if (player->animator->currentFrame == 4)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 79);
+			}
+			if (player->animator->currentFrame == 5)
+			{
+				player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 80);
+			}
+		}
 	}
+
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
 		player->runKeyPress = false;
 		player->zOrder->MoveZ(-player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+
+		if (player->isCatch == true)
+		{
+			if (player->dir == false)
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 3)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 86);
+				}
+				if (player->animator->currentFrame == 4)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 79);
+				}
+				if (player->animator->currentFrame == 5)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 80);
+				}
+			}
+			else
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 81);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 3)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 86);
+				}
+				if (player->animator->currentFrame == 4)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 79);
+				}
+				if (player->animator->currentFrame == 5)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 80);
+				}
+			}
+		}
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		player->runKeyPress = false;
 		player->zOrder->MoveZ(player->GetSpeed() * TIMEMANAGER->getElapsedTime());
+		if (player->isCatch == true)
+		{
+			if (player->dir == false)
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 81);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 3)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 86);
+				}
+				if (player->animator->currentFrame == 4)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 18, player->transform->GetY() - 79);
+				}
+				if (player->animator->currentFrame == 5)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() - 16, player->transform->GetY() - 80);
+				}
+			}
+			else
+			{
+				if (player->animator->currentFrame == 0)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 1)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 81);
+				}
+				if (player->animator->currentFrame == 2)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 83);
+				}
+				if (player->animator->currentFrame == 3)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 86);
+				}
+				if (player->animator->currentFrame == 4)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 18, player->transform->GetY() - 79);
+				}
+				if (player->animator->currentFrame == 5)
+				{
+					player->GetItemTransform()->SetPosition(player->transform->GetX() + 16, player->transform->GetY() - 80);
+				}
+			}
+		}
 	}
 }
 
 void PlayerWalkState::Enter(Player * player)
 {	
-	_itemShakeTime = 0;
-
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
 		{
+			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_right", false);
 			player->GetItemTransform()->SetPosition(player->transform->GetX() - 14, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_walk_right", false);
 		}
 		else
 		{
+			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_left", false);
 			player->GetItemTransform()->SetPosition(player->transform->GetX() + 14, player->transform->GetY() - 77);
 			player->ChangeClip("two_hand_walk_left", false);
 		}

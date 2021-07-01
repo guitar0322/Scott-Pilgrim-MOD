@@ -17,6 +17,8 @@ public:
 	GameObject* _succubus[SUCCUBUSMAX];
 	Animator* animator;
 	BoxCollider* collision;
+	int _attackTime;
+	float _phaseTime;
 	virtual void Init();
 	virtual void Release();
 	virtual void Update();
@@ -25,6 +27,7 @@ public:
 	bool Getdir() const { return _dir; }
 	void Setdir(bool dir) { _dir = dir; }
 	float GetSpeed() const { return _speed; }
+	float GetHp(){ return _hp; }
 	Transform* GetPlayer() const { return _player->transform; }
 	void SetPlayer(GameObject* player) { _player = player; }
 };

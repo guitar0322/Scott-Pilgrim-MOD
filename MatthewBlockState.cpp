@@ -5,8 +5,7 @@
 
 Matthewstate * MatthewBlockState::Update(Matthew * matthew)
 {
-	_blockTime += TIMEMANAGER->getElapsedTime();
-	if (_blockTime >= 2.0f)
+	if (matthew->animator->GetEnd()==true)
 	{
 		return new MatthewIdleState();
 	}
@@ -17,7 +16,6 @@ Matthewstate * MatthewBlockState::Update(Matthew * matthew)
 
 void MatthewBlockState::Enter(Matthew * matthew)
 {
-	_blockTime = 0;
 	if (matthew->Getdir() == false)
 	{
 		matthew->ChangeCilp("matthew_block_right", true);

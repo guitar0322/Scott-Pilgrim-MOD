@@ -80,10 +80,16 @@ void PlayerBreakState::Enter(Player * player)
 	if (player->isCatch == true)
 	{
 		if (player->dir == false)
-
+		{
 			player->ChangeClip("two_hand_idle_right", true);
+			player->GetItemTransform()->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 78);
+
+		}
 		else
+		{
 			player->ChangeClip("two_hand_idle_left", true);
+			player->GetItemTransform()->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 78);
+		}
 	}
 	else
 	{

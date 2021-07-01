@@ -6,7 +6,7 @@
 Matthewstate * MatthewHitState::Update(Matthew * matthew)
 {
 	_hitTime = TIMEMANAGER->getElapsedTime();
-	if (_hitTime >= 2.0)
+	if (_hitTime >= 1.0)
 	{
 		return new MatthewIdleState();
 	}

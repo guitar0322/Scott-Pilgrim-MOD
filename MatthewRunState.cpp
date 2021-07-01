@@ -2,7 +2,10 @@
 #include "MatthewRunState.h"
 #include "Matthew.h"
 #include "MatthewAttackState.h"
+#include "MatthewAttack2State.h"
+#include "MatthewAttack3State.h"
 #include "MatthewMoveState.h"
+#include "MatthewPalmwindState.h"
 
 Matthewstate * MatthewRunState::Update(Matthew * matthew)
 {
@@ -23,15 +26,29 @@ Matthewstate * MatthewRunState::Update(Matthew * matthew)
 		}
 	}
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
-		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 300)
+		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 400)
 	{
-		return new MatthewMoveState;
+		return new MatthewMoveState();
 	}
 
 
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 50)
 	{
-		return new MatthewAttackState;
+		switch (RND->getInt(4))
+		{
+		case 0:
+			return new MatthewAttackState();
+			break;
+		case 1:
+			return new MatthewAttack2State();
+			break;
+		case 2:
+			return new MatthewAttack3State();
+			break;
+		case 3:
+			return new MatthewPalmwindState();
+			break;
+		}
 	}
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());

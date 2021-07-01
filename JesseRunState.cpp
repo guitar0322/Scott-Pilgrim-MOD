@@ -3,7 +3,7 @@
 #include "JesseIdleState.h"
 #include "JesseWalkState.h"
 #include "JesseRunState.h"
-#include "JesseAttackState.h"
+#include "JesseAttack1State.h"
 #include "JesseKickState.h"
 
 EnemyState* JesseRunState::Update(EnemyAI* enemy)
@@ -39,18 +39,18 @@ EnemyState* JesseRunState::Update(EnemyAI* enemy)
 		enemy->zOrder->GetZ() + 6 >= enemy->GetPlayerTransform()->gameObject->GetComponent<ZOrder>()->GetZ())
 	{
 		/* 콤보공격 OR 발차기 공격 중 랜덤선택 */
-		int randomAttack = RND->getInt(2);
+		int randomAttack = 1; // RND->getInt(2);
 		switch (randomAttack)
 		{
 		case 0:
-			return new JesseAttackState();
+			return new JesseAttack1State();
 		case 1:
 			return new JesseKickState();
 		}
 	}
 
-	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
+	float angle = GetAngle(enemy->transform->GetX(), enemy->zOrder->GetZ(),
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayer()->GetComponent<ZOrder>()->GetZ());
 
 	enemy->transform->MoveX(_speed * TIMEMANAGER->getElapsedTime() * cosf(angle));
 	enemy->zOrder->MoveZ(_speed * TIMEMANAGER->getElapsedTime() * -sinf(angle));
