@@ -5,6 +5,7 @@ class playGround : public gameNode
 private:
 	int deltaTime;
 	int curTime, oldTime;
+	bool _isEdit;
 public:
 	int frame;
 	int x, y;

@@ -5,5 +5,7 @@ class William : public Enemy
 public:
 	William();
 	~William();
+
+	virtual void Init();
 };
 

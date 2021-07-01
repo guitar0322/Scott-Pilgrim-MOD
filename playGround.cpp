@@ -17,15 +17,22 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 	_camShakeFrame = 0;
+	_isEdit = false;
 	StartScene* startScene = new StartScene();
 	SCENEMANAGER->AddScene("start", startScene);
-	SCENEMANAGER->LoadScene("start");
-	SCENEMANAGER->GetCurScene()->Init();
 
-	//EditorScene* editorScene = new EditorScene();
-	//SCENEMANAGER->AddScene("editor", editorScene);
-	//SCENEMANAGER->LoadScene("editor");
-	//editorScene->Init();
+	EditorScene* editorScene = new EditorScene();
+	SCENEMANAGER->AddScene("editor", editorScene);
+	if (_isEdit == false)
+	{
+		SCENEMANAGER->LoadScene("start");
+		SCENEMANAGER->GetCurScene()->Init();
+	}
+	else
+	{
+		SCENEMANAGER->LoadScene("editor");
+		editorScene->Init();
+	}
 
 	//_mainCam.transform->SetX(_mainCam.transform->GetX() + 100);
 	//testParticle = new image();

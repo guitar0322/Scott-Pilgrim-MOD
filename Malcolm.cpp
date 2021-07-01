@@ -32,4 +32,7 @@ Malcolm::~Malcolm()
 
 void Malcolm::Init()
 {
+	zOrder->SetZ(transform->GetX() + 132 / 2);
+	enemyinfo->SetSpeed(30.0f);
+	enemyinfo->Sethp(100.f);
 }

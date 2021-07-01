@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "SuccubusSummonState.h"
-#include "SuccubusIdle.h"
 #include "Succubus.h"
-#include "SuccubusIdle.h"
+#include "SuccubusIdleState.h"
 
 SuccubusState * SuccubusSummonState::Update(Succubus * succubus)
 {
 	if (succubus->animator->GetEnd()==true)
 	{
-		return new SuccubusIdle();
+		return new SuccubusIdleState();
 	}
 	return nullptr;
 }

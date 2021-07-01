@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Succubus.h"
-#include "SuccubusIdle.h"
+#include "SuccubusIdleState.h"
 #include "SuccubusState.h"
 #include "SuccubusSummonState.h"
 

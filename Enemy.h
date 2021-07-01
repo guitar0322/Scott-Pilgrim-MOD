@@ -3,7 +3,7 @@
 #include "EnemyAI.h"
 #include "EnemyInfo.h"
 
-//class Player;
+class Player;
 
 class Enemy : public GameObject
 {
@@ -18,8 +18,7 @@ public:
 	ZOrder* zOrder;
 	Shadow* shadow;
 
-	// 210625 TODO - AI, INFO 추가, CPP에서 동적할당 및 Init
+	// 210625 - AI, INFO 추가, CPP에서 동적할당 및 Init
 	EnemyInfo* enemyinfo;
 	EnemyAI* enemyAI;
-
 };

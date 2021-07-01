@@ -31,6 +31,7 @@
 #include "WallManager.h"
 #include "EffectManager.h"
 #include "MapManager.h"
+#include "EnemyManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -67,6 +68,7 @@ using namespace HDY_UTIL;
 #define WALLMANAGER WallManager::getSingleton()
 #define EFFECTMANAGER EffectManager::getSingleton()
 #define MAPMANAGER MapManager::getSingleton()
+#define ENEMYMANAGER EnemyManager::getSingleton()
 
 #define MainCam CAMERAMANAGER->GetMainCam()
 #define BackBuffer SCENEMANAGER->GetCurScene()->GetBackDC()

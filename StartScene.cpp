@@ -21,41 +21,22 @@ HRESULT StartScene::Init()
 {    
     Scene::Init();
     CameraInit();
+    EnemyClipManager();
 
     sceneInfoLoader.SetLinkObjectVAddress(&_propV);
-    sceneInfoLoader.LoadObjectInfo(0);
-    sceneInfoLoader.LoadObjectInfo(1);
-    sceneInfoLoader.LoadObjectInfo(2);
-    sceneInfoLoader.LoadObjectInfo(3);
+    for (int i = 0; i < 13; i++)
+    {
+        sceneInfoLoader.LoadObjectInfo(i);
+    }
 
-    sceneInfoLoader.SetLinkObjectVAddress(&_enemyV);
-    sceneInfoLoader.LoadObjectInfo(4);
-
+    sceneInfoLoader.SetLinkObjectVAddress(ENEMYMANAGER->GetEnemyVAddress(0));
+    sceneInfoLoader.LoadObjectInfo(13);
 
     // 210629 시영 추가
     EnemyClipManager();
 	EffectClipInit();
-
+    ItemImageClip();
     //위에는 건들지 마시오
-    //=============미리 만들어져 있는 예시 오브젝트============
-    //AddComponent 및 GetComponent()->Init을 하는것이 번거롭기 때문에 필요한 컴포넌트를
-    //미리 붙여 Init을 해놓는 GameObject클래스의 자식 클래스를 생성해놓았다.
-
-    //1.ImageObject
-    //Renderer컴포넌트가 미리 추가되어있는 오브젝트
-    //imageObj->renderer 로 접근이 가능
-    imageObj = new ImageObject();
-	
-    //2.Box
-    //Renderer, BoxCollider가 미리 추가되어있는 오브젝트
-    //->renderer,  ->collider 로 접근이 가능
-    box = new Box();
-
-    //3.Character
-    //Renderer, BoxCollider, Animator, ZOrder, Ground 컴포넌트가 추가되어있는 오브젝트
-    //->renderer, ->collider, ->animator, ->zOrder, ->ground로 접근 가능하다
-
-	ItemImageClip();
 
     character = new Character();
     character->name = "character";
@@ -67,7 +48,10 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-
+    cameraControler.Init();
+    cameraControler.SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetCameraControler(&cameraControler);
     for (int i = 0; i < _enemyV.size(); i++)
     {
         _enemyV[i]->Init();
@@ -81,14 +65,6 @@ HRESULT StartScene::Init()
     wall[2] = new WallObj();
     wall[2]->Init(800, 200, 1000, 300);
 
-    testGround = new GameObject();
-    testGround->transform->SetPosition(500, 350);
-    testGround->AddComponent(new ZOrder());
-    testGround->GetComponent<ZOrder>()->Init();
-    testGround->GetComponent<ZOrder>()->SetZ(400);
-    testGround->AddComponent(new Ground());
-    testGround->GetComponent<Ground>()->Init(100, 10, 0, 0);
-
 	trashBox = new ItemObject();
 	trashBox->Init();
 	trashBox->item->SetItemImage("trashbox");
@@ -96,7 +72,7 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 시영 추가 (Enemy Update)
+    // 210630 시영 추가
     enemy = new Luke();
     enemy->Init();
     enemy->transform->SetPosition(800, 300);
@@ -106,20 +82,20 @@ HRESULT StartScene::Init()
 	doberman = new Doberman();
     doberman->transform->SetPosition(1200, 400);
 	doberman->enemyAI->SetPlayer(character);
-	doberman->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	doberman->enemyinfo->SetSpeed(60.0f);
+    doberman->Init();
+
 	// 210629 광철 말콤 구현//
 	malcolm = new Malcolm();
 	malcolm->transform->SetPosition(1300, 500);
 	malcolm->enemyAI->SetPlayer(character);
-	malcolm->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	malcolm->enemyinfo->SetSpeed(30.0f);
+    malcolm->Init();
+
 	// 210629 광철 윌리엄 구현//
 	william = new William();
 	william->transform->SetPosition(1500, 500);
 	william->enemyAI->SetPlayer(character);
-	william->zOrder->SetZ(enemy->transform->GetX() + 132 / 2);
-	william->enemyinfo->SetSpeed(20.0f);
+    william->Init();
+
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
@@ -130,11 +106,6 @@ HRESULT StartScene::Init()
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
-	// 210627 시영 추가 (Enemy Update)
-	enemy = new Luke();
-	enemy->Init();
-	enemy->transform->SetPosition(800, 300);
-	enemy->enemyAI->SetPlayer(character);
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i] = new Character();
@@ -171,18 +142,19 @@ void StartScene::Update()
     {
         _enemyV[i]->Update();
     }
+	trashBox->Update();
     MainCam->transform->SetX(character->transform->GetX());
     if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
         MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
     testGround->Update();
-	trashBox->Update();
     character->Update();
+    cameraControler.Update();
     BGMANAGER->Update();
     EFFECTMANAGER->Update();
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-
+    ENEMYMANAGER->Update();
     // 광철 에너미 Update
 	malcolm->Update();
 	william->Update();
@@ -199,7 +171,6 @@ void StartScene::Update()
 void StartScene::Render()
 {
     BGMANAGER->Render();
-
 	trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
@@ -207,9 +178,6 @@ void StartScene::Render()
     }
     testGround->Render();
     EFFECTMANAGER->Render();
-
-    // 210627 시영 추가 (Enemy Render)
-
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
@@ -475,5 +443,4 @@ void StartScene::EffectClipInit()
 	CLIPMANAGER->AddClip("run_or_break_effect_right", "effect/run_or_break_effect_right.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("run_or_break_effect_left", "effect/run_or_break_effect_left.bmp", 411, 50, 6, 0.12f);
 	CLIPMANAGER->AddClip("attack_effect", "effect/attack_effect.bmp", 614, 135, 5, 0.12f);
-
 }

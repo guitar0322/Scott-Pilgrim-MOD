@@ -93,6 +93,8 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
 		player->jumpZ = false;
+		player->pressL == true;
+
 		if (player->isCatch == false)
 		{
 			return new PlayerAttackState();
