@@ -317,3 +317,13 @@ void Player::PutItem()															//item을 놓았을때
 	isCatch = false;															//item이 없는 상태이고
 	item = nullptr;																//item은 값을 잃는다	
 }
+
+void Player::Hit(int damage)
+{
+	hp -= damage;
+	if (hp <= 0)
+	{
+		gameObject->SetActive(false);
+		// TODO - DEAD
+	}
+}

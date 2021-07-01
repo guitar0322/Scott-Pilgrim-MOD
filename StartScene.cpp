@@ -72,7 +72,7 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-    // 210630 시영 추가 (Enemy Update)
+    // 210630 시영 추가
     enemy = new Luke();
     enemy->Init();
     enemy->transform->SetPosition(800, 300);
@@ -142,8 +142,11 @@ void StartScene::Update()
     {
         _enemyV[i]->Update();
     }
-
 	trashBox->Update();
+    MainCam->transform->SetX(character->transform->GetX());
+    if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
+        MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
+    testGround->Update();
     character->Update();
     cameraControler.Update();
     BGMANAGER->Update();
@@ -175,9 +178,6 @@ void StartScene::Render()
     }
     testGround->Render();
     EFFECTMANAGER->Render();
-
-    // 210627 시영 추가 (Enemy Render)
-
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
     TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));

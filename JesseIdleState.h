@@ -1,10 +1,12 @@
 #pragma once
 #include "EnemyState.h"
 
-class LukeRunState : public EnemyState
+class JesseIdleState : public EnemyState
 {
 private:
-	float _speed;
+	float _idleTime;
+	float _idleMaxTime;
+
 public:
 	virtual EnemyState* Update(EnemyAI* enemy);
 	virtual void Enter(EnemyAI* enemy);

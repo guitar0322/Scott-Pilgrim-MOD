@@ -1,7 +1,7 @@
 #pragma once
 #include "EnemyState.h"
 
-class LukeRunState : public EnemyState
+class JesseRunState : public EnemyState
 {
 private:
 	float _speed;
@@ -10,4 +10,3 @@ public:
 	virtual void Enter(EnemyAI* enemy);
 	virtual void Exit(EnemyAI* enemy);
 };
-
