@@ -290,6 +290,8 @@
     <ClCompile Include="SuccubusIdle.cpp" />
     <ClCompile Include="SuccubusSummonState.cpp" />
     <ClCompile Include="PlayerDoubleAttackState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
+    <ClCompile Include="PlayerDieState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -587,6 +589,8 @@
     <ClInclude Include="SuccubusIdle.h" />
     <ClInclude Include="SuccubusSummonState.h" />
     <ClInclude Include="PlayerDoubleAttackState.h" />
+    <ClInclude Include="PlayerHitState.h" />
+    <ClInclude Include="PlayerDieState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

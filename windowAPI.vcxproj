@@ -222,9 +222,11 @@
     <ClInclude Include="PlayerBlockState.h" />
     <ClInclude Include="PlayerBreakState.h" />
     <ClInclude Include="PlayerControler.h" />
+    <ClInclude Include="PlayerDieState.h" />
     <ClInclude Include="PlayerDoubleAttackState.h" />
     <ClInclude Include="PlayerFallState.h" />
     <ClInclude Include="PlayerGroundState.h" />
+    <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerJumpKickState.h" />
     <ClInclude Include="PlayerJumpState.h" />
@@ -348,9 +350,11 @@
     <ClCompile Include="PlayerBlockState.cpp" />
     <ClCompile Include="PlayerBreakState.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
+    <ClCompile Include="PlayerDieState.cpp" />
     <ClCompile Include="PlayerDoubleAttackState.cpp" />
     <ClCompile Include="PlayerFallState.cpp" />
     <ClCompile Include="PlayerGroundState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpKickState.cpp" />
     <ClCompile Include="PlayerJumpState.cpp" />
