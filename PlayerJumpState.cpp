@@ -48,11 +48,13 @@ void PlayerJumpState::Update(Player * player)
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
 			player->transform->MoveX(_speedX * TIMEMANAGER->getElapsedTime());
-			if (MAPMANAGER->IsInSlope1(player->gameObject) == true) {
+			if (MAPMANAGER->IsInSlope1(player->gameObject) == true)
+			{
 				player->zOrder->MoveZ(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 				MainCam->transform->MoveY(_speedX * TIMEMANAGER->getElapsedTime() / tanf(MAPMANAGER->slopeAngle1));
 			}
 		}
+
 		if (KEYMANAGER->isStayKeyDown('A'))
 		{
 			player->transform->MoveX(-_speedX * TIMEMANAGER->getElapsedTime());
@@ -114,10 +116,12 @@ void PlayerJumpState::Enter(Player * player)
 		if (player->dir == false)
 		{
 			player->ChangeClip("two_hand_jump_right", true);
+			player->equipItem->transform->SetPosition(player->transform->GetX() - 15, player->transform->GetY() - 95);
 		}
 		else
 		{
 			player->ChangeClip("two_hand_jump_left", true);
+			player->equipItem->transform->SetPosition(player->transform->GetX() + 15, player->transform->GetY() - 95);
 
 		}
 	}

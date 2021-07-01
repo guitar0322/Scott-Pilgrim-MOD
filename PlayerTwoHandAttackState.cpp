@@ -50,7 +50,7 @@ void PlayerTwoHandAttackState::Update(Player * player)
 		}
 		else
 		{
-		/*	if (player->animator->currentFrame == 0)
+			if (player->animator->currentFrame == 0)
 			{
 				player->GetItemTransform()->SetPosition(player->transform->GetX() + 50, player->transform->GetY() - 76);
 			}																	  
@@ -68,16 +68,16 @@ void PlayerTwoHandAttackState::Update(Player * player)
 			}																	  
 			if (player->animator->currentFrame == 4)							  
 			{																	  
-				player->GetItemTransform()->SetPosition(player->transform->GetX() + 70, player->transform->GetY() + 15);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 70, player->transform->GetY() + 15);
 			}																	  
 			if (player->animator->currentFrame == 5)							  
 			{																	  
-				player->GetItemTransform()->SetPosition(player->transform->GetX() + 60, player->transform->GetY() + 5);
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 60, player->transform->GetY() + 5);
 			}																	  
 			if (player->animator->currentFrame == 6)							  
 			{																	  
-				player->GetItemTransform()->SetPosition(player->transform->GetX() + 37, player->transform->GetY() + 2);
-			}*/
+				player->GetItemTransform()->SetPosition(player->transform->GetX() - 37, player->transform->GetY() + 2);
+			}
 		}
 
 	}
@@ -89,11 +89,14 @@ void PlayerTwoHandAttackState::Enter(Player * player)
 	{
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_walk_attack_right", false);
+			player->ChangeClip("two_hand_walk_attack_right", true);
 			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_walk_attack_right", false);
 		}
 		else
-			player->ChangeClip("two_hand_walk_attack_left", false);
+		{
+			player->ChangeClip("two_hand_walk_attack_left", true);
+			player->equipItem->GetComponent<Item>()->ChangeClip("trashbox_walk_attack_left", false);
+		}
 	}
 	else
 	{
@@ -101,11 +104,11 @@ void PlayerTwoHandAttackState::Enter(Player * player)
 
 		if (player->dir == false)
 		{
-			player->ChangeClip("two_hand_run_attack_right", false);
+			player->ChangeClip("two_hand_run_attack_right", true);
 
 		}
 		else
-			player->ChangeClip("two_hand_run_attack_left", false);
+			player->ChangeClip("two_hand_run_attack_left", true);
 	}
 
 }

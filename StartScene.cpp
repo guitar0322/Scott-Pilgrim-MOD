@@ -9,6 +9,7 @@
 #include "Malcolm.h"
 #include "William.h"
 #include "Succubus.h"
+
 StartScene::StartScene()
 {
 }
@@ -20,8 +21,8 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {    
     Scene::Init();
-    CameraInit();
     EnemyClipManager();
+    CameraInit();
 
     sceneInfoLoader.SetLinkObjectVAddress(&_propV);
     for (int i = 0; i < 13; i++)
@@ -51,7 +52,7 @@ HRESULT StartScene::Init()
 	character->transform->SetX(2100);
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
-    ENEMYMANAGER->SetPlayerTransform(character->transform);
+    ENEMYMANAGER->SetPlayerTransform(character);
     ENEMYMANAGER->SetCameraControler(&cameraControler);
     for (int i = 0; i < _enemyV.size(); i++)
     {
@@ -68,44 +69,10 @@ HRESULT StartScene::Init()
 
 	trashBox = new ItemObject();
 	trashBox->Init();
-	trashBox->item->SetItemImage("trashbox");
+	trashBox->item->SetItemImage("trashbox_right");
 	trashBox->transform->SetPosition(640, 300);
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
-
-    // 210630 ½Ã¿µ Ãß°¡
-    enemy = new Luke();
-    enemy->Init();
-    enemy->transform->SetPosition(800, 300);
-    enemy->enemyAI->SetPlayer(character);
-
-	// 210628 ±¤Ã¶ µµº£¸£¸¸ °³¼± //
-	doberman = new Doberman();
-    doberman->transform->SetPosition(1200, 400);
-	doberman->enemyAI->SetPlayer(character);
-    doberman->Init();
-
-	// 210629 ±¤Ã¶ ¸»ÄÞ ±¸Çö//
-	malcolm = new Malcolm();
-	malcolm->transform->SetPosition(1300, 500);
-	malcolm->enemyAI->SetPlayer(character);
-    malcolm->Init();
-
-	// 210629 ±¤Ã¶ Àª¸®¾ö ±¸Çö//
-	william = new William();
-	william->transform->SetPosition(1500, 500);
-	william->enemyAI->SetPlayer(character);
-    william->Init();
-
-	// º¸½º ¸ÅÆ© ±¸Çö//
-	matthew = new Character();
-	matthew->Init();
-	matthew->transform->SetPosition(1700, 400);
-	matthew->collider->isTrigger = true;
-	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
-	matthew->AddComponent(new Matthew());
-	matthew->GetComponent<Matthew>()->Init();
-	matthew->GetComponent<Matthew>()->SetPlayer(character);
 
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{
@@ -118,6 +85,7 @@ HRESULT StartScene::Init()
 		succubus[i]->SetActive(false);
 		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
 	}
+	
 	character->GetComponent<Player>()->SetEnemy(enemy);
 
     BackgroundInit();
@@ -156,22 +124,18 @@ void StartScene::Update()
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	malcolm->Update();
-	william->Update();
-	doberman->Update();
-	matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i]->Update();
 	}
+
     // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
-    enemy->Update();
 }
 
 void StartScene::Render()
 {
     BGMANAGER->Render();
-	trashBox->Render();
+	//trashBox->Render();
     ZORDER->Render();
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
@@ -226,15 +190,24 @@ void StartScene::WallInit()
 
 void StartScene::ItemImageClip()
 {
-    CLIPMANAGER->AddClip("trashbox", "item/trashbox.bmp", 115, 87, 1, 1);
+    CLIPMANAGER->AddClip("trashbox_right", "item/trashbox_right.bmp", 115, 87, 1, 1);
+	CLIPMANAGER->AddClip("trashbox_left", "item/trashbox_left.bmp", 115, 87, 1, 1);
     CLIPMANAGER->AddClip("chair", "item/chair.bmp", 41, 48, 1, 1);
 
     //walk attack 
     CLIPMANAGER->AddClip("trashbox_walk_attack_right", "item/trashbox_walk_attack_right.bmp", 805, 93, 7, 0.2f);
     CLIPMANAGER->FindClip("trashbox_walk_attack_right")->isLoop = false;
 
-    //trashBox->animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
+	CLIPMANAGER->AddClip("trashbox_walk_attack_left", "item/trashbox_walk_attack_left.bmp", 805, 93, 7, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_attack_left")->isLoop = false;
+	//throw
+	CLIPMANAGER->AddClip("trashbox_walk_throw_right", "item/trashbox_walk_throw_right.bmp", 807, 69, 7, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_throw_right")->isLoop = false;
+
+	CLIPMANAGER->AddClip("trashbox_walk_throw_left", "item/trashbox_walk_throw_left.bmp", 460, 87, 4, 0.2f);
+	CLIPMANAGER->FindClip("trashbox_walk_throw_left")->isLoop = false;
 }
+
 void StartScene::EnemyClipManager()
 {
     /*
@@ -271,66 +244,65 @@ void StartScene::EnemyClipManager()
     // IDLE
     CLIPMANAGER->AddClip("lee_idle_right", "lee/lee_idle_right.bmp", 800, 132, 8, 0.20f);
     CLIPMANAGER->AddClip("lee_idle_left", "lee/lee_idle_left.bmp", 800, 132, 8, 0.20f);
-    // WALK               
+    // WALK
     CLIPMANAGER->AddClip("lee_walk_right", "lee/lee_walk_right.bmp", 576, 138, 6, 0.20f);
     CLIPMANAGER->AddClip("lee_walk_left", "lee/lee_walk_left.bmp", 576, 138, 6, 0.20f);
-    // RUN                
+    // RUN
     CLIPMANAGER->AddClip("lee_run_right", "lee/lee_run_right.bmp", 864, 144, 8, 0.20f);
     CLIPMANAGER->AddClip("lee_run_left", "lee/lee_run_left.bmp", 864, 144, 8, 0.20f);
-    // BLOCK              
+    // BLOCK
     CLIPMANAGER->AddClip("lee_block_right", "lee/lee_block_right.bmp", 88, 132, 1, 0.20f);
     CLIPMANAGER->AddClip("lee_block_left", "lee/lee_block_left.bmp", 88, 132, 1, 0.20f);
-    // HIT                
+    // HIT
     CLIPMANAGER->AddClip("lee_hit_right", "lee/lee_hit_right.bmp", 550, 134, 5, 0.20f);
     CLIPMANAGER->AddClip("lee_hit_left", "lee/lee_hit_left.bmp", 550, 134, 5, 0.20f);
-    // KICK               
+    // KICK
     CLIPMANAGER->AddClip("lee_kick_right", "lee/lee_kick_right.bmp", 1050, 136, 7, 0.20f);
     CLIPMANAGER->AddClip("lee_kick_left", "lee/lee_kick_left.bmp", 1050, 136, 7, 0.20f);
-    // ATTACK 1       
+    // ATTACK 1
     CLIPMANAGER->AddClip("lee_attack1_right", "lee/lee_attack1_right.bmp", 560, 128, 4, 0.20f);
     CLIPMANAGER->AddClip("lee_attack1_left", "lee/lee_attack1_left.bmp", 560, 128, 4, 0.20f);
     // ATTACK 2
     CLIPMANAGER->AddClip("lee_attack2_right", "lee/lee_attack2_right.bmp", 568, 132, 4, 0.20f);
     CLIPMANAGER->AddClip("lee_attack2_left", "lee/lee_attack2_left.bmp", 568, 132, 4, 0.20f);
-    // ATTACK 3       
+    // ATTACK 3
     CLIPMANAGER->AddClip("lee_attack3_right", "lee/lee_attack3_right.bmp", 672, 156, 7, 0.20f);
     CLIPMANAGER->AddClip("lee_attack3_left", "lee/lee_attack3_left.bmp", 672, 156, 7, 0.20f);
-    // DIE                
+    // DIE
     CLIPMANAGER->AddClip("lee_die_right", "lee/lee_die_right.bmp", 2072, 172, 14, 0.20f);
     CLIPMANAGER->AddClip("lee_die_left", "lee/lee_die_left.bmp", 2072, 172, 14, 0.20f);
 
-    /* LUKE CLIP MANAGER */
-    // IDLE
-    CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 800, 128, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 800, 128, 8, 0.20f);
-    // WALK
-    CLIPMANAGER->AddClip("luke_walk_right", "luke/luke_walk_right.bmp", 564, 136, 6, 0.20f);
-    CLIPMANAGER->AddClip("luke_walk_left", "luke/luke_walk_left.bmp", 564, 136, 6, 0.20f);
-    // RUN
-    CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 880, 130, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 880, 130, 8, 0.20f);
-    // BLOCK
-    CLIPMANAGER->AddClip("luke_block_right", "luke/luke_block_right.bmp", 264, 128, 3, 0.20f);
-    CLIPMANAGER->AddClip("luke_block_left", "luke/luke_block_left.bmp", 264, 128, 3, 0.20f);
-    // HIT
-    CLIPMANAGER->AddClip("luke_hit_right", "luke/luke_hit_right.bmp", 600, 130, 5, 0.20f);
-    CLIPMANAGER->AddClip("luke_hit_left", "luke/luke_hit_left.bmp", 600, 130, 5, 0.20f);
-    // KICK
-    CLIPMANAGER->AddClip("luke_kick_right", "luke/luke_kick_right.bmp", 1050, 134, 7, 0.20f);
-    CLIPMANAGER->AddClip("luke_kick_left", "luke/luke_kick_left.bmp", 1050, 134, 7, 0.20f);
-    // ATTACK 1
-    CLIPMANAGER->AddClip("luke_attack1_right", "luke/luke_attack1_right.bmp", 560, 134, 4, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack1_left", "luke/luke_attack1_left.bmp", 560, 134, 4, 0.20f);
-    // ATTACK 2
-    CLIPMANAGER->AddClip("luke_attack2_right", "luke/luke_attack2_right.bmp", 568, 132, 4, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack2_left", "luke/luke_attack2_left.bmp", 568, 132, 4, 0.20f);
-    // ATTACK 3
-    CLIPMANAGER->AddClip("luke_attack3_right", "luke/luke_attack3_right.bmp", 832, 170, 8, 0.20f);
-    CLIPMANAGER->AddClip("luke_attack3_left", "luke/luke_attack3_left.bmp", 832, 170, 8, 0.20f);
-    // DIE
-    CLIPMANAGER->AddClip("luke_die_right", "luke/luke_die_right.bmp", 2100, 172, 14, 0.20f);
-    CLIPMANAGER->AddClip("luke_die_left", "luke/luke_die_left.bmp", 2100, 172, 14, 0.20f);
-
+	/* LUKE CLIP MANAGER */
+// IDLE
+	CLIPMANAGER->AddClip("luke_idle_right", "luke/luke_idle_right.bmp", 800, 128, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_idle_left", "luke/luke_idle_left.bmp", 800, 128, 8, 0.20f);
+	// WALK
+	CLIPMANAGER->AddClip("luke_walk_right", "luke/luke_walk_right.bmp", 564, 136, 6, 0.20f);
+	CLIPMANAGER->AddClip("luke_walk_left", "luke/luke_walk_left.bmp", 564, 136, 6, 0.20f);
+	// RUN
+	CLIPMANAGER->AddClip("luke_run_right", "luke/luke_run_right.bmp", 880, 130, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_run_left", "luke/luke_run_left.bmp", 880, 130, 8, 0.20f);
+	// BLOCK
+	CLIPMANAGER->AddClip("luke_block_right", "luke/luke_block_right.bmp", 264, 128, 3, 0.20f);
+	CLIPMANAGER->AddClip("luke_block_left", "luke/luke_block_left.bmp", 264, 128, 3, 0.20f);
+	// HIT
+	CLIPMANAGER->AddClip("luke_hit_right", "luke/luke_hit_right.bmp", 600, 130, 5, 0.20f);
+	CLIPMANAGER->AddClip("luke_hit_left", "luke/luke_hit_left.bmp", 600, 130, 5, 0.20f);
+	// KICK
+	CLIPMANAGER->AddClip("luke_kick_right", "luke/luke_kick_right.bmp", 1050, 134, 7, 0.20f);
+	CLIPMANAGER->AddClip("luke_kick_left", "luke/luke_kick_left.bmp", 1050, 134, 7, 0.20f);
+	// ATTACK 1
+	CLIPMANAGER->AddClip("luke_attack1_right", "luke/luke_attack1_right.bmp", 560, 134, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack1_left", "luke/luke_attack1_left.bmp", 560, 134, 4, 0.20f);
+	// ATTACK 2
+	CLIPMANAGER->AddClip("luke_attack2_right", "luke/luke_attack2_right.bmp", 568, 132, 4, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack2_left", "luke/luke_attack2_left.bmp", 568, 132, 4, 0.20f);
+	// ATTACK 3
+	CLIPMANAGER->AddClip("luke_attack3_right", "luke/luke_attack3_right.bmp", 832, 170, 8, 0.20f);
+	CLIPMANAGER->AddClip("luke_attack3_left", "luke/luke_attack3_left.bmp", 832, 170, 8, 0.20f);
+	// DIE
+	CLIPMANAGER->AddClip("luke_die_right", "luke/luke_die_right.bmp", 2100, 172, 14, 0.20f);
+	CLIPMANAGER->AddClip("luke_die_left", "luke/luke_die_left.bmp", 2100, 172, 14, 0.20f);
     /* MIKE CLIP MANAGER */
     // IDLE
     CLIPMANAGER->AddClip("mike_idle_right", "mike/mike_idle_right.bmp", 798, 134, 8, 0.20f);

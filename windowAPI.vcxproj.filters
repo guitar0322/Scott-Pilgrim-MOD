@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="AnimationClip.cpp" />
@@ -37,6 +37,7 @@
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="Jesse.cpp" />
     <ClCompile Include="JesseAttackState.cpp" />
+    <ClCompile Include="JesseAttack1State.cpp" />
     <ClCompile Include="JesseBlockState.cpp" />
     <ClCompile Include="JesseDieState.cpp" />
     <ClCompile Include="JesseHitState.cpp" />
@@ -142,6 +143,42 @@
     <ClCompile Include="MalcolmBlockState.cpp" />
     <ClCompile Include="WilliamBlockState.cpp" />
     <ClCompile Include="WilliamHitState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerLastHitState.cpp" />
+    <ClCompile Include="PlayerKnockoutState.cpp" />
+    <ClCompile Include="LeeWalkState.cpp" />
+    <ClCompile Include="LeeRunState.cpp" />
+    <ClCompile Include="LeeBlockState.cpp" />
+    <ClCompile Include="LeeHitState.cpp" />
+    <ClCompile Include="LeeKickState.cpp" />
+    <ClCompile Include="LeeAttack1State.cpp" />
+    <ClCompile Include="LeeAttack2State.cpp" />
+    <ClCompile Include="LeeAttack3State.cpp" />
+    <ClCompile Include="LeeDieState.cpp" />
+    <ClCompile Include="Mike.cpp" />
+    <ClCompile Include="MikeIdleState.cpp" />
+    <ClCompile Include="MikeWalkState.cpp" />
+    <ClCompile Include="MikeRunState.cpp" />
+    <ClCompile Include="MikeBlockState.cpp" />
+    <ClCompile Include="MikeHitState.cpp" />
+    <ClCompile Include="MikeKickState.cpp" />
+    <ClCompile Include="MikeAttack1State.cpp" />
+    <ClCompile Include="MikeAttack2State.cpp" />
+    <ClCompile Include="MikeAttack3State.cpp" />
+    <ClCompile Include="MikeDieState.cpp" />
+    <ClCompile Include="Richard.cpp" />
+    <ClCompile Include="RichardIdleState.cpp" />
+    <ClCompile Include="RichardWalkState.cpp" />
+    <ClCompile Include="RichardRunState.cpp" />
+    <ClCompile Include="RichardBlockState.cpp" />
+    <ClCompile Include="RichardHitState.cpp" />
+    <ClCompile Include="RichardKickState.cpp" />
+    <ClCompile Include="RichardAttack1State.cpp" />
+    <ClCompile Include="RichardAttack2State.cpp" />
+    <ClCompile Include="RichardAttack3State.cpp" />
+    <ClCompile Include="RichardDieState.cpp" />
+    <ClCompile Include="JesseAttack2State.cpp" />
+    <ClCompile Include="JesseAttack3State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -181,6 +218,7 @@
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="Jesse.h" />
     <ClInclude Include="JesseAttackState.h" />
+    <ClInclude Include="JesseAttack1State.h" />
     <ClInclude Include="JesseBlockState.h" />
     <ClInclude Include="JesseDieState.h" />
     <ClInclude Include="JesseHitState.h" />
@@ -289,6 +327,42 @@
     <ClInclude Include="MalcolmBlockState.h" />
     <ClInclude Include="WilliamBlockState.h" />
     <ClInclude Include="WilliamHitState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerLastHitState.h" />
+    <ClInclude Include="PlayerKnockoutState.h" />
+    <ClInclude Include="LeeWalkState.h" />
+    <ClInclude Include="LeeRunState.h" />
+    <ClInclude Include="LeeBlockState.h" />
+    <ClInclude Include="LeeHitState.h" />
+    <ClInclude Include="LeeKickState.h" />
+    <ClInclude Include="LeeAttack1State.h" />
+    <ClInclude Include="LeeAttack2State.h" />
+    <ClInclude Include="LeeAttack3State.h" />
+    <ClInclude Include="LeeDieState.h" />
+    <ClInclude Include="Mike.h" />
+    <ClInclude Include="MikeIdleState.h" />
+    <ClInclude Include="MikeWalkState.h" />
+    <ClInclude Include="MikeRunState.h" />
+    <ClInclude Include="MikeBlockState.h" />
+    <ClInclude Include="MikeHitState.h" />
+    <ClInclude Include="MikeKickState.h" />
+    <ClInclude Include="MikeAttack1State.h" />
+    <ClInclude Include="MikeAttack2State.h" />
+    <ClInclude Include="MikeAttack3State.h" />
+    <ClInclude Include="MikeDieState.h" />
+    <ClInclude Include="Richard.h" />
+    <ClInclude Include="RichardIdleState.h" />
+    <ClInclude Include="RichardWalkState.h" />
+    <ClInclude Include="RichardRunState.h" />
+    <ClInclude Include="RichardBlockState.h" />
+    <ClInclude Include="RichardHitState.h" />
+    <ClInclude Include="RichardKickState.h" />
+    <ClInclude Include="RichardAttack1State.h" />
+    <ClInclude Include="RichardAttack2State.h" />
+    <ClInclude Include="RichardAttack3State.h" />
+    <ClInclude Include="RichardDieState.h" />
+    <ClInclude Include="JesseAttack2State.h" />
+    <ClInclude Include="JesseAttack3State.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

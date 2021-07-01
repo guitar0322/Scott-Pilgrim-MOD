@@ -4,8 +4,7 @@ class PlayerIdleState :
 	public PlayerState
 {
 private:
-	float _itemShakeDir;
-	float _itemShakeTime;
+	bool _playerJump;
 public:
 	virtual PlayerState* InputHandle(Player* player);
 	virtual void Update(Player* player);

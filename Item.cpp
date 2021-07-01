@@ -6,10 +6,15 @@ void Item::Init()
 	_animator = gameObject->GetComponent<Animator>();
 	_zorder = gameObject->GetComponent<ZOrder>();
 
+	_animator->AddClip("trashbox_left", CLIPMANAGER->FindClip("trashbox_left"));
 	_animator->AddClip("trashbox_walk_attack_right", CLIPMANAGER->FindClip("trashbox_walk_attack_right"));
+	_animator->AddClip("trashbox_walk_attack_left", CLIPMANAGER->FindClip("trashbox_walk_attack_left"));
+
+	_animator->AddClip("trashbox_walk_throw_right", CLIPMANAGER->FindClip("trashbox_walk_throw_right"));
+	_animator->AddClip("trashbox_walk_throw_left", CLIPMANAGER->FindClip("trashbox_walk_throw_left"));
+
 	_itemSpeed = 320.f;		// 아이템의 속도
 	_gravity = 560.f;
-	//_gravity = 15.0f;		// 중력
 	_friction = 60.f;		// 마찰력
 							//위 값들은 변하지 않기에 init에서 값 줌
 
@@ -78,12 +83,10 @@ void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 	_isGround = false;
 	if (dir == false)				// right일때
 	{
-		//_angle = (PI/4);			// 45도
 		_angle = 0;
 	}
 	if (dir == true)				// left일때
 	{
-		//_angle = (PI * 3 / 4);		//135도
 		_angle = PI;
 	}
 

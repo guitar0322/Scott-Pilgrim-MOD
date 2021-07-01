@@ -12,7 +12,7 @@ Luke::Luke()
 	animator->AddClip("luke_walk_left", CLIPMANAGER->FindClip("luke_walk_left"));
 	// RUN
 	animator->AddClip("luke_run_right", CLIPMANAGER->FindClip("luke_run_right"));
-	animator->AddClip("luke_run_left", CLIPMANAGER->FindClip("luke_run_left"));	
+	animator->AddClip("luke_run_left", CLIPMANAGER->FindClip("luke_run_left"));
 	// BLOCK
 	animator->AddClip("luke_block_right", CLIPMANAGER->FindClip("luke_block_right"));
 	animator->AddClip("luke_block_left", CLIPMANAGER->FindClip("luke_block_left"));
@@ -43,9 +43,6 @@ Luke::Luke()
 	animator->AddClip("luke_die_right", CLIPMANAGER->FindClip("luke_die_right"));
 	animator->AddClip("luke_die_left", CLIPMANAGER->FindClip("luke_die_left"));
 
-	/* LUKE INIT */
-	Init();
-
 	// AI STATE 동적 할당
 	enemyAI->SetState(new LukeIdleState());
 }
@@ -64,7 +61,10 @@ void Luke::Init()
 
 	enemyinfo->Sethp(50);
 
-	int randomAttackDamage = RND->getInt(5);
+	//int randomAttackDamage = RND->getInt(10);
+	int randomAttackDamage = 0;
+
+	//int randomAttackDamage = RND->getInt(5);
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);

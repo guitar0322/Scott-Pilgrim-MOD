@@ -1,19 +1,56 @@
 #include "stdafx.h"
 #include "PlayerHitState.h"
+#include "PlayerIdleState.h"
+#include "PlayerLastHitState.h"
 
-PlayerState * PlayerHitState::InputHandle(Player * player)
+PlayerState * PlayerHitState::InputHandle(Player* player)
 {
+	if(player->animator->GetEnd())
+		return new PlayerIdleState();
+
+	if (player->hitCount == 3)
+	{
+		player->hitCount = 0;
+		return new PlayerLastHitState();
+	}
+
 	return nullptr;
 }
 
-void PlayerHitState::Update(Player * player)
+void PlayerHitState::Update(Player* player)
 {
+	
+	
+
 }
 
-void PlayerHitState::Enter(Player * player)
+void PlayerHitState::Enter(Player* player)
 {
+
+	if (player->dir == false)
+	{
+		player->ChangeClip("hit1_right", true);
+	}
+	else
+	{
+		player->ChangeClip("hit1_left", true);
+	}
+
+	if (player->hitCount == 2)
+	{
+		if (player->dir == false)
+		{
+			player->ChangeClip("hit2_right", true);
+		}
+		else
+		{
+			player->ChangeClip("hit2_left", true);
+		}
+		
+	}
 }
 
-void PlayerHitState::Exit(Player * player)
+void PlayerHitState::Exit(Player* player)
 {
+
 }
