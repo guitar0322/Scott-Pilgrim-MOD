@@ -16,6 +16,7 @@ EnemyState* JesseKickState::Update(EnemyAI* enemy)
 	/* 위치 좌표 보정 */
 	if (enemy->animator->GetEnd())
 	{
+		enemy->transform->MoveY(-20);
 		if (enemy->enemyinfo->GetDir())
 		{
 			enemy->transform->MoveX(25);
@@ -39,6 +40,7 @@ void JesseKickState::Enter(EnemyAI* enemy)
 	}
 
 	/* 위치 좌표 보정 */
+	enemy->transform->MoveY(+20);
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->transform->MoveX(25);

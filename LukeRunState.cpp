@@ -35,8 +35,8 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	/* RUN 상태 내 PLAYER 범위 내 있으며, Z축도 정해진 값과 비슷해질 경우 */
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
 					enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 100 &&
-					enemy->zOrder->GetZ() - 6 <= enemy->GetPlayerTransform()->gameObject->GetComponent<ZOrder>()->GetZ() &&
-					enemy->zOrder->GetZ() + 6 >= enemy->GetPlayerTransform()->gameObject->GetComponent<ZOrder>()->GetZ())
+					enemy->zOrder->GetZ() - 6 <= enemy->GetPlayer()->GetComponent<ZOrder>()->GetZ() &&
+					enemy->zOrder->GetZ() + 6 >= enemy->GetPlayer()->GetComponent<ZOrder>()->GetZ())
 	{
 		/* 콤보공격 OR 발차기 공격 중 랜덤선택 */
 		int randomAttack = RND->getInt(2);
@@ -50,8 +50,8 @@ EnemyState* LukeRunState::Update(EnemyAI* enemy)
 	}
 
 	// TODO - AI X축, Y축, 
-	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY());
+	float angle = GetAngle(enemy->transform->GetX(), enemy->zOrder->GetZ(),
+		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayer()->GetComponent<ZOrder>()->GetZ());
 
 	enemy->transform->MoveX(_speed * TIMEMANAGER->getElapsedTime() * cosf(angle));
 	enemy->zOrder->MoveZ(_speed * TIMEMANAGER->getElapsedTime() * -sinf(angle));

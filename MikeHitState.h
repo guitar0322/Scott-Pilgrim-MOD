@@ -1,6 +1,7 @@
 #pragma once
 #include "EnemyState.h"
-class JesseAttackState : public EnemyState
+
+class MikeHitState : public EnemyState
 {
 private:
 
