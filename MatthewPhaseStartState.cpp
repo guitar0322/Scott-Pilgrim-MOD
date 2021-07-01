@@ -5,8 +5,7 @@
 
 Matthewstate * MatthewPhaseStartState::Update(Matthew * matthew)
 {
-	_startTime += TIMEMANAGER->getElapsedTime();
-	if (_startTime >=0.5f)
+	if (matthew->animator->GetEnd()==true)
 	{
 		return new MatthewPhaseSpotlightState();
 	}
@@ -15,7 +14,6 @@ Matthewstate * MatthewPhaseStartState::Update(Matthew * matthew)
 
 void MatthewPhaseStartState::Enter(Matthew * matthew)
 {
-	_startTime = 0;
 	if (matthew->Getdir() == false)
 	{
 		matthew->ChangeCilp("matthew_phase_start_right", false);

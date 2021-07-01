@@ -2,6 +2,7 @@
 #include "WilliamMoveState.h"
 #include "WilliamIdleState.h"
 #include "WilliamAttackState.h"
+#include "WilliamBellyState.h"
 
 EnemyState * WilliamMoveState::Update(EnemyAI * enemy)
 {
@@ -29,7 +30,16 @@ EnemyState * WilliamMoveState::Update(EnemyAI * enemy)
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) < 50)
 	{
-		return new WilliamAttackState();
+		switch (RND->getInt(2))
+		{
+		case 0:
+			return new WilliamAttackState();
+			break;
+
+		case 1:
+			return new WilliamBellyState();
+			break;
+		}
 	}
 
 	float angle = GetAngle(enemy->transform->GetX(), enemy->transform->GetY(),

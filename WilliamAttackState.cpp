@@ -4,8 +4,7 @@
 
 EnemyState * WilliamAttackState::Update(EnemyAI * enemy)
 {
-	_attackTime += TIMEMANAGER->getElapsedTime();
-	if (_attackTime >= 2.0f)
+	if (enemy->animator->GetEnd()==true)
 	{
 		return new WilliamIdleState();
 	}
@@ -14,7 +13,6 @@ EnemyState * WilliamAttackState::Update(EnemyAI * enemy)
 
 void WilliamAttackState::Enter(EnemyAI * enemy)
 {
-	_attackTime = 0;
 	if (enemy->enemyinfo->GetDir()==false)
 	{
 		enemy->ChangeClip("william_attack_right",true);

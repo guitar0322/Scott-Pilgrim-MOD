@@ -5,8 +5,7 @@
 
 Matthewstate * MatthewPhaseEndState::Update(Matthew * matthew)
 {
-	_endTime += TIMEMANAGER->getElapsedTime();
-	if (_endTime >= 1.0f)
+	if (matthew->animator->GetEnd()==true)
 	{
 		matthew->transform->MoveY(150);
 		return new MatthewIdleState();

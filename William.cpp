@@ -6,6 +6,11 @@ William::William()
 {
 	CLIPMANAGER->FindClip("william_attack_left")->isLoop = false;
 	CLIPMANAGER->FindClip("william_attack_right")->isLoop = false;
+	CLIPMANAGER->FindClip("william_belly_left")->isLoop = false;
+	CLIPMANAGER->FindClip("william_belly_right")->isLoop = false;
+	CLIPMANAGER->FindClip("william_block_left")->isLoop = false;
+	CLIPMANAGER->FindClip("william_hit_left")->isLoop = false;
+	CLIPMANAGER->FindClip("william_hit_right")->isLoop = false;
 
 	animator->AddClip("william_idle_left", CLIPMANAGER->FindClip("william_idle_left"));
 	animator->AddClip("william_idle_right", CLIPMANAGER->FindClip("william_idle_right"));

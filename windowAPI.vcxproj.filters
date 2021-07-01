@@ -1,840 +1,294 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="AnimationClip.cpp" />
-    <ClCompile Include="image.cpp" />
-    <ClCompile Include="ImageManager.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="utils.cpp" />
-    <ClCompile Include="winMain.cpp" />
-    <ClCompile Include="Animator.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="BackgroundManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="Cam.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ClipManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugText.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyAI.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyInfo.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyState.cpp">
-      <Filter>EnemyState</Filter>
-    </ClCompile>
-    <ClCompile Include="gameNode.cpp">
-      <Filter>Playground</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="GroundManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageObject.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeAttack1State.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeIdleState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeRunState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="Matthew.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerAttackState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBlockState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBreakState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerControler.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerFallState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerGroundState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerIdleState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerJumpKickState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerJumpState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerKickAttackState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerKickSkillState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRunState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerWalkState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerZorderJumpState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="keyManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectInfo.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="playGround.cpp">
-      <Filter>Playground</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneInfoLoader.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="soundManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="TagManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="StartScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="UIBase.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="UIRenderer.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="WallManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="WallObj.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ZOrder.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="ZOrderManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Component\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="TextDataManager.cpp">
-      <Filter>Manager\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Zone.cpp">
-      <Filter>GameObject\Framwork</Filter>
-    </ClCompile>
-    <ClCompile Include="Outline.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Cam.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraControler.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ClipManager.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Doberman.cpp" />
+    <ClCompile Include="DobermanAttackState.cpp" />
+    <ClCompile Include="DobermanHitState.cpp" />
+    <ClCompile Include="DobermanIdleState.cpp" />
+    <ClCompile Include="DobermanMoveState.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyInfo.cpp" />
-    <ClCompile Include="Luke.cpp" />
-    <ClCompile Include="LukeIdleState.cpp" />
-    <ClCompile Include="LukeRunState.cpp" />
-    <ClCompile Include="MapManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="DobermanAttackState.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="DobermanIdleState.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="DobermanMoveState.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewAttack2State.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewAttack3State.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewAttackState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewIdleState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewMoveState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyState.cpp" />
+    <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="GroundManager.cpp" />
+    <ClCompile Include="image.cpp" />
+    <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemObject.cpp" />
+    <ClCompile Include="Jesse.cpp" />
+    <ClCompile Include="JesseAttackState.cpp" />
+    <ClCompile Include="JesseBlockState.cpp" />
+    <ClCompile Include="JesseDieState.cpp" />
+    <ClCompile Include="JesseHitState.cpp" />
+    <ClCompile Include="JesseIdleState.cpp" />
+    <ClCompile Include="JesseKickState.cpp" />
+    <ClCompile Include="JesseRunState.cpp" />
+    <ClCompile Include="JesseWalkState.cpp" />
+    <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MalcolmHitState.cpp" />
+    <ClCompile Include="MalcolmKickState.cpp" />
+    <ClCompile Include="Lee.cpp" />
+    <ClCompile Include="LeeIdleState.cpp" />
+    <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Malcolm.cpp" />
+    <ClCompile Include="MalcolmAttackState.cpp" />
     <ClCompile Include="MalcolmIdleState.cpp" />
     <ClCompile Include="MalcolmMoveState.cpp" />
-    <ClCompile Include="MalcolmAttackState.cpp" />
-    <ClCompile Include="MalcolmhitState.cpp" />
+    <ClCompile Include="MatthewBlockState.cpp" />
+    <ClCompile Include="MatthewHitState.cpp" />
+    <ClCompile Include="LukeAttack2State.cpp" />
+    <ClCompile Include="LukeAttack3State.cpp" />
+    <ClCompile Include="LukeBlockState.cpp" />
+    <ClCompile Include="LukeDieState.cpp" />
+    <ClCompile Include="LukeHitState.cpp" />
+    <ClCompile Include="LukeKickState.cpp" />
+    <ClCompile Include="LukeWalkState.cpp" />
+    <ClCompile Include="Matthew.cpp" />
+    <ClCompile Include="MatthewAttack2State.cpp" />
+    <ClCompile Include="MatthewAttack3State.cpp" />
+    <ClCompile Include="MatthewAttackState.cpp" />
+    <ClCompile Include="MatthewIdleState.cpp" />
+    <ClCompile Include="MatthewMoveState.cpp" />
+    <ClCompile Include="MatthewPalmwindState.cpp" />
+    <ClCompile Include="Luke.cpp" />
+    <ClCompile Include="LukeAttack1State.cpp" />
+    <ClCompile Include="LukeIdleState.cpp" />
+    <ClCompile Include="LukeRunState.cpp" />
+    <ClCompile Include="MatthewPhaseEndState.cpp" />
+    <ClCompile Include="MatthewPhaseReadyState.cpp" />
+    <ClCompile Include="MatthewPhaseSpotlightState.cpp" />
+    <ClCompile Include="MatthewPhaseStartState.cpp" />
+    <ClCompile Include="MatthewRunState.cpp" />
+    <ClCompile Include="MatthewState.cpp" />
+    <ClCompile Include="ObjectInfo.cpp" />
+    <ClCompile Include="Outline.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerBlockState.cpp" />
+    <ClCompile Include="PlayerBreakState.cpp" />
+    <ClCompile Include="PlayerControler.cpp" />
+    <ClCompile Include="PlayerDieState.cpp" />
+    <ClCompile Include="PlayerDoubleAttackState.cpp" />
+    <ClCompile Include="PlayerFallState.cpp" />
+    <ClCompile Include="PlayerGroundState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpKickState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
+    <ClCompile Include="PlayerKickAttackState.cpp" />
+    <ClCompile Include="PlayerKickSkillState.cpp" />
+    <ClCompile Include="PlayerRunState.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerTwoHandAttackState.cpp" />
+    <ClCompile Include="PlayerWalkState.cpp" />
+    <ClCompile Include="PlayerZorderJumpState.cpp" />
+    <ClCompile Include="playGround.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneInfoLoader.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="EditorScene.cpp" />
+    <ClCompile Include="Shadow.cpp" />
+    <ClCompile Include="soundManager.cpp" />
+    <ClCompile Include="StartScene.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Succubus.cpp" />
+    <ClCompile Include="SuccubusIdleState.cpp" />
+    <ClCompile Include="SuccubusState.cpp" />
+    <ClCompile Include="SuccubusSummonState.cpp" />
+    <ClCompile Include="TagManager.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextDataManager.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UIBase.cpp" />
+    <ClCompile Include="UIRenderer.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WallManager.cpp" />
+    <ClCompile Include="WallObj.cpp" />
     <ClCompile Include="William.cpp" />
+    <ClCompile Include="WilliamAttackState.cpp" />
     <ClCompile Include="WilliamIdleState.cpp" />
     <ClCompile Include="WilliamMoveState.cpp" />
-    <ClCompile Include="WilliamAttackState.cpp" />
-    <ClCompile Include="LukeAttack2State.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeAttack3State.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeBlockState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeDieState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeHitState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeKickState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="LukeWalkState.cpp">
-      <Filter>EnemyState\Luke</Filter>
-    </ClCompile>
-    <ClCompile Include="DobermanHitState.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="Malcolm.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MalcolmAttackState.cpp">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClCompile>
-    <ClCompile Include="MalcolmhitState.cpp">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClCompile>
-    <ClCompile Include="MalcolmIdleState.cpp">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClCompile>
-    <ClCompile Include="MalcolmMoveState.cpp">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPalmwindState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="William.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="WilliamAttackState.cpp">
-      <Filter>EnemyState\William</Filter>
-    </ClCompile>
-    <ClCompile Include="WilliamIdleState.cpp">
-      <Filter>EnemyState\William</Filter>
-    </ClCompile>
-    <ClCompile Include="WilliamMoveState.cpp">
-      <Filter>EnemyState\William</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraControler.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="MalcolmKickState.cpp">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewBlockState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewHitState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPhaseEndState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPhaseReadyState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPhaseSpotlightState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPhaseStartState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerDoubleAttackState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerTwoHandAttackState.cpp">
-      <Filter>PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="SuccubusIdle.cpp">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClCompile>
-    <ClCompile Include="SuccubusState.cpp">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClCompile>
-    <ClCompile Include="SuccubusSummonState.cpp">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClCompile>
-    <ClCompile Include="Succubus.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Outline.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Shadow.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Doberman.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerDoubleAttackState.cpp" />
-    <ClCompile Include="MatthewRunState.cpp" />
-    <ClCompile Include="SuccubusIdleState.cpp" />
-    <ClCompile Include="PlayerHitState.cpp" />
-    <ClCompile Include="PlayerDieState.cpp" />
-    <ClCompile Include="MatthehHitState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="MatthewPalmwindState.cpp">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClCompile>
-    <ClCompile Include="DobermanHitState.cpp">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseAttackState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseBlockState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseDieState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseHitState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseIdleState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseKickState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseRunState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="JesseWalkState.cpp">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClCompile>
-    <ClCompile Include="Luke.cpp">
-      <Filter>GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Jesse.cpp">
-      <Filter>GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Lee.cpp">
-      <Filter>GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="LeeIdleState.cpp" />
+    <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="Zone.cpp" />
+    <ClCompile Include="ZOrder.cpp" />
+    <ClCompile Include="ZOrderManager.cpp" />
+    <ClCompile Include="WilliamBellyState.cpp" />
+    <ClCompile Include="MalcolmRunState.cpp" />
+    <ClCompile Include="MalcolmBlockState.cpp" />
+    <ClCompile Include="WilliamBlockState.cpp" />
+    <ClCompile Include="WilliamHitState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="Animator.h" />
+    <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Cam.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraControler.h" />
+    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="ClipManager.h" />
+    <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
-    <ClInclude Include="image.h" />
-    <ClInclude Include="ImageManager.h" />
-    <ClInclude Include="randomFunction.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="utils.h" />
-    <ClInclude Include="Animator.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="BackgroundManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="Cam.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ClipManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAI.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyInfo.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyState.h">
-      <Filter>EnemyState</Filter>
-    </ClInclude>
-    <ClInclude Include="gameNode.h">
-      <Filter>Playground</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="GroundManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageObject.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeAttack1State.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeIdleState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeRunState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="Matthew.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerAttackState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBlockState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBreakState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerControler.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerFallState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerGroundState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerIdleState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerJumpKickState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerJumpState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerKickAttackState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerKickSkillState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRunState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerWalkState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerZorderJumpState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="keyManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectInfo.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="playGround.h">
-      <Filter>Playground</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneInfoLoader.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="soundManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="singletonBase.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="TagManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="StartScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="UIRenderer.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="WallManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="WallObj.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ZOrder.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="ZOrderManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Component\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="TextDataManager.h">
-      <Filter>Manager\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Zone.h">
-      <Filter>GameObject\Framwork</Filter>
-    </ClInclude>
-    <ClInclude Include="Outline.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Doberman.h" />
+    <ClInclude Include="DobermanAttackState.h" />
+    <ClInclude Include="DobermanHitState.h" />
+    <ClInclude Include="DobermanIdleState.h" />
+    <ClInclude Include="DobermanMoveState.h" />
+    <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="DebugText.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyInfo.h" />
-    <ClInclude Include="Luke.h" />
-    <ClInclude Include="LukeIdleState.h" />
-    <ClInclude Include="LukeRunState.h" />
-    <ClInclude Include="MapManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="DobermanAttackState.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="DobermanIdleState.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="DobermanMoveState.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewAttack2State.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewAttack3State.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewAttackState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewIdleState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewMoveState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="gameNode.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="GroundManager.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="ImageObject.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemObject.h" />
+    <ClInclude Include="Jesse.h" />
+    <ClInclude Include="JesseAttackState.h" />
+    <ClInclude Include="JesseBlockState.h" />
+    <ClInclude Include="JesseDieState.h" />
+    <ClInclude Include="JesseHitState.h" />
+    <ClInclude Include="JesseIdleState.h" />
+    <ClInclude Include="JesseKickState.h" />
+    <ClInclude Include="JesseRunState.h" />
+    <ClInclude Include="JesseWalkState.h" />
+    <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MalcolmHitState.h" />
+    <ClInclude Include="MalcolmKickState.h" />
+    <ClInclude Include="Lee.h" />
+    <ClInclude Include="LeeIdleState.h" />
+    <ClInclude Include="MapManager.h" />
     <ClInclude Include="Malcolm.h" />
+    <ClInclude Include="MalcolmAttackState.h" />
     <ClInclude Include="MalcolmIdleState.h" />
     <ClInclude Include="MalcolmMoveState.h" />
-    <ClInclude Include="MalcolmAttackState.h" />
-    <ClInclude Include="MalcolmhitState.h" />
+    <ClInclude Include="MatthewBlockState.h" />
+    <ClInclude Include="MatthewHitState.h" />
+    <ClInclude Include="LukeAttack2State.h" />
+    <ClInclude Include="LukeAttack3State.h" />
+    <ClInclude Include="LukeBlockState.h" />
+    <ClInclude Include="LukeDieState.h" />
+    <ClInclude Include="LukeHitState.h" />
+    <ClInclude Include="LukeKickState.h" />
+    <ClInclude Include="LukeWalkState.h" />
+    <ClInclude Include="Matthew.h" />
+    <ClInclude Include="MatthewAttack2State.h" />
+    <ClInclude Include="MatthewAttack3State.h" />
+    <ClInclude Include="MatthewAttackState.h" />
+    <ClInclude Include="MatthewIdleState.h" />
+    <ClInclude Include="MatthewMoveState.h" />
+    <ClInclude Include="MatthewPalmwindState.h" />
+    <ClInclude Include="Luke.h" />
+    <ClInclude Include="LukeAttack1State.h" />
+    <ClInclude Include="LukeIdleState.h" />
+    <ClInclude Include="LukeRunState.h" />
+    <ClInclude Include="MatthewPhaseEndState.h" />
+    <ClInclude Include="MatthewPhaseReadyState.h" />
+    <ClInclude Include="MatthewPhaseSpotlightState.h" />
+    <ClInclude Include="MatthewPhaseStartState.h" />
+    <ClInclude Include="MatthewRunState.h" />
+    <ClInclude Include="MatthewState.h" />
+    <ClInclude Include="ObjectInfo.h" />
+    <ClInclude Include="Outline.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerBlockState.h" />
+    <ClInclude Include="PlayerBreakState.h" />
+    <ClInclude Include="PlayerControler.h" />
+    <ClInclude Include="PlayerDieState.h" />
+    <ClInclude Include="PlayerDoubleAttackState.h" />
+    <ClInclude Include="PlayerFallState.h" />
+    <ClInclude Include="PlayerGroundState.h" />
+    <ClInclude Include="PlayerHitState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpKickState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
+    <ClInclude Include="PlayerKickAttackState.h" />
+    <ClInclude Include="PlayerKickSkillState.h" />
+    <ClInclude Include="PlayerRunState.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerTwoHandAttackState.h" />
+    <ClInclude Include="PlayerWalkState.h" />
+    <ClInclude Include="PlayerZorderJumpState.h" />
+    <ClInclude Include="playGround.h" />
+    <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneInfoLoader.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="EditorScene.h" />
+    <ClInclude Include="Shadow.h" />
+    <ClInclude Include="singletonBase.h" />
+    <ClInclude Include="soundManager.h" />
+    <ClInclude Include="StartScene.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Succubus.h" />
+    <ClInclude Include="SuccubusIdleState.h" />
+    <ClInclude Include="SuccubusState.h" />
+    <ClInclude Include="SuccubusSummonState.h" />
+    <ClInclude Include="TagManager.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextDataManager.h" />
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="UIBase.h" />
+    <ClInclude Include="UIRenderer.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Wall.h" />
+    <ClInclude Include="WallManager.h" />
+    <ClInclude Include="WallObj.h" />
     <ClInclude Include="William.h" />
+    <ClInclude Include="WilliamAttackState.h" />
     <ClInclude Include="WilliamIdleState.h" />
     <ClInclude Include="WilliamMoveState.h" />
-    <ClInclude Include="WilliamAttackState.h" />
-    <ClInclude Include="LukeAttack2State.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeAttack3State.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeBlockState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeDieState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeHitState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeKickState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="LukeWalkState.h">
-      <Filter>EnemyState\Luke</Filter>
-    </ClInclude>
-    <ClInclude Include="DobermanHitState.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="Malcolm.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MalcolmAttackState.h">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClInclude>
-    <ClInclude Include="MalcolmhitState.h">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClInclude>
-    <ClInclude Include="MalcolmIdleState.h">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClInclude>
-    <ClInclude Include="MalcolmMoveState.h">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPalmwindState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="William.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="WilliamAttackState.h">
-      <Filter>EnemyState\William</Filter>
-    </ClInclude>
-    <ClInclude Include="WilliamIdleState.h">
-      <Filter>EnemyState\William</Filter>
-    </ClInclude>
-    <ClInclude Include="WilliamMoveState.h">
-      <Filter>EnemyState\William</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraControler.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="MalcolmKickState.h">
-      <Filter>EnemyState\Malcolm</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewBlockState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewHitState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPhaseEndState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPhaseReadyState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPhaseSpotlightState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPhaseStartState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerDoubleAttackState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerTwoHandAttackState.h">
-      <Filter>PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="SuccubusSummonState.h">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClInclude>
-    <ClInclude Include="SuccubusIdle.h">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClInclude>
-    <ClInclude Include="SuccubusState.h">
-      <Filter>EnemyState\Succubus</Filter>
-    </ClInclude>
-    <ClInclude Include="Succubus.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Outline.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Shadow.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Doberman.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerDoubleAttackState.h" />
-    <ClInclude Include="MatthewRunState.h" />
-    <ClInclude Include="SuccubusIdleState.h" />
-    <ClInclude Include="PlayerHitState.h" />
-    <ClInclude Include="PlayerDieState.h" />
-    <ClInclude Include="MatthehHitState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="MatthewPalmwindState.h">
-      <Filter>EnemyState\Matthew</Filter>
-    </ClInclude>
-    <ClInclude Include="DobermanHitState.h">
-      <Filter>EnemyState\Doberman</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseAttackState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseBlockState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseDieState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseHitState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseIdleState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseKickState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseRunState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="JesseWalkState.h">
-      <Filter>EnemyState\Jesse</Filter>
-    </ClInclude>
-    <ClInclude Include="Luke.h">
-      <Filter>GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Jesse.h">
-      <Filter>GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Lee.h">
-      <Filter>GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="LeeIdleState.h" />
+    <ClInclude Include="Zone.h" />
+    <ClInclude Include="ZOrder.h" />
+    <ClInclude Include="ZOrderManager.h" />
+    <ClInclude Include="WilliamBellyState.h" />
+    <ClInclude Include="MalcolmRunState.h" />
+    <ClInclude Include="MalcolmBlockState.h" />
+    <ClInclude Include="WilliamBlockState.h" />
+    <ClInclude Include="WilliamHitState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />
@@ -842,69 +296,5 @@
   <ItemGroup>
     <Image Include="small.ico" />
     <Image Include="windowAPI.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Component">
-      <UniqueIdentifier>{1695fa46-7111-4e39-8374-4194fde8d9f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{442158c0-801c-4ac9-8ed4-e9bcbc49d544}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{78ac1a8e-7538-4321-979b-df64c6091b2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Framwork">
-      <UniqueIdentifier>{71ed6f6e-1496-4aea-a773-b748fa4694c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Framework">
-      <UniqueIdentifier>{761b4e69-99d5-407e-9eeb-81156bac7d61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\Framework">
-      <UniqueIdentifier>{2df55f64-1ffc-44e5-b9d1-9c64814cb4da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState">
-      <UniqueIdentifier>{0405cdcc-53f3-4805-a41a-905ac166c4d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Doberman">
-      <UniqueIdentifier>{9aeb018c-f28e-4404-92b6-56efabd225b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Playground">
-      <UniqueIdentifier>{5354eac0-e5cc-45f6-955d-87a787cdf187}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Luke">
-      <UniqueIdentifier>{c6a5bb4a-e8a4-4f81-a883-404afada58a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Matthew">
-      <UniqueIdentifier>{490c3b71-8e9a-4bd4-8502-408e15848bc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayerState">
-      <UniqueIdentifier>{eb712d03-1881-4f3c-a7b1-07a4b5f9af0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{ac84b6cc-0d8a-4eb5-ba31-259f1945132b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Luke">
-      <UniqueIdentifier>{6df51c3f-b629-42b6-b817-b146501a13f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Enemy">
-      <UniqueIdentifier>{7d6c3acd-d20c-4035-8f5d-68e0e3b8cbfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Malcolm">
-      <UniqueIdentifier>{9068b1d4-bd3d-4127-a670-b8918961c93f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\William">
-      <UniqueIdentifier>{fa35d000-a240-4e74-b290-97d760d6d80a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Succubus">
-      <UniqueIdentifier>{54b5bfdf-3c27-498b-b057-a1b85488dcf5}</UniqueIdentifier>
-    <Filter Include="EnemyState\Jesse">
-      <UniqueIdentifier>{edc0605c-9f2e-4c24-af18-b86434f7f900}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Enemy">
-      <UniqueIdentifier>{ae3f0aab-8e4c-4cd2-903b-543900c65d0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EnemyState\Lee">
-      <UniqueIdentifier>{a2021663-121e-476f-b7ab-e69b0cdeb68b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>

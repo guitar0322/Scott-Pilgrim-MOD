@@ -192,10 +192,12 @@
     <ClInclude Include="JesseRunState.h" />
     <ClInclude Include="JesseWalkState.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MalcolmBlockState.h" />
     <ClInclude Include="MalcolmHitState.h" />
     <ClInclude Include="MalcolmKickState.h" />
     <ClInclude Include="Lee.h" />
     <ClInclude Include="LeeIdleState.h" />
+    <ClInclude Include="MalcolmRunState.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Malcolm.h" />
     <ClInclude Include="MalcolmAttackState.h" />
@@ -282,6 +284,9 @@
     <ClInclude Include="WallObj.h" />
     <ClInclude Include="William.h" />
     <ClInclude Include="WilliamAttackState.h" />
+    <ClInclude Include="WilliamBellyState.h" />
+    <ClInclude Include="WilliamBlockState.h" />
+    <ClInclude Include="WilliamHitState.h" />
     <ClInclude Include="WilliamIdleState.h" />
     <ClInclude Include="WilliamMoveState.h" />
     <ClInclude Include="Zone.h" />
@@ -333,10 +338,12 @@
     <ClCompile Include="JesseRunState.cpp" />
     <ClCompile Include="JesseWalkState.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MalcolmBlockState.cpp" />
     <ClCompile Include="MalcolmHitState.cpp" />
     <ClCompile Include="MalcolmKickState.cpp" />
     <ClCompile Include="Lee.cpp" />
     <ClCompile Include="LeeIdleState.cpp" />
+    <ClCompile Include="MalcolmRunState.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Malcolm.cpp" />
     <ClCompile Include="MalcolmAttackState.cpp" />
@@ -424,6 +431,9 @@
     <ClCompile Include="WallObj.cpp" />
     <ClCompile Include="William.cpp" />
     <ClCompile Include="WilliamAttackState.cpp" />
+    <ClCompile Include="WilliamBellyState.cpp" />
+    <ClCompile Include="WilliamBlockState.cpp" />
+    <ClCompile Include="WilliamHitState.cpp" />
     <ClCompile Include="WilliamIdleState.cpp" />
     <ClCompile Include="WilliamMoveState.cpp" />
     <ClCompile Include="winMain.cpp" />

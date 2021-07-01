@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MatthewIdleState.h"
 #include "MatthewMoveState.h"
+#include "MatthewHitState.h"
+#include "MatthewPhaseReadyState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewIdleState::Update(Matthew* matthew)
@@ -27,6 +29,12 @@ Matthewstate * MatthewIdleState::Update(Matthew* matthew)
 			return new MatthewMoveState();
 		}
 	}
+	if (matthew->GetHp()<= 250)
+	{
+		return new MatthewPhaseReadyState();
+	}
+
+
 	return nullptr;
 }
 

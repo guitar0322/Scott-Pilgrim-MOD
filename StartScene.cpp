@@ -48,6 +48,7 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
+	character->transform->SetX(2100);
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
     ENEMYMANAGER->SetPlayerTransform(character->transform);
@@ -99,7 +100,7 @@ HRESULT StartScene::Init()
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
-	matthew->transform->SetPosition(1000, 400);
+	matthew->transform->SetPosition(1700, 400);
 	matthew->collider->isTrigger = true;
 	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
 	matthew->AddComponent(new Matthew());
@@ -111,7 +112,7 @@ HRESULT StartScene::Init()
 		succubus[i] = new Character();
 		succubus[i]->Init();
 		succubus[i]->transform->SetPosition(600, 200);
-		succubus[i]->collider->isTrigger = true;
+		succubus[i]->collider->enable = false;
 		succubus[i]->AddComponent(new Succubus());
 		succubus[i]->GetComponent<Succubus>()->Init();
 		succubus[i]->SetActive(false);
@@ -146,7 +147,6 @@ void StartScene::Update()
     MainCam->transform->SetX(character->transform->GetX());
     if (MainCam->transform->GetX() <= MainCam->GetRenderWidth() / 2)
         MainCam->transform->SetX(MainCam->GetRenderWidth() / 2);
-    testGround->Update();
     character->Update();
     cameraControler.Update();
     BGMANAGER->Update();
@@ -176,7 +176,6 @@ void StartScene::Render()
     for (int i = 0; i < WALL_NUM; i++) {
 		wall[i]->Render();
     }
-    testGround->Render();
     EFFECTMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
