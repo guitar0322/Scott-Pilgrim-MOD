@@ -2,13 +2,14 @@
 #include "Enemy.h"
 #include "EnemyState.h"
 
-class Luke : public Enemy
+class Lee : public Enemy
 {
 private:
 
 public:
-	Luke();
-	~Luke();
+	Lee();
+	~Lee();
 
 	virtual void Init();
 };
+

@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "LukeIdleState.h"
-#include "LukeKickState.h"
+#include "JesseIdleState.h"
+#include "JesseKickState.h"
 
-EnemyState* LukeKickState::Update(EnemyAI* enemy)
+EnemyState* JesseKickState::Update(EnemyAI* enemy)
 {
 	if (enemy->enemyinfo->GetDir() == true)
 	{
@@ -24,13 +24,13 @@ EnemyState* LukeKickState::Update(EnemyAI* enemy)
 		{
 			enemy->transform->MoveX(-25);
 		}
-		return new LukeIdleState();
+		return new JesseIdleState();
 	}
 
 	return nullptr;
 }
 
-void LukeKickState::Enter(EnemyAI* enemy)
+void JesseKickState::Enter(EnemyAI* enemy)
 {
 	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
 		enemy->GetPlayerTransform()->GetX(), enemy->transform->GetY()) > 20)
@@ -42,15 +42,15 @@ void LukeKickState::Enter(EnemyAI* enemy)
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->transform->MoveX(25);
-		enemy->ChangeClip("luke_kick_right", true);
+		enemy->ChangeClip("jesse_kick_right", true);
 	}
 	else
 	{
 		enemy->transform->MoveX(-25);
-		enemy->ChangeClip("luke_kick_left", true);
+		enemy->ChangeClip("jesse_kick_left", true);
 	}
 }
 
-void LukeKickState::Exit(EnemyAI* enemy)
+void JesseKickState::Exit(EnemyAI* enemy)
 {
 }

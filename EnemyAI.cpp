@@ -13,18 +13,15 @@ EnemyAI::~EnemyAI()
 
 void EnemyAI::Init()
 {
-	/* ADD 클립 추가하기 */
-	/* 
-	클립 인잇을 만들어서 에너미 이름을 스트링으로 받게한다. 
-	그 다음에 LEFT, RIGHT 붙여서 에너미에 추가하도록 
-	*/
+	/* 헤더에서 걸어준 것들 초기화 */
+	zOrder = gameObject->GetComponent<ZOrder>();
 	animator = gameObject->GetComponent<Animator>();
 	enemyinfo = gameObject->GetComponent<EnemyInfo>();
 }
 
 void EnemyAI::Update()
 {
-	/* 상태패턴이 계속 업데이트 되어야 하므로 여기에 넣어야 한다. */
+	/* 상태패턴이 계속 업데이트 되어야 하므로 존재한다. */
 	EnemyState* newState = state->Update(this);
 	if (newState != nullptr)
 	{
