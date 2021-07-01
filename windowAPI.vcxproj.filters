@@ -287,9 +287,10 @@
     <ClCompile Include="MatthewPhaseReadyState.cpp" />
     <ClCompile Include="Succubus.cpp" />
     <ClCompile Include="SuccubusState.cpp" />
-    <ClCompile Include="SuccubusIdle.cpp" />
     <ClCompile Include="SuccubusSummonState.cpp" />
     <ClCompile Include="PlayerDoubleAttackState.cpp" />
+    <ClCompile Include="MatthewRunState.cpp" />
+    <ClCompile Include="SuccubusIdleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -584,9 +585,10 @@
     <ClInclude Include="MatthewPhaseReadyState.h" />
     <ClInclude Include="Succubus.h" />
     <ClInclude Include="SuccubusState.h" />
-    <ClInclude Include="SuccubusIdle.h" />
     <ClInclude Include="SuccubusSummonState.h" />
     <ClInclude Include="PlayerDoubleAttackState.h" />
+    <ClInclude Include="MatthewRunState.h" />
+    <ClInclude Include="SuccubusIdleState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

@@ -6,7 +6,7 @@
 Matthewstate * MatthewIdleState::Update(Matthew* matthew)
 {
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
-		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 200)
+		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 500)
 	{
 		if (matthew->transform->GetX() < matthew->GetPlayer()->GetX())
 		{

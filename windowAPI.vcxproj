@@ -213,6 +213,7 @@
     <ClInclude Include="MatthewPhaseReadyState.h" />
     <ClInclude Include="MatthewPhaseSpotlightState.h" />
     <ClInclude Include="MatthewPhaseStartState.h" />
+    <ClInclude Include="MatthewRunState.h" />
     <ClInclude Include="MatthewState.h" />
     <ClInclude Include="ObjectInfo.h" />
     <ClInclude Include="Outline.h" />
@@ -249,7 +250,7 @@
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Succubus.h" />
-    <ClInclude Include="SuccubusIdle.h" />
+    <ClInclude Include="SuccubusIdleState.h" />
     <ClInclude Include="SuccubusState.h" />
     <ClInclude Include="SuccubusSummonState.h" />
     <ClInclude Include="TagManager.h" />
@@ -339,6 +340,7 @@
     <ClCompile Include="MatthewPhaseReadyState.cpp" />
     <ClCompile Include="MatthewPhaseSpotlightState.cpp" />
     <ClCompile Include="MatthewPhaseStartState.cpp" />
+    <ClCompile Include="MatthewRunState.cpp" />
     <ClCompile Include="MatthewState.cpp" />
     <ClCompile Include="ObjectInfo.cpp" />
     <ClCompile Include="Outline.cpp" />
@@ -377,7 +379,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Succubus.cpp" />
-    <ClCompile Include="SuccubusIdle.cpp" />
+    <ClCompile Include="SuccubusIdleState.cpp" />
     <ClCompile Include="SuccubusState.cpp" />
     <ClCompile Include="SuccubusSummonState.cpp" />
     <ClCompile Include="TagManager.cpp" />

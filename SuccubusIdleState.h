@@ -1,6 +1,6 @@
 #pragma once
 #include "SuccubusState.h"
-class SuccubusIdle : public SuccubusState
+class SuccubusIdleState : public SuccubusState
 {
 public:
 	virtual SuccubusState* Update(Succubus* succubus);

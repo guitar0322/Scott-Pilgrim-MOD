@@ -20,6 +20,8 @@ void Matthew::Init()
 	animator->AddClip("matthew_idle_right", CLIPMANAGER->AddClip("matthew_idle_right", "matthew/idle_right.bmp", 686, 136, 6, 0.3f));
 	animator->AddClip("matthew_move_left", CLIPMANAGER->AddClip("matthew_move_left", "matthew/move_left.bmp", 1160, 136, 10, 0.2f));
 	animator->AddClip("matthew_move_right", CLIPMANAGER->AddClip("matthew_move_right", "matthew/move_right.bmp", 1160, 136, 10, 0.2f));
+	animator->AddClip("matthew_run_left", CLIPMANAGER->AddClip("matthew_run_left", "matthew/run_left.bmp", 1088, 136, 8, 0.2f));
+	animator->AddClip("matthew_run_right", CLIPMANAGER->AddClip("matthew_run_right", "matthew/run_right.bmp", 1088, 136, 8, 0.2f));
 	animator->AddClip("matthew_attack1_left", CLIPMANAGER->AddClip("matthew_attack1_left", "matthew/attack1_Left.bmp", 1244, 136, 6, 0.2f));
 	animator->AddClip("matthew_attack1_right", CLIPMANAGER->AddClip("matthew_attack1_right", "matthew/attack1_Right.bmp", 1244, 136, 6, 0.2f));
 	animator->AddClip("matthew_attack2_left", CLIPMANAGER->AddClip("matthew_attack2_left", "matthew/attack2_Left.bmp", 1148, 136, 6, 0.2f));

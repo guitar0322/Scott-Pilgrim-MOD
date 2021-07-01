@@ -2,6 +2,7 @@
 #include "MatthewMoveState.h"
 #include "MatthewIdleState.h"
 #include "MatthewAttackState.h"
+#include "MatthewRunState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewMoveState::Update(Matthew * matthew)
@@ -23,14 +24,20 @@ Matthewstate * MatthewMoveState::Update(Matthew * matthew)
 		}
 	}
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
-		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 200)
+		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 500)
 	{
 		return new MatthewIdleState;
 	}
-	if (GetDistance(matthew->transform->GetX(),matthew->transform->GetY(),matthew->GetPlayer()->GetX(),matthew->GetPlayer()->GetY())<50)
+
+	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 300)
+	{
+		return new MatthewRunState();
+	}
+
+	/*if (GetDistance(matthew->transform->GetX(),matthew->transform->GetY(),matthew->GetPlayer()->GetX(),matthew->GetPlayer()->GetY())<50)
 	{
 		return new MatthewAttackState;
-	}
+	}*/
 
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());
 	matthew->transform->Move(matthew->GetSpeed()*TIMEMANAGER->getElapsedTime()*cosf(angle),
