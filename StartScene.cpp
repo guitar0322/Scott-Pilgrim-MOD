@@ -88,7 +88,6 @@ HRESULT StartScene::Init()
 	trashBox->zorder->Init();
 	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
-
 	// º¸½º ¸ÅÆ© ±¸Çö//
 	matthew = new Character();
 	matthew->Init();
@@ -111,7 +110,6 @@ HRESULT StartScene::Init()
 		matthew->GetComponent<Matthew>()->_succubus[i] = succubus[i];
 	}
 	
-
     BackgroundInit();
     WallInit();
 
@@ -143,15 +141,20 @@ void StartScene::Update()
     ZORDER->Update();
     MainCam->Update();
     MAPMANAGER->Update();
-    //ENEMYMANAGER->Update();
     // ±¤Ã¶ ¿¡³Ê¹Ì Update
-	matthew->Update();
+	//matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i]->Update();
 	}
+    ENEMYMANAGER->Update();
 
-    // 210627 ½Ã¿µ Ãß°¡ (Enemy Update)
+	//matthew->Update();
+	//for (int i = 0; i < SUCCUBUSMAX; i++)
+	//{
+	//	succubus[i]->Update();
+	//}
+
 }
 
 void StartScene::Render()
