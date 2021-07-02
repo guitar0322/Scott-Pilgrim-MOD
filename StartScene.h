@@ -27,12 +27,16 @@ public:
 	GameObject* player;
     WallObj* wall[WALL_NUM];
 	ItemObject* trashBox;
-
+    UIBase uiBox;
+    image* numImg[10];
+    image* hpUI[3];
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();
     virtual void Render();
 
+    void UiInit();
+    void HPRender();
     void BackgroundInit();
     void CameraInit();
     void WallInit();

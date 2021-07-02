@@ -67,7 +67,7 @@ void Luke::Init()
 
 	enemyinfo->Sethp(50);
 
-	int randomAttackDamage = RND->getInt(10);
+	int randomAttackDamage = RND->getFromIntTo(1,5);
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);

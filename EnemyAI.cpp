@@ -39,6 +39,7 @@ void EnemyAI::Render()
 void EnemyAI::Hit(float damage)
 {
 	if (hitable == false) return;
+	DAMAGEMANAGER->CreateDamage(damage, transform->GetX(), transform->GetY() - 70);
 	enemyinfo->Hit(damage);
 
 	state->Exit(this);

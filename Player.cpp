@@ -395,6 +395,7 @@ void Player::Hit(int damage)
 	} 
 
 	if (hitable == false) return;
+	DAMAGEMANAGER->CreateDamage(damage, transform->GetX(), transform->GetY() - 70);
 	hp -= damage;
 	_state->Exit(this);
 	hitCount++;

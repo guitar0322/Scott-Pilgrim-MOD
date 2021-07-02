@@ -10,58 +10,34 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 
 	_attackTime += TIMEMANAGER->getElapsedTime();
 
-	if (_attackTime > 0.5f &&  _doubleAttack == false && player->pressL == false)
+	if (_attackTime > 0.5f)
 	{
-		player->isUppercut = false;
-		return new PlayerIdleState();
+		if (_doubleAttack == false)
+			return new PlayerIdleState();
+		else
+			return new PlayerDoubleAttackState();
 	}
-	//1연타 공격 시 L키 안 누르고 이미지 프레임이 끝나면 기본자세
-
-	if (_attackTime > 0.5f && _doubleAttack == true && player->pressL == false)
-	{
-		player->isUppercut = false;
-		_doubleAttack = false;
-		player->pressL == false;
-		_attackTime = 0;
-
-		return new PlayerIdleState();
-	}
-	//L키 누르고 0.7초이상 지나면 기본자세
-
-	if (_attackTime < 0.5f && _doubleAttack == true && player->pressL == true) //연타에 들어 갔을 때
-	{
-		_attackTime = 0;
-
-		return new PlayerDoubleAttackState();
-		
-	}
-	
-	//0.7초 안에 L키가 눌려지고 연타공격에 들어가고 한번 더 L키가 눌렸을 시 3연타 공격을 넘어간다
 
 	return nullptr;
 }
 
 void PlayerAttackState::Update(Player * player)
 {
-
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
-		if (player->pressL == false && _doubleAttack == false)
+		if (player->pressL == false)
 		{
 			_attackTime = 0;
 			player->pressL = true;
 		}
-
+		else {
+			_doubleAttack = true;
+		}
 		//최대 프레임이되면 attack2이미지로 
 		if (player->animator->GetEnd())
 		{
-			if (player->pressL == true)
+			if (player->pressL == true && _doubleAttack == false)
 			{
-				_doubleAttack = true;
-				player->pressL = false;
-
-				player->isUppercut = false;		//에너미가 없을 때 3연타 확인 위하여
-
 				//거리내에 에너미가 있을 때 3타 공격은 어퍼컷으로 한다.
 
 				if (player->dir == false)
@@ -78,8 +54,6 @@ void PlayerAttackState::Update(Player * player)
 			Attack(player);
 		}
 	}
-	
-	
 }
 
 void PlayerAttackState::Enter(Player * player)
@@ -88,7 +62,7 @@ void PlayerAttackState::Enter(Player * player)
 	player->pressL = false;
 	_doubleAttack = false;
 	_attackTime = 0;
-
+	player->isUppercut = false;
 	if (player->dir == false)
 	{
 		player->ChangeClip("attack1_right", true);
@@ -120,7 +94,8 @@ void PlayerAttackState::Attack(Player* player)
 		{
 			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
 
-			player->isUppercut = true;
+			if(player->pressL == true)
+				player->isUppercut = true;
 
 			if (player->dir == false)
 			{

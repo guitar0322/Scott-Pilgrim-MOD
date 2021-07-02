@@ -33,12 +33,12 @@ void RichardAttack2State::Enter(EnemyAI* enemy)
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->transform->MoveX(40);
-		enemy->ChangeClip("mike_attack2_right", true);
+		enemy->ChangeClip("richard_attack2_right", true);
 	}
 	else
 	{
 		enemy->transform->MoveX(-40);
-		enemy->ChangeClip("mike_attack2_left", true);
+		enemy->ChangeClip("richard_attack2_left", true);
 	}
 }
 
