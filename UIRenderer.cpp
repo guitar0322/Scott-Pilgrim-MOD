@@ -23,8 +23,6 @@ void UIRenderer::Init()
 	SelectObject(alphaMemDC, hBit);
 
 	ReleaseDC(_hWnd, hdc);
-	transform->SetX(0);
-	transform->SetY(0);
 	alpha = 255;
 	blendFunction.BlendOp = AC_SRC_OVER;
 	blendFunction.BlendFlags = 0;
@@ -46,9 +44,8 @@ void UIRenderer::Init(const char* filename, int width, int height)
 	hBit = CreateCompatibleBitmap(hdc, width, height);
 	SelectObject(alphaMemDC, hBit);
 
+	DeleteObject(hBit);
 	ReleaseDC(_hWnd, hdc);
-	transform->SetX(0);
-	transform->SetY(0);
 	alpha = 255;
 	blendFunction.BlendOp = AC_SRC_OVER;
 	blendFunction.BlendFlags = 0;

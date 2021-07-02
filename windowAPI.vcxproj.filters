@@ -180,6 +180,8 @@
     <ClCompile Include="LukeWalkState.cpp" />
     <ClCompile Include="Malcolm.cpp" />
     <ClCompile Include="PlayerWakeupState.cpp" />
+    <ClCompile Include="DamageManager.cpp" />
+    <ClCompile Include="HpUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -365,6 +367,8 @@
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="LukeWalkState.h" />
     <ClInclude Include="PlayerWakeupState.h" />
+    <ClInclude Include="DamageManager.h" />
+    <ClInclude Include="HpUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

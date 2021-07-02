@@ -3,12 +3,16 @@
 void CameraControler::Init()
 {
     _lock = false;
-    for (int i = 0; i < SECTOR_NUM; i++)
+    for (int i = 0; i < CAM_SECTOR_NUM; i++)
     {
         _isLockPoint[i] = false;
     }
-    _camLockPoint[0] = 20000;
-    _camLockPoint[1] = 20000;
+    _camLockPoint[0] = 2350;
+    _camLockPoint[1] = 4030;
+    _camLockPoint[2] = 6145;
+    _camLockPoint[3] = 8480;
+    _camLockPoint[4] = 11680;
+
     _camSpeed = 300.f;
 }
 
@@ -16,7 +20,7 @@ void CameraControler::Update()
 {
     _playerX = _playerTr->GetX();
     _camX = MainCam->transform->GetX();
-    for (int i = 0; i < SECTOR_NUM; i++)
+    for (int i = 0; i < CAM_SECTOR_NUM; i++)
     {
         if (_isLockPoint[i] == false && _playerTr->GetX() >= _camLockPoint[i])
         {

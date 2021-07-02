@@ -4,7 +4,7 @@
 class Player;
 using namespace std;
 
-#define SECTOR_NUM 2
+#define SECTOR_NUM 5
 
 #define TYPE_NUM 8
 
