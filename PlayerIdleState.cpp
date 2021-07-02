@@ -136,6 +136,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 			{
 				player->isPick = false;
 				player->isThrow = true;
+				player->equipItem->GetComponent<Item>()->itemAttack = true;
 				if (player->dir == false)
 				{
 					player->ChangeClip("two_hand_walk_throw_right", true);

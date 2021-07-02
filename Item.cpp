@@ -30,6 +30,17 @@ void Item::Init()
 
 void Item::Update()
 {
+	if (itemAttack)
+	{
+		if (animator->currentFrame == 5)
+		{
+			ItemAttack();
+		}
+	}
+	if (_speedX != 0)
+	{
+		ItemThrowAttack();
+	}
 	transform->MoveX(_speedX * TIMEMANAGER->getElapsedTime());
 	
 	if (_isGround == false)					//땅 위에 있지 않다면
@@ -65,11 +76,6 @@ void Item::Update()
 	{
 		_speedX *= -1;					//범위 초과시 x 좌표 방향 바꿔줌		
 	}
-	
-	if (itemAttack)
-	{
-		ItemAttack();
-	}
 }
 void Item::Render()
 {
@@ -92,18 +98,47 @@ void Item::ItemAttack()
 		float _distance = GetDistance(transform->GetX(), transform->gameObject->GetComponent<ZOrder>()->GetZ(),
 			_sectorEnemyV[i]->transform->GetX(),
 			_sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ());
-		if (_distance < 80)
+
+		if (_distance < 100) 
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(49);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(10);
+			EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX(), transform->GetY());
 		}
 	}
+}
 
+void Item::ItemThrowAttack()
+{
+	vector<GameObject*> _sectorEnemyV = ENEMYMANAGER->GetSectorEnemy();
+	for (int i = 0; i < _sectorEnemyV.size(); i++)
+	{
+		if (_isHitThrow[i] == true) continue;
+		if (_sectorEnemyV[i]->isActive == false) continue;
+
+		float _distance = GetDistance(transform->GetX(), transform->gameObject->GetComponent<ZOrder>()->GetZ(),
+			_sectorEnemyV[i]->transform->GetX(),
+			_sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ());
+
+		if (_distance < 100)
+		{
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(10);
+			_isHitThrow[i] = true;
+			EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX(), transform->GetY());
+			_speedX *= -1;
+		}
+	}
 }
 
 void Item::Throw(bool dir)			//throw시 bool값 dir 반환
 {
 	_throwDir = dir;	
 	_isGround = false;
+	vector<GameObject*> _sectorEnemyV = ENEMYMANAGER->GetSectorEnemy();
+	_isHitThrow.clear();
+	for (int i = 0; i < _sectorEnemyV.size(); i++)
+	{
+		_isHitThrow.push_back(false);
+	}
 	if (dir == false)				// right일때
 	{
 		_angle = 0;
