@@ -52,6 +52,7 @@ void PlayerAttackState::Update(Player * player)
 				// 그리고 1연타 공격이 마무리되고 L키를 누를 시 2연타 공격으로 넘어간다.
 			}
 			Attack(player);
+			player->BossAttack();
 		}
 	}
 }
@@ -59,6 +60,7 @@ void PlayerAttackState::Update(Player * player)
 void PlayerAttackState::Enter(Player * player)
 {
 	Attack(player);
+	player->BossAttack();
 	player->pressL = false;
 	_doubleAttack = false;
 	_attackTime = 0;

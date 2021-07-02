@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Mike.h"
 #include "MikeIdleState.h"
+#include "MikeHitState.h"
+#include "MikeDieState.h"
 
 Mike::Mike()
 {
@@ -18,7 +20,9 @@ Mike::Mike()
 	animator->AddClip("mike_block_left", CLIPMANAGER->FindClip("mike_block_left"));
 	// HIT
 	animator->AddClip("mike_hit_right", CLIPMANAGER->FindClip("mike_hit_right"));
+	animator->GetClip("mike_hit_right")->isLoop = false;
 	animator->AddClip("mike_hit_left", CLIPMANAGER->FindClip("mike_hit_left"));
+	animator->GetClip("mike_hit_left")->isLoop = false;
 	// KICK
 	animator->AddClip("mike_kick_right", CLIPMANAGER->FindClip("mike_kick_right"));
 	animator->GetClip("mike_kick_right")->isLoop = false;
@@ -41,7 +45,9 @@ Mike::Mike()
 	animator->GetClip("mike_attack3_left")->isLoop = false;
 	// DIE
 	animator->AddClip("mike_die_right", CLIPMANAGER->FindClip("mike_die_right"));
+	animator->GetClip("mike_die_right")->isLoop = false;
 	animator->AddClip("mike_die_left", CLIPMANAGER->FindClip("mike_die_left"));
+	animator->GetClip("mike_die_left")->isLoop = false;
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new MikeIdleState());
@@ -65,4 +71,7 @@ void Mike::Init()
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new MikeHitState();
+	enemyAI->dieState = new MikeDieState();
 }

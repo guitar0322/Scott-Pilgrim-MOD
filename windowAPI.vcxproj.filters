@@ -180,6 +180,10 @@
     <ClCompile Include="LukeWalkState.cpp" />
     <ClCompile Include="Malcolm.cpp" />
     <ClCompile Include="PlayerWakeupState.cpp" />
+    <ClCompile Include="MatthewLastHitState.cpp" />
+    <ClCompile Include="MatthewKnockDown.cpp" />
+    <ClCompile Include="MatthewComeBack.cpp" />
+    <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="DamageManager.cpp" />
     <ClCompile Include="HpUI.cpp" />
   </ItemGroup>
@@ -367,6 +371,10 @@
     <ClInclude Include="LukeRunState.h" />
     <ClInclude Include="LukeWalkState.h" />
     <ClInclude Include="PlayerWakeupState.h" />
+    <ClInclude Include="MatthewLastHitState.h" />
+    <ClInclude Include="MatthewKnockDown.h" />
+    <ClInclude Include="MatthewComeBack.h" />
+    <ClInclude Include="BossScene.h" />
     <ClInclude Include="DamageManager.h" />
     <ClInclude Include="HpUI.h" />
   </ItemGroup>

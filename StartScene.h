@@ -27,6 +27,8 @@ public:
 	GameObject* player;
     WallObj* wall[WALL_NUM];
 	ItemObject* trashBox;
+	ImageObject fadeOut;
+	int fadeOutAlpha;
     UIBase uiBox;
     image* numImg[10];
     image* hpUI[3];

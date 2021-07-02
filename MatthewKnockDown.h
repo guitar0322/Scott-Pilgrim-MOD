@@ -1,8 +1,9 @@
 #pragma once
-#include "Matthewstate.h"
-class MatthewAttack3State :
-	public Matthewstate
+#include "MatthewState.h"
+class MatthewKnockDown : public Matthewstate
 {
+private:
+	float _knockDownTime;
 public:
 	virtual Matthewstate* Update(Matthew* matthew);
 	virtual void Enter(Matthew* matthew);

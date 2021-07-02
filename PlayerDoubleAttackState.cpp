@@ -23,7 +23,8 @@ void PlayerDoubleAttackState::Update(Player * player)
 
 void PlayerDoubleAttackState::Enter(Player * player)
 {
-
+	player->BossAttack();
+	
 	if (player->isUppercut == true)
 	{
 		if (player->dir == false)

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Richard.h"
 #include "RichardIdleState.h"
+#include "RichardHitState.h"
+#include "RichardDieState.h"
 
 Richard::Richard()
 {
@@ -18,7 +20,9 @@ Richard::Richard()
 	animator->AddClip("richard_block_left", CLIPMANAGER->FindClip("richard_block_left"));
 	// HIT
 	animator->AddClip("richard_hit_right", CLIPMANAGER->FindClip("richard_hit_right"));
+	animator->GetClip("richard_hit_right")->isLoop = false;
 	animator->AddClip("richard_hit_left", CLIPMANAGER->FindClip("richard_hit_left"));
+	animator->GetClip("richard_hit_left")->isLoop = false;
 	// KICK
 	animator->AddClip("richard_kick_right", CLIPMANAGER->FindClip("richard_kick_right"));
 	animator->GetClip("richard_kick_right")->isLoop = false;
@@ -41,7 +45,9 @@ Richard::Richard()
 	animator->GetClip("richard_attack3_left")->isLoop = false;
 	// DIE
 	animator->AddClip("richard_die_right", CLIPMANAGER->FindClip("richard_die_right"));
+	animator->GetClip("richard_die_right")->isLoop = false;
 	animator->AddClip("richard_die_left", CLIPMANAGER->FindClip("richard_die_left"));
+	animator->GetClip("richard_die_left")->isLoop = false;
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new RichardIdleState());
@@ -66,4 +72,7 @@ void Richard::Init()
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new RichardHitState();
+	enemyAI->dieState = new RichardDieState();
 }

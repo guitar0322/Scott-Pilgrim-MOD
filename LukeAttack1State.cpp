@@ -1,6 +1,4 @@
 #include "stdafx.h"
-#include "Enemy.h"
-#include "LukeIdleState.h"
 #include "LukeAttack1State.h"
 #include "LukeAttack2State.h"
 
@@ -29,11 +27,7 @@ EnemyState* LukeAttack1State::Update(EnemyAI* enemy)
 
 void LukeAttack1State::Enter(EnemyAI* enemy)
 {
-	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->GetPlayerTransform()->GetY()) > 20)
-	{
-		enemy->GetPlayer()->GetComponent<Player>()->Hit(enemy->enemyinfo->GetDamage());
-	}
+	enemy->Attack(70);
 
 	/* 위치 좌표 보정 */
 	if (enemy->enemyinfo->GetDir() == false)

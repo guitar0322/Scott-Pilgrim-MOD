@@ -426,4 +426,25 @@ void Player::Hit(int damage)
 
 }
 
+void Player::BossAttack()
+{
+	float distance =
+		GetDistance(transform->GetX(), transform->GetY(),
+			boss->transform->GetX(), boss->transform->GetY());
+	float distanceZ = zOrder->GetZ() - boss->GetComponent<ZOrder>()->GetZ();
+	if (distanceZ < 0)
+		distanceZ *= -1;
+	if (distance < 100 && distanceZ < 10)
+	{
+		boss->GetComponent<Matthew>()->Hit(attack);
+		if (boss->GetComponent<Matthew>()->hitable == true)
+		{
+			if (dir == false)
+				EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() + 30, transform->GetY() - 10);
+			else
+				EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() - 30, transform->GetY() - 10);
+		}
+	}
+}
+
 

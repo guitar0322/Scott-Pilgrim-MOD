@@ -99,7 +99,9 @@ HRESULT StartScene::Init()
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
-    matthew->transform->SetX(5000);
+	character->GetComponent<Player>()->boss = matthew;
+
+	matthew->transform->SetX(5000);
     matthew->SetActive(false);
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{
@@ -116,6 +118,13 @@ HRESULT StartScene::Init()
     BackgroundInit();
     WallInit();
 
+	fadeOut.Init();
+	fadeOut.renderer->Init();
+	fadeOut.renderer->Resize(WINSIZEX, WINSIZEY);
+	fadeOut.renderer->SetAlphaMode(true, 0);
+	fadeOut.SetActive(false);
+	fadeOutAlpha = 0;
+
     MAPMANAGER->player = character;
     MAPMANAGER->enemyV = &_enemyV;
     return S_OK;
@@ -123,7 +132,11 @@ HRESULT StartScene::Init()
 
 void StartScene::Release()
 {
-
+	for (int i = 0; i < _propV.size(); i++)
+	{
+		_propV[i]->SetActive(false);
+	}
+	trashBox->SetActive(false);
 }
 
 void StartScene::Update()
@@ -136,6 +149,17 @@ void StartScene::Update()
     {
         _enemyV[i]->Update();
     }
+	if (character->transform->GetX() >= _mapWidth - 800)
+	{
+		fadeOut.SetActive(true);
+		if (fadeOutAlpha < 255)
+		{
+			fadeOutAlpha++;
+		}
+		fadeOut.transform->SetPosition(MainCam->transform->GetX(), MainCam->transform->GetY());
+		fadeOut.renderer->SetAlpha(fadeOutAlpha);
+	}
+	fadeOut.Update();
 	trashBox->Update();
     character->Update();
     cameraControler.Update();
@@ -157,7 +181,13 @@ void StartScene::Update()
 	}
 
 	matthew->Update();
-	
+	if (fadeOutAlpha == 255)
+	{
+		Release();
+		fadeOutAlpha++;
+		SCENEMANAGER->LoadScene("boss");
+		SCENEMANAGER->GetCurScene()->Init();
+	}
 
 }
 
@@ -172,6 +202,7 @@ void StartScene::Render()
     DAMAGEMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
+	fadeOut.Render();
     //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
     //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 40, debug[1], strlen(debug[1]));
     //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 60, debug[2], strlen(debug[2]));
