@@ -108,7 +108,7 @@ void EnemyManager::DeadEvent(GameObject* deadObject)
 
 void EnemyManager::InitSectorEnemyIdx()
 {
-	_sectorEnemyIdxV[0].push_back({ 0, 0 });
+	//_sectorEnemyIdxV[0].push_back({ 0, 0 });
 
 	//_sectorEnemyIdxV[0].push_back({ 1, 0 });
 	//_sectorEnemyIdxV[0].push_back({ 2, 0 });

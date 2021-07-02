@@ -3,6 +3,7 @@
 #include "StartScene.h"
 #include "EditorScene.h"
 #include "TitleScene.h"
+#include "BossScene.h"
 
 playGround::playGround()
 {
@@ -29,6 +30,9 @@ HRESULT playGround::init()
 
 	EditorScene* editorScene = new EditorScene();
 	SCENEMANAGER->AddScene("editor", editorScene);
+
+	BossScene* bossScene = new BossScene();
+	SCENEMANAGER->AddScene("boss", bossScene);
 	if (_isEdit == false)
 	{
 		//SCENEMANAGER->LoadScene("title");

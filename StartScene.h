@@ -27,7 +27,8 @@ public:
 	GameObject* player;
     WallObj* wall[WALL_NUM];
 	ItemObject* trashBox;
-
+	ImageObject fadeOut;
+	int fadeOutAlpha;
     virtual HRESULT Init();
     virtual void Release();
     virtual void Update();

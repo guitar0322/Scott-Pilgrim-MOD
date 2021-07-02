@@ -1,7 +1,6 @@
 #pragma once
-#include "Matthewstate.h"
-class MatthewAttack3State :
-	public Matthewstate
+#include "MatthewState.h"
+class MatthewComeBack : public Matthewstate
 {
 public:
 	virtual Matthewstate* Update(Matthew* matthew);

@@ -94,7 +94,7 @@ public:
 	Item* item;
 	GameObject* equipItem;
 	GameObject* enemy;
-
+	GameObject* boss;
 	bool dir;			//오른쪽 왼쪽 구분
 	bool jumpZ;			//Z축 점프 구분
 	bool isZJump;		//Z축 그라운드 체크 구분
@@ -153,7 +153,6 @@ public:
 	/* Player.h */
 	/* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
 	void Hit(int damage);
-
-
+	void BossAttack();
 };
 

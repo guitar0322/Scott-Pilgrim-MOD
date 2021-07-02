@@ -32,7 +32,8 @@ Matthewstate * MatthewRunState::Update(Matthew * matthew)
 	}
 
 
-	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(), matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 100)
+	if (GetDistance(matthew->transform->GetX(), matthew->gameObject->GetComponent<ZOrder>()->GetZ(),
+		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->gameObject->GetComponent<ZOrder>()->GetZ()) < 100)
 	{
 		switch (RND->getInt(4))
 		{
@@ -49,7 +50,6 @@ Matthewstate * MatthewRunState::Update(Matthew * matthew)
 			return new MatthewPalmwindState();
 			break;
 		}
-		return new MatthewPalmwindState();
 	}
 	float angle = GetAngle(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY());

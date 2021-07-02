@@ -10,6 +10,7 @@ private:
 	int _hp;
 	float _speed;
 	int _damage;
+	float _gravity;
 	bool _dir;
 
 public:
@@ -22,6 +23,9 @@ public:
 	ZOrder* zOrder;
 	int _attackTime;
 	float _phaseTime;
+	float jumpPower;
+	int hitCount;
+	bool hitable;
 	virtual void Init();
 	virtual void Release();
 	virtual void Update();
@@ -31,6 +35,7 @@ public:
 	void Setdir(bool dir) { _dir = dir; }
 	float GetSpeed() const { return _speed; }
 	int GetHp(){ return _hp; }
+	int GetGravity() const { return _gravity; }
 	void Sethp(int hp) { _hp = hp; }
 	int GetDamage()const { return _damage; }
 	void SetDamage(int damage) { _damage = damage; }

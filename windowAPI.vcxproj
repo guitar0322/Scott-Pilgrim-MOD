@@ -150,6 +150,7 @@
     <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="BossScene.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Cam.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="MalcolmIdleState.h" />
     <ClInclude Include="MalcolmMoveState.h" />
     <ClInclude Include="MatthewBlockState.h" />
+    <ClInclude Include="MatthewComeBack.h" />
     <ClInclude Include="MatthewHitState.h" />
     <ClInclude Include="LukeAttack2State.h" />
     <ClInclude Include="LukeAttack3State.h" />
@@ -228,6 +230,8 @@
     <ClInclude Include="MatthewAttack3State.h" />
     <ClInclude Include="MatthewAttackState.h" />
     <ClInclude Include="MatthewIdleState.h" />
+    <ClInclude Include="MatthewKnockDown.h" />
+    <ClInclude Include="MatthewLastHitState.h" />
     <ClInclude Include="MatthewMoveState.h" />
     <ClInclude Include="MatthewPalmwindState.h" />
     <ClInclude Include="Luke.h" />
@@ -333,6 +337,7 @@
     <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Cam.cpp" />
@@ -397,6 +402,7 @@
     <ClCompile Include="MalcolmIdleState.cpp" />
     <ClCompile Include="MalcolmMoveState.cpp" />
     <ClCompile Include="MatthewBlockState.cpp" />
+    <ClCompile Include="MatthewComeBack.cpp" />
     <ClCompile Include="MatthewHitState.cpp" />
     <ClCompile Include="LukeAttack2State.cpp" />
     <ClCompile Include="LukeAttack3State.cpp" />
@@ -410,6 +416,8 @@
     <ClCompile Include="MatthewAttack3State.cpp" />
     <ClCompile Include="MatthewAttackState.cpp" />
     <ClCompile Include="MatthewIdleState.cpp" />
+    <ClCompile Include="MatthewKnockDown.cpp" />
+    <ClCompile Include="MatthewLastHitState.cpp" />
     <ClCompile Include="MatthewMoveState.cpp" />
     <ClCompile Include="MatthewPalmwindState.cpp" />
     <ClCompile Include="Luke.cpp" />

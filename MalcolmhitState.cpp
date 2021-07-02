@@ -10,8 +10,6 @@ EnemyState * MalcolmHitState::Update(EnemyAI * enemy)
 		return new MalcolmIdleState();
 	}
 
-
-
 	return nullptr;
 }
 
@@ -25,8 +23,6 @@ void MalcolmHitState::Enter(EnemyAI * enemy)
 	{
 		enemy->ChangeClip("malcolm_hit_left", true);
 	}
-
-
 }
 
 void MalcolmHitState::Exit(EnemyAI * enemy)
