@@ -48,7 +48,6 @@ void Player::Init()
 	throwDelay = 0;
 
 	hp = 100;
-	attack = 50;
 	isUppercut = false;
 	pressL = false;
 	hitCount = 0;
@@ -395,6 +394,7 @@ void Player::Hit(int damage)
 	} 
 
 	if (hitable == false) return;
+	DAMAGEMANAGER->CreateDamage(damage, transform->GetX(), transform->GetY() - 70);
 	hp -= damage;
 	_state->Exit(this);
 	hitCount++;

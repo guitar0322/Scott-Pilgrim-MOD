@@ -183,6 +183,8 @@
     <ClCompile Include="MatthewKnockDown.cpp" />
     <ClCompile Include="MatthewComeBack.cpp" />
     <ClCompile Include="BossScene.cpp" />
+    <ClCompile Include="DamageManager.cpp" />
+    <ClCompile Include="HpUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -371,6 +373,8 @@
     <ClInclude Include="MatthewKnockDown.h" />
     <ClInclude Include="MatthewComeBack.h" />
     <ClInclude Include="BossScene.h" />
+    <ClInclude Include="DamageManager.h" />
+    <ClInclude Include="HpUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

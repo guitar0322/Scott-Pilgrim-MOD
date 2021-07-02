@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Luke.h"
 #include "LukeIdleState.h"
+#include "LukeHitState.h"
+#include "LukeDieState.h"
 
 Luke::Luke()
 {
@@ -18,7 +20,9 @@ Luke::Luke()
 	animator->AddClip("luke_block_left", CLIPMANAGER->FindClip("luke_block_left"));
 	// HIT
 	animator->AddClip("luke_hit_right", CLIPMANAGER->FindClip("luke_hit_right"));
+	animator->GetClip("luke_hit_right")->isLoop = false;
 	animator->AddClip("luke_hit_left", CLIPMANAGER->FindClip("luke_hit_left"));
+	animator->GetClip("luke_hit_left")->isLoop = false;
 	// KICK
 	animator->AddClip("luke_kick_right", CLIPMANAGER->FindClip("luke_kick_right"));
 	animator->GetClip("luke_kick_right")->isLoop = false;
@@ -41,7 +45,9 @@ Luke::Luke()
 	animator->GetClip("luke_attack3_left")->isLoop = false;
 	// DIE
 	animator->AddClip("luke_die_right", CLIPMANAGER->FindClip("luke_die_right"));
+	animator->GetClip("luke_die_right")->isLoop = false;
 	animator->AddClip("luke_die_left", CLIPMANAGER->FindClip("luke_die_left"));
+	animator->GetClip("luke_die_left")->isLoop = false;
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new LukeIdleState());
@@ -61,11 +67,11 @@ void Luke::Init()
 
 	enemyinfo->Sethp(50);
 
-	//int randomAttackDamage = RND->getInt(10);
-	int randomAttackDamage = 0;
-
-	//int randomAttackDamage = RND->getInt(5);
+	int randomAttackDamage = RND->getFromIntTo(1,5);
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new LukeHitState();
+	enemyAI->dieState = new LukeDieState();
 }

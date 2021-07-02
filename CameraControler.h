@@ -1,5 +1,5 @@
 #pragma once
-#define CAM_SECTOR_NUM 2
+#define CAM_SECTOR_NUM 5
 class CameraControler
 {
 private:

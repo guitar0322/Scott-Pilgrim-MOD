@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Lee.h"
 #include "LeeIdleState.h"
+#include "LeeHitState.h"
+#include "LeeDieState.h"
 
 Lee::Lee()
 {
@@ -18,7 +20,9 @@ Lee::Lee()
 	animator->AddClip("lee_block_left", CLIPMANAGER->FindClip("lee_block_left"));
 	// HIT
 	animator->AddClip("lee_hit_right", CLIPMANAGER->FindClip("lee_hit_right"));
+	animator->GetClip("lee_hit_right")->isLoop = false;
 	animator->AddClip("lee_hit_left", CLIPMANAGER->FindClip("lee_hit_left"));
+	animator->GetClip("lee_hit_left")->isLoop = false;
 	// KICK
 	animator->AddClip("lee_kick_right", CLIPMANAGER->FindClip("lee_kick_right"));
 	animator->GetClip("lee_kick_right")->isLoop = false;
@@ -41,7 +45,10 @@ Lee::Lee()
 	animator->GetClip("lee_attack3_left")->isLoop = false;
 	// DIE
 	animator->AddClip("lee_die_right", CLIPMANAGER->FindClip("lee_die_right"));
+	animator->GetClip("lee_die_right")->isLoop = false;
 	animator->AddClip("lee_die_left", CLIPMANAGER->FindClip("lee_die_left"));
+	animator->GetClip("lee_die_right")->isLoop = false;
+
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new LeeIdleState());
@@ -65,4 +72,7 @@ void Lee::Init()
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new LeeHitState();
+	enemyAI->dieState = new LeeDieState();
 }

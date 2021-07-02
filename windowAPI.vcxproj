@@ -162,6 +162,7 @@
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DamageManager.h" />
     <ClInclude Include="Doberman.h" />
     <ClInclude Include="DobermanAttackState.h" />
     <ClInclude Include="DobermanHitState.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroundManager.h" />
+    <ClInclude Include="HpUI.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="ImageObject.h" />
@@ -348,6 +350,7 @@
     <ClCompile Include="ClipManager.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DamageManager.cpp" />
     <ClCompile Include="Doberman.cpp" />
     <ClCompile Include="DobermanAttackState.cpp" />
     <ClCompile Include="DobermanHitState.cpp" />
@@ -364,6 +367,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="GroundManager.cpp" />
+    <ClCompile Include="HpUI.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="ImageObject.cpp" />

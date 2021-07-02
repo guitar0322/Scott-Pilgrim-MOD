@@ -32,6 +32,7 @@
 #include "EffectManager.h"
 #include "MapManager.h"
 #include "EnemyManager.h"
+#include "DamageManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -69,6 +70,7 @@ using namespace HDY_UTIL;
 #define EFFECTMANAGER EffectManager::getSingleton()
 #define MAPMANAGER MapManager::getSingleton()
 #define ENEMYMANAGER EnemyManager::getSingleton()
+#define DAMAGEMANAGER DamageManager::getSingleton()
 
 #define MainCam CAMERAMANAGER->GetMainCam()
 #define BackBuffer SCENEMANAGER->GetCurScene()->GetBackDC()
