@@ -39,7 +39,7 @@ EnemyState* LeeRunState::Update(EnemyAI* enemy)
 		enemy->zOrder->GetZ() + 6 >= enemy->GetPlayerTransform()->gameObject->GetComponent<ZOrder>()->GetZ())
 	{
 		/* 콤보공격 OR 발차기 공격 중 랜덤선택 */
-		int randomAttack = 1; // RND->getInt(2);
+		int randomAttack = 0; // RND->getInt(2);
 		switch (randomAttack)
 		{
 		case 0:

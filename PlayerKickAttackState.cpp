@@ -22,6 +22,7 @@ void PlayerKickAttackState::Update(Player * player)
 void PlayerKickAttackState::Enter(Player * player)
 {
 	Attack(player);
+	player->hitable = false;
 
 	if (player->dir == false)
 	{
@@ -53,7 +54,7 @@ void PlayerKickAttackState::Attack(Player * player)
 			distanceZ *= -1;
 		if (distance < 120 && distanceZ < 5)
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->damage);
 
 			if (player->dir == false)
 			{

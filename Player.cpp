@@ -36,9 +36,12 @@ void Player::Init()
 	block = false;							//막기 확인용
 	isZJump = false;						//Z축 점프 시 플레이어 그라운드 착지 확인용
 	onGround = false;
-
 	isPick = false;							//아이템을 주었는지 유무
 	isCatch = false;						//아이템을 잡았는지 유무
+	isUppercut = false;
+	pressL = false;
+	hitable = true;
+	isJump = false;
 
 	_state = new PlayerIdleState();			//Idle 상태로 초기화
 	_state->Enter(this);
@@ -48,11 +51,11 @@ void Player::Init()
 	throwDelay = 0;
 
 	hp = 100;
-	attack = 10;
+	damage = 2;
+	skillDamage = 6;
 	isUppercut = false;
 	pressL = false;
 	hitCount = 0;
-	hitable = true;
 }
 
 void Player::Update()
@@ -164,23 +167,14 @@ void Player::ClipInit()
 	shieldLeft.Init("player/block_left.bmp", 532, 126, 7, 0.22f);
 	shieldLeft.isLoop = false;
 
-	kickAttackRight.Init("player/kick_attack_right.bmp", 896, 126, 7, 0.15f);
-	kickAttackRight.isLoop = false;
-	kickAttackLeft.Init("player/kick_attack_left.bmp", 896, 126, 7, 0.15f);
-	kickAttackLeft.isLoop = false;
-	kickSkillRight.Init("player/kick_skill_right.bmp", 7958, 152, 23, 0.1f);
-	kickSkillRight.isLoop = false;
-	kickSkillLeft.Init("player/kick_skill_left.bmp", 7958, 152, 23, 0.1f);
-	kickSkillLeft.isLoop = false;
+	wakeupRight.Init("player/wakeup_right.bmp", 966, 134, 7, 0.22f);
+	wakeupRight.isLoop = false;
+	wakeupLeft.Init("player/wakeup_left.bmp", 966, 134, 7, 0.22f);
+	wakeupLeft.isLoop = false;
 
-	walkJumpKickRight.Init("player/walk_jump_kick_right.bmp", 980, 106, 7, 0.1f);
-	walkJumpKickRight.isLoop = false;
-	walkJumpKickLeft.Init("player/walk_jump_kick_left.bmp", 980, 106, 7, 0.1f);
-	walkJumpKickLeft.isLoop = false;
-	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.15f);
-	runJumpKickRight.isLoop = false;
-	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
-	runJumpKickLeft.isLoop = false;
+
+
+
 	//공격 이미지
 	attack1Right.Init("player/attack1_right.bmp", 456, 120, 3, 0.1f);
 	attack2Right.Init("player/attack2_right.bmp", 608, 120, 4, 0.1f);
@@ -221,6 +215,24 @@ void Player::ClipInit()
 	hit2Left.isLoop = false;
 	lastHitLeft.isLoop = false;
 	knockoutLeft.isLoop = false;
+
+	kickAttackRight.Init("player/kick_attack_right.bmp", 896, 126, 7, 0.15f);
+	kickAttackRight.isLoop = false;
+	kickAttackLeft.Init("player/kick_attack_left.bmp", 896, 126, 7, 0.15f);
+	kickAttackLeft.isLoop = false;
+	kickSkillRight.Init("player/kick_skill_right.bmp", 7958, 152, 23, 0.1f);
+	kickSkillRight.isLoop = false;
+	kickSkillLeft.Init("player/kick_skill_left.bmp", 7958, 152, 23, 0.1f);
+	kickSkillLeft.isLoop = false;
+
+	walkJumpKickRight.Init("player/walk_jump_kick_right.bmp", 980, 106, 7, 0.1f);
+	walkJumpKickRight.isLoop = false;
+	walkJumpKickLeft.Init("player/walk_jump_kick_left.bmp", 980, 106, 7, 0.1f);
+	walkJumpKickLeft.isLoop = false;
+	runJumpKickRight.Init("player/run_jump_kick_right.bmp", 1036, 102, 7, 0.15f);
+	runJumpKickRight.isLoop = false;
+	runJumpKickLeft.Init("player/run_jump_kick_left.bmp", 1036, 102, 7, 0.15f);
+	runJumpKickLeft.isLoop = false;
 
 	//두손 이미지
 	twoHandPickRight.Init("player/two_hand_pick_right.bmp", 192, 130, 2, 0.20f);
@@ -282,6 +294,8 @@ void Player::ClipInit()
 	animator->AddClip("jump_Zorder_left", &jumpZorderLeft);
 	animator->AddClip("ground_right", &groundRight);
 	animator->AddClip("ground_left", &groundLeft);
+	animator->AddClip("wakeup_right", &wakeupRight);
+	animator->AddClip("wakeup_left", &wakeupLeft);
 
 	animator->AddClip("block_right", &shieldRight);
 	animator->AddClip("block_left", &shieldLeft);
@@ -343,6 +357,7 @@ void Player::ClipInit()
 	animator->AddTransaction("pickup_to_pickup_idle_left", &twoHandPickLeft, &twoHandIdleLeft);
 	animator->AddTransaction("throw_idle_right", &twoHandWalkThrowRight, &idleRight);
 	animator->AddTransaction("throw_idle_left", &twoHandWalkThrowLeft, &idleLeft);
+	
 }
 
 void Player::OnTriggerEnter(GameObject * gameObject)
@@ -425,6 +440,27 @@ void Player::Hit(int damage)
 	{
 		//gameObject->SetActive(false);
 		// TODO - DEAD
+	}
+}
+
+void Player::BossAttack()
+{
+	float distance =
+		GetDistance(transform->GetX(), transform->GetY(),
+			boss->transform->GetX(), boss->transform->GetY());
+	float distanceZ = zOrder->GetZ() - boss->GetComponent<ZOrder>()->GetZ();
+	if (distanceZ < 0)
+		distanceZ *= -1;
+	if (distance < 100 && distanceZ < 10)
+	{
+		boss->GetComponent<Matthew>()->Hit(attack);
+		if (boss->GetComponent<Matthew>()->hitable == true)
+		{
+			if (dir == false)
+				EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() + 30, transform->GetY() - 10);
+			else
+				EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() - 30, transform->GetY() - 10);
+		}
 	}
 }
 

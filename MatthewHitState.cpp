@@ -1,14 +1,19 @@
 #include "stdafx.h"
 #include "MatthewHitState.h"
 #include "MatthewIdleState.h"
+#include "MatthewLastHitState.h"
 #include "Matthew.h"
 
 Matthewstate * MatthewHitState::Update(Matthew * matthew)
 {
-	_hitTime = TIMEMANAGER->getElapsedTime();
-	if (_hitTime >= 1.0)
+	if (matthew->animator->GetEnd()==true)
 	{
 		return new MatthewIdleState();
+	}
+	if (matthew->hitCount ==3)
+	{
+		matthew->hitCount = 0;
+		return new MatthewLastHitState();
 	}
 
 	return nullptr;

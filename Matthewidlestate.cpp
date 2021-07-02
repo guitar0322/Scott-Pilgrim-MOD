@@ -10,29 +10,33 @@ Matthewstate * MatthewIdleState::Update(Matthew* matthew)
 	if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
 		matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 500)
 	{
-		if (matthew->transform->GetX() < matthew->GetPlayer()->GetX())
-		{
-			if (matthew->Getdir() == true)
-			{
-				matthew->ChangeCilp("matthew_idle_right", true);
-				matthew->Setdir(false);
-			}
-			return new MatthewMoveState();
-		}
-		else
-		{
-			if (matthew->Getdir() == false)
-			{
-				matthew->ChangeCilp("matthew_idle_left", true);
-				matthew->Setdir(true);
-			}
-			return new MatthewMoveState();
-		}
+		//if (matthew->GetHp() <= 250)
+		//{
+		//	int percent = RND->getInt(100);
+		//	if (percent <= 30)
+		//		return new MatthewPhaseReadyState();
+		//}
+		return new MatthewMoveState();
+
+		//if (matthew->transform->GetX() < matthew->GetPlayer()->GetX())
+		//{
+		//	if (matthew->Getdir() == true)
+		//	{
+		//		matthew->ChangeCilp("matthew_idle_right", true);
+		//		matthew->Setdir(false);
+		//	}
+		//}
+		//else
+		//{
+		//	if (matthew->Getdir() == false)
+		//	{
+		//		matthew->ChangeCilp("matthew_idle_left", true);
+		//		matthew->Setdir(true);
+		//	}
+		//	return new MatthewMoveState();
+		//}
 	}
-	if (matthew->GetHp()<= 250)
-	{
-		return new MatthewPhaseReadyState();
-	}
+
 
 
 	return nullptr;
@@ -40,6 +44,7 @@ Matthewstate * MatthewIdleState::Update(Matthew* matthew)
 
 void MatthewIdleState::Enter(Matthew * matthew)
 {
+
 	if (matthew->Getdir()==false)
 	{
 		matthew->ChangeCilp("matthew_idle_right", true);

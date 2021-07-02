@@ -106,6 +106,7 @@ void PlayerJumpState::Enter(Player * player)
 {
 	player->jumpPower = 200;
 	player->isZJump = false;
+
 	if (player->isRun == true)
 		_speedX = player->GetSpeed() * 2;
 	else

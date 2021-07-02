@@ -49,7 +49,7 @@ void PlayerKickSkillState::Attack(Player * player)
 			distanceZ *= -1;
 		if (distance < 130 && distanceZ < 50)
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->skillDamage);
 			EFFECTMANAGER->EmissionEffect("attack_effect", _sectorEnemyV[i]->transform->GetX(), _sectorEnemyV[i]->transform->GetY() - 10);
 		}
 	}

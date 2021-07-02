@@ -21,6 +21,8 @@ public:
 	Animator* animator;
 	EnemyInfo* enemyinfo;
 	ZOrder* zOrder;
+	EnemyState* hitState;
+	EnemyState* dieState;
 
 	/* 210630 Patrol 관련 변수 & 함수 설정 */
 	float deltaX;
@@ -31,8 +33,6 @@ public:
 	virtual void Update();
 	virtual void Render();
 
-	void Hit(float damage);
-	void Dead();
 	/* 상태별 Clip 변경하기 위한 함수 */
 	void ChangeClip(string clipName, bool isInitFrame);
 
@@ -43,4 +43,10 @@ public:
 
 	/* 210630 private Player 가져오기 위한 함수 충돌(히트) */
 	GameObject* GetPlayer() const { return _player; }
+
+	/* Enemy Hit Die */
+	bool hitable;
+	void Hit(float damage);
+	void Dead();
+	void Attack(float range);
 };

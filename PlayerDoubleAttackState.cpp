@@ -23,6 +23,7 @@ void PlayerDoubleAttackState::Update(Player * player)
 
 void PlayerDoubleAttackState::Enter(Player * player)
 {
+	player->BossAttack();
 	
 	if (player->isUppercut == true)
 	{
@@ -68,7 +69,7 @@ void PlayerDoubleAttackState::Attack(Player* player)
 			distanceZ *= -1;
 		if (distance < 100 && distanceZ < 5)
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->damage);
 			EFFECTMANAGER->EmissionEffect("attack_effect", player->transform->GetX() + 60, player->transform->GetY() - 10);
 			player->isUppercut = true;
 		}

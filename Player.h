@@ -59,6 +59,8 @@ private:
 	AnimationClip knockoutLeft;
 	AnimationClip hitJumpRight;
 	AnimationClip hitJumpLeft;
+	AnimationClip wakeupRight;
+	AnimationClip wakeupLeft;
 
 	//두손이미지
 	AnimationClip twoHandPickRight;
@@ -95,20 +97,22 @@ public:
 	GameObject* equipItem;
 	GameObject* enemy;
 
-	bool dir;			//오른쪽 왼쪽 구분
-	bool jumpZ;			//Z축 점프 구분
-	bool isZJump;		//Z축 그라운드 체크 구분
-
-	bool isRun;			//뛰는 거 구분
-	bool runKeyPress;	//키 더블했는지
-
-	bool block;			//막기 구분
-	bool dirZ;			//Z축 (true -> 위/ false->아래)
-
-	bool onGround;
-	bool isCatch;		//아이템을 획득 유무 
-	bool isPick;		//아이템을 들어올렸는지 유무
-	bool isThrow;		//아이템을 던졌는가?
+	GameObject* boss;
+	bool dir;				//오른쪽 왼쪽 구분
+	bool jumpZ;				//Z축 점프 구분
+	bool isZJump;			//Z축 그라운드 체크 구분
+	bool isRun;				//뛰는 거 구분
+	bool runKeyPress;		//키 더블했는지
+	bool block;				//막기 구분
+	bool dirZ;				//Z축 (true -> 위/ false->아래)
+	bool onGround;			//그라운드 인지 여부
+	bool isCatch;			//아이템을 획득 유무 
+	bool isPick;			//아이템을 들어올렸는지 유무
+	bool isThrow;			//아이템을 던졌는가?
+	bool isUppercut;		//어퍼컷 유무
+	bool pressL;			//L키 누른 거 여부
+	bool hitable;			//공격 가능 여부
+	bool isJump;			//점프 여부
 
 	float runDelay;			//뛸 때 딜레이 시간 줄 때
 	float jumpDelay;		//z축 위아래 점프 딜레이 시간 줄때
@@ -118,10 +122,8 @@ public:
 	float jumpPower;		//점프력
 
 	int hp;					//플레이어 hp
-	int attack;				//플레이어 공격력 (추후 레벨 별 구분)
-	bool isUppercut;		//어퍼컷 유무
-	bool pressL;			//L키 누른 거 여부
-	bool hitable;			
+	int damage;				//플레이어 공격력 (추후 레벨 별 구분)
+	int skillDamage;		//플레이어 스킬 공격력
 	int hitCount;			//타격 맞은 횟수
 
 
@@ -153,7 +155,6 @@ public:
 	/* Player.h */
 	/* 210630 Enemy 충돌(Hit)를 위한 함수 생성 by. 시영 */
 	void Hit(int damage);
-
-
+	void BossAttack();
 };
 

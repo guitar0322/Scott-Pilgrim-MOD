@@ -4,7 +4,7 @@
 #include "Matthewidlestate.h"
 #include "Succubus.h"
 #include "MatthewPhaseReadyState.h"
-
+#include "MatthewHitState.h"
 Matthew::Matthew()
 {
 }
@@ -44,7 +44,13 @@ void Matthew::Init()
 	animator->AddClip("matthew_phase_spotlight_right", CLIPMANAGER->AddClip("matthew_phase_spotlight_right", "matthew/phase_spotlight_right.bmp", 453, 440, 3, 0.2f));
 	animator->AddClip("matthew_phase_end_left", CLIPMANAGER->AddClip("matthew_phase_end_left", "matthew/phase_end_left.bmp", 755, 440, 5, 0.2f));
 	animator->AddClip("matthew_phase_end_right", CLIPMANAGER->AddClip("matthew_phase_end_right", "matthew/phase_end_right.bmp", 755, 440, 5, 0.2f));
-	
+	animator->AddClip("matthew_lasthit_left",CLIPMANAGER->AddClip("matthew_lasthit_left","matthew/fall_left.bmp",960,136,6,0.3f));
+	animator->AddClip("matthew_lasthit_right",CLIPMANAGER->AddClip("matthew_lasthit_right","matthew/fall_Right.bmp",960,136,6,0.3f));
+	animator->AddClip("matthew_knockdown_left", CLIPMANAGER->AddClip("matthew_knockdown_left", "matthew/knockdown_left.bmp", 1280, 136, 8, 0.3f));
+	animator->AddClip("matthew_knockdown_right", CLIPMANAGER->AddClip("matthew_knockdown_right", "matthew/knockdown_right.bmp", 1280, 136, 8, 0.3f));
+	animator->AddClip("matthew_comeback_left", CLIPMANAGER->AddClip("matthew_comeback_left", "matthew/comeback_left.bmp", 1716, 150, 11, 0.2f));
+	animator->AddClip("matthew_comeback_right", CLIPMANAGER->AddClip("matthew_comeback_right", "matthew/comeback_right.bmp", 1716, 150, 11, 0.2f));
+
 	CLIPMANAGER->FindClip("matthew_palmwind_left")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_palmwind_right")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_phase_ready_left")->isLoop = false;
@@ -59,14 +65,26 @@ void Matthew::Init()
 	CLIPMANAGER->FindClip("matthew_attack2_right")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_attack3_left")->isLoop = false;
 	CLIPMANAGER->FindClip("matthew_attack3_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_hit_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_hit_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_lasthit_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_lasthit_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_knockdown_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_knockdown_right")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_comeback_left")->isLoop = false;
+	CLIPMANAGER->FindClip("matthew_comeback_right")->isLoop = false;
+
 	_hp = 500;
 	_speed = 30;
+	_gravity = 200;
+	hitable = true;
+	hitCount = 0;
 	_damage = 10;
 	_dir = true;
 	_attackTime = 0;
 	_phaseTime = 0;
 	_matthewstate = new MatthewIdleState();
-	zOrder->SetZ(transform->GetY() + 132 / 2);
+	zOrder->SetZ(transform->GetY() + 136 / 2);
 	_matthewstate->Enter(this);
 
 }
@@ -96,6 +114,7 @@ void Matthew::Update()
 
 void Matthew::Render()
 {
+
 }
 
 void Matthew::ChangeCilp(string name, bool isInitFrame)
@@ -109,4 +128,15 @@ void Matthew::ChangeCilp(string name, bool isInitFrame)
 		animator->SetClip(animator->GetClip(name), animator->curClip->currentFrame);
 	}
 
+}
+
+void Matthew::Hit(int damage)
+{
+	if (hitable == false) return;
+	_hp = damage;
+	_matthewstate->Exit(this);
+	hitCount++;
+	SAFE_DELETE(_matthewstate);
+	_matthewstate = new MatthewHitState();
+	_matthewstate->Enter(this);
 }

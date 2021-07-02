@@ -86,6 +86,9 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	{
 		_playerJump = true;
 		player->jumpZ = false;
+		player->hitable = false;
+		player->isJump = true;
+
 		return new PlayerJumpState();
 	}
 
@@ -94,7 +97,7 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
 		player->jumpZ = false;
-		player->pressL == true;
+		player->pressL = true;
 
 		if (player->isCatch == false)
 		{
@@ -153,18 +156,23 @@ PlayerState * PlayerIdleState::InputHandle(Player * player)
 	//막기
 	if (KEYMANAGER->isStayKeyDown('K'))
 	{
-		player->jumpZ = false;
-		player->block = true;
-		return new PlayerBlockState();
-
+		if (player->isCatch == false)
+		{
+			player->jumpZ = false;
+			player->block = true;
+			return new PlayerBlockState();
+		}
 	}
 
 	//공격 스킬
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		player->jumpZ = false;
-
-		return new PlayerKickSkillState();
+		if (player->isCatch == false)
+		{
+			player->jumpZ = false;
+			return new PlayerKickSkillState();
+		}
+		
 	}
 	return nullptr;
 }

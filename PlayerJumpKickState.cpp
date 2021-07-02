@@ -95,9 +95,9 @@ void PlayerJumpKickState::Attack(Player * player)
 		float distanceZ = player->zOrder->GetZ() - _sectorEnemyV[i]->GetComponent<ZOrder>()->GetZ();
 		if (distanceZ < 0)
 			distanceZ *= -1;
-		if (distance < 130 && distanceZ < 10)
+		if (distance < 150 && distanceZ < 10)
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->damage);
 
 			if (player->dir == false)
 			{

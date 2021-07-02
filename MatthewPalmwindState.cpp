@@ -10,8 +10,11 @@ Matthewstate * MatthewPalmwindState::Update(Matthew * matthew)
 {
 	if (matthew->animator->currentFrame == 12 && _ishit == false)
 	{
+		float distanceZ = matthew->_player->GetComponent<ZOrder>()->GetZ() - matthew->zOrder->GetZ();
+		if (distanceZ < 0)
+			distanceZ *= -1;
 		if (GetDistance(matthew->transform->GetX(), matthew->transform->GetY(),
-			matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) > 50)
+			matthew->GetPlayer()->GetX(), matthew->GetPlayer()->GetY()) < 150 & distanceZ<10)
 		{
 			matthew->GetPlayer()->gameObject->GetComponent<Player>()->Hit(matthew->GetDamage() + 4);
 		}

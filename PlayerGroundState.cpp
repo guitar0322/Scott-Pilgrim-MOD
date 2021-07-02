@@ -62,4 +62,6 @@ void PlayerGroundState::Enter(Player * player)
 
 void PlayerGroundState::Exit(Player * player)
 {
+	player->hitable = true;
+	player->isJump = false;
 }

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Jesse.h"
 #include "JesseIdleState.h"
+#include "JesseHitState.h"
+#include "JesseDieState.h"
 
 Jesse::Jesse()
 {
@@ -18,7 +20,9 @@ Jesse::Jesse()
 	animator->AddClip("jesse_block_left", CLIPMANAGER->FindClip("jesse_block_left"));
 	// HIT
 	animator->AddClip("jesse_hit_right", CLIPMANAGER->FindClip("jesse_hit_right"));
+	animator->GetClip("jesse_hit_right")->isLoop = false;
 	animator->AddClip("jesse_hit_left", CLIPMANAGER->FindClip("jesse_hit_left"));
+	animator->GetClip("jesse_hit_left")->isLoop = false;
 	// KICK
 	animator->AddClip("jesse_kick_right", CLIPMANAGER->FindClip("jesse_kick_right"));
 	animator->GetClip("jesse_kick_right")->isLoop = false;
@@ -31,7 +35,9 @@ Jesse::Jesse()
 	animator->GetClip("jesse_attack_left")->isLoop = false;
 	// DIE
 	animator->AddClip("jesse_die_right", CLIPMANAGER->FindClip("jesse_die_right"));
+	animator->GetClip("jesse_die_right")->isLoop = false;
 	animator->AddClip("jesse_die_left", CLIPMANAGER->FindClip("jesse_die_left"));
+	animator->GetClip("jesse_die_left")->isLoop = false;
 
 	// AI STATE 동적 할당
 	enemyAI->SetState(new JesseIdleState());
@@ -55,4 +61,7 @@ void Jesse::Init()
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new JesseHitState();
+	enemyAI->dieState = new JesseDieState();
 }

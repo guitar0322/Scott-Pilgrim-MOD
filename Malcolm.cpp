@@ -38,7 +38,18 @@ Malcolm::~Malcolm()
 
 void Malcolm::Init()
 {
-	zOrder->SetZ(transform->GetY() + 132 / 2);
-	enemyinfo->SetSpeed(30.0f);
-	enemyinfo->Sethp(100.f);
+	zOrder->SetZ(transform->GetY() + 158 / 2);
+
+	bool randomDir = RND->getInt(2);
+	enemyinfo->SetDir(randomDir);
+
+	enemyinfo->Sethp(50);
+
+	//int randomAttackDamage = RND->getInt(10);
+	int randomAttackDamage = 0;
+
+	//int randomAttackDamage = RND->getInt(5);
+	enemyinfo->SetDamage(randomAttackDamage);
+
+	enemyinfo->SetSpeed(48.0f);
 }

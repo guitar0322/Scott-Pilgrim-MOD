@@ -64,6 +64,7 @@ PlayerState * PlayerWalkState::InputHandle(Player * player)
 
 	if (KEYMANAGER->isStayKeyDown('J'))
 	{
+		player->isJump = true;
 		return new PlayerJumpState();
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
