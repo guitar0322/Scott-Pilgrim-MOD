@@ -38,6 +38,7 @@ void EnemyAI::Render()
 
 void EnemyAI::Hit(float damage)
 {
+	DAMAGEMANAGER->CreateDamage(damage, transform->GetX(), transform->GetY() - 70);
 	enemyinfo->Hit(damage);
 	if (enemyinfo->GetHp() <= 0)
 		Dead();

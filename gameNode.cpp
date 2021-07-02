@@ -43,6 +43,7 @@ HRESULT gameNode::init(bool managerInit)
 		EFFECTMANAGER->Init();
 		MAPMANAGER->Init();
 		ENEMYMANAGER->Init();
+		DAMAGEMANAGER->Init();
 	}
 
 	return S_OK;
@@ -95,6 +96,9 @@ void gameNode::release()
 
 	ENEMYMANAGER->Release();
 	ENEMYMANAGER->releaseSingleton();
+
+	DAMAGEMANAGER->Release();
+	DAMAGEMANAGER->releaseSingleton();
 }
 
 void gameNode::update()

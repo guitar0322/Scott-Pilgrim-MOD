@@ -9,6 +9,7 @@
 #include "Malcolm.h"
 #include "William.h"
 #include "Succubus.h"
+#include "HpUI.h"
 
 StartScene::StartScene()
 {
@@ -57,6 +58,8 @@ HRESULT StartScene::Init()
     ItemImageClip();
     //위에는 건들지 마시오
 
+
+
     character = new Character();
     character->name = "character";
     character->zOrder->SetZ(character->transform->GetY() + 52);
@@ -67,10 +70,9 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-    character->transform->SetX(4500);
-    character->transform->SetY(400);
-    character->zOrder->SetZ(452);
-    MainCam->transform->SetX(4500);
+
+    UiInit();
+
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
     ENEMYMANAGER->SetPlayerTransform(character);
@@ -97,7 +99,8 @@ HRESULT StartScene::Init()
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
-
+    matthew->transform->SetX(5000);
+    matthew->SetActive(false);
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{
 		succubus[i] = new Character();
@@ -142,6 +145,10 @@ void StartScene::Update()
     MainCam->Update();
     MAPMANAGER->Update();
     ENEMYMANAGER->Update();
+    DAMAGEMANAGER->Update();
+    uiBox.Update();
+
+
     // 광철 에너미 Update
 	//matthew->Update();
 	for (int i = 0; i < SUCCUBUSMAX; i++)
@@ -162,12 +169,46 @@ void StartScene::Render()
 		wall[i]->Render();
     }
     EFFECTMANAGER->Render();
+    DAMAGEMANAGER->Render();
     sprintf_s(debug[0], "Player X : %f, Player Y : %f", character->transform->GetX(), character->transform->GetY());
     sprintf_s(debug[1], "FPS : %d ", TIMEMANAGER->getFPS());
-    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
-    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 40, debug[1], strlen(debug[1]));
-    TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 60, debug[2], strlen(debug[2]));
+    //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 20, debug[0], strlen(debug[0]));
+    //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 40, debug[1], strlen(debug[1]));
+    //TextOut(BackBuffer, MainCam->transform->GetX() - MainCam->GetScreenWidth() / 2, 60, debug[2], strlen(debug[2]));
+    uiBox.Render();
+    HPRender();
     MainCam->Render(_hdc);
+}
+
+void StartScene::UiInit()
+{
+    uiBox.Init();
+    uiBox.uiRenderer->Init("ui/uibox.bmp", 187, 60);
+    uiBox.transform->SetPosition(-(WINSIZEX / 2 - 120), -(WINSIZEY / 2 - 50));
+    char filename[32];
+    for (int i = 0; i < 10; i++)
+    {
+        sprintf_s(filename, "ui/number%d.bmp", i);
+        numImg[i] = new image();
+        numImg[i]->init(filename, 21, 30, true, RGB(255, 0, 255));
+    }
+}
+
+void StartScene::HPRender()
+{
+    vector<int> hpNumV;
+    int hpCopy = character->GetComponent<Player>()->hp;
+    while (hpCopy != 0)
+    {
+        int num = hpCopy % 10;
+        hpNumV.push_back(num);
+        hpCopy /= 10;
+    }
+    for (int i = 0; i < hpNumV.size(); i++)
+    {
+        numImg[hpNumV[i]]->render(BackBuffer, MainCam->transform->GetX() - (WINSIZEX / 2 - 180 + 21 * i),
+            MainCam->transform->GetY() - (WINSIZEY / 2 - 40));
+    }
 }
 
 void StartScene::BackgroundInit()
