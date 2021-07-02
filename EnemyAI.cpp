@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "EnemyAI.h"
 #include "EnemyState.h"
-#include "LukeIdleState.h"
 
 EnemyAI::EnemyAI()
 {
@@ -17,6 +16,7 @@ void EnemyAI::Init()
 	zOrder = gameObject->GetComponent<ZOrder>();
 	animator = gameObject->GetComponent<Animator>();
 	enemyinfo = gameObject->GetComponent<EnemyInfo>();
+	hitable = true;
 }
 
 void EnemyAI::Update()
@@ -38,15 +38,24 @@ void EnemyAI::Render()
 
 void EnemyAI::Hit(float damage)
 {
+	if (hitable == false) return;
 	enemyinfo->Hit(damage);
+
+	state->Exit(this);
+	SAFE_DELETE(state);
+	state = hitState;
+	state->Enter(this);
+
 	if (enemyinfo->GetHp() <= 0)
 		Dead();
 }
 
 void EnemyAI::Dead()
 {
-	gameObject->SetActive(false);
-	ENEMYMANAGER->DeadEvent(gameObject);
+	state->Exit(this);
+	SAFE_DELETE(state);
+	state = dieState;
+	state->Enter(this);
 }
 
 void EnemyAI::ChangeClip(string clipName, bool isInitFrame)
@@ -64,4 +73,21 @@ void EnemyAI::SetState(EnemyState * newState)
 	state = newState;
 	state->Enter(this);
 	return;
+}
+
+void EnemyAI::Attack(float range)
+{
+	if (GetDistance(transform->GetX(), transform->GetY(),
+		GetPlayerTransform()->GetX(), GetPlayerTransform()->GetY()) < range)
+	{
+		GetPlayer()->GetComponent<Player>()->Hit(enemyinfo->GetDamage());
+		if (enemyinfo->GetDir() == false)
+		{
+			EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() + range, transform->GetY());
+		}
+		else
+		{
+			EFFECTMANAGER->EmissionEffect("attack_effect", transform->GetX() - range, transform->GetY());
+		}
+	}
 }

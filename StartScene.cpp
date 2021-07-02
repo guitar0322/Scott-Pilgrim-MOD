@@ -67,10 +67,6 @@ HRESULT StartScene::Init()
 	character->collider->isTrigger = true;
     character->AddComponent(new DebugText());
     character->GetComponent<DebugText>()->Init();
-    character->transform->SetX(4500);
-    character->transform->SetY(400);
-    character->zOrder->SetZ(452);
-    MainCam->transform->SetX(4500);
     cameraControler.Init();
     cameraControler.SetPlayerTransform(character->transform);
     ENEMYMANAGER->SetPlayerTransform(character);
@@ -97,6 +93,7 @@ HRESULT StartScene::Init()
 	matthew->AddComponent(new Matthew());
 	matthew->GetComponent<Matthew>()->Init();
 	matthew->GetComponent<Matthew>()->SetPlayer(character);
+	matthew->transform->SetX(5000);
 
 	for ( int i = 0; i < SUCCUBUSMAX; i++)
 	{

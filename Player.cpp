@@ -48,7 +48,7 @@ void Player::Init()
 	throwDelay = 0;
 
 	hp = 100;
-	attack = 0;
+	attack = 10;
 	isUppercut = false;
 	pressL = false;
 	hitCount = 0;

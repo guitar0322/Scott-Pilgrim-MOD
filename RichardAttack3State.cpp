@@ -28,11 +28,7 @@ EnemyState* RichardAttack3State::Update(EnemyAI* enemy)
 
 void RichardAttack3State::Enter(EnemyAI* enemy)
 {
-	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->transform->GetY()) > 20)
-	{
-		enemy->GetPlayer()->GetComponent<Player>()->Hit(enemy->enemyinfo->GetDamage());
-	}
+	enemy->Attack(70);
 
 	/* 위치 좌표 보정 */
 	enemy->transform->MoveY(-20);

@@ -27,11 +27,7 @@ EnemyState* JesseAttack2State::Update(EnemyAI* enemy)
 
 void JesseAttack2State::Enter(EnemyAI* enemy)
 {
-	if (GetDistance(enemy->transform->GetX(), enemy->transform->GetY(),
-		enemy->GetPlayerTransform()->GetX(), enemy->transform->GetY()) > 2)
-	{
-		enemy->GetPlayer()->GetComponent<Player>()->Hit(enemy->enemyinfo->GetDamage());
-	}
+	enemy->Attack(100);
 
 	/* 위치 좌표 보정 */
 	if (enemy->enemyinfo->GetDir() == false)
