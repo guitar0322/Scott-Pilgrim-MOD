@@ -22,6 +22,7 @@ PlayerState * PlayerRunState::InputHandle(Player * player)
 
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
+		player->isJump = true;
 		return new PlayerJumpState();
 	}
 

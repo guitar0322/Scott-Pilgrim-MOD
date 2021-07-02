@@ -5,14 +5,22 @@
 
 PlayerState * PlayerHitState::InputHandle(Player* player)
 {
-	if(player->animator->GetEnd())
-		return new PlayerIdleState();
+	
 
-	if (player->hitCount == 3)
+	if (player->isJump == true)
+	{
+		player->isJump = false;
+		return new PlayerLastHitState();
+	}
+	if (player->animator->GetEnd())
+		return new PlayerIdleState();
+	if (player->hitCount == 3 && player->isCatch == false)
 	{
 		player->hitCount = 0;
 		return new PlayerLastHitState();
 	}
+
+
 
 	return nullptr;
 }

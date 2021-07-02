@@ -12,6 +12,8 @@ PlayerState * PlayerAttackState::InputHandle(Player * player)
 
 	if (_attackTime > 0.5f &&  _doubleAttack == false && player->pressL == false)
 	{
+		_attackTime = 0;
+
 		player->isUppercut = false;
 		return new PlayerIdleState();
 	}
@@ -79,7 +81,6 @@ void PlayerAttackState::Update(Player * player)
 		}
 	}
 	
-	
 }
 
 void PlayerAttackState::Enter(Player * player)
@@ -118,7 +119,7 @@ void PlayerAttackState::Attack(Player* player)
 			distanceZ *= -1;
 		if (distance < 100 && distanceZ < 10)
 		{
-			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->attack);
+			_sectorEnemyV[i]->GetComponent<EnemyAI>()->Hit(player->damage);
 
 			player->isUppercut = true;
 

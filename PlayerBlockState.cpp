@@ -75,7 +75,7 @@ PlayerState * PlayerBlockState::InputHandle(Player * player)
 
 void PlayerBlockState::Update(Player * player)
 {
-	if (player->animator->currentFrame >= 4)
+	if (player->animator->currentFrame >= 3)
 	{
 		player->animator->Pause();
 	}
