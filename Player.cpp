@@ -453,7 +453,7 @@ void Player::BossAttack()
 		distanceZ *= -1;
 	if (distance < 100 && distanceZ < 10)
 	{
-		boss->GetComponent<Matthew>()->Hit(attack);
+		boss->GetComponent<Matthew>()->Hit(damage);
 		if (boss->GetComponent<Matthew>()->hitable == true)
 		{
 			if (dir == false)

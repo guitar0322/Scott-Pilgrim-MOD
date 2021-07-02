@@ -15,6 +15,7 @@ EnemyState * MalcolmHitState::Update(EnemyAI * enemy)
 
 void MalcolmHitState::Enter(EnemyAI * enemy)
 {
+	enemy->hitState = new MalcolmHitState();
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->ChangeClip("malcolm_hit_right", true);

@@ -16,6 +16,7 @@ EnemyState * DobermanHitState::Update(EnemyAI * enemy)
 void DobermanHitState::Enter(EnemyAI * enemy)
 {
 	_hitTime = 0;
+	enemy->hitState = new DobermanHitState();
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->ChangeClip("doberman_hit_right", true);

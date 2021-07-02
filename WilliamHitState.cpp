@@ -13,6 +13,7 @@ EnemyState * WilliamHitState::Update(EnemyAI * enemy)
 
 void WilliamHitState::Enter(EnemyAI * enemy)
 {
+	enemy->hitState = new WilliamHitState();
 	if (enemy->enemyinfo->GetDir() == false)
 	{
 		enemy->ChangeClip("william_hit_right",true);

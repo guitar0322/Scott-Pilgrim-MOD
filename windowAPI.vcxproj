@@ -165,6 +165,7 @@
     <ClInclude Include="DamageManager.h" />
     <ClInclude Include="Doberman.h" />
     <ClInclude Include="DobermanAttackState.h" />
+    <ClInclude Include="DobermanDieState.h" />
     <ClInclude Include="DobermanHitState.h" />
     <ClInclude Include="DobermanIdleState.h" />
     <ClInclude Include="DobermanMoveState.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="LeeKickState.h" />
     <ClInclude Include="LeeRunState.h" />
     <ClInclude Include="LeeWalkState.h" />
+    <ClInclude Include="MalcolmDieState.h" />
     <ClInclude Include="MalcolmHitState.h" />
     <ClInclude Include="MalcolmKickState.h" />
     <ClInclude Include="Lee.h" />
@@ -329,6 +331,7 @@
     <ClInclude Include="WilliamAttackState.h" />
     <ClInclude Include="WilliamBellyState.h" />
     <ClInclude Include="WilliamBlockState.h" />
+    <ClInclude Include="WilliamDieState.h" />
     <ClInclude Include="WilliamHitState.h" />
     <ClInclude Include="WilliamIdleState.h" />
     <ClInclude Include="WilliamMoveState.h" />
@@ -354,6 +357,7 @@
     <ClCompile Include="DamageManager.cpp" />
     <ClCompile Include="Doberman.cpp" />
     <ClCompile Include="DobermanAttackState.cpp" />
+    <ClCompile Include="DobermanDieState.cpp" />
     <ClCompile Include="DobermanHitState.cpp" />
     <ClCompile Include="DobermanIdleState.cpp" />
     <ClCompile Include="DobermanMoveState.cpp" />
@@ -396,6 +400,7 @@
     <ClCompile Include="LeeKickState.cpp" />
     <ClCompile Include="LeeRunState.cpp" />
     <ClCompile Include="LeeWalkState.cpp" />
+    <ClCompile Include="MalcolmDieState.cpp" />
     <ClCompile Include="MalcolmHitState.cpp" />
     <ClCompile Include="MalcolmKickState.cpp" />
     <ClCompile Include="Lee.cpp" />
@@ -519,6 +524,7 @@
     <ClCompile Include="WilliamAttackState.cpp" />
     <ClCompile Include="WilliamBellyState.cpp" />
     <ClCompile Include="WilliamBlockState.cpp" />
+    <ClCompile Include="WilliamDieState.cpp" />
     <ClCompile Include="WilliamHitState.cpp" />
     <ClCompile Include="WilliamIdleState.cpp" />
     <ClCompile Include="WilliamMoveState.cpp" />

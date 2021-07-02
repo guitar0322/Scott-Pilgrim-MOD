@@ -186,6 +186,9 @@
     <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="DamageManager.cpp" />
     <ClCompile Include="HpUI.cpp" />
+    <ClCompile Include="MalcolmDieState.cpp" />
+    <ClCompile Include="WilliamDieState.cpp" />
+    <ClCompile Include="DobermanDieState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationClip.h" />
@@ -377,6 +380,9 @@
     <ClInclude Include="BossScene.h" />
     <ClInclude Include="DamageManager.h" />
     <ClInclude Include="HpUI.h" />
+    <ClInclude Include="MalcolmDieState.h" />
+    <ClInclude Include="WilliamDieState.h" />
+    <ClInclude Include="DobermanDieState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc" />

@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "William.h"
 #include "WilliamIdleState.h"
-
+#include "WilliamHitState.h"
+#include "WilliamDieState.h"
 William::William()
 {
 	CLIPMANAGER->FindClip("william_attack_left")->isLoop = false;
@@ -38,4 +39,6 @@ void William::Init()
 	zOrder->SetZ(transform->GetY() + 132 / 2);
 	enemyinfo->SetSpeed(20.0f);
 	enemyinfo->Sethp(100.f);
+	enemyAI->hitState = new WilliamHitState();
+	enemyAI->dieState = new WilliamDieState();
 }

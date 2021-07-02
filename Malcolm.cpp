@@ -2,6 +2,8 @@
 #include "EnemyState.h"
 #include "Malcolm.h"
 #include "MalcolmIdleState.h"
+#include "MalcolmhitState.h"
+#include "MalcolmDieState.h"
 Malcolm::Malcolm()
 {
 	CLIPMANAGER->FindClip("malcolm_attack_left")->isLoop = false;
@@ -52,4 +54,7 @@ void Malcolm::Init()
 	enemyinfo->SetDamage(randomAttackDamage);
 
 	enemyinfo->SetSpeed(48.0f);
+
+	enemyAI->hitState = new MalcolmHitState();
+	enemyAI->dieState = new MalcolmDieState();
 }

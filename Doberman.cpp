@@ -2,6 +2,8 @@
 #include "EnemyState.h"
 #include "Doberman.h"
 #include "Dobermanidlestate.h"
+#include "DobermanHitState.h"
+#include "DobermanDieState.h"
 Doberman::Doberman()
 {
 	CLIPMANAGER->FindClip("doberman_attack_left")->isLoop = false;
@@ -28,4 +30,6 @@ void Doberman::Init()
 	zOrder->SetZ(transform->GetY() + 96 / 2);
 	enemyinfo->SetSpeed(60.0f);
 	enemyinfo->SetSpeed(30.f);
+	enemyAI->hitState = new DobermanHitState();
+	enemyAI->dieState = new DobermanDieState();
 }
