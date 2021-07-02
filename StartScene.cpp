@@ -88,12 +88,11 @@ HRESULT StartScene::Init()
 	trashBox->item->SetItemImage("trashbox_right");
 	trashBox->transform->SetPosition(640, 300);
 	trashBox->zorder->Init();
-	trashBox->zorder->SetZ(trashBox->transform->GetY() + 10);
 
 	// 보스 매튜 구현//
 	matthew = new Character();
 	matthew->Init();
-	matthew->transform->SetPosition(1000, 400);
+	matthew->transform->SetPosition(10000, 4000);
 	matthew->collider->isTrigger = true;
 	matthew->zOrder->SetZ(matthew->transform->GetX()+132/2);
 	matthew->AddComponent(new Matthew());

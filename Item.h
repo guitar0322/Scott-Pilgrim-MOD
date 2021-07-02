@@ -18,6 +18,8 @@ private:
 
 	bool _throwDir;							//던졌을때 방향 설정
 	bool _isGround;							//땅에 착지 했는가?
+
+	vector<bool> _isHitThrow;
 public:
 	Animator* animator;
 	GameObject* enemy;
@@ -29,6 +31,7 @@ public:
 
 	virtual void SetItemImage(string imageName);
 	void ItemAttack();
+	void ItemThrowAttack();
    
 	void Throw(bool dir);					//던졌을때 방향 설정 함수
 	void ChangeClip(string clipName, bool isInitFrame);

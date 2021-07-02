@@ -69,6 +69,8 @@ void Player::Update()
 	if (isCatch == true)
 	{
 		equipItem->GetComponent<ZOrder>()->SetZ(zOrder->GetZ() - 1);
+		//equipItem = item->gameObject;
+		//equipItem->GetComponent<Item>()->transform->GetChild(1);
 	}
 	if (isPick == true)
 	{
@@ -95,7 +97,6 @@ void Player::Update()
 		if (throwDelay >= 0.4f)
 		{
 			PutItem();
-
 			isThrow = false;	
 			throwDelay = 0;
 		}
@@ -356,10 +357,11 @@ void Player::OnTriggerExit(GameObject * gameObject)
 
 void Player::PickItem()								// item 획득 했을때
 {
-	if (transform->GetChildCount() == 0)		//player가 자식이 없을때
+	if (transform->GetChildCount() == 0)			//player가 자식이 없을때
 	{
-		transform->AddChild(item->transform);	//player는 item을 자식으로 가지고
-		isCatch = true;							//item을 가지고 있는 상태가 된다
+		transform->AddChild(item->transform);		//player는 item을 자식으로 가지고
+		//transform->GetChild(1)->DetachParent();
+		isCatch = true;								//item을 가지고 있는 상태가 된다
 		equipItem = item->gameObject;
 		equipItem->GetComponent<ZOrder>()->SetZ(zOrder->GetZ());
 	}
@@ -381,7 +383,7 @@ void Player::PutItem()															//item을 놓았을때
 
 void Player::Hit(int damage)
 {
-	if (block == true)
+	if (block == true && isCatch == false)
 	{
 		if (dir == false)
 		{
@@ -394,21 +396,36 @@ void Player::Hit(int damage)
 		return;
 	} 
 
-	if (hitable == false) return;
+	//if (hitable == false) return;
 	DAMAGEMANAGER->CreateDamage(damage, transform->GetX(), transform->GetY() - 70);
 	hp -= damage;
 	_state->Exit(this);
+	if (hitable == false) return;
 	hitCount++;
 
-	_state = new PlayerHitState();
-	_state->Enter(this);
+	if (isCatch == true && hitCount >= 1)
+	{
+		
+		//transform->GetChild(1)->DetachParent();
+		//equipItem = item->gameObject;
+		//equipItem->GetComponent<Item>()->transform->GetChild(1);
+		//transform->DetachChild(1);
+		//equipItem = item->gameObject;
+		//equipItem->GetComponent<Item>()->transform->DetachParent();
+		//transform->DetachChild(1);
+		//equipItem->GetComponent<Item>()->transform->DetachParent();
+		//item = nullptr;
+		//transform->DetachChild(1);
+		//transform->GetChild(1)->DetachChild(1);
+	}
+
+	//_state = new PlayerHitState();
+	//_state->Enter(this);
 	if (hp <= 0)
 	{
 		//gameObject->SetActive(false);
 		// TODO - DEAD
 	}
-
-
 }
 
 
